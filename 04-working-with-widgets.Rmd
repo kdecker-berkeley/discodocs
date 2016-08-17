@@ -1,0 +1,65 @@
+# Working with widgets {#working_with_widgets}
+
+So far, we've used widgets in some simple examples. In this section, we'll explore widgets in some more detail. As always, we'll begin by loading the `discoveryengine`:
+
+```{r working_with_load}
+library(discoveryengine)
+```
+
+## Finding widgets
+
+There are two main ways to find widgets. The first is to use the `show_widgets` function. The function takes no arguments. When you run it, an interactive list of widgets, with short descriptions of each, will appear in your viewer window:
+
+```{r working_with_show_widgets, fig.width=9}
+show_widgets()
+```
+
+You can browse the entire listing, or use the search bar at the top right to search for specific widgets. 
+
+The second way to search for widgets is to use the `widget_for` function. This function takes as an argument a search term, and finds all widgets that are related to that search term. For example:
+
+```{r working_with_widget_for}
+widget_for("giving")
+```
+
+Once you've found the widget you're looking for, you can get additional information using R's built-in help system. Just type a question mark followed by the name of the widget, e.g. `?gave_to_area`.
+
+## Codes and synonyms
+
+You may have noticed in previous examples that widgets work with exact codes, such as `in_unit_portfolio(BU)` or with *synonyms*, such as `in_unit_portfolio(business)`. Synonyms will always be in lower-case, and may include any letter of the alphabet or the underscore "_" character, and nothing else. 
+
+Use whichever feels more comfortable -- there is no advantage to using codes vs. synonyms, though I personally find the synonyms easier to read and understand later on. If you're not sure of the code or synonym to use, try out the synonym search feature that works with most widgets. Instead of entering a code (`in_unit_portfolio(BU)`) or synonym (`in_unit_portfolio(business)`), enter a question mark followed by a search string:
+
+```{r working_with_synsearch1}
+in_unit_portfolio(?business)
+```
+
+You can enter partial terms:
+
+```{r working_with_synsearch2}
+in_unit_portfolio(?sci)
+```
+
+And even multiple search terms:
+
+```{r working_with_synsearch3}
+in_unit_portfolio(?bus, ?chem, ?public)
+```
+
+Widgets can always accept multiple codes/synonyms as arguments, and even combinations of the two:
+
+- `gave_to_area(business)` would find anyone who has given to the school of Business
+- `gave_to_area(business, chemistry)` would find anyone who has given to Business or to Chemistry
+- `gave_to_area(HSB, COC)` is the same as above
+- `gave_to_area(business, COC)` once again, the same thing
+
+## Detailed controls
+
+We saw above that `gave_to_area(business)` will find people who have given to the Haas School of Business. By default, this will find anyone who has ever given any amount, at any time. But `gave_to_area`, like many widgets, has a number of optional arguments that allow more fine-grained control. For example: 
+
+- `gave_to_area(business, at_least = 10000)`: finds anyone who has given at least $10,000 lifetime to the school of Business.
+- `gave_to_area(business, at_least = 10000, from = 20160101)`: finds anyone who has given at least $10,000 to Business since the beginning of 2016. 
+- `gave_to_area(business, at_least = 10000, from = 20150101, to = 20151231)`: finds anyone who gave at least $10,000 to Business between January 1, 2015 and December 31, 2015.
+- `gave_to_area(business, from = 20150101, to = 20151231)`: finds anyone who gave anything at all to the school of Business between January 1, 2015 and December 31, 2015
+
+As you can see, you can pick and choose which optional arguments you want to use. 

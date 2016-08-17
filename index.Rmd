@@ -1,0 +1,16 @@
+--- 
+title: "Documentation for discoveryengine"
+author: "Tarak Shah"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+github-repo: tarakc02/discodocs
+description: "Some documentation for the discoveryengine"
+knit: "bookdown::render_book"
+---
+
+# Disco
+
+Welcome to the documentation for the discoveryengine! This site will cover installation, and some other things.
+

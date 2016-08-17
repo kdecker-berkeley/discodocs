@@ -1,0 +1,3 @@
+# Introduction to R and RStudio {#r_intro}
+
+The discoveryengine works best when used with RStudio. Below, we'll look at 
