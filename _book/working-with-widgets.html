@@ -25,7 +25,7 @@
 
 <meta name="author" content="Tarak Shah">
 
-<meta name="date" content="2016-08-16">
+<meta name="date" content="2016-08-25">
 
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -33,7 +33,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="first-steps.html">
+<link rel="prev" href="intro-example.html">
 
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
@@ -50,10 +50,10 @@
 
 
 <script src="libs/htmlwidgets-0.7/htmlwidgets.js"></script>
-<script src="libs/datatables-binding-0.1/datatables.js"></script>
-<script src="libs/datatables-1.10.7/jquery.dataTables.min.js"></script>
-<link href="libs/datatables-default-1.10.7/dataTables.extra.css" rel="stylesheet" />
-<link href="libs/datatables-default-1.10.7/jquery.dataTables.min.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.2/datatables.js"></script>
+<link href="libs/dt-core-1.10.12/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.12/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.12/js/jquery.dataTables.min.js"></script>
 
 
 <style type="text/css">
@@ -116,11 +116,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3.2" data-path="intro-example.html"><a href="intro-example.html#creating-the-definition"><i class="fa fa-check"></i><b>3.2</b> Creating the definition</a></li>
 <li class="chapter" data-level="3.3" data-path="intro-example.html"><a href="intro-example.html#sending-the-definition-to-the-cads-data-warehouse"><i class="fa fa-check"></i><b>3.3</b> Sending the definition to the CADS Data Warehouse</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="first-steps.html"><a href="first-steps.html"><i class="fa fa-check"></i><b>4</b> First steps</a></li>
-<li class="chapter" data-level="5" data-path="working-with-widgets.html"><a href="working-with-widgets.html"><i class="fa fa-check"></i><b>5</b> Working with widgets</a><ul>
-<li class="chapter" data-level="5.1" data-path="working-with-widgets.html"><a href="working-with-widgets.html#finding-widgets"><i class="fa fa-check"></i><b>5.1</b> Finding widgets</a></li>
-<li class="chapter" data-level="5.2" data-path="working-with-widgets.html"><a href="working-with-widgets.html#codes-and-synonyms"><i class="fa fa-check"></i><b>5.2</b> Codes and synonyms</a></li>
-<li class="chapter" data-level="5.3" data-path="working-with-widgets.html"><a href="working-with-widgets.html#detailed-controls"><i class="fa fa-check"></i><b>5.3</b> Detailed controls</a></li>
+<li class="chapter" data-level="4" data-path="working-with-widgets.html"><a href="working-with-widgets.html"><i class="fa fa-check"></i><b>4</b> Working with widgets</a><ul>
+<li class="chapter" data-level="4.1" data-path="working-with-widgets.html"><a href="working-with-widgets.html#finding-widgets"><i class="fa fa-check"></i><b>4.1</b> Finding widgets</a></li>
+<li class="chapter" data-level="4.2" data-path="working-with-widgets.html"><a href="working-with-widgets.html#codes-and-synonyms"><i class="fa fa-check"></i><b>4.2</b> Codes and synonyms</a></li>
+<li class="chapter" data-level="4.3" data-path="working-with-widgets.html"><a href="working-with-widgets.html#detailed-controls"><i class="fa fa-check"></i><b>4.3</b> Detailed controls</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -143,15 +142,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
             <section class="normal" id="section-">
 <div id="working_with_widgets" class="section level1">
-<h1><span class="header-section-number">5</span> Working with widgets</h1>
+<h1><span class="header-section-number">4</span> Working with widgets</h1>
 <p>So far, we’ve used widgets in some simple examples. In this section, we’ll explore widgets in some more detail. As always, we’ll begin by loading the <code>discoveryengine</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(discoveryengine)</code></pre></div>
 <div id="finding-widgets" class="section level2">
-<h2><span class="header-section-number">5.1</span> Finding widgets</h2>
+<h2><span class="header-section-number">4.1</span> Finding widgets</h2>
 <p>There are two main ways to find widgets. The first is to use the <code>show_widgets</code> function. The function takes no arguments. When you run it, an interactive list of widgets, with short descriptions of each, will appear in your viewer window:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">show_widgets</span>()</code></pre></div>
-<div id="htmlwidget-3a40d8623ae0d3f18e76" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-3a40d8623ae0d3f18e76">{"x":{"data":[["attended_event","has_reunion_year","gave_to_area","has_affiliation","has_capacity","has_degree_from","has_implied_capacity","has_interest","has_major_gift_score","has_philanthropic_affinity","in_unit_portfolio","lives_in_county","lives_in_msa","lives_in_zip","on_committee","participated_in","played_sport","received_award","works_in_county","works_in_msa","works_in_zip","majored_in","contact_text_contains","gave_to_department","fund_text_contains","is_a","contacted_entity_of","gave_to_fund","household","parent_of","child_of","related_to"],["Lists entities who have participated in (an) event(s)","Lists entities with given reunion year(s)","Lists entities who gave to specific areas with minimum giving and specific date range","Lists entities with (an) affiliation(s)","Lists entities with capacity ratings","Lists entities with degrees from specific school(s)","Lists entities with implied capacity ratings","Lists entities with interest(s)","Lists entities with major gift scores","Lists entities with philanthropic affinity(ies)","Lists entities with proposals assigned to certain unit(s)","Lists entities who live in (a) certain county(ies)","Lists entities who live in (a) certain MSA(s)","Lists entities who live in (a) certain zip code(s)","Lists entities who are on/have been on committee(s)","Lists entities who participated in (a) student activity(s)","Lists entities who played (a) sport(s)","Lists entities who received (an) award(s)","Lists entities who work in (a) certain county(ies)","Lists entities who work in (a) certain MSA(s)","Lists entities who work in (a) certain zip code(s)","Lists entities who graduated with specific major(s)","Contact reports that contain the specified search string(s)","Lists entities who gave to specific departments with minimum giving and specific date range","Funds with notes/biographies that contain the specified search string(s)","Specify entity type (person or org) and status (active/deceased)","Entities who were contacted in specified contact reports","Entities who have given to specified funds","Get only the primary household entities from a defined list of entities","Get list of parents of specified entities","Get children of specified entities","Get relations of specified entities"],["entity_id","entity_id","entity_id","entity_id","entity_id","entity_id","entity_id","entity_id","entity_id","entity_id","entity_id","entity_id","entity_id","entity_id","entity_id","entity_id","entity_id","entity_id","entity_id","entity_id","entity_id","entity_id","contact_report_id","entity_id","allocation_id","entity_id","entity_id","entity_id","entity_id","entity_id","entity_id","entity_id"],["first-order","first-order","first-order","first-order","first-order","first-order","first-order","first-order","first-order","first-order","first-order","first-order","first-order","first-order","first-order","first-order","first-order","first-order","first-order","first-order","first-order","first-order","first-order","first-order","first-order","first-order","second-order","second-order","second-order","second-order","second-order","second-order"],["event, activity, attended, participated","class campaign year, reunion, graduation year, class, alumni","area of giving, area, unit, giving, donor","affiliation","capacity, rating, rated","degree, college, school, attended","implied capacity, predictive model, capacity, likelihood","interest","major gift score, predictive model","philanthropic affinity, giving, interest, charitable giving","proposals, assignments, portfolio, office, unit","address, county, home, lives","address, MSA, geo code, home, lives","address, zip, zip code, home, lives","committee, member","student activity, clubs, participated","sports, athlete","award, honor, won, received","address, county, work, business","address, MSA, geo code, work, business","address, zip, zip code,work, business","major, college, school degree, attended, academic","contact report, text, finder, contact, visit, call","department of giving, department, giving, donor","fund, allocation, terms, biography, fund terms, fund biography, finder, giving","active, deceased, person, people, organization, organizations, corporate, corporation","contact report, contact, visit, call","giving","household, married, spouse","parents, family, relations, relationships, children, child","parents, family, relations, relationships, children, child","parents, family, relations, relationships, children, child"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>widget_name\u003c/th>\n      <th>description\u003c/th>\n      <th>ID.type\u003c/th>\n      <th>Order\u003c/th>\n      <th>key_words\u003c/th>\n    \u003c/tr>\n  \u003c/thead>\n\u003c/table>","options":{"order":[[1,"asc"]],"autoWidth":false,"orderClasses":false},"callback":null,"filter":"none","selection":"multiple"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-ec193e5006e6a86df746" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ec193e5006e6a86df746">{"x":{"filter":"none","data":[["attended_event","has_reunion_year","gave_to_area","has_affiliation","has_capacity","has_degree_from","has_implied_capacity","has_interest","has_major_gift_score","has_philanthropic_affinity","in_unit_portfolio","lives_in_county","lives_in_msa","lives_in_zip","on_committee","participated_in","played_sport","received_award","works_in_county","works_in_msa","works_in_zip","majored_in","contact_text_contains","gave_to_department","fund_text_contains","is_a","contacted_entity_of","gave_to_fund","household","parent_of","child_of","related_to"],["Lists entities who have participated in (an) event(s)","Lists entities with given reunion year(s)","Lists entities who gave to specific areas with minimum giving and specific date range","Lists entities with (an) affiliation(s)","Lists entities with capacity ratings","Lists entities with degrees from specific school(s)","Lists entities with implied capacity ratings","Lists entities with interest(s)","Lists entities with major gift scores","Lists entities with philanthropic affinity(ies)","Lists entities with proposals assigned to certain unit(s)","Lists entities who live in (a) certain county(ies)","Lists entities who live in (a) certain MSA(s)","Lists entities who live in (a) certain zip code(s)","Lists entities who are on/have been on committee(s)","Lists entities who participated in (a) student activity(s)","Lists entities who played (a) sport(s)","Lists entities who received (an) award(s)","Lists entities who work in (a) certain county(ies)","Lists entities who work in (a) certain MSA(s)","Lists entities who work in (a) certain zip code(s)","Lists entities who graduated with specific major(s)","Contact reports that contain the specified search string(s)","Lists entities who gave to specific departments with minimum giving and specific date range","Funds with notes/biographies that contain the specified search string(s)","Specify entity type (person or org) and status (active/deceased)","Entities who were contacted in specified contact reports","Entities who have given to specified funds","Get only the primary household entities from a defined list of entities","Get list of parents of specified entities","Get children of specified entities","Get relations of specified entities"],["entity_id","entity_id","entity_id","entity_id","entity_id","entity_id","entity_id","entity_id","entity_id","entity_id","entity_id","entity_id","entity_id","entity_id","entity_id","entity_id","entity_id","entity_id","entity_id","entity_id","entity_id","entity_id","contact_report_id","entity_id","allocation_id","entity_id","entity_id","entity_id","entity_id","entity_id","entity_id","entity_id"],["first-order","first-order","first-order","first-order","first-order","first-order","first-order","first-order","first-order","first-order","first-order","first-order","first-order","first-order","first-order","first-order","first-order","first-order","first-order","first-order","first-order","first-order","first-order","first-order","first-order","first-order","second-order","second-order","second-order","second-order","second-order","second-order"],["event, activity, attended, participated","class campaign year, reunion, graduation year, class, alumni","area of giving, area, unit, giving, donor","affiliation","capacity, rating, rated","degree, college, school, attended","implied capacity, predictive model, capacity, likelihood","interest","major gift score, predictive model","philanthropic affinity, giving, interest, charitable giving","proposals, assignments, portfolio, office, unit","address, county, home, lives","address, MSA, geo code, home, lives","address, zip, zip code, home, lives","committee, member","student activity, clubs, participated","sports, athlete","award, honor, won, received","address, county, work, business","address, MSA, geo code, work, business","address, zip, zip code,work, business","major, college, school degree, attended, academic","contact report, text, finder, contact, visit, call","department of giving, department, giving, donor","fund, allocation, terms, biography, fund terms, fund biography, finder, giving","active, deceased, person, people, organization, organizations, corporate, corporation","contact report, contact, visit, call","giving","household, married, spouse","parents, family, relations, relationships, children, child","parents, family, relations, relationships, children, child","parents, family, relations, relationships, children, child"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>widget_name\u003c/th>\n      <th>description\u003c/th>\n      <th>ID.type\u003c/th>\n      <th>Order\u003c/th>\n      <th>key_words\u003c/th>\n    \u003c/tr>\n  \u003c/thead>\n\u003c/table>","options":{"order":[[1,"asc"]],"autoWidth":false,"orderClasses":false},"selection":{"mode":"multiple","selected":null,"target":"row"}},"evals":[],"jsHooks":[]}</script>
 <p>You can browse the entire listing, or use the search bar at the top right to search for specific widgets.</p>
 <p>The second way to search for widgets is to use the <code>widget_for</code> function. This function takes as an argument a search term, and finds all widgets that are related to that search term. For example:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">widget_for</span>(<span class="st">&quot;giving&quot;</span>)</code></pre></div>
@@ -168,7 +167,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Once you’ve found the widget you’re looking for, you can get additional information using R’s built-in help system. Just type a question mark followed by the name of the widget, e.g. <code>?gave_to_area</code>.</p>
 </div>
 <div id="codes-and-synonyms" class="section level2">
-<h2><span class="header-section-number">5.2</span> Codes and synonyms</h2>
+<h2><span class="header-section-number">4.2</span> Codes and synonyms</h2>
 <p>You may have noticed in previous examples that widgets work with exact codes, such as <code>in_unit_portfolio(BU)</code> or with <em>synonyms</em>, such as <code>in_unit_portfolio(business)</code>. Synonyms will always be in lower-case, and may include any letter of the alphabet or the underscore “_&quot; character, and nothing else.</p>
 <p>Use whichever feels more comfortable – there is no advantage to using codes vs. synonyms, though I personally find the synonyms easier to read and understand later on. If you’re not sure of the code or synonym to use, try out the synonym search feature that works with most widgets. Instead of entering a code (<code>in_unit_portfolio(BU)</code>) or synonym (<code>in_unit_portfolio(business)</code>), enter a question mark followed by a search string:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">in_unit_portfolio</span>(?business)</code></pre></div>
@@ -199,7 +198,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul>
 </div>
 <div id="detailed-controls" class="section level2">
-<h2><span class="header-section-number">5.3</span> Detailed controls</h2>
+<h2><span class="header-section-number">4.3</span> Detailed controls</h2>
 <p>We saw above that <code>gave_to_area(business)</code> will find people who have given to the Haas School of Business. By default, this will find anyone who has ever given any amount, at any time. But <code>gave_to_area</code>, like many widgets, has a number of optional arguments that allow more fine-grained control. For example:</p>
 <ul>
 <li><code>gave_to_area(business, at_least = 10000)</code>: finds anyone who has given at least $10,000 lifetime to the school of Business.</li>
@@ -216,7 +215,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
-<a href="first-steps.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="intro-example.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -236,7 +235,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/tarakc02/discodocs/edit/master/04-working-with-widgets.Rmd",
+"link": "https://github.com/tarakc02/discodocs/edit/master/03-working-with-widgets.Rmd",
 "text": null
 },
 "download": null,

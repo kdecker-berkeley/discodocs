@@ -1,3 +1,5 @@
 # Introduction to R and RStudio {#r_intro}
 
-The discoveryengine works best when used with RStudio. Below, we'll look at 
+The discoveryengine works best when used with RStudio. Watch this video for a quick tour around RStudio:
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/O-CSMq2jBAM?rel=0" frameborder="0" allowfullscreen></iframe>
