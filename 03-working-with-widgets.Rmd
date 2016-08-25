@@ -62,4 +62,4 @@ We saw above that `gave_to_area(business)` will find people who have given to th
 - `gave_to_area(business, at_least = 10000, from = 20150101, to = 20151231)`: finds anyone who gave at least $10,000 to Business between January 1, 2015 and December 31, 2015.
 - `gave_to_area(business, from = 20150101, to = 20151231)`: finds anyone who gave anything at all to the school of Business between January 1, 2015 and December 31, 2015
 
-As you can see, you can pick and choose which optional arguments you want to use. 
+As you can see, you can pick and choose which optional arguments you want to use. To find out all of the possible controls for a widget, use the built in help. For example, type `?gave_to_area`.

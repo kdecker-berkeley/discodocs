@@ -179,25 +179,25 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>As we discussed in the previous section, now that we have an official definition we can send it to the data warehouse, and see if the data warehouse finds anyone who fits. You can see the definition for yourself by just typing the name of it, though it is now written in a language for the computer to understand and may look intimidating to us humans:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">event_prospect</code></pre></div>
 <pre><code>## LISTBUILDER DEFINITION (type: entity_id)
-## .   operator (HW67): intersect
-## .   left (HW67): 
-## .   .   operator (FX67): union
-## .   .   left (FX67): 
+## .   operator (OM35): intersect
+## .   left (OM35): 
+## .   .   operator (KJ49): union
+## .   .   left (KJ49): 
 ## .   .   .   source: d_bio_interest_mv.entity_id (entity_id)
 ## .   .   .   logic: interest_code IN &#39;TEC&#39;
-## .   .   right (FX67): 
+## .   .   right (KJ49): 
 ## .   .   .   source: d_oth_phil_affinity_mv.entity_id (entity_id)
 ## .   .   .   logic: 
 ## .   .   .   .   other_affinity_type IN &#39;ST&#39;
 ## .   .   .   .   sum(gift_amt) &gt;= 0.0
-## .   right (HW67): 
-## .   .   operator (NR94): union
-## .   .   left (NR94): 
+## .   right (OM35): 
+## .   .   operator (RE97): union
+## .   .   left (RE97): 
 ## .   .   .   source: d_bio_address_mv.entity_id (entity_id)
 ## .   .   .   logic: 
 ## .   .   .   .   geo_metro_area_code IN &#39;41860&#39;
 ## .   .   .   .   addr_type_code IN &#39;H&#39;
-## .   .   right (NR94): 
+## .   .   right (RE97): 
 ## .   .   .   source: d_bio_address_mv.entity_id (entity_id)
 ## .   .   .   logic: 
 ## .   .   .   .   geo_metro_area_code IN &#39;41860&#39;
@@ -214,8 +214,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ## 4      43187
 ## 5     145337
 ## 6     211715
-## 7     263076
-## 8     257211
+## 7     257211
+## 8     263076
 ## 9     278872
 ## 10    317044
 ## # ... with 679 more rows</code></pre>
