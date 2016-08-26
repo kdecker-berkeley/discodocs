@@ -18,9 +18,20 @@ wealthy = has_capacity(1:7)
 
 But now I'm stuck. I want to find children of anyone on that list. But so far all of the widgets we've seen work with specific codes, not other widgets. Technically, all the widgets we've seen are *first-order* widgets. But we do have some widgets that, instead of working on one or more specific codes, works on an existing, already filled out widget. `child_of` is one such *second-order* widget:
 
-```{r higher-order-cow2}
+```{r higher-order-cow2, cache = TRUE}
 child_of_wealth = child_of(wealthy)
 display(child_of_wealth)
 ```
 
 Though the syntax looks just like what we've been doing all along, note that `wealthy` in the above is not a code or synonym, but instead is the name that I gave to the definition `has_capacity(1:7)`. This makes `child_of` very different from other widgets we've seen so far. As we'll see in the next seciton, the ability to use second-order widgets allows us to do some very powerful things. 
+
+The result of using a second-order widget, though, is just like using any other widget. You can continue to combine it with other widgets:
+
+```{r higher-order-cow3, cache = TRUE}
+display(child_of_wealth %and% lives_in_msa(san_francisco))
+
+# or even
+display(
+    child_of(child_of_wealth)
+)
+```

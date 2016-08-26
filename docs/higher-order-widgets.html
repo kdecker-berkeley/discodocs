@@ -198,6 +198,40 @@ wealthy =<span class="st"> </span><span class="kw">has_capacity</span>(<span cla
 ## 10     26435
 ## # ... with 1,014 more rows</code></pre>
 <p>Though the syntax looks just like what we’ve been doing all along, note that <code>wealthy</code> in the above is not a code or synonym, but instead is the name that I gave to the definition <code>has_capacity(1:7)</code>. This makes <code>child_of</code> very different from other widgets we’ve seen so far. As we’ll see in the next seciton, the ability to use second-order widgets allows us to do some very powerful things.</p>
+<p>The result of using a second-order widget, though, is just like using any other widget. You can continue to combine it with other widgets:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">display</span>(child_of_wealth %and%<span class="st"> </span><span class="kw">lives_in_msa</span>(san_francisco))</code></pre></div>
+<pre><code>## # A tibble: 448 x 1
+##    entity_id
+##        &lt;dbl&gt;
+## 1     501819
+## 2     731797
+## 3     325782
+## 4     415779
+## 5      30775
+## 6      30776
+## 7     459195
+## 8      28210
+## 9      21477
+## 10    433145
+## # ... with 438 more rows</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># or even</span>
+<span class="kw">display</span>(
+    <span class="kw">child_of</span>(child_of_wealth)
+)</code></pre></div>
+<pre><code>## # A tibble: 118 x 1
+##    entity_id
+##        &lt;dbl&gt;
+## 1     684446
+## 2    1002656
+## 3     499074
+## 4    3211635
+## 5     945146
+## 6     509691
+## 7    3162983
+## 8     734034
+## 9     916909
+## 10    742372
+## # ... with 108 more rows</code></pre>
 
 </div>
 </div>

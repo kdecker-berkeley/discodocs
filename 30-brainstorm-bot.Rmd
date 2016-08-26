@@ -10,7 +10,7 @@ library(discoveryengine)
 At this point, you're pretty empowered to search through the database for all sorts of prospects, provided you know something about the codes in the database. Even if you don't know the exact code for, say, basketball, you can use the 
 [synonym search feature](#synonym-search) because you know which widget to use:
 
-```{r bb-find-basketball}
+```{r bb-find-basketball, cache = TRUE}
 played_sport(?basketball)
 ```
 
@@ -18,19 +18,19 @@ But now imagine someone has asked you for a list of people interested in robotic
 
 Enter the brainstorm bot. The brainstorm bot is a robot that is knowledgeable about the code tables in CADS. Let's ask it about robotics:
 
-```{r bb-find-robotics}
+```{r bb-find-robotics, cache = TRUE}
 brainstorm_bot("robotics")
 ```
 
 Hey brainstorm bot, thanks for the ideas! The results show the name of a widget, along with the codes that are of interest, along with their description from the CADS code tables, so you can decide if they are appropriate for your project. You can then copy and paste to build up the right population:
 
-```{r bb-robotics-interest}
+```{r bb-robotics-interest, cache = TRUE}
 display(has_interest(ROB))
 ```
 
 If it turns out you agree with every one of the brainstorm bot's suggestions, then you don't even have to copy and paste, because (surprise!) the brainstorm bot is actually giving you a fully filled out widget:
 
-```{r bb-robotics-sf}
+```{r bb-robotics-sf, cache = TRUE}
 # if i wanted robotics fans in the san francisco MSA
 prospects = brainstorm_bot("robotics") %and%
     lives_in_msa(san_francisco)
@@ -41,12 +41,12 @@ display(prospects)
 
 The brainstorm bot understands wildcards at the beginning and/or ending of your search term:
 
-```{r bb-find-robotstar}
+```{r bb-find-robotstar, cache = TRUE}
 brainstorm_bot("robot*")
 ```
 
 It also will do multiple searches at once:
 
-```{r bb-robotstar-ds}
+```{r bb-robotstar-ds, cache = TRUE}
 brainstorm_bot("robot*", "data science")
 ```

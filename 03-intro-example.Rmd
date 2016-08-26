@@ -65,7 +65,7 @@ event_prospect
 
 In order to send the definition to the data warehouse, retrieve the results, and show them to us, we use the `display` function:
 
-```{r}
+```{r, cache = TRUE}
 display(event_prospect)
 ```
 

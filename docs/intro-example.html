@@ -207,25 +207,25 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>As we discussed in the previous section, now that we have an official definition we can send it to the data warehouse, and see if the data warehouse finds anyone who fits. You can see the definition for yourself by just typing the name of it, though it is now written in a language for the computer to understand and may look intimidating to us humans:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">event_prospect</code></pre></div>
 <pre><code>## LISTBUILDER DEFINITION (type: entity_id)
-## .   operator (BY92): intersect
-## .   left (BY92): 
-## .   .   operator (YA52): union
-## .   .   left (YA52): 
+## .   operator (LI19): intersect
+## .   left (LI19): 
+## .   .   operator (UP37): union
+## .   .   left (UP37): 
 ## .   .   .   source: d_bio_interest_mv.entity_id (entity_id)
 ## .   .   .   logic: interest_code IN &#39;TEC&#39;
-## .   .   right (YA52): 
+## .   .   right (UP37): 
 ## .   .   .   source: d_oth_phil_affinity_mv.entity_id (entity_id)
 ## .   .   .   logic: 
 ## .   .   .   .   other_affinity_type IN &#39;ST&#39;
 ## .   .   .   .   sum(gift_amt) &gt;= 0.0
-## .   right (BY92): 
-## .   .   operator (ET92): union
-## .   .   left (ET92): 
+## .   right (LI19): 
+## .   .   operator (VJ34): union
+## .   .   left (VJ34): 
 ## .   .   .   source: d_bio_address_mv.entity_id (entity_id)
 ## .   .   .   logic: 
 ## .   .   .   .   geo_metro_area_code IN &#39;41860&#39;
 ## .   .   .   .   addr_type_code IN &#39;H&#39;
-## .   .   right (ET92): 
+## .   .   right (VJ34): 
 ## .   .   .   source: d_bio_address_mv.entity_id (entity_id)
 ## .   .   .   logic: 
 ## .   .   .   .   geo_metro_area_code IN &#39;41860&#39;
@@ -238,13 +238,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ## 1      11535
 ## 2      27562
 ## 3      32528
-## 4      43187
-## 5     145337
-## 6     211715
-## 7     257211
-## 8     263076
-## 9     278872
-## 10    317044
+## 4     367399
+## 5      43187
+## 6     145337
+## 7     211715
+## 8     257211
+## 9     263076
+## 10    278872
 ## # ... with 679 more rows</code></pre>
 <p>Of course, we are probably interested in exporting this savedlist to a file, so that we might load it into CADS and run CADSmart reports on it. Conveniently, we can just do that by adding a filename:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">display</span>(event_prospect, <span class="dt">file =</span> <span class="st">&quot;sf-tech-prospects&quot;</span>)</code></pre></div>

@@ -63,7 +63,7 @@ So by now you can probably figure out that `partcipated_in(uc_jazz_ensembles)` g
 
 Luckily, no! In fact, all you have to do is type `participated_in()`:
 
-```{r participated-in-anything}
+```{r participated-in-anything, cache = TRUE}
 did_anything = participated_in()
 display(did_anything)
 ```
@@ -105,10 +105,7 @@ You're working with a major gift officer in the School of Business who is surpri
 
 You could probably have a savedlist ready before she's even hung up the phone:
 
-```{r bus_15k}
-# if you haven't already loaded the disco engine
-library(discoveryengine)
-
+```{r bus_15k, cache = TRUE}
 important_prospects = 
     gave_to_area(business, at_least = 15000, from = 20160101) %but_not% 
     in_unit_portfolio(business)
@@ -122,7 +119,7 @@ So you create your savedlist, run a Prospect Pool Spreadsheet on it, review the 
 
 You start out by checking if the portfolio widget has any options regarding inactive proposal assignments, by typing `?in_unit_portfolio`. You see that yes, indeed, there is an option called `include_inactive` that defaults to `FALSE`. If you instead set it to `TRUE` by typing `in_unit_portfolio(business, include_inactive = TRUE)`, you'd be capturing anyone who has ever been in a Business portfolio, and you can again use `%but_not%` to subtract those people from the donor list:
 
-```{r bus-15k-2}
+```{r bus-15k-2, cache = TRUE}
 important_prospects = 
     gave_to_area(business, at_least = 15000, from = 20160101) %but_not%
     in_unit_portfolio(business, include_inactive = TRUE)
