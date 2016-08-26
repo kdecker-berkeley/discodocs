@@ -33,8 +33,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
-<link rel="next" href="r-intro.html">
+<link rel="prev" href="working-with-widgets.html">
+<link rel="next" href="higher-order-widgets.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -169,17 +169,67 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Documentation for discoveryengine</h1>
-<h4 class="author"><em>Tarak Shah</em></h4>
-<h4 class="date"><em>2016-08-26</em></h4>
-</div>
-<div id="disco" class="section level1">
-<h1><span class="header-section-number">1</span> Disco</h1>
-<p>Welcome to the introduction and extended documentation for the discoveryengine! The discoveryengine, also known as “Disco Engine” or just “Disco,” is a tool enabling Prospect Development staff to do custom prospecting, written in the R programming language. Feel free to read this document in order, or to jump around or just bookmark it and refer to it as needed. You may find the search feature helpful, you can access it by clicking on the little magnifying glass at the top of the screen.</p>
-<div id="help-wanted" class="section level2">
-<h2><span class="header-section-number">1.1</span> Help wanted</h2>
-<p>This site is a work in progress. One way you can help is to report any mistakes you find (typos, spelling mistakes, grammatical errors) or any areas that could be explained better (if something was not clear to you, there’s a good chance it won’t be clear to others either). Use the <a href="https://github.com/tarakc02/discodocs/issues">Issues page</a> – click on the green “New Issue” button and enter a short message explaining what’s wrong. If you’d like to suggest edits directly, you can do so by clicking on the pen-and-paper icon at the top of any page on this site (guide coming soon). Thank you!</p>
+<div id="the-brainstorm-bot" class="section level1">
+<h1><span class="header-section-number">6</span> The Brainstorm Bot</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># as always, i have to make sure the disco engine is loaded</span>
+<span class="kw">library</span>(discoveryengine)</code></pre></div>
+<p>At this point, you’re pretty empowered to search through the database for all sorts of prospects, provided you know something about the codes in the database. Even if you don’t know the exact code for, say, basketball, you can use the <a href="working-with-widgets.html#synonym-search">synonym search feature</a> because you know which widget to use:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">played_sport</span>(?basketball)</code></pre></div>
+<pre><code>##              synonym code
+##       basketball_men MABB
+##     basketball_women WABB
+##  cal_basketball_club RSBK</code></pre>
+<p>But now imagine someone has asked you for a list of people interested in robotics. Where would that be coded? Perhaps in multiple places? How can you find out?</p>
+<p>Enter the brainstorm bot. The brainstorm bot is a robot that is knowledgeable about the code tables in CADS. Let’s ask it about robotics:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">brainstorm_bot</span>(<span class="st">&quot;robotics&quot;</span>)</code></pre></div>
+<pre><code>## has_interest 
+##     ROB: Robotics
+## participated_in 
+##     ENRO: Cal Robotics</code></pre>
+<p>Hey brainstorm bot, thanks for the ideas! The results show the name of a widget, along with the codes that are of interest, along with their description from the CADS code tables, so you can decide if they are appropriate for your project. You can then copy and paste to build up the right population:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">display</span>(<span class="kw">has_interest</span>(ROB))</code></pre></div>
+<pre><code>## # A tibble: 1 x 1
+##   entity_id
+##       &lt;dbl&gt;
+## 1    470691</code></pre>
+<p>If it turns out you agree with every one of the brainstorm bot’s suggestions, then you don’t even have to copy and paste, because (surprise!) the brainstorm bot is actually giving you a fully filled out widget:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># if i wanted robotics fans in the san francisco MSA</span>
+prospects =<span class="st"> </span><span class="kw">brainstorm_bot</span>(<span class="st">&quot;robotics&quot;</span>) %and%
+<span class="st">    </span><span class="kw">lives_in_msa</span>(san_francisco)
+<span class="kw">display</span>(prospects)</code></pre></div>
+<pre><code>## # A tibble: 5 x 1
+##   entity_id
+##       &lt;dbl&gt;
+## 1    718587
+## 2    749416
+## 3    823913
+## 4    875964
+## 5    824900</code></pre>
+<div id="search-features" class="section level2">
+<h2><span class="header-section-number">6.1</span> Search features</h2>
+<p>The brainstorm bot understands wildcards at the beginning and/or ending of your search term:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">brainstorm_bot</span>(<span class="st">&quot;robot*&quot;</span>)</code></pre></div>
+<pre><code>## attended_event 
+##     6724: Haas East Bay Chp Robotic Event 06-18-14
+## has_interest 
+##     ROB: Robotics
+## participated_in 
+##     ENRO: Cal Robotics
+##     UROB: Robotmedia Presents</code></pre>
+<p>It also will do multiple searches at once:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">brainstorm_bot</span>(<span class="st">&quot;robot*&quot;</span>, <span class="st">&quot;data science&quot;</span>)</code></pre></div>
+<pre><code>## attended_event 
+##     6724: Haas East Bay Chp Robotic Event 06-18-14
+## gave_to_department 
+##     DT: Berkeley Institute for Data Science
+## has_interest 
+##     DAT: Data Science
+##     ROB: Robotics
+## majored_in 
+##     2E0: Master of Information &amp; Data Science
+## participated_in 
+##     ENRO: Cal Robotics
+##     UROB: Robotmedia Presents</code></pre>
 
 </div>
 </div>
@@ -191,8 +241,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
-
-<a href="r-intro.html" class="navigation navigation-next navigation-unique" aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+<a href="working-with-widgets.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="higher-order-widgets.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
@@ -211,7 +261,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/tarakc02/discodocs/edit/master/index.Rmd",
+"link": "https://github.com/tarakc02/discodocs/edit/master/30-brainstorm-bot.Rmd",
 "text": null
 },
 "download": null,

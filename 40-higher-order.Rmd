@@ -1,0 +1,26 @@
+# (PART) Advanced {-}
+
+# Higher order widgets
+
+You may have noticed when we ran the `show_widgets()` function in  [working with widgets](#working-with-show_widgets) that there is a mysterious "Order" column that categorizes widgets as either "first-order" or "second-order". What's that all about? In order to answer that, let's take a look at another example.
+
+## Children of wealth
+
+Many alumni in our database do not have capacity ratings, but come from wealthy families. This would be nice to be aware of if they were ever being solicited. But how could we identify these "children of wealth" using the discovery engine? It's pretty easy to find wealthy individuals:
+
+```{r higher-order-cow1}
+# as always, i make sure the disco engine is loaded
+library(discoveryengine)
+
+# i'll define wealthy as a capacity of $1 Million+
+wealthy = has_capacity(1:7)
+```
+
+But now I'm stuck. I want to find children of anyone on that list. But so far all of the widgets we've seen work with specific codes, not other widgets. Technically, all the widgets we've seen are *first-order* widgets. But we do have some widgets that, instead of working on one or more specific codes, works on an existing, already filled out widget. `child_of` is one such *second-order* widget:
+
+```{r higher-order-cow2}
+child_of_wealth = child_of(wealthy)
+display(child_of_wealth)
+```
+
+Though the syntax looks just like what we've been doing all along, note that `wealthy` in the above is not a code or synonym, but instead is the name that I gave to the definition `has_capacity(1:7)`. This makes `child_of` very different from other widgets we've seen so far. As we'll see in the next seciton, the ability to use second-order widgets allows us to do some very powerful things. 

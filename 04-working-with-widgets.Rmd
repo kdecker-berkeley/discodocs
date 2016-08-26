@@ -2,7 +2,7 @@
 
 So far, we've used widgets in some simple examples. In this section, we'll explore widgets in some more detail. As always, we'll begin by loading the `discoveryengine`:
 
-```{r working_with_load}
+```{r working-with-load}
 library(discoveryengine)
 ```
 
@@ -10,7 +10,7 @@ library(discoveryengine)
 
 There are two main ways to find widgets. The first is to use the `show_widgets` function. The function takes no arguments. When you run it, an interactive list of widgets, with short descriptions of each, will appear in your viewer window:
 
-```{r working_with_show_widgets, fig.width=9}
+```{r working-with-show_widgets, fig.width=9}
 show_widgets()
 ```
 
@@ -28,7 +28,11 @@ Once you've found the widget you're looking for, you can get additional informat
 
 You may have noticed in previous examples that widgets work with exact codes, such as `in_unit_portfolio(BU)` or with *synonyms*, such as `in_unit_portfolio(business)`. Synonyms will always be in lower-case, and may include any letter of the alphabet or the underscore "_" character, and nothing else. 
 
-Use whichever feels more comfortable -- there is no advantage to using codes vs. synonyms, though I personally find the synonyms easier to read and understand later on. If you're not sure of the code or synonym to use, try out the synonym search feature that works with most widgets. Instead of entering a code (`in_unit_portfolio(BU)`) or synonym (`in_unit_portfolio(business)`), enter a question mark followed by a search string:
+Use whichever feels more comfortable -- there is no advantage to using codes vs. synonyms, though I personally find the synonyms easier to read and understand later on. 
+
+## Synonym search {#synonym-search}
+
+If you're not sure of the code or synonym to use, try out the synonym search feature that works with most widgets. Instead of entering a code (`in_unit_portfolio(BU)`) or synonym (`in_unit_portfolio(business)`), enter a question mark followed by a search string:
 
 ```{r working_with_synsearch1}
 in_unit_portfolio(?business)
@@ -53,6 +57,19 @@ Widgets can always accept multiple codes/synonyms as arguments, and even combina
 - `gave_to_area(HSB, COC)` is the same as above
 - `gave_to_area(business, COC)` once again, the same thing
 
+## Use the default cases
+
+So by now you can probably figure out that `partcipated_in(uc_jazz_ensembles)` gets you alumni who participated in the UC Jazz Ensembles. But what if you're actually looking for people who particpated in any student activity at all? Would you have to type out all (hundreds!) of them? 
+
+Luckily, no! In fact, all you have to do is type `participated_in()`:
+
+```{r participated-in-anything}
+did_anything = participated_in()
+display(did_anything)
+```
+
+That seems a bit magical, doesn't it? The reason that works is because every widget has a defined behavior for when no codes/synonyms are entered. These default behaviors aim to be sensible so that you can use them in an intuitive way. You can always find out exactly what is included in the default by using the help. For instance, by typing `?has_capacity` I find out that entering `has_capacity()` without any specific ratings will find anyone with a researched capacity rating between 1 and 14 (so 99's are excluded, and those with no capacity ratings are excluded). 
+
 ## Detailed controls
 
 We saw above that `gave_to_area(business)` will find people who have given to the Haas School of Business. By default, this will find anyone who has ever given any amount, at any time. But `gave_to_area`, like many widgets, has a number of optional arguments that allow more fine-grained control. For example: 
@@ -63,3 +80,52 @@ We saw above that `gave_to_area(business)` will find people who have given to th
 - `gave_to_area(business, from = 20150101, to = 20151231)`: finds anyone who gave anything at all to the school of Business between January 1, 2015 and December 31, 2015
 
 As you can see, you can pick and choose which optional arguments you want to use. To find out all of the possible controls for a widget, use the built in help. For example, type `?gave_to_area`.
+
+## Combining widgets
+
+As flexible as individual widgets are, they won't help you too much by themselves. What makes them really useful is that they can be combined. There are three ways to combine widgets:
+
+- `%and%` will look for entities who satisfy both widgets
+- `%or%` will look for entities who satisfy at least one of two widgets
+- `%but_not%` will look for entities who satisfy a widget but do not satisfy a second widget. 
+
+Some quick examples:
+
+`gave_to_area(art_museum) %and% gave_to_area(cal_performances)` finds anyone who has given to **both** the Art Museum and Cal Performances. 
+
+`gave_to_area(art_museum) %or% gave_to_area(cal_performances)` finds anyone who has ever given to either the Art Museum or to Cal Performances. Note that this would include everyone who was found in the previous (`%and%`) example, as well as those who only gave to one or the other area.
+
+`gave_to_area(art_museum) %but_not% gave_to_area(cal_performances)` finds anyone who has given to the Art Museum but has not given to Cal Performances.
+
+## Combination example
+
+You're working with a major gift officer in the School of Business who is surprised to find out that alumni have been giving $15,000+ gifts in response to annual appeals, with no follow-up from major gift officers. She calls you up and says:
+
+> I need to a report on everyone who has given $15,000 or more this year who isn't yet in a portfolio, and I need it right away!
+
+You could probably have a savedlist ready before she's even hung up the phone:
+
+```{r bus_15k}
+# if you haven't already loaded the disco engine
+library(discoveryengine)
+
+important_prospects = 
+    gave_to_area(business, at_least = 15000, from = 20160101) %but_not% 
+    in_unit_portfolio(business)
+
+display(important_prospects)
+```
+
+## Combination example 2
+
+So you create your savedlist, run a Prospect Pool Spreadsheet on it, review the results, and send the data and your analysis over to the major gift officer. She notices that several of the people on the list had been in portfolios earlier, so asks if you can find just those who have never been in a portfolio. 
+
+You start out by checking if the portfolio widget has any options regarding inactive proposal assignments, by typing `?in_unit_portfolio`. You see that yes, indeed, there is an option called `include_inactive` that defaults to `FALSE`. If you instead set it to `TRUE` by typing `in_unit_portfolio(business, include_inactive = TRUE)`, you'd be capturing anyone who has ever been in a Business portfolio, and you can again use `%but_not%` to subtract those people from the donor list:
+
+```{r bus-15k-2}
+important_prospects = 
+    gave_to_area(business, at_least = 15000, from = 20160101) %but_not%
+    in_unit_portfolio(business, include_inactive = TRUE)
+
+display(important_prospects)
+```

@@ -1,3 +1,5 @@
+# (PART) Basics {-}
+
 # An introductory example {#intro-example}
 
 Before diving in to details, let's work through a simple real-life example. We'll explain the functions used in more detail in later sections, but here you can see what the tool looks like in action.
