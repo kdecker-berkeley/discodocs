@@ -1,0 +1,139 @@
+# (APPENDIX) Appendix {-}
+
+# Setting up and testing your CDW connection {#test_cdw}
+
+## Testing your connection
+
+First, let's make sure your connection works. You'll need the user name and password you received from Nancy Fan. Here are the steps to see if that connection works:
+
+1) Navigate to C:\\Windows\\SysWOW64. Double click odbcad32. It's the application highlighted in the following image:
+
+<p><center>
+`r knitr::include_graphics("images/syswow64.png")`
+</p></center>
+
+2) You'll now have the ODBC Data Source Administrator open. Click the "System DSN" tab and then click the "Add.." button.
+
+<p><center>
+`r knitr::include_graphics("images/odbc.png")`
+</p></center>
+
+3) Scroll down to close to the bottom of the list of drivers. There you'll find "Oracle in instantclient_11_2". Double click this.
+
+<p><center>
+`r knitr::include_graphics("images/oracle.png")`
+</p></center>
+
+4) You'll now be in a window that asks you for some information to configure this driver. Fill out the Data Source Name as "URELUAT" and find "URELUAT" in the dropdown menu for TNS Service Name. Enter your user name (the one given to you by Nancy, which is probably the same as your CalNet ID) as the User ID. Click "Test Connection".
+
+<p><center>
+`r knitr::include_graphics("images/configuration.png")`
+</p></center>
+
+5) Enter your password (given to you by Nancy) in the Password field. Click "OK".
+
+<p><center>
+`r knitr::include_graphics("images/test.png")`
+</p></center>
+
+6) You should now get a pop up message letting you know that the connection was successful. Click "OK" three times to close out the ODBC Source Administrator. If you did not get this message and instead got an error message, do not continue with the rest of these instructions until your connection is successful. You may have the wrong password, or there may be other connection issues.
+
+<p><center>
+`r knitr::include_graphics("images/successful.png")`
+</p></center>
+
+## Opening RStudio
+
+If your connection was successful, let's move on to setting up some packages you'll need.
+
+First, open RStudio. If you don't have an icon on your desktop, you can find the program by searching for "rstudio" in your Start menu. You'll also find a copy at C:\\Program Files\\RStudio\\bin. If you want a shortcut on your desktop, simply drag and drop the rstudio application.
+
+When RStudio is open, you'll see a few different panes on the screen. The console is where you can type commands and see output. We only need to worry about the console right now. It's this part of the screen:
+
+<p><center>
+`r knitr::include_graphics("images/console.png")`
+</p></center>
+
+You also want to make sure you're using the correct version of R. Here are the steps to do so:
+
+1) Go to the Tools dropdown menu at the top of the screen, and select Global Options. You'll see a box that looks like this:
+
+<p><center>
+`r knitr::include_graphics("images/options.png")`
+</p></center>
+
+2) The top box tells you the R version you're using. Click on the "Change.." button and make sure "[32-bit] C:\\Program Files\\R\\R-3.3.1" is selected. It looks like this:
+
+<p><center>
+`r knitr::include_graphics("images/version.png")`
+</p></center>
+
+3) Click "Ok" twice. You may be prompted to restart the program. If so, go ahead and do so.
+
+## Installing getcdw
+
+Before you can install getcdw, you'll need to install a few packages. This can be done in a couple of ways, but perhaps the easiest is to enter the following into the console:
+
+```{r, eval = FALSE}
+install.packages("devtools")
+install.packages("dplyr", dependencies = TRUE)
+install.packages("S:/UR_Everyone/Rohit_Saini/ROracle/ROracle_1.2-2.zip", repos = NULL)
+```
+
+You'll then need to run this script. To do this, simply press enter after each line. There may be a pause for a few seconds during installation of the packages. A little stop sign will appear in the upper right corner of the console while the script is running. Once this stop sign is gone, you should get an output message that tells you that each package has been successfully unpacked and where the downloaded packages are stored. You're now ready to move on to the next line.
+
+Tip: Copy and paste each line of the above code directly into your console and press enter after each time. This will avoid typos and will help narrow down what went wrong if something doesn't work.
+
+Now go ahead and use devtools to install getcdw. You'll need to run code that looks like this:
+
+```{r, eval = FALSE}
+devtools::install_github("tarakc02/getcdw")
+```
+
+You should get a message that getcdw has been installed. Again there may be a pause while the package is being installed.
+
+## Testing getcdw
+
+Let's go ahead and load the library for getcdw:
+
+```{r}
+library(getcdw)
+```
+
+Copy the above into your console and press enter. It will appear that nothing happened, but that actually means everything is fine.
+
+Now all we need to do is run a simple query to test the connection. We'll do this by entering a SQL query into the console and seeing if it returns valid data (which would mean that you are able to connect to the database). When you do so, you'll be prompted for some information, please read the instructions below and make sure you understand what you're supposed to enter:
+
+```{r, eval = FALSE}
+get_cdw("select * from dual")
+```
+
+When you do this for the first time, you will be prompted for *three* pieces of information:
+
+1) Your "UID": This is your username to log-in to the database. Unless you were told otherwise, this should be the same as your CalNet ID
+
+<p><center>
+`r knitr::include_graphics("images/UID.png")`
+</center></p>
+
+2) Your "PWD": This is the password to log-in to the database. You should have received this from Nancy Fan, and it looks like a long random set of characters, numbers, and other symbols:
+
+<p><center>
+`r knitr::include_graphics("images/PWD.png")`
+</center></p>
+
+3) Finally, you'll be prompted for a "secret passphrase." The database password is long and confusing and impossible to remember, which encourages most of us to write it down somewhere and keep it near the computer, which is insecure! So instead getcdw allows you to pick your own secret passphrase (this can be anything, from a single word to a memorable sentence, or whatever you think is easy for you to remember but not easy for someone else to guess).
+
+<p><center>
+`r knitr::include_graphics("images/passphrase.png")`
+</center></p>
+
+After this step, you will only ever be required to enter your secret passphrase -- you will no longer be prompted for your database UID or PWD.
+
+If everything is working properly, you should see something like this:
+
+```{r, echo = FALSE}
+get_cdw("select * from dual")
+```
+
+If that's what you see, you are all set! Stay tuned for further instructions as we work to roll out the new suite of tools!
