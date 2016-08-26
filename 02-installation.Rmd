@@ -7,6 +7,7 @@ Note that installation can sometimes be a pain. But once you've gotten through t
 ## Required packages
 
 At this point, you should have already: 
+
 - tested your CDW connection
 - installed `getcdw`
 - run a test query

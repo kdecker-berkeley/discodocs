@@ -49,11 +49,6 @@
 
 
 
-<script src="libs/htmlwidgets-0.7/htmlwidgets.js"></script>
-<script src="libs/datatables-binding-0.2/datatables.js"></script>
-<link href="libs/dt-core-1.10.12/css/jquery.dataTables.min.css" rel="stylesheet" />
-<link href="libs/dt-core-1.10.12/css/jquery.dataTables.extra.css" rel="stylesheet" />
-<script src="libs/dt-core-1.10.12/js/jquery.dataTables.min.js"></script>
 
 
 <style type="text/css">
@@ -109,31 +104,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="./">Documentation for the discoveryengine</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Disco</a><ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#help-wanted"><i class="fa fa-check"></i><b>1.1</b> Help wanted</a></li>
-</ul></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Disco</a></li>
 <li class="chapter" data-level="2" data-path="r-intro.html"><a href="r-intro.html"><i class="fa fa-check"></i><b>2</b> Introduction to R and RStudio</a></li>
 <li class="chapter" data-level="3" data-path="installation.html"><a href="installation.html"><i class="fa fa-check"></i><b>3</b> Installation</a><ul>
 <li class="chapter" data-level="3.1" data-path="installation.html"><a href="installation.html#required-packages"><i class="fa fa-check"></i><b>3.1</b> Required packages</a></li>
 <li class="chapter" data-level="3.2" data-path="installation.html"><a href="installation.html#a-disco-test"><i class="fa fa-check"></i><b>3.2</b> A disco test</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="intro-example.html"><a href="intro-example.html"><i class="fa fa-check"></i><b>4</b> An introductory example</a><ul>
-<li class="chapter" data-level="4.1" data-path="intro-example.html"><a href="intro-example.html#develop-a-strategy"><i class="fa fa-check"></i><b>4.1</b> Develop a strategy</a></li>
-<li class="chapter" data-level="4.2" data-path="intro-example.html"><a href="intro-example.html#create-the-definition"><i class="fa fa-check"></i><b>4.2</b> Create the definition</a></li>
-<li class="chapter" data-level="4.3" data-path="intro-example.html"><a href="intro-example.html#send-the-definition-to-the-cdw"><i class="fa fa-check"></i><b>4.3</b> Send the definition to the CDW</a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="working-with-widgets.html"><a href="working-with-widgets.html"><i class="fa fa-check"></i><b>5</b> Working with widgets</a><ul>
-<li class="chapter" data-level="5.1" data-path="working-with-widgets.html"><a href="working-with-widgets.html#finding-widgets"><i class="fa fa-check"></i><b>5.1</b> Finding widgets</a></li>
-<li class="chapter" data-level="5.2" data-path="working-with-widgets.html"><a href="working-with-widgets.html#codes-and-synonyms"><i class="fa fa-check"></i><b>5.2</b> Codes and synonyms</a></li>
-<li class="chapter" data-level="5.3" data-path="working-with-widgets.html"><a href="working-with-widgets.html#detailed-controls"><i class="fa fa-check"></i><b>5.3</b> Detailed controls</a></li>
-</ul></li>
+<li class="chapter" data-level="4" data-path="intro-example.html"><a href="intro-example.html"><i class="fa fa-check"></i><b>4</b> An introductory example</a></li>
+<li class="chapter" data-level="5" data-path="working-with-widgets.html"><a href="working-with-widgets.html"><i class="fa fa-check"></i><b>5</b> Working with widgets</a></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
-<li class="chapter" data-level="A" data-path="test-cdw.html"><a href="test-cdw.html"><i class="fa fa-check"></i><b>A</b> Test your database set up</a><ul>
-<li class="chapter" data-level="A.1" data-path="test-cdw.html"><a href="test-cdw.html#test-your-connection"><i class="fa fa-check"></i><b>A.1</b> Test your connection</a></li>
-<li class="chapter" data-level="A.2" data-path="test-cdw.html"><a href="test-cdw.html#opening-rstudio"><i class="fa fa-check"></i><b>A.2</b> Opening RStudio</a></li>
-<li class="chapter" data-level="A.3" data-path="test-cdw.html"><a href="test-cdw.html#installing-getcdw"><i class="fa fa-check"></i><b>A.3</b> Installing getcdw</a></li>
-<li class="chapter" data-level="A.4" data-path="test-cdw.html"><a href="test-cdw.html#testing-getcdw"><i class="fa fa-check"></i><b>A.4</b> Testing getcdw</a></li>
-</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -160,8 +139,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Note that installation can sometimes be a pain. But once you’ve gotten through the process successfully, you won’t have to deal with it again!</p>
 <div id="required-packages" class="section level2">
 <h2><span class="header-section-number">3.1</span> Required packages</h2>
-<p>At this point, you should have already: - tested your CDW connection - installed <code>getcdw</code> - run a test query</p>
-<p>If you haven’t completed all of those items, head over to <a href="test-cdw.html#test-cdw">the step-by-step guide</a> and complete those steps, and then return here.</p>
+<p>At this point, you should have already:</p>
+<ul>
+<li>tested your CDW connection</li>
+<li>installed <code>getcdw</code></li>
+<li>run a test query</li>
+</ul>
+<p>If you haven’t completed all of those items, head over to <a href="#test-cdw">the step-by-step guide</a> and complete those steps, and then return here.</p>
 <p>Ok, so if you’ve got <code>getcdw</code> working properly, that means you’ve already installed <code>devtools</code>. All that’s left is to install <code>listbuilder</code> and <code>discoveryengine</code> packages:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools::<span class="kw">install_github</span>(<span class="st">&quot;tarakc02/listbuilder&quot;</span>)
 devtools::<span class="kw">install_github</span>(<span class="st">&quot;tarakc02/discoveryengine&quot;</span>)</code></pre></div>
