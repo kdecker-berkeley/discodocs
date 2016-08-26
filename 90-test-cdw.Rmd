@@ -1,8 +1,8 @@
 # (APPENDIX) Appendix {-}
 
-# Setting up and testing your CDW connection {#test-cdw}
+# Test your database set up {#test-cdw}
 
-## Testing your connection
+## Test your connection
 
 First, let's make sure your connection works. You'll need the user name and password you received from Nancy Fan. Here are the steps to see if that connection works:
 

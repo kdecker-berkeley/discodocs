@@ -8,7 +8,7 @@ Here is our scenario: A fundraiser just called, and is trying to organize an eve
 library(discoveryengine)
 ```
 
-## Developing a strategy
+## Develop a strategy
 
 You might already be thinking of what sorts of prospects we should look for. That's good! There are countless ways to respond to this request, and you'll have to rely on your own expertise in order to know who to include on a potential invite list. For this example, I'll use the following definition of a good prospect:
 
@@ -17,7 +17,7 @@ You might already be thinking of what sorts of prospects we should look for. Tha
 
 Note that we now have a pretty clear idea of who to look for, but we need more precision. For instance, what constitutes a "demonstrated interest in technology?" What does it mean to be "in/near San Francisco?" In day-to-day conversations, we don't necessarily need that level of precision to understand one another, but since we'll need to translate this request into language a computer can understand, the more precision the better. I'll define a "demonstrated interest in technology" as having either an interest code or a philanthropic affinity related to technology, and "in/near San Francisco" as anywhere that falls into the San Francisco Metropolitan Statistical Area (MSA).
 
-## Creating the definition
+## Create the definition
 
 So now that we have a precise idea of who we want to find, we can create a definition that the computer will understand. This is important, since our computer is the only link we have to the CADS Data Warehouse. We can give it a precise definition in a language that it understands, and it will then relay our request to the CADS Data Warehouse. The CADS data warehouse can then search for people who meet our definition, and send them back to the computer, which will then display the list to us. 
 
@@ -53,7 +53,7 @@ We are now able to create our full definition by combining the pieces:
 event_prospect = has_tech_interest %and% is_in_sf
 ```
 
-## Sending the definition to the CADS Data Warehouse
+## Send the definition to the CDW
 
 As we discussed in the previous section, now that we have an official definition we can send it to the data warehouse, and see if the data warehouse finds anyone who fits. You can see the definition for yourself by just typing the name of it, though it is now written in a language for the computer to understand and may look intimidating to us humans:
 
