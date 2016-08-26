@@ -1,6 +1,6 @@
 # (APPENDIX) Appendix {-}
 
-# Setting up and testing your CDW connection {#test_cdw}
+# Setting up and testing your CDW connection {#test-cdw}
 
 ## Testing your connection
 

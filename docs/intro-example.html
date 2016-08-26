@@ -110,7 +110,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Disco</a></li>
-<li class="chapter" data-level="2" data-path="r-intro.html"><a href="r-intro.html"><i class="fa fa-check"></i><b>2</b> Introduction to R and RStudio</a></li>
+<li class="chapter" data-level="2" data-path="r-intro.html"><a href="r-intro.html"><i class="fa fa-check"></i><b>2</b> [Introduction to R and RStudio]</a></li>
 <li class="chapter" data-level="3" data-path="installation.html"><a href="installation.html"><i class="fa fa-check"></i><b>3</b> Installation</a><ul>
 <li class="chapter" data-level="3.1" data-path="installation.html"><a href="installation.html#required-packages"><i class="fa fa-check"></i><b>3.1</b> Required packages</a></li>
 <li class="chapter" data-level="3.2" data-path="installation.html"><a href="installation.html#a-disco-test"><i class="fa fa-check"></i><b>3.2</b> A disco test</a></li>
@@ -152,7 +152,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="intro_example" class="section level1">
+<div id="intro-example" class="section level1">
 <h1><span class="header-section-number">4</span> An introductory example</h1>
 <p>Before diving in to details, let’s work through a simple real-life example. We’ll explain the functions used in more detail in later sections, but here you can see what the tool looks like in action.</p>
 <p>Here is our scenario: A fundraiser just called, and is trying to organize an event in San Francisco that will feature a well-known technologist. She wants you to help her find prospects to invite to the event. We start out by loading the discoveryengine:</p>
@@ -190,25 +190,25 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>As we discussed in the previous section, now that we have an official definition we can send it to the data warehouse, and see if the data warehouse finds anyone who fits. You can see the definition for yourself by just typing the name of it, though it is now written in a language for the computer to understand and may look intimidating to us humans:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">event_prospect</code></pre></div>
 <pre><code>## LISTBUILDER DEFINITION (type: entity_id)
-## .   operator (DN40): intersect
-## .   left (DN40): 
-## .   .   operator (GR29): union
-## .   .   left (GR29): 
+## .   operator (DF90): intersect
+## .   left (DF90): 
+## .   .   operator (EK56): union
+## .   .   left (EK56): 
 ## .   .   .   source: d_bio_interest_mv.entity_id (entity_id)
 ## .   .   .   logic: interest_code IN &#39;TEC&#39;
-## .   .   right (GR29): 
+## .   .   right (EK56): 
 ## .   .   .   source: d_oth_phil_affinity_mv.entity_id (entity_id)
 ## .   .   .   logic: 
 ## .   .   .   .   other_affinity_type IN &#39;ST&#39;
 ## .   .   .   .   sum(gift_amt) &gt;= 0.0
-## .   right (DN40): 
-## .   .   operator (YE84): union
-## .   .   left (YE84): 
+## .   right (DF90): 
+## .   .   operator (HA27): union
+## .   .   left (HA27): 
 ## .   .   .   source: d_bio_address_mv.entity_id (entity_id)
 ## .   .   .   logic: 
 ## .   .   .   .   geo_metro_area_code IN &#39;41860&#39;
 ## .   .   .   .   addr_type_code IN &#39;H&#39;
-## .   .   right (YE84): 
+## .   .   right (HA27): 
 ## .   .   .   source: d_bio_address_mv.entity_id (entity_id)
 ## .   .   .   logic: 
 ## .   .   .   .   geo_metro_area_code IN &#39;41860&#39;
