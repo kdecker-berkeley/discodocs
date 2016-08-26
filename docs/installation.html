@@ -49,6 +49,11 @@
 
 
 
+<script src="libs/htmlwidgets-0.7/htmlwidgets.js"></script>
+<script src="libs/datatables-binding-0.2/datatables.js"></script>
+<link href="libs/dt-core-1.10.12/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.12/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.12/js/jquery.dataTables.min.js"></script>
 
 
 <style type="text/css">
@@ -110,9 +115,23 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3.1" data-path="installation.html"><a href="installation.html#required-packages"><i class="fa fa-check"></i><b>3.1</b> Required packages</a></li>
 <li class="chapter" data-level="3.2" data-path="installation.html"><a href="installation.html#a-disco-test"><i class="fa fa-check"></i><b>3.2</b> A disco test</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="intro-example.html"><a href="intro-example.html"><i class="fa fa-check"></i><b>4</b> An introductory example</a></li>
-<li class="chapter" data-level="5" data-path="working-with-widgets.html"><a href="working-with-widgets.html"><i class="fa fa-check"></i><b>5</b> Working with widgets</a></li>
+<li class="chapter" data-level="4" data-path="intro-example.html"><a href="intro-example.html"><i class="fa fa-check"></i><b>4</b> An introductory example</a><ul>
+<li class="chapter" data-level="4.1" data-path="intro-example.html"><a href="intro-example.html#developing-a-strategy"><i class="fa fa-check"></i><b>4.1</b> Developing a strategy</a></li>
+<li class="chapter" data-level="4.2" data-path="intro-example.html"><a href="intro-example.html#creating-the-definition"><i class="fa fa-check"></i><b>4.2</b> Creating the definition</a></li>
+<li class="chapter" data-level="4.3" data-path="intro-example.html"><a href="intro-example.html#sending-the-definition-to-the-cads-data-warehouse"><i class="fa fa-check"></i><b>4.3</b> Sending the definition to the CADS Data Warehouse</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="working-with-widgets.html"><a href="working-with-widgets.html"><i class="fa fa-check"></i><b>5</b> Working with widgets</a><ul>
+<li class="chapter" data-level="5.1" data-path="working-with-widgets.html"><a href="working-with-widgets.html#finding-widgets"><i class="fa fa-check"></i><b>5.1</b> Finding widgets</a></li>
+<li class="chapter" data-level="5.2" data-path="working-with-widgets.html"><a href="working-with-widgets.html#codes-and-synonyms"><i class="fa fa-check"></i><b>5.2</b> Codes and synonyms</a></li>
+<li class="chapter" data-level="5.3" data-path="working-with-widgets.html"><a href="working-with-widgets.html#detailed-controls"><i class="fa fa-check"></i><b>5.3</b> Detailed controls</a></li>
+</ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="test-cdw.html"><a href="test-cdw.html"><i class="fa fa-check"></i><b>A</b> Setting up and testing your CDW connection</a><ul>
+<li class="chapter" data-level="A.1" data-path="test-cdw.html"><a href="test-cdw.html#testing-your-connection"><i class="fa fa-check"></i><b>A.1</b> Testing your connection</a></li>
+<li class="chapter" data-level="A.2" data-path="test-cdw.html"><a href="test-cdw.html#opening-rstudio"><i class="fa fa-check"></i><b>A.2</b> Opening RStudio</a></li>
+<li class="chapter" data-level="A.3" data-path="test-cdw.html"><a href="test-cdw.html#installing-getcdw"><i class="fa fa-check"></i><b>A.3</b> Installing getcdw</a></li>
+<li class="chapter" data-level="A.4" data-path="test-cdw.html"><a href="test-cdw.html#testing-getcdw"><i class="fa fa-check"></i><b>A.4</b> Testing getcdw</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -140,7 +159,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="required-packages" class="section level2">
 <h2><span class="header-section-number">3.1</span> Required packages</h2>
 <p>At this point, you should have already: - tested your CDW connection - installed <code>getcdw</code> - run a test query</p>
-<p>If you haven’t completed all of those items, head over to <a href="#test-cdw">the step-by-step guide</a> and complete those steps, and then return here.</p>
+<p>If you haven’t completed all of those items, head over to <a href="test-cdw.html#test-cdw">the step-by-step guide</a> and complete those steps, and then return here.</p>
 <p>Ok, so if you’ve got <code>getcdw</code> working properly, that means you’ve already installed <code>devtools</code>. All that’s left is to install <code>listbuilder</code> and <code>discoveryengine</code> packages:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools::<span class="kw">install_github</span>(<span class="st">&quot;tarakc02/listbuilder&quot;</span>)
 devtools::<span class="kw">install_github</span>(<span class="st">&quot;tarakc02/discoveryengine&quot;</span>)</code></pre></div>

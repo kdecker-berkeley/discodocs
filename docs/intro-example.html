@@ -110,7 +110,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Disco</a></li>
-<li class="chapter" data-level="2" data-path="r-intro.html"><a href="r-intro.html"><i class="fa fa-check"></i><b>2</b> [Introduction to R and RStudio]</a></li>
+<li class="chapter" data-level="2" data-path="r-intro.html"><a href="r-intro.html"><i class="fa fa-check"></i><b>2</b> Introduction to R and RStudio</a></li>
 <li class="chapter" data-level="3" data-path="installation.html"><a href="installation.html"><i class="fa fa-check"></i><b>3</b> Installation</a><ul>
 <li class="chapter" data-level="3.1" data-path="installation.html"><a href="installation.html#required-packages"><i class="fa fa-check"></i><b>3.1</b> Required packages</a></li>
 <li class="chapter" data-level="3.2" data-path="installation.html"><a href="installation.html#a-disco-test"><i class="fa fa-check"></i><b>3.2</b> A disco test</a></li>
@@ -190,25 +190,25 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>As we discussed in the previous section, now that we have an official definition we can send it to the data warehouse, and see if the data warehouse finds anyone who fits. You can see the definition for yourself by just typing the name of it, though it is now written in a language for the computer to understand and may look intimidating to us humans:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">event_prospect</code></pre></div>
 <pre><code>## LISTBUILDER DEFINITION (type: entity_id)
-## .   operator (DF90): intersect
-## .   left (DF90): 
-## .   .   operator (EK56): union
-## .   .   left (EK56): 
+## .   operator (KG61): intersect
+## .   left (KG61): 
+## .   .   operator (FH50): union
+## .   .   left (FH50): 
 ## .   .   .   source: d_bio_interest_mv.entity_id (entity_id)
 ## .   .   .   logic: interest_code IN &#39;TEC&#39;
-## .   .   right (EK56): 
+## .   .   right (FH50): 
 ## .   .   .   source: d_oth_phil_affinity_mv.entity_id (entity_id)
 ## .   .   .   logic: 
 ## .   .   .   .   other_affinity_type IN &#39;ST&#39;
 ## .   .   .   .   sum(gift_amt) &gt;= 0.0
-## .   right (DF90): 
-## .   .   operator (HA27): union
-## .   .   left (HA27): 
+## .   right (KG61): 
+## .   .   operator (DO46): union
+## .   .   left (DO46): 
 ## .   .   .   source: d_bio_address_mv.entity_id (entity_id)
 ## .   .   .   logic: 
 ## .   .   .   .   geo_metro_area_code IN &#39;41860&#39;
 ## .   .   .   .   addr_type_code IN &#39;H&#39;
-## .   .   right (HA27): 
+## .   .   right (DO46): 
 ## .   .   .   source: d_bio_address_mv.entity_id (entity_id)
 ## .   .   .   logic: 
 ## .   .   .   .   geo_metro_area_code IN &#39;41860&#39;
