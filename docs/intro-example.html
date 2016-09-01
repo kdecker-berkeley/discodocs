@@ -25,7 +25,7 @@
 
 <meta name="author" content="Tarak Shah">
 
-<meta name="date" content="2016-08-26">
+<meta name="date" content="2016-08-31">
 
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -121,11 +121,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="part"><span><b>Basics</b></span></li>
 <li class="chapter" data-level="4" data-path="intro-example.html"><a href="intro-example.html"><i class="fa fa-check"></i><b>4</b> An introductory example</a><ul>
 <li class="chapter" data-level="4.1" data-path="intro-example.html"><a href="intro-example.html#develop-a-strategy"><i class="fa fa-check"></i><b>4.1</b> Develop a strategy</a></li>
-<li class="chapter" data-level="4.2" data-path="intro-example.html"><a href="intro-example.html#create-the-definition"><i class="fa fa-check"></i><b>4.2</b> Create the definition</a></li>
+<li class="chapter" data-level="4.2" data-path="intro-example.html"><a href="intro-example.html#intro-example-create-def"><i class="fa fa-check"></i><b>4.2</b> Create the definition</a></li>
 <li class="chapter" data-level="4.3" data-path="intro-example.html"><a href="intro-example.html#send-the-definition-to-the-cdw"><i class="fa fa-check"></i><b>4.3</b> Send the definition to the CDW</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="working-with-widgets.html"><a href="working-with-widgets.html"><i class="fa fa-check"></i><b>5</b> Working with widgets</a><ul>
-<li class="chapter" data-level="5.1" data-path="working-with-widgets.html"><a href="working-with-widgets.html#finding-widgets"><i class="fa fa-check"></i><b>5.1</b> Finding widgets</a></li>
+<li class="chapter" data-level="5.1" data-path="working-with-widgets.html"><a href="working-with-widgets.html#working-with-finding-widgets"><i class="fa fa-check"></i><b>5.1</b> Finding widgets</a></li>
 <li class="chapter" data-level="5.2" data-path="working-with-widgets.html"><a href="working-with-widgets.html#codes-and-synonyms"><i class="fa fa-check"></i><b>5.2</b> Codes and synonyms</a></li>
 <li class="chapter" data-level="5.3" data-path="working-with-widgets.html"><a href="working-with-widgets.html#synonym-search"><i class="fa fa-check"></i><b>5.3</b> Synonym search</a></li>
 <li class="chapter" data-level="5.4" data-path="working-with-widgets.html"><a href="working-with-widgets.html#use-the-default-cases"><i class="fa fa-check"></i><b>5.4</b> Use the default cases</a></li>
@@ -141,6 +141,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="part"><span><b>Advanced</b></span></li>
 <li class="chapter" data-level="7" data-path="higher-order-widgets.html"><a href="higher-order-widgets.html"><i class="fa fa-check"></i><b>7</b> Higher order widgets</a><ul>
 <li class="chapter" data-level="7.1" data-path="higher-order-widgets.html"><a href="higher-order-widgets.html#children-of-wealth"><i class="fa fa-check"></i><b>7.1</b> Children of wealth</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="non-entity-widgets.html"><a href="non-entity-widgets.html"><i class="fa fa-check"></i><b>8</b> Non-entity widgets</a><ul>
+<li class="chapter" data-level="8.1" data-path="non-entity-widgets.html"><a href="non-entity-widgets.html#motivation"><i class="fa fa-check"></i><b>8.1</b> Motivation</a></li>
+<li class="chapter" data-level="8.2" data-path="non-entity-widgets.html"><a href="non-entity-widgets.html#non-entity-disco-definition-types"><i class="fa fa-check"></i><b>8.2</b> Disco Definition Types</a></li>
+<li class="chapter" data-level="8.3" data-path="non-entity-widgets.html"><a href="non-entity-widgets.html#searching-fund-text"><i class="fa fa-check"></i><b>8.3</b> Searching fund text</a></li>
+<li class="chapter" data-level="8.4" data-path="non-entity-widgets.html"><a href="non-entity-widgets.html#from-funds-to-entities"><i class="fa fa-check"></i><b>8.4</b> From funds to entities</a></li>
+<li class="chapter" data-level="8.5" data-path="non-entity-widgets.html"><a href="non-entity-widgets.html#non-entity-converters"><i class="fa fa-check"></i><b>8.5</b> “Converters”</a></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="test-cdw.html"><a href="test-cdw.html"><i class="fa fa-check"></i><b>A</b> Test your database set up</a><ul>
@@ -183,7 +190,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul>
 <p>Note that we now have a pretty clear idea of who to look for, but we need more precision. For instance, what constitutes a “demonstrated interest in technology?” What does it mean to be “in/near San Francisco?” In day-to-day conversations, we don’t necessarily need that level of precision to understand one another, but since we’ll need to translate this request into language a computer can understand, the more precision the better. I’ll define a “demonstrated interest in technology” as having either an interest code or a philanthropic affinity related to technology, and “in/near San Francisco” as anywhere that falls into the San Francisco Metropolitan Statistical Area (MSA).</p>
 </div>
-<div id="create-the-definition" class="section level2">
+<div id="intro-example-create-def" class="section level2">
 <h2><span class="header-section-number">4.2</span> Create the definition</h2>
 <p>So now that we have a precise idea of who we want to find, we can create a definition that the computer will understand. This is important, since our computer is the only link we have to the CADS Data Warehouse. We can give it a precise definition in a language that it understands, and it will then relay our request to the CADS Data Warehouse. The CADS data warehouse can then search for people who meet our definition, and send them back to the computer, which will then display the list to us.</p>
 <p>Ideally, our definition would look like this: <code>has_tech_interest %and% is_in_sf</code>. Of course, we haven’t defined those pieces yet, so just typing that in will result in an error</p>
@@ -207,25 +214,25 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>As we discussed in the previous section, now that we have an official definition we can send it to the data warehouse, and see if the data warehouse finds anyone who fits. You can see the definition for yourself by just typing the name of it, though it is now written in a language for the computer to understand and may look intimidating to us humans:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">event_prospect</code></pre></div>
 <pre><code>## LISTBUILDER DEFINITION (type: entity_id)
-## .   operator (LI19): intersect
-## .   left (LI19): 
-## .   .   operator (UP37): union
-## .   .   left (UP37): 
+## .   operator (PW17): intersect
+## .   left (PW17): 
+## .   .   operator (JL36): union
+## .   .   left (JL36): 
 ## .   .   .   source: d_bio_interest_mv.entity_id (entity_id)
 ## .   .   .   logic: interest_code IN &#39;TEC&#39;
-## .   .   right (UP37): 
+## .   .   right (JL36): 
 ## .   .   .   source: d_oth_phil_affinity_mv.entity_id (entity_id)
 ## .   .   .   logic: 
 ## .   .   .   .   other_affinity_type IN &#39;ST&#39;
 ## .   .   .   .   sum(gift_amt) &gt;= 0.0
-## .   right (LI19): 
-## .   .   operator (VJ34): union
-## .   .   left (VJ34): 
+## .   right (PW17): 
+## .   .   operator (LA58): union
+## .   .   left (LA58): 
 ## .   .   .   source: d_bio_address_mv.entity_id (entity_id)
 ## .   .   .   logic: 
 ## .   .   .   .   geo_metro_area_code IN &#39;41860&#39;
 ## .   .   .   .   addr_type_code IN &#39;H&#39;
-## .   .   right (VJ34): 
+## .   .   right (LA58): 
 ## .   .   .   source: d_bio_address_mv.entity_id (entity_id)
 ## .   .   .   logic: 
 ## .   .   .   .   geo_metro_area_code IN &#39;41860&#39;

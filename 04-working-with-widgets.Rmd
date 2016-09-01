@@ -1,4 +1,4 @@
-# Working with widgets {#working_with_widgets}
+# Working with widgets {#working-with-widgets}
 
 So far, we've used widgets in some simple examples. In this section, we'll explore widgets in some more detail. As always, we'll begin by loading the `discoveryengine`:
 
@@ -6,7 +6,7 @@ So far, we've used widgets in some simple examples. In this section, we'll explo
 library(discoveryengine)
 ```
 
-## Finding widgets
+## Finding widgets {#working-with-finding-widgets}
 
 There are two main ways to find widgets. The first is to use the `show_widgets` function. The function takes no arguments. When you run it, an interactive list of widgets, with short descriptions of each, will appear in your viewer window:
 

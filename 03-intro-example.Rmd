@@ -19,7 +19,7 @@ You might already be thinking of what sorts of prospects we should look for. Tha
 
 Note that we now have a pretty clear idea of who to look for, but we need more precision. For instance, what constitutes a "demonstrated interest in technology?" What does it mean to be "in/near San Francisco?" In day-to-day conversations, we don't necessarily need that level of precision to understand one another, but since we'll need to translate this request into language a computer can understand, the more precision the better. I'll define a "demonstrated interest in technology" as having either an interest code or a philanthropic affinity related to technology, and "in/near San Francisco" as anywhere that falls into the San Francisco Metropolitan Statistical Area (MSA).
 
-## Create the definition
+## Create the definition {#intro-example-create-def}
 
 So now that we have a precise idea of who we want to find, we can create a definition that the computer will understand. This is important, since our computer is the only link we have to the CADS Data Warehouse. We can give it a precise definition in a language that it understands, and it will then relay our request to the CADS Data Warehouse. The CADS data warehouse can then search for people who meet our definition, and send them back to the computer, which will then display the list to us. 
 

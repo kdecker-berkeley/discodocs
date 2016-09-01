@@ -25,7 +25,7 @@ devtools::install_github("tarakc02/discoveryengine")
 
 In order to make sure everything is working properly, we'll run a quick disco test:
 
-```{r disco_test}
+```{r disco_test, cache = TRUE}
 # you'll always load the discoveryengine package before doing anythying else
 library(discoveryengine)
 

@@ -1,6 +1,6 @@
 # (PART) Advanced {-}
 
-# Higher order widgets
+# Higher order widgets {#higher-order-widgets}
 
 You may have noticed when we ran the `show_widgets()` function in  [working with widgets](#working-with-show_widgets) that there is a mysterious "Order" column that categorizes widgets as either "first-order" or "second-order". What's that all about? In order to answer that, let's take a look at another example.
 

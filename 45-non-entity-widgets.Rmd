@@ -1,0 +1,52 @@
+# Non-entity widgets {#non-entity-widgets}
+
+## Motivation
+
+In CADSmart, there is a report called the Fundfinder, which allows you to search for allocations that contain specific words or phrases in the name, fund terms, or fund biography. A natural application is to use the report to find some allocations, and then turn around and get a list of entities who have given to those funds. So far, we haven't seen how to do that in the disco engine, but that's about to change. Before reading this section, make sure you understand [higher order widgets](#higher-order-widgets).
+
+## Disco Definition Types {#non-entity-disco-definition-types}
+
+Let's take a closer look at a widget we've already used a lot, the `has_capacity` widget. In particular, let's look at the [definition](#intro-example-create-def) that gets created when we use `has_capacity`:
+
+```{r non-entity-has-cap-ex}
+has_capacity(1)
+```
+
+See in parentheses in the first line where it says `type: entity_id`? So `entity_id` is the "type" of the definition we've created. And as you may have guessed by now, we can also create other types of definition!
+
+## Searching fund text
+
+The Fundfinder report does not give you a list of entities, it gives you a list of allocations. You are then expected to use a different report to find donors to those allocations. We'll follow a similar (but hopefully more convenient) strategy with the disco engine. We start by using `fund_text_contains` to do a text search of fund terms/biographies/names (for more info, check the help file by typing `?fund_text_contains`). `fund_text_contains`, like all text-searching tools in the discoveryengine, allows you to enter as many search terms as you like, and to use wildcards (*):
+
+```{r non-entity-fund-text-contains}
+# let's look for funds that support diversity/underrepresented students
+diversity_funds = fund_text_contains("divers*", "underrepresented")
+```
+
+The definition looks pretty complex, but notice that first line -- this time around, instead of entity_id, we have `type: allocation_code`:
+
+```{r non-entity-fund-text-contains-view}
+diversity_funds
+```
+
+And in fact, if we run `display`, we'll see a list of allocation codes instead of the entity IDs that we've seen in previous examples:
+
+```{r non-entity-fund-text-contains-display, cache = TRUE}
+display(diversity_funds)
+```
+
+## From funds to entities
+
+If all you needed to do was get a list of allocation codes for your own research, then congrats, you're done! But what if you want to take the next step, and find donors to those funds? You use one of the [tools to find widgets](#working-with-finding-widgets) to discover the `gave_to_fund` widget (read more at `?gave_to_fund`). Though it looks on the surface pretty similar to `gave_to_area` and `gave_to_department`, it is in fact one of those [second-order widgets](#higher-order-widgets)! 
+
+```{r non-entity-gave-to-fund, cache = TRUE}
+# gave_to_fund has the same interface/options 
+# as gave_to_area and gave_to_department. 
+diversity_donors = gave_to_fund(diversity_funds, at_least = 10000,
+                                from = 20150101, to = 20151231)
+display(diversity_donors)
+```
+
+## "Converters" {#non-entity-converters}
+
+Examples like this one show how higher-order widgets can act as "converters," converting one type of definition (like `allocation_code`) to another (like `entity_id`). This is a handy idea to have in the back of your mind. If you find yourself with an ID list definition that has the wrong type of ID, see if you can find a second-order widget that will "convert" it to the right type. 

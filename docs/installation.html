@@ -25,7 +25,7 @@
 
 <meta name="author" content="Tarak Shah">
 
-<meta name="date" content="2016-08-26">
+<meta name="date" content="2016-08-31">
 
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -121,11 +121,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="part"><span><b>Basics</b></span></li>
 <li class="chapter" data-level="4" data-path="intro-example.html"><a href="intro-example.html"><i class="fa fa-check"></i><b>4</b> An introductory example</a><ul>
 <li class="chapter" data-level="4.1" data-path="intro-example.html"><a href="intro-example.html#develop-a-strategy"><i class="fa fa-check"></i><b>4.1</b> Develop a strategy</a></li>
-<li class="chapter" data-level="4.2" data-path="intro-example.html"><a href="intro-example.html#create-the-definition"><i class="fa fa-check"></i><b>4.2</b> Create the definition</a></li>
+<li class="chapter" data-level="4.2" data-path="intro-example.html"><a href="intro-example.html#intro-example-create-def"><i class="fa fa-check"></i><b>4.2</b> Create the definition</a></li>
 <li class="chapter" data-level="4.3" data-path="intro-example.html"><a href="intro-example.html#send-the-definition-to-the-cdw"><i class="fa fa-check"></i><b>4.3</b> Send the definition to the CDW</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="working-with-widgets.html"><a href="working-with-widgets.html"><i class="fa fa-check"></i><b>5</b> Working with widgets</a><ul>
-<li class="chapter" data-level="5.1" data-path="working-with-widgets.html"><a href="working-with-widgets.html#finding-widgets"><i class="fa fa-check"></i><b>5.1</b> Finding widgets</a></li>
+<li class="chapter" data-level="5.1" data-path="working-with-widgets.html"><a href="working-with-widgets.html#working-with-finding-widgets"><i class="fa fa-check"></i><b>5.1</b> Finding widgets</a></li>
 <li class="chapter" data-level="5.2" data-path="working-with-widgets.html"><a href="working-with-widgets.html#codes-and-synonyms"><i class="fa fa-check"></i><b>5.2</b> Codes and synonyms</a></li>
 <li class="chapter" data-level="5.3" data-path="working-with-widgets.html"><a href="working-with-widgets.html#synonym-search"><i class="fa fa-check"></i><b>5.3</b> Synonym search</a></li>
 <li class="chapter" data-level="5.4" data-path="working-with-widgets.html"><a href="working-with-widgets.html#use-the-default-cases"><i class="fa fa-check"></i><b>5.4</b> Use the default cases</a></li>
@@ -141,6 +141,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="part"><span><b>Advanced</b></span></li>
 <li class="chapter" data-level="7" data-path="higher-order-widgets.html"><a href="higher-order-widgets.html"><i class="fa fa-check"></i><b>7</b> Higher order widgets</a><ul>
 <li class="chapter" data-level="7.1" data-path="higher-order-widgets.html"><a href="higher-order-widgets.html#children-of-wealth"><i class="fa fa-check"></i><b>7.1</b> Children of wealth</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="non-entity-widgets.html"><a href="non-entity-widgets.html"><i class="fa fa-check"></i><b>8</b> Non-entity widgets</a><ul>
+<li class="chapter" data-level="8.1" data-path="non-entity-widgets.html"><a href="non-entity-widgets.html#motivation"><i class="fa fa-check"></i><b>8.1</b> Motivation</a></li>
+<li class="chapter" data-level="8.2" data-path="non-entity-widgets.html"><a href="non-entity-widgets.html#non-entity-disco-definition-types"><i class="fa fa-check"></i><b>8.2</b> Disco Definition Types</a></li>
+<li class="chapter" data-level="8.3" data-path="non-entity-widgets.html"><a href="non-entity-widgets.html#searching-fund-text"><i class="fa fa-check"></i><b>8.3</b> Searching fund text</a></li>
+<li class="chapter" data-level="8.4" data-path="non-entity-widgets.html"><a href="non-entity-widgets.html#from-funds-to-entities"><i class="fa fa-check"></i><b>8.4</b> From funds to entities</a></li>
+<li class="chapter" data-level="8.5" data-path="non-entity-widgets.html"><a href="non-entity-widgets.html#non-entity-converters"><i class="fa fa-check"></i><b>8.5</b> “Converters”</a></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="test-cdw.html"><a href="test-cdw.html"><i class="fa fa-check"></i><b>A</b> Test your database set up</a><ul>
@@ -202,21 +209,20 @@ high_cap</code></pre></div>
 ## .   logic: capacity_rating_code IN 1</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># make sure we can send the defintion to the data warehouse</span>
 <span class="kw">display</span>(high_cap)</code></pre></div>
-<pre><code>## Loading required package: DBI</code></pre>
-<pre><code>## # A tibble: 118 x 1
+<pre><code>## # A tibble: 169 x 1
 ##    entity_id
 ##        &lt;dbl&gt;
-## 1    3002874
-## 2      21209
-## 3      28838
-## 4      29606
-## 5     418093
-## 6     952492
-## 7    3002973
-## 8    3156372
-## 9     689600
-## 10    753358
-## # ... with 108 more rows</code></pre>
+## 1       1969
+## 2       3105
+## 3       3422
+## 4       7644
+## 5      12178
+## 6      17464
+## 7      18139
+## 8      20039
+## 9      20125
+## 10     20227
+## # ... with 159 more rows</code></pre>
 <p>If you got this far without any problems, then congrats! You are a disco dancer!</p>
 
 </div>

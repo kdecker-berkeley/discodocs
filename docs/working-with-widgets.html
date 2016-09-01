@@ -25,7 +25,7 @@
 
 <meta name="author" content="Tarak Shah">
 
-<meta name="date" content="2016-08-26">
+<meta name="date" content="2016-08-31">
 
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -121,11 +121,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="part"><span><b>Basics</b></span></li>
 <li class="chapter" data-level="4" data-path="intro-example.html"><a href="intro-example.html"><i class="fa fa-check"></i><b>4</b> An introductory example</a><ul>
 <li class="chapter" data-level="4.1" data-path="intro-example.html"><a href="intro-example.html#develop-a-strategy"><i class="fa fa-check"></i><b>4.1</b> Develop a strategy</a></li>
-<li class="chapter" data-level="4.2" data-path="intro-example.html"><a href="intro-example.html#create-the-definition"><i class="fa fa-check"></i><b>4.2</b> Create the definition</a></li>
+<li class="chapter" data-level="4.2" data-path="intro-example.html"><a href="intro-example.html#intro-example-create-def"><i class="fa fa-check"></i><b>4.2</b> Create the definition</a></li>
 <li class="chapter" data-level="4.3" data-path="intro-example.html"><a href="intro-example.html#send-the-definition-to-the-cdw"><i class="fa fa-check"></i><b>4.3</b> Send the definition to the CDW</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="working-with-widgets.html"><a href="working-with-widgets.html"><i class="fa fa-check"></i><b>5</b> Working with widgets</a><ul>
-<li class="chapter" data-level="5.1" data-path="working-with-widgets.html"><a href="working-with-widgets.html#finding-widgets"><i class="fa fa-check"></i><b>5.1</b> Finding widgets</a></li>
+<li class="chapter" data-level="5.1" data-path="working-with-widgets.html"><a href="working-with-widgets.html#working-with-finding-widgets"><i class="fa fa-check"></i><b>5.1</b> Finding widgets</a></li>
 <li class="chapter" data-level="5.2" data-path="working-with-widgets.html"><a href="working-with-widgets.html#codes-and-synonyms"><i class="fa fa-check"></i><b>5.2</b> Codes and synonyms</a></li>
 <li class="chapter" data-level="5.3" data-path="working-with-widgets.html"><a href="working-with-widgets.html#synonym-search"><i class="fa fa-check"></i><b>5.3</b> Synonym search</a></li>
 <li class="chapter" data-level="5.4" data-path="working-with-widgets.html"><a href="working-with-widgets.html#use-the-default-cases"><i class="fa fa-check"></i><b>5.4</b> Use the default cases</a></li>
@@ -141,6 +141,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="part"><span><b>Advanced</b></span></li>
 <li class="chapter" data-level="7" data-path="higher-order-widgets.html"><a href="higher-order-widgets.html"><i class="fa fa-check"></i><b>7</b> Higher order widgets</a><ul>
 <li class="chapter" data-level="7.1" data-path="higher-order-widgets.html"><a href="higher-order-widgets.html#children-of-wealth"><i class="fa fa-check"></i><b>7.1</b> Children of wealth</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="non-entity-widgets.html"><a href="non-entity-widgets.html"><i class="fa fa-check"></i><b>8</b> Non-entity widgets</a><ul>
+<li class="chapter" data-level="8.1" data-path="non-entity-widgets.html"><a href="non-entity-widgets.html#motivation"><i class="fa fa-check"></i><b>8.1</b> Motivation</a></li>
+<li class="chapter" data-level="8.2" data-path="non-entity-widgets.html"><a href="non-entity-widgets.html#non-entity-disco-definition-types"><i class="fa fa-check"></i><b>8.2</b> Disco Definition Types</a></li>
+<li class="chapter" data-level="8.3" data-path="non-entity-widgets.html"><a href="non-entity-widgets.html#searching-fund-text"><i class="fa fa-check"></i><b>8.3</b> Searching fund text</a></li>
+<li class="chapter" data-level="8.4" data-path="non-entity-widgets.html"><a href="non-entity-widgets.html#from-funds-to-entities"><i class="fa fa-check"></i><b>8.4</b> From funds to entities</a></li>
+<li class="chapter" data-level="8.5" data-path="non-entity-widgets.html"><a href="non-entity-widgets.html#non-entity-converters"><i class="fa fa-check"></i><b>8.5</b> “Converters”</a></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="test-cdw.html"><a href="test-cdw.html"><i class="fa fa-check"></i><b>A</b> Test your database set up</a><ul>
@@ -169,11 +176,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="working_with_widgets" class="section level1">
+<div id="working-with-widgets" class="section level1">
 <h1><span class="header-section-number">5</span> Working with widgets</h1>
 <p>So far, we’ve used widgets in some simple examples. In this section, we’ll explore widgets in some more detail. As always, we’ll begin by loading the <code>discoveryengine</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(discoveryengine)</code></pre></div>
-<div id="finding-widgets" class="section level2">
+<div id="working-with-finding-widgets" class="section level2">
 <h2><span class="header-section-number">5.1</span> Finding widgets</h2>
 <p>There are two main ways to find widgets. The first is to use the <code>show_widgets</code> function. The function takes no arguments. When you run it, an interactive list of widgets, with short descriptions of each, will appear in your viewer window:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">show_widgets</span>()</code></pre></div>
@@ -207,20 +214,24 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ##  business   BU</code></pre>
 <p>You can enter partial terms:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">in_unit_portfolio</span>(?sci)</code></pre></div>
-<pre><code>##                   synonym code
-##  lawrence_hall_of_science   LH
-##       letters_and_science   LS
-##              neuroscience   NS
-##    neuroscience_institute   NS
-##   quantitative_bioscience   QB
-##  quantitative_biosciences   QB</code></pre>
+<pre><code>##                       synonym code
+##      lawrence_hall_of_science   LH
+##           letters_and_science   LS
+##                  neuroscience   NS
+##        neuroscience_institute   NS
+##       quantitative_bioscience   QB
+##      quantitative_biosciences   QB
+##  qb3_quantitative_biosciences   QB
+##               letters_science   LS
+##   greater_good_science_center   GG</code></pre>
 <p>And even multiple search terms:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">in_unit_portfolio</span>(?bus, ?chem, ?public)</code></pre></div>
-<pre><code>##        synonym code
-##       business   BU
-##      chemistry   CH
-##  public_health   PH
-##  public_policy   PP</code></pre>
+<pre><code>##                        synonym code
+##                       business   BU
+##                      chemistry   CH
+##                  public_health   PH
+##                  public_policy   PP
+##  communications_public_affairs   PA</code></pre>
 <p>Widgets can always accept multiple codes/synonyms as arguments, and even combinations of the two:</p>
 <ul>
 <li><code>gave_to_area(business)</code> would find anyone who has given to the school of Business</li>
