@@ -25,7 +25,7 @@
 
 <meta name="author" content="Tarak Shah">
 
-<meta name="date" content="2016-08-31">
+<meta name="date" content="2016-09-14">
 
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -110,7 +110,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Disco</a><ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#help-wanted"><i class="fa fa-check"></i><b>1.1</b> Help wanted</a></li>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#contribute-to-the-disco-engine"><i class="fa fa-check"></i><b>1.1</b> Contribute to the Disco Engine</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#contribute-to-this-documentation"><i class="fa fa-check"></i><b>1.2</b> Contribute to this documentation</a></li>
 </ul></li>
 <li class="part"><span><b>Preliminaries</b></span></li>
 <li class="chapter" data-level="2" data-path="r-intro.html"><a href="r-intro.html"><i class="fa fa-check"></i><b>2</b> Introduction to R and RStudio</a></li>
@@ -214,25 +215,25 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>As we discussed in the previous section, now that we have an official definition we can send it to the data warehouse, and see if the data warehouse finds anyone who fits. You can see the definition for yourself by just typing the name of it, though it is now written in a language for the computer to understand and may look intimidating to us humans:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">event_prospect</code></pre></div>
 <pre><code>## LISTBUILDER DEFINITION (type: entity_id)
-## .   operator (PW17): intersect
-## .   left (PW17): 
-## .   .   operator (JL36): union
-## .   .   left (JL36): 
+## .   operator (VN68): intersect
+## .   left (VN68): 
+## .   .   operator (XV29): union
+## .   .   left (XV29): 
 ## .   .   .   source: d_bio_interest_mv.entity_id (entity_id)
 ## .   .   .   logic: interest_code IN &#39;TEC&#39;
-## .   .   right (JL36): 
+## .   .   right (XV29): 
 ## .   .   .   source: d_oth_phil_affinity_mv.entity_id (entity_id)
 ## .   .   .   logic: 
 ## .   .   .   .   other_affinity_type IN &#39;ST&#39;
 ## .   .   .   .   sum(gift_amt) &gt;= 0.0
-## .   right (PW17): 
-## .   .   operator (LA58): union
-## .   .   left (LA58): 
+## .   right (VN68): 
+## .   .   operator (KD89): union
+## .   .   left (KD89): 
 ## .   .   .   source: d_bio_address_mv.entity_id (entity_id)
 ## .   .   .   logic: 
 ## .   .   .   .   geo_metro_area_code IN &#39;41860&#39;
 ## .   .   .   .   addr_type_code IN &#39;H&#39;
-## .   .   right (LA58): 
+## .   .   right (KD89): 
 ## .   .   .   source: d_bio_address_mv.entity_id (entity_id)
 ## .   .   .   logic: 
 ## .   .   .   .   geo_metro_area_code IN &#39;41860&#39;
