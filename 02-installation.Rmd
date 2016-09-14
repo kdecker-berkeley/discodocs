@@ -21,6 +21,13 @@ devtools::install_github("tarakc02/listbuilder")
 devtools::install_github("tarakc02/discoveryengine")
 ```
 
+There are a couple more packages that are optional, but will make the discoveryengine even better:
+
+```{r install_disco_optional, eval = FALSE}
+devtools::install_github("tarakc02/preprocessr")
+install.packages("DT")
+```
+
 ## A disco test
 
 In order to make sure everything is working properly, we'll run a quick disco test:
