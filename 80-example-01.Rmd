@@ -1,0 +1,70 @@
+# (PART) Examples {-}
+
+# Political economy list {#ex-political-economy}
+
+Here's the request:
+
+>Can you please generate a prospect list for me that includes econ, political economy, poli sci and business grads. And also include donors to Haas Center, Goldman School and CEGA? 
+
+I start with the part I already know -- business grads.
+
+```{r, kassie-ex1}
+library(discoveryengine)
+is_business_grad = has_degree_from(business)
+```
+
+I believe Economics, Political Economy, and Political Science are all majors. I don't know major codes, but most widgets have a built-in lookup feature:
+
+```{r, kassie-ex2}
+majored_in(?econ)
+```
+
+Ok, looks like `economics` and `political_economy` should definitely be included. What about political science?
+
+```{r, kassie-ex3}
+majored_in(?political)
+```
+
+So now I have what I need for the other graduates:
+
+```{r, kassie-ex4}
+is_poli_econ_grad = majored_in(political_science, political_economy, economics)
+```
+
+Now I need to find donors to the Haas Center, Goldman School, and CEGA. Some follow-up clarified that the "Haas Center" here is referring to the [Haas Institute for a fair and inclusive society](http://haasinstitute.berkeley.edu/) . I don't know if that is an area of giving, a department, a fund? So I use the brainstorm bot:
+
+```{r, kassie-ex5, cache = TRUE}
+brainstorm_bot("haas inst")
+```
+
+Ah ha! It's the department.
+
+```{r, kassie-ex6}
+is_haas_ctr_donor = gave_to_department(HDRC)
+```
+
+CEGA is the "effective global action center." Once again, I'll ask the brainstorm bot for suggestions:
+
+```{r, kassie-ex7, cache = TRUE}
+brainstorm_bot("global action")
+is_cega_donor = gave_to_department(CEGA)
+```
+
+I already happen to know that the Goldman School is an area of giving, so:
+
+```{r, kassie-ex8}
+is_goldman_donor = gave_to_area(public_policy)
+```
+
+The request was for people who meet any of the given criteria, so I'll use  `%or%` to combine them:
+
+```{r, kassie-ex9, cache = TRUE}
+prospect_list = is_business_grad %or% 
+    is_poli_econ_grad %or%
+    is_haas_ctr_donor %or%
+    is_cega_donor %or%
+    is_goldman_donor
+
+display(prospect_list)
+```
+

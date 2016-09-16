@@ -33,8 +33,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="r-intro.html">
-<link rel="next" href="intro-example.html">
+<link rel="prev" href="non-entity-widgets.html">
+<link rel="next" href="test-cdw.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -151,7 +151,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="8.5" data-path="non-entity-widgets.html"><a href="non-entity-widgets.html#non-entity-converters"><i class="fa fa-check"></i><b>8.5</b> “Converters”</a></li>
 </ul></li>
 <li class="part"><span><b>Examples</b></span></li>
-<li class="chapter" data-level="9" data-path="ex-political-economy.html"><a href="ex-political-economy.html"><i class="fa fa-check"></i><b>9</b> Political economy list</a></li>
+<li class="chapter" data-level="9" data-path="kassie-example.html"><a href="kassie-example.html"><i class="fa fa-check"></i><b>9</b> Econ/Business/Polisci</a></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="test-cdw.html"><a href="test-cdw.html"><i class="fa fa-check"></i><b>A</b> Test your database set up</a><ul>
 <li class="chapter" data-level="A.1" data-path="test-cdw.html"><a href="test-cdw.html#test-your-connection"><i class="fa fa-check"></i><b>A.1</b> Test your connection</a></li>
@@ -179,59 +179,73 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="installation" class="section level1">
-<h1><span class="header-section-number">3</span> Installation</h1>
-<p>In order to use the discoveryengine, you’ll have to install it. And in order to successfully install the discoveryengine, you’ll have to install a few other packages, too. The <a href="r-intro.html#r-intro">introduction to RStudio video</a> showed you how to install new packages both by typing install commands into the console, or by using RStudio’s “Packages” pane. Here, we’ll go through the installation step-by-step by typing out the install commands (copying and pasting is a good way to avoid frustrating typos!).</p>
-<p>Note that installation can sometimes be a pain. But once you’ve gotten through the process successfully, you won’t have to deal with it again!</p>
-<div id="required-packages" class="section level2">
-<h2><span class="header-section-number">3.1</span> Required packages</h2>
-<p>At this point, you should have already:</p>
-<ul>
-<li>tested your CDW connection</li>
-<li>installed <code>getcdw</code></li>
-<li>run a test query</li>
-</ul>
-<p>If you haven’t completed all of those items, head over to <a href="test-cdw.html#test-cdw">the step-by-step guide</a> and complete those steps, and then return here.</p>
-<p>Ok, so if you’ve got <code>getcdw</code> working properly, that means you’ve already installed <code>devtools</code>. All that’s left is to install <code>listbuilder</code> and <code>discoveryengine</code> packages:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools::<span class="kw">install_github</span>(<span class="st">&quot;tarakc02/listbuilder&quot;</span>)
-devtools::<span class="kw">install_github</span>(<span class="st">&quot;tarakc02/discoveryengine&quot;</span>)</code></pre></div>
-<p>There are a couple more packages that are optional, but will make the discoveryengine even better:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools::<span class="kw">install_github</span>(<span class="st">&quot;tarakc02/preprocessr&quot;</span>)
-<span class="kw">install.packages</span>(<span class="st">&quot;DT&quot;</span>)</code></pre></div>
-</div>
-<div id="a-disco-test" class="section level2">
-<h2><span class="header-section-number">3.2</span> A disco test</h2>
-<p>In order to make sure everything is working properly, we’ll run a quick disco test:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># you&#39;ll always load the discoveryengine package before doing anythying else</span>
-<span class="kw">library</span>(discoveryengine)
+<div id="kassie-example" class="section level1">
+<h1><span class="header-section-number">9</span> Econ/Business/Polisci</h1>
+<p>Here’s the request:</p>
+<blockquote>
+<p>Can you please generate a prospect list for me that includes econ, political economy, poli sci and business grads. And also include donors to Haas Center, Goldman School and CEGA?</p>
+</blockquote>
+<p>I start with the part I already know – business grads.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(discoveryengine)
+is_business_grad =<span class="st"> </span><span class="kw">has_degree_from</span>(business)</code></pre></div>
+<p>I believe Economics, Political Economy, and Political Science are all majors. I don’t know major codes, but most widgets have a built-in lookup feature:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">majored_in</span>(?econ)</code></pre></div>
+<pre><code>##                          synonym  code
+##          urban_secondary_english 24903
+##                political_economy   2B2
+##     household_artshome_economics  373X
+##           agricultural_economics   024
+##        environmental_econ_policy   779
+##  agricultural_resource_economics   034
+##        pol_econ_of_nat_resources   698
+##           pol_econ_of_indust_soc   697
+##                        economics   246
+##    household_arts_home_economics  373X</code></pre>
+<p>Ok, looks like <code>economics</code> and <code>political_economy</code> should definitely be included. What about political science?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">majored_in</span>(?political)</code></pre></div>
+<pre><code>##            synonym code
+##  political_science  699
+##  political_economy  2B2</code></pre>
+<p>So now I have what I need for the other graduates:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">is_poli_econ_grad =<span class="st"> </span><span class="kw">majored_in</span>(political_science, political_economy, economics)</code></pre></div>
+<p>Now I need to find donors to the Haas Center, Goldman School, and CEGA. Some follow-up clarified that the “Haas Center” here is referring to the <a href="http://haasinstitute.berkeley.edu/">Haas Institute for a fair and inclusive society</a> . I don’t know if that is an area of giving, a department, a fund? So I use the brainstorm bot:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">brainstorm_bot</span>(<span class="st">&quot;haas inst&quot;</span>)</code></pre></div>
+<pre><code>## gave_to_department 
+##     HDRC: Haas Inst/Fair &amp; Inclusive Soc
+## has_affiliation 
+##     BUA18: Haas Inst of Mgmt, Innovation &amp; Org IMI</code></pre>
+<p>Ah ha! It’s the department.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">is_haas_ctr_donor =<span class="st"> </span><span class="kw">gave_to_department</span>(HDRC)</code></pre></div>
+<p>CEGA is the “effective global action center.” Once again, I’ll ask the brainstorm bot for suggestions:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">brainstorm_bot</span>(<span class="st">&quot;global action&quot;</span>)</code></pre></div>
+<pre><code>## gave_to_department 
+##     CEGA: Effective Global Action Center</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">is_cega_donor =<span class="st"> </span><span class="kw">gave_to_department</span>(CEGA)</code></pre></div>
+<p>I already happen to know that the Goldman School is an area of giving, so:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">is_goldman_donor =<span class="st"> </span><span class="kw">gave_to_area</span>(public_policy)</code></pre></div>
+<p>The request was for people who meet any of the given criteria, so I’ll use <code>%or%</code> to combine them:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">kassie_prospect =<span class="st"> </span>is_business_grad %or%<span class="st"> </span>
+<span class="st">    </span>is_poli_econ_grad %or%
+<span class="st">    </span>is_haas_ctr_donor %or%
+<span class="st">    </span>is_cega_donor %or%
+<span class="st">    </span>is_goldman_donor
 
-<span class="co"># make sure we can create a disco definition</span>
-high_cap =<span class="st"> </span><span class="kw">has_capacity</span>(<span class="dv">1</span>)
-
-<span class="co"># make sure that things print properly</span>
-high_cap</code></pre></div>
-<pre><code>## LISTBUILDER DEFINITION (type: entity_id)
-## .   source: d_entity_mv.entity_id (entity_id)
-## .   logic: capacity_rating_code IN 1</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># make sure we can send the defintion to the data warehouse</span>
-<span class="kw">display</span>(high_cap)</code></pre></div>
-<pre><code>## # A tibble: 169 x 1
+<span class="kw">display</span>(kassie_prospect)</code></pre></div>
+<pre><code>## # A tibble: 83,461 x 1
 ##    entity_id
 ##        &lt;dbl&gt;
-## 1       1969
-## 2       3105
-## 3       3422
-## 4       7644
-## 5      12178
-## 6      17464
-## 7      18139
-## 8      20039
-## 9      20125
-## 10     20227
-## # ... with 159 more rows</code></pre>
-<p>If you got this far without any problems, then congrats! You are a disco dancer!</p>
+## 1          2
+## 2          5
+## 3         13
+## 4         16
+## 5         28
+## 6         51
+## 7         78
+## 8         81
+## 9         98
+## 10       109
+## # ... with 83,451 more rows</code></pre>
 
-</div>
 </div>
 
 
@@ -241,8 +255,8 @@ high_cap</code></pre></div>
           </div>
         </div>
       </div>
-<a href="r-intro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="intro-example.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+<a href="non-entity-widgets.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="test-cdw.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
@@ -261,7 +275,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/tarakc02/discodocs/edit/master/02-installation.Rmd",
+"link": "https://github.com/tarakc02/discodocs/edit/master/80-example-01.Rmd",
 "text": null
 },
 "download": null,
