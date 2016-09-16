@@ -217,25 +217,25 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>As we discussed in the previous section, now that we have an official definition we can send it to the data warehouse, and see if the data warehouse finds anyone who fits. You can see the definition for yourself by just typing the name of it, though it is now written in a language for the computer to understand and may look intimidating to us humans:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">event_prospect</code></pre></div>
 <pre><code>## LISTBUILDER DEFINITION (type: entity_id)
-## .   operator (MG34): intersect
-## .   left (MG34): 
-## .   .   operator (SA57): union
-## .   .   left (SA57): 
+## .   operator (LJ84): intersect
+## .   left (LJ84): 
+## .   .   operator (QD36): union
+## .   .   left (QD36): 
 ## .   .   .   source: d_bio_interest_mv.entity_id (entity_id)
 ## .   .   .   logic: interest_code IN &#39;TEC&#39;
-## .   .   right (SA57): 
+## .   .   right (QD36): 
 ## .   .   .   source: d_oth_phil_affinity_mv.entity_id (entity_id)
 ## .   .   .   logic: 
 ## .   .   .   .   other_affinity_type IN &#39;ST&#39;
 ## .   .   .   .   sum(gift_amt) &gt;= 0.0
-## .   right (MG34): 
-## .   .   operator (MK71): union
-## .   .   left (MK71): 
+## .   right (LJ84): 
+## .   .   operator (SW68): union
+## .   .   left (SW68): 
 ## .   .   .   source: d_bio_address_mv.entity_id (entity_id)
 ## .   .   .   logic: 
 ## .   .   .   .   geo_metro_area_code IN &#39;41860&#39;
 ## .   .   .   .   addr_type_code IN &#39;H&#39;
-## .   .   right (MK71): 
+## .   .   right (SW68): 
 ## .   .   .   source: d_bio_address_mv.entity_id (entity_id)
 ## .   .   .   logic: 
 ## .   .   .   .   geo_metro_area_code IN &#39;41860&#39;

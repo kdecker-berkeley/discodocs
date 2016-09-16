@@ -208,12 +208,17 @@ is_business_grad =<span class="st"> </span><span class="kw">has_degree_from</spa
 ##  political_economy  2B2</code></pre>
 <p>So now I have what I need for the other graduates:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">is_poli_econ_grad =<span class="st"> </span><span class="kw">majored_in</span>(political_science, political_economy, economics)</code></pre></div>
-<p>Now I need to find donors to the Haas Center, Goldman School, and CEGA. Some follow-up clarified that the “Haas Center” here is referring to the <a href="http://haasinstitute.berkeley.edu/">Haas Institute for a fair and inclusive society</a> . I don’t know if that is an area of giving, a department, a fund? So I use the brainstorm bot:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">brainstorm_bot</span>(<span class="st">&quot;haas inst&quot;</span>)</code></pre></div>
-<pre><code>## gave_to_department 
+<p>Now I need to find donors to the Haas Center, Goldman School, and CEGA. Some follow-up clarified that the “Haas Center” here is referring to the <a href="http://haasinstitute.berkeley.edu/">Haas Institute for a fair and inclusive society</a> . I don’t know if that is an area of giving, a department, a fund? So I use the brainstorm bot. From experience, I know that “institute” sometimes appears in CADS as the full word “institute” and is sometimes abbreviated to something like “inst.” I’ll use the wildcard (*) ability in the brainstorm bot to make sure I capture all possibilities:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">brainstorm_bot</span>(<span class="st">&quot;haas inst*&quot;</span>)</code></pre></div>
+<pre><code>## attended_event 
+##     2843: Haas Institutional Analysis Workshop
+##     4340: Haas Institutional Analysis Workshop
+## gave_to_department 
 ##     HDRC: Haas Inst/Fair &amp; Inclusive Soc
 ## has_affiliation 
-##     BUA18: Haas Inst of Mgmt, Innovation &amp; Org IMI</code></pre>
+##     BUA18: Haas Inst of Mgmt, Innovation &amp; Org IMI
+##     BUBSI: Haas Institute for Bus &amp; Social Impact
+##     BUIBI: Haas Institute for Business Innovation</code></pre>
 <p>Ah ha! It’s the department.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">is_haas_ctr_donor =<span class="st"> </span><span class="kw">gave_to_department</span>(HDRC)</code></pre></div>
 <p>CEGA is the “effective global action center.” Once again, I’ll ask the brainstorm bot for suggestions:</p>

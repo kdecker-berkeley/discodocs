@@ -31,10 +31,10 @@ So now I have what I need for the other graduates:
 is_poli_econ_grad = majored_in(political_science, political_economy, economics)
 ```
 
-Now I need to find donors to the Haas Center, Goldman School, and CEGA. Some follow-up clarified that the "Haas Center" here is referring to the [Haas Institute for a fair and inclusive society](http://haasinstitute.berkeley.edu/) . I don't know if that is an area of giving, a department, a fund? So I use the brainstorm bot:
+Now I need to find donors to the Haas Center, Goldman School, and CEGA. Some follow-up clarified that the "Haas Center" here is referring to the [Haas Institute for a fair and inclusive society](http://haasinstitute.berkeley.edu/) . I don't know if that is an area of giving, a department, a fund? So I use the brainstorm bot. From experience, I know that "institute" sometimes appears in CADS as the full word "institute" and is sometimes abbreviated to something like "inst." I'll use the wildcard (*) ability in the brainstorm bot to make sure I capture all possibilities:
 
 ```{r, kassie-ex5, cache = TRUE}
-brainstorm_bot("haas inst")
+brainstorm_bot("haas inst*")
 ```
 
 Ah ha! It's the department.
