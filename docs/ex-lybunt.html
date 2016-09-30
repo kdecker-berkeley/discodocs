@@ -33,8 +33,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="working-with-widgets.html">
-<link rel="next" href="higher-order-widgets.html">
+<link rel="prev" href="ex-political-economy.html">
+<link rel="next" href="test-cdw.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -180,69 +180,55 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="the-brainstorm-bot" class="section level1">
-<h1><span class="header-section-number">6</span> The Brainstorm Bot</h1>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># as always, i have to make sure the disco engine is loaded</span>
+<div id="ex-lybunt" class="section level1">
+<h1><span class="header-section-number">10</span> LYBUNTs</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># i always begin by loading the disco engine if it isn&#39;t already loaded</span>
 <span class="kw">library</span>(discoveryengine)</code></pre></div>
-<p>At this point, you’re pretty empowered to search through the database for all sorts of prospects, provided you know something about the codes in the database. Even if you don’t know the exact code for, say, basketball, you can use the <a href="working-with-widgets.html#synonym-search">synonym search feature</a> because you know which widget to use:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">played_sport</span>(?basketball)</code></pre></div>
-<pre><code>##              synonym code
-##       basketball_men MABB
-##     basketball_women WABB
-##  cal_basketball_club RSBK</code></pre>
-<p>But now imagine someone has asked you for a list of people interested in robotics. Where would that be coded? Perhaps in multiple places? How can you find out?</p>
-<p>Enter the brainstorm bot. The brainstorm bot is a robot that is knowledgeable about the code tables in CADS. Let’s ask it about robotics:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">brainstorm_bot</span>(<span class="st">&quot;robotics&quot;</span>)</code></pre></div>
-<pre><code>## has_interest 
-##     ROB: Robotics
-## participated_in 
-##     ENRO: Cal Robotics</code></pre>
-<p>Hey brainstorm bot, thanks for the ideas! The results show the name of a widget, along with the codes that are of interest, along with their description from the CADS code tables, so you can decide if they are appropriate for your project. You can then copy and paste to build up the right population:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">display</span>(<span class="kw">has_interest</span>(ROB))</code></pre></div>
-<pre><code>## # A tibble: 1 x 1
-##   entity_id
-##       &lt;dbl&gt;
-## 1    470691</code></pre>
-<p>If it turns out you agree with every one of the brainstorm bot’s suggestions, then you don’t even have to copy and paste, because (surprise!) the brainstorm bot is actually giving you a fully filled out widget:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># if i wanted robotics fans in the san francisco MSA</span>
-prospects =<span class="st"> </span><span class="kw">brainstorm_bot</span>(<span class="st">&quot;robotics&quot;</span>) %and%
-<span class="st">    </span><span class="kw">lives_in_msa</span>(san_francisco)
-<span class="kw">display</span>(prospects)</code></pre></div>
-<pre><code>## # A tibble: 5 x 1
-##   entity_id
-##       &lt;dbl&gt;
-## 1    718587
-## 2    749416
-## 3    823913
-## 4    875964
-## 5    824900</code></pre>
-<div id="search-features" class="section level2">
-<h2><span class="header-section-number">6.1</span> Search features</h2>
-<p>The brainstorm bot understands wildcards at the beginning and/or ending of your search term:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">brainstorm_bot</span>(<span class="st">&quot;robot*&quot;</span>)</code></pre></div>
-<pre><code>## attended_event 
-##     6724: Haas East Bay Chp Robotic Event 06-18-14
-## has_interest 
-##     ROB: Robotics
-## participated_in 
-##     ENRO: Cal Robotics
-##     UROB: Robotmedia Presents</code></pre>
-<p>It also will do multiple searches at once:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">brainstorm_bot</span>(<span class="st">&quot;robot*&quot;</span>, <span class="st">&quot;data science&quot;</span>)</code></pre></div>
-<pre><code>## attended_event 
-##     6724: Haas East Bay Chp Robotic Event 06-18-14
-## gave_to_department 
-##     DT: Berkeley Institute for Data Science
-## has_interest 
-##     DAT: Data Science
-##     ROB: Robotics
-## majored_in 
-##     2E0: Master of Information &amp; Data Science
-## participated_in 
-##     ENRO: Cal Robotics
-##     UROB: Robotmedia Presents</code></pre>
+<p>Anyone involved in an annual solicitation cycle will have some interest in the population referred to as <em>LYBUNT</em>, which stands for <strong>L</strong>ast <strong>Y</strong>ear <strong>Bu</strong>t <strong>N</strong>ot <strong>T</strong>his Year. That is, someone who gave last year but has not given this year. How can we create such a definition in the Disco Engine?</p>
+<p>To make the example concrete, let’s say we’re identifying LYBUNTs for the school of Social Welfare. What I’d like to get to is:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">LYBUNT =<span class="st"> </span>last_year %but_not%<span class="st"> </span>this_year</code></pre></div>
+<p>So, all I really need to do is define <code>last_year</code> and <code>this_year</code>. I’m writing this example in September, 2016, so I’ll define “last year” as FY2015-16, or in other words, July 1, 2015 - June 30, 2016:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">last_year =<span class="st"> </span><span class="kw">gave_to_area</span>(social_welfare, <span class="dt">from =</span> <span class="dv">20150701</span>, <span class="dt">to =</span> <span class="dv">20160630</span>)</code></pre></div>
+<p>And now for this year. Since the <code>to</code> argument is optional, I can just do:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">this_year =<span class="st"> </span><span class="kw">gave_to_area</span>(social_welfare, <span class="dt">from =</span> <span class="dv">20160701</span>)</code></pre></div>
+<p>Now I can create my <code>LYBUNT</code> definition, as I strategized above:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">LYBUNT =<span class="st"> </span>last_year %but_not%<span class="st"> </span>this_year
+<span class="kw">display</span>(LYBUNT)</code></pre></div>
+<pre><code>## Loading required package: DBI</code></pre>
+<pre><code>## # A tibble: 554 x 1
+##    entity_id
+##        &lt;dbl&gt;
+## 1        448
+## 2        500
+## 3        548
+## 4       3408
+## 5       3669
+## 6       8181
+## 7       9357
+## 8       9359
+## 9       9598
+## 10      9684
+## # ... with 544 more rows</code></pre>
+<p>Finally, recall that <a href="working-with-widgets.html#use-defaults">every widget has a default</a> set up if you don’t enter any codes. Looking at <code>?gave_to_area</code> I can see that if I don’t use an area of giving codes, I just get any giving anywhere. I can use this knowledge to get campus-wide LYBUNTs:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">last_year =<span class="st"> </span><span class="kw">gave_to_area</span>(<span class="dt">from =</span> <span class="dv">20150701</span>, <span class="dt">to =</span> <span class="dv">20160630</span>)
+this_year =<span class="st"> </span><span class="kw">gave_to_area</span>(<span class="dt">from =</span> <span class="dv">20160701</span>)
+LYBUNT =<span class="st"> </span>last_year %but_not%<span class="st"> </span>this_year
+<span class="kw">display</span>(LYBUNT)</code></pre></div>
+<pre><code>## # A tibble: 77,587 x 1
+##    entity_id
+##        &lt;dbl&gt;
+## 1          2
+## 2          3
+## 3          4
+## 4          7
+## 5         13
+## 6         16
+## 7         49
+## 8         59
+## 9         72
+## 10        80
+## # ... with 77,577 more rows</code></pre>
 
-</div>
 </div>
 
 
@@ -252,8 +238,8 @@ prospects =<span class="st"> </span><span class="kw">brainstorm_bot</span>(<span
           </div>
         </div>
       </div>
-<a href="working-with-widgets.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="higher-order-widgets.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+<a href="ex-political-economy.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="test-cdw.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
@@ -272,7 +258,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/tarakc02/discodocs/edit/master/30-brainstorm-bot.Rmd",
+"link": "https://github.com/tarakc02/discodocs/edit/master/80-example-02.Rmd",
 "text": null
 },
 "download": null,

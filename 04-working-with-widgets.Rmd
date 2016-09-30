@@ -57,7 +57,7 @@ Widgets can always accept multiple codes/synonyms as arguments, and even combina
 - `gave_to_area(HSB, COC)` is the same as above
 - `gave_to_area(business, COC)` once again, the same thing
 
-## Use the default cases
+## Use the default cases {#use-defaults}
 
 So by now you can probably figure out that `partcipated_in(uc_jazz_ensembles)` gets you alumni who participated in the UC Jazz Ensembles. But what if you're actually looking for people who particpated in any student activity at all? Would you have to type out all (hundreds!) of them? 
 

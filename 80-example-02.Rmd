@@ -1,0 +1,42 @@
+# LYBUNTs {#ex-lybunt}
+
+```{r ex-lybunt-loadlib}
+# i always begin by loading the disco engine if it isn't already loaded
+library(discoveryengine)
+```
+
+Anyone involved in an annual solicitation cycle will have some interest in the population referred to as *LYBUNT*, which stands for **L**ast **Y**ear **Bu**t **N**ot **T**his Year. That is, someone who gave last year but has not given this year. How can we create such a definition in the Disco Engine?
+
+To make the example concrete, let's say we're identifying LYBUNTs for the school of Social Welfare. What I'd like to get to is:
+
+```{r ex-lybunt-strat, eval = FALSE}
+LYBUNT = last_year %but_not% this_year
+```
+
+So, all I really need to do is define `last_year` and `this_year`. I'm writing this example in September, 2016, so I'll define "last year" as FY2015-16, or in other words, July 1, 2015 - June 30, 2016:
+
+```{r ex-lybunt-last-year}
+last_year = gave_to_area(social_welfare, from = 20150701, to = 20160630)
+```
+
+And now for this year. Since the `to` argument is optional, I can just do:
+
+```{r ex-lybunt-this-year}
+this_year = gave_to_area(social_welfare, from = 20160701)
+```
+
+Now I can create my `LYBUNT` definition, as I strategized above:
+
+```{r ex-lybunt-lybunt, cache = TRUE}
+LYBUNT = last_year %but_not% this_year
+display(LYBUNT)
+```
+
+Finally, recall that [every widget has a default](#use-defaults) set up if you don't enter any codes. Looking at `?gave_to_area` I can see that if I don't use an area of giving codes, I just get any giving anywhere. I can use this knowledge to get campus-wide LYBUNTs:
+
+```{r ex-lybunt-campuswide, cache = TRUE}
+last_year = gave_to_area(from = 20150701, to = 20160630)
+this_year = gave_to_area(from = 20160701)
+LYBUNT = last_year %but_not% this_year
+display(LYBUNT)
+```
