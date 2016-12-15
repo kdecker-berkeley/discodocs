@@ -20,6 +20,8 @@ basketball_player = played_sport(basketball_men, basketball_women)
 display(basketball_player)
 ```
 
+If instead of just viewing IDs on the screen, you'd like to export them (perhaps to use in a CADS savedlist), just add a filename: `display(basketball_player, file = "basketball-players")` and a file called "basketball-players.csv" will appear in your working directory.
+
 ## Code lookup
 
 Most widgets rely on the coding found in CADS for their input, but you probably haven't memorized all of the codes! By using a question-mark inside of a widget, you can do look-ups on the fly:
