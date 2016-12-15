@@ -1,0 +1,53 @@
+# Cheat Sheet {#cheat-sheet}
+
+## Getting started
+
+* Always start a session with `library(discoveryengine)`
+
+```{r cheat-sheet-loadlib}
+library(discoveryengine)
+```
+
+* Not sure where to begin? Use `show_widgets()` to view a searchable and sortable list of available widgets. For more tips on finding widgets, check out [the section on finding widgets](#working-with-finding-widgets).
+* Still not sure what to do? Try using the [brainstorm bot](#brainstorm-bot). For instance if you are looking for people who played on the basketball team, type `brainstorm_bot("basketball")`
+
+## Output
+
+Use `display` for output. Recall that you can use the equals sign `=` to assign names to your disco engine definitions, to make it easier to refer to them when `display`ing or doing other operations:
+
+```{r cheat-sheet-output-1}
+basketball_player = played_sport(basketball_men, basketball_women)
+display(basketball_player)
+```
+
+## Code lookup
+
+Most widgets rely on the coding found in CADS for their input, but you probably haven't memorized all of the codes! By using a question-mark inside of a widget, you can do look-ups on the fly:
+
+```{r cheat-sheet-lookup}
+gave_to_department(?band)
+```
+
+Codes (such as `CALBAND`) and synonyms (such as `cal_band`) can be used interchangeably, so use whichever feels more comfortable. 
+
+## The best widgets for . . .
+
+The following may be incomplete and is *not* a substitute for using `show_widgets()`, but may come in handy in a pinch. Find out more about any one of these by using the built-in help. For example, to learn more about the `gave_to_area` widget, type `?gave_to_area`
+
+* Giving widgets: `gave_to_area`, `gave_to_department`, `gave_to_fund`
+* Ratings: `has_capacity`, `has_implied_capacity`, `has_major_gift_score`, `has_gift_planning_score`
+* Academic and student experience: `has_degree_from`, `majored_in`, `participated_in`, `played_sport`, `received_award`
+* UCB affiliations: `has_affiliation`, `on_committee`, `received_award`
+* Interests, etc: `has_interest`, `has_philanthropic_affinity`
+* Employment: `works_in_industry`, `has_occupation`
+* Geography: `lives_in_county`, `lives_in_msa`, `lives_in_zip`, `lives_near`, `works_in_county`, `works_in_msa`, `works_in_zip`, `works_near`
+
+## Text search
+
+Though most widgets rely on codes from CADS as inputs, some are search-based. Just like the `brainstorm_bot`, which is also based on text search, these widgets require you to use quotation marks around the search term(s). Here are some examples:
+
+* `contact_text_contains("neuroscience")`
+* `fund_text_contains("diversity")`
+* `research_miner("underrepresented")`
+
+**Note:** The `brainstorm_bot` will help you find things through the code tables, but it will not do big text searches of things like contact reports, fund biographies/terms, and research profiles. For that kind of specialized search, you should use these text search based widgets.

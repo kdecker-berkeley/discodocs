@@ -1,6 +1,6 @@
 # (PART) Bots {-}
 
-# The Brainstorm Bot
+# The Brainstorm Bot {#brainstorm-bot}
 
 ```{r bb-loadlib}
 # as always, i have to make sure the disco engine is loaded

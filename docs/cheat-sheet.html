@@ -33,8 +33,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="ex-political-economy.html">
-<link rel="next" href="test-cdw.html">
+<link rel="prev" href="test-cdw.html">
+
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -187,65 +187,79 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="ex-lybunt" class="section level1">
-<h1><span class="header-section-number">10</span> LYBUNTs</h1>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># i always begin by loading the disco engine if it isn&#39;t already loaded</span>
-<span class="kw">library</span>(discoveryengine)</code></pre></div>
-<p>Anyone involved in an annual solicitation cycle will have some interest in the population referred to as <em>LYBUNT</em>, which stands for <strong>L</strong>ast <strong>Y</strong>ear <strong>Bu</strong>t <strong>N</strong>ot <strong>T</strong>his Year. That is, someone who gave last year but has not given this year. How can we create such a definition in the Disco Engine?</p>
-<p>To make the example concrete, let’s say we’re identifying LYBUNTs for the school of Social Welfare. What I’d like to get to is:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">LYBUNT =<span class="st"> </span>last_year %but_not%<span class="st"> </span>this_year</code></pre></div>
-<p>So, all I really need to do is define <code>last_year</code> and <code>this_year</code>. I’m writing this example in September, 2016, so I’ll define “last year” as FY2015-16, or in other words, July 1, 2015 - June 30, 2016:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">last_year =<span class="st"> </span><span class="kw">gave_to_area</span>(social_welfare, <span class="dt">from =</span> <span class="dv">20150701</span>, <span class="dt">to =</span> <span class="dv">20160630</span>)</code></pre></div>
-<p>And now for this year. Since the <code>to</code> argument is optional, I can just do:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">this_year =<span class="st"> </span><span class="kw">gave_to_area</span>(social_welfare, <span class="dt">from =</span> <span class="dv">20160701</span>)</code></pre></div>
-<p>Now I can create my <code>LYBUNT</code> definition, as I strategized above:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">LYBUNT =<span class="st"> </span>last_year %but_not%<span class="st"> </span>this_year
-<span class="kw">display</span>(LYBUNT)</code></pre></div>
-<pre><code>## # A tibble: 433 × 1
+<div id="cheat-sheet" class="section level1">
+<h1><span class="header-section-number">B</span> Cheat Sheet</h1>
+<div id="getting-started" class="section level2">
+<h2><span class="header-section-number">B.1</span> Getting started</h2>
+<ul>
+<li>Always start a session with <code>library(discoveryengine)</code></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(discoveryengine)</code></pre></div>
+<ul>
+<li>Not sure where to begin? Use <code>show_widgets()</code> to view a searchable and sortable list of available widgets. For more tips on finding widgets, check out <a href="working-with-widgets.html#working-with-finding-widgets">the section on finding widgets</a>.</li>
+<li>Still not sure what to do? Try using the <a href="brainstorm-bot.html#brainstorm-bot">brainstorm bot</a>. For instance if you are looking for people who played on the basketball team, type <code>brainstorm_bot(&quot;basketball&quot;)</code></li>
+</ul>
+</div>
+<div id="output" class="section level2">
+<h2><span class="header-section-number">B.2</span> Output</h2>
+<p>Use <code>display</code> for output. Recall that you can use the equals sign <code>=</code> to assign names to your disco engine definitions, to make it easier to refer to them when <code>display</code>ing or doing other operations:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">basketball_player =<span class="st"> </span><span class="kw">played_sport</span>(basketball_men, basketball_women)
+<span class="kw">display</span>(basketball_player)</code></pre></div>
+<pre><code>## # A tibble: 444 × 1
 ##    entity_id
 ##        &lt;dbl&gt;
-## 1        448
-## 2        500
-## 3        548
-## 4       3408
-## 5       8181
-## 6       9357
-## 7       9359
-## 8       9598
-## 9       9684
-## 10     10025
-## # ... with 423 more rows</code></pre>
-<p>Finally, recall that <a href="working-with-widgets.html#use-defaults">every widget has a default</a> set up if you don’t enter any codes. Looking at <code>?gave_to_area</code> I can see that if I don’t use an area of giving codes, I just get any giving anywhere. I can use this knowledge to get campus-wide LYBUNTs:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">last_year =<span class="st"> </span><span class="kw">gave_to_area</span>(<span class="dt">from =</span> <span class="dv">20150701</span>, <span class="dt">to =</span> <span class="dv">20160630</span>)
-this_year =<span class="st"> </span><span class="kw">gave_to_area</span>(<span class="dt">from =</span> <span class="dv">20160701</span>)
-LYBUNT =<span class="st"> </span>last_year %but_not%<span class="st"> </span>this_year
-<span class="kw">display</span>(LYBUNT)</code></pre></div>
-<pre><code>## # A tibble: 63,319 × 1
-##    entity_id
-##        &lt;dbl&gt;
-## 1          3
-## 2          4
-## 3          7
-## 4         13
-## 5         16
-## 6         49
-## 7         59
-## 8         72
-## 9         94
-## 10       114
-## # ... with 63,309 more rows</code></pre>
+## 1        370
+## 2       1429
+## 3       1495
+## 4       3615
+## 5       3662
+## 6       4425
+## 7       5946
+## 8       6412
+## 9       6882
+## 10      7539
+## # ... with 434 more rows</code></pre>
+</div>
+<div id="code-lookup" class="section level2">
+<h2><span class="header-section-number">B.3</span> Code lookup</h2>
+<p>Most widgets rely on the coding found in CADS for their input, but you probably haven’t memorized all of the codes! By using a question-mark inside of a widget, you can do look-ups on the fly:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">gave_to_department</span>(?band)</code></pre></div>
+<pre><code>##   synonym    code
+##  cal_band CALBAND</code></pre>
+<p>Codes (such as <code>CALBAND</code>) and synonyms (such as <code>cal_band</code>) can be used interchangeably, so use whichever feels more comfortable.</p>
+</div>
+<div id="the-best-widgets-for-.-.-." class="section level2">
+<h2><span class="header-section-number">B.4</span> The best widgets for . . .</h2>
+<p>The following may be incomplete and is <em>not</em> a substitute for using <code>show_widgets()</code>, but may come in handy in a pinch. Find out more about any one of these by using the built-in help. For example, to learn more about the <code>gave_to_area</code> widget, type <code>?gave_to_area</code></p>
+<ul>
+<li>Giving widgets: <code>gave_to_area</code>, <code>gave_to_department</code>, <code>gave_to_fund</code></li>
+<li>Ratings: <code>has_capacity</code>, <code>has_implied_capacity</code>, <code>has_major_gift_score</code>, <code>has_gift_planning_score</code></li>
+<li>Academic and student experience: <code>has_degree_from</code>, <code>majored_in</code>, <code>participated_in</code>, <code>played_sport</code>, <code>received_award</code></li>
+<li>UCB affiliations: <code>has_affiliation</code>, <code>on_committee</code>, <code>received_award</code></li>
+<li>Interests, etc: <code>has_interest</code>, <code>has_philanthropic_affinity</code></li>
+<li>Employment: <code>works_in_industry</code>, <code>has_occupation</code></li>
+<li>Geography: <code>lives_in_county</code>, <code>lives_in_msa</code>, <code>lives_in_zip</code>, <code>lives_near</code>, <code>works_in_county</code>, <code>works_in_msa</code>, <code>works_in_zip</code>, <code>works_near</code></li>
+</ul>
+</div>
+<div id="text-search" class="section level2">
+<h2><span class="header-section-number">B.5</span> Text search</h2>
+<p>Though most widgets rely on codes from CADS as inputs, some are search-based. Just like the <code>brainstorm_bot</code>, which is also based on text search, these widgets require you to use quotation marks around the search term(s). Here are some examples:</p>
+<ul>
+<li><code>contact_text_contains(&quot;neuroscience&quot;)</code></li>
+<li><code>fund_text_contains(&quot;diversity&quot;)</code></li>
+<li><code>research_miner(&quot;underrepresented&quot;)</code></li>
+</ul>
+<p><strong>Note:</strong> The <code>brainstorm_bot</code> will help you find things through the code tables, but it will not do big text searches of things like contact reports, fund biographies/terms, and research profiles. For that kind of specialized search, you should use these text search based widgets.</p>
 
 </div>
-
-
-
+</div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="ex-political-economy.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="test-cdw.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+<a href="test-cdw.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
@@ -264,7 +278,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/tarakc02/discodocs/edit/master/80-example-02.Rmd",
+"link": "https://github.com/tarakc02/discodocs/edit/master/93-cheat-sheet.Rmd",
 "text": null
 },
 "download": null,
