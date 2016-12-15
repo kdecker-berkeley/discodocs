@@ -25,7 +25,7 @@
 
 <meta name="author" content="Tarak Shah">
 
-<meta name="date" content="2016-12-14">
+<meta name="date" content="2016-12-15">
 
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -166,6 +166,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="B.3" data-path="cheat-sheet.html"><a href="cheat-sheet.html#code-lookup"><i class="fa fa-check"></i><b>B.3</b> Code lookup</a></li>
 <li class="chapter" data-level="B.4" data-path="cheat-sheet.html"><a href="cheat-sheet.html#the-best-widgets-for-.-.-."><i class="fa fa-check"></i><b>B.4</b> The best widgets for . . .</a></li>
 <li class="chapter" data-level="B.5" data-path="cheat-sheet.html"><a href="cheat-sheet.html#text-search"><i class="fa fa-check"></i><b>B.5</b> Text search</a></li>
+<li class="chapter" data-level="B.6" data-path="cheat-sheet.html"><a href="cheat-sheet.html#other"><i class="fa fa-check"></i><b>B.6</b> Other</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -198,6 +199,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <ul>
 <li>Not sure where to begin? Use <code>show_widgets()</code> to view a searchable and sortable list of available widgets. For more tips on finding widgets, check out <a href="working-with-widgets.html#working-with-finding-widgets">the section on finding widgets</a>.</li>
 <li>Still not sure what to do? Try using the <a href="brainstorm-bot.html#brainstorm-bot">brainstorm bot</a>. For instance if you are looking for people who played on the basketball team, type <code>brainstorm_bot(&quot;basketball&quot;)</code></li>
+<li>Multiple widgets can be combined using the operators <code>%and%</code>, <code>%or%</code>, or <code>%but_not%</code>. For example, <code>gave_to_area(natural_resources) %but_not% in_unit_portfolio(natural_resources)</code></li>
 </ul>
 </div>
 <div id="output" class="section level2">
@@ -219,7 +221,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ## 9       6882
 ## 10      7539
 ## # ... with 434 more rows</code></pre>
-<p>If instead of just viewing IDs on the screen, you’d like to export them (perhaps to use in a CADS savedlist), just add a filename: <code>display(basketball_player, file = &quot;basketball-players&quot;)</code> and a file called “basketball-players.csv” will appear in your working directory.</p>
+<p>If instead of just viewing IDs on the screen, you’d like to export them (perhaps to use in a CADS savedlist), just add a filename: <code>display(basketball_player, file = &quot;basketball-players&quot;)</code> and a file called “basketball-players.csv” will appear in your working directory. <em>Note that the exported file has a header, so when you upload it to an Advance savedlist, make sure to check the “First row is a header” box.</em></p>
 </div>
 <div id="code-lookup" class="section level2">
 <h2><span class="header-section-number">B.3</span> Code lookup</h2>
@@ -251,6 +253,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><code>research_miner(&quot;underrepresented&quot;)</code></li>
 </ul>
 <p><strong>Note:</strong> The <code>brainstorm_bot</code> will help you find things through the code tables, but it will not do big text searches of things like contact reports, fund biographies/terms, and research profiles. For that kind of specialized search, you should use these text search based widgets.</p>
+</div>
+<div id="other" class="section level2">
+<h2><span class="header-section-number">B.6</span> Other</h2>
+<p>Type <code>show_suspect_pools()</code> to view a list of all Suspect Pools, which is useful in conjunction with the <code>in_suspect_pool</code> widget.</p>
 
 </div>
 </div>

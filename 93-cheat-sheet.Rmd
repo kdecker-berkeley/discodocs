@@ -10,6 +10,7 @@ library(discoveryengine)
 
 * Not sure where to begin? Use `show_widgets()` to view a searchable and sortable list of available widgets. For more tips on finding widgets, check out [the section on finding widgets](#working-with-finding-widgets).
 * Still not sure what to do? Try using the [brainstorm bot](#brainstorm-bot). For instance if you are looking for people who played on the basketball team, type `brainstorm_bot("basketball")`
+* Multiple widgets can be combined using the operators `%and%`, `%or%`, or `%but_not%`. For example, `gave_to_area(natural_resources) %but_not% in_unit_portfolio(natural_resources)`
 
 ## Output
 
@@ -20,7 +21,7 @@ basketball_player = played_sport(basketball_men, basketball_women)
 display(basketball_player)
 ```
 
-If instead of just viewing IDs on the screen, you'd like to export them (perhaps to use in a CADS savedlist), just add a filename: `display(basketball_player, file = "basketball-players")` and a file called "basketball-players.csv" will appear in your working directory.
+If instead of just viewing IDs on the screen, you'd like to export them (perhaps to use in a CADS savedlist), just add a filename: `display(basketball_player, file = "basketball-players")` and a file called "basketball-players.csv" will appear in your working directory. *Note that the exported file has a header, so when you upload it to an Advance savedlist, make sure to check the "First row is a header" box.*
 
 ## Code lookup
 
@@ -53,3 +54,7 @@ Though most widgets rely on codes from CADS as inputs, some are search-based. Ju
 * `research_miner("underrepresented")`
 
 **Note:** The `brainstorm_bot` will help you find things through the code tables, but it will not do big text searches of things like contact reports, fund biographies/terms, and research profiles. For that kind of specialized search, you should use these text search based widgets.
+
+## Other
+
+Type `show_suspect_pools()` to view a list of all Suspect Pools, which is useful in conjunction with the `in_suspect_pool` widget.

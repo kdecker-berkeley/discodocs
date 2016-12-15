@@ -25,7 +25,7 @@
 
 <meta name="author" content="Tarak Shah">
 
-<meta name="date" content="2016-12-14">
+<meta name="date" content="2016-12-15">
 
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -166,6 +166,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="B.3" data-path="cheat-sheet.html"><a href="cheat-sheet.html#code-lookup"><i class="fa fa-check"></i><b>B.3</b> Code lookup</a></li>
 <li class="chapter" data-level="B.4" data-path="cheat-sheet.html"><a href="cheat-sheet.html#the-best-widgets-for-.-.-."><i class="fa fa-check"></i><b>B.4</b> The best widgets for . . .</a></li>
 <li class="chapter" data-level="B.5" data-path="cheat-sheet.html"><a href="cheat-sheet.html#text-search"><i class="fa fa-check"></i><b>B.5</b> Text search</a></li>
+<li class="chapter" data-level="B.6" data-path="cheat-sheet.html"><a href="cheat-sheet.html#other"><i class="fa fa-check"></i><b>B.6</b> Other</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -225,25 +226,25 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>As we discussed in the previous section, now that we have an official definition we can send it to the data warehouse, and see if the data warehouse finds anyone who fits. You can see the definition for yourself by just typing the name of it, though it is now written in a language for the computer to understand and may look intimidating to us humans:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">event_prospect</code></pre></div>
 <pre><code>## LISTBUILDER DEFINITION (type: entity_id)
-## .   operator (XA91): intersect
-## .   left (XA91): 
-## .   .   operator (LF01): union
-## .   .   left (LF01): 
+## .   operator (DC74): intersect
+## .   left (DC74): 
+## .   .   operator (GW59): union
+## .   .   left (GW59): 
 ## .   .   .   source: d_bio_interest_mv.entity_id (entity_id)
 ## .   .   .   logic: interest_code IN &#39;TEC&#39;
-## .   .   right (LF01): 
+## .   .   right (GW59): 
 ## .   .   .   source: d_oth_phil_affinity_mv.entity_id (entity_id)
 ## .   .   .   logic: 
 ## .   .   .   .   other_affinity_type IN &#39;ST&#39;
 ## .   .   .   .   sum(gift_amt) &gt;= 0.0
-## .   right (XA91): 
-## .   .   operator (HN26): union
-## .   .   left (HN26): 
+## .   right (DC74): 
+## .   .   operator (CW19): union
+## .   .   left (CW19): 
 ## .   .   .   source: d_bio_address_mv.entity_id (entity_id)
 ## .   .   .   logic: 
 ## .   .   .   .   geo_metro_area_code IN &#39;41860&#39;
 ## .   .   .   .   addr_type_code IN &#39;H&#39;
-## .   .   right (HN26): 
+## .   .   right (CW19): 
 ## .   .   .   source: d_bio_address_mv.entity_id (entity_id)
 ## .   .   .   logic: 
 ## .   .   .   .   geo_metro_area_code IN &#39;41860&#39;
