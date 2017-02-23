@@ -33,8 +33,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="ex-political-economy.html">
-<link rel="next" href="ex-recent-band-parents.html">
+<link rel="prev" href="ex-lybunt.html">
+<link rel="next" href="test-cdw.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -195,62 +195,86 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="ex-lybunt" class="section level1">
-<h1><span class="header-section-number">10</span> LYBUNTs</h1>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># i always begin by loading the disco engine if it isn&#39;t already loaded</span>
+<div id="ex-recent-band-parents" class="section level1">
+<h1><span class="header-section-number">11</span> Recent Band Parents</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># always begin by loading the disco engine if it isn&#39;t already loaded</span>
 <span class="kw">library</span>(discoveryengine)</code></pre></div>
-<p>Anyone involved in an annual solicitation cycle will have some interest in the population referred to as <em>LYBUNT</em>, which stands for <strong>L</strong>ast <strong>Y</strong>ear <strong>Bu</strong>t <strong>N</strong>ot <strong>T</strong>his Year. That is, someone who gave last year but has not given this year. How can we create such a definition in the Disco Engine?</p>
-<p>To make the example concrete, let’s say we’re identifying LYBUNTs for the school of Social Welfare. What I’d like to get to is:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">LYBUNT =<span class="st"> </span>last_year %but_not%<span class="st"> </span>this_year</code></pre></div>
-<p>So, all I really need to do is define <code>last_year</code> and <code>this_year</code>. I’m writing this example in September, 2016, so I’ll define “last year” as FY2015-16, or in other words, July 1, 2015 - June 30, 2016:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">last_year =<span class="st"> </span><span class="kw">gave_to_area</span>(social_welfare, <span class="dt">from =</span> <span class="dv">20150701</span>, <span class="dt">to =</span> <span class="dv">20160630</span>)</code></pre></div>
-<p>And now for this year. Since the <code>to</code> argument is optional, I can just do:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">this_year =<span class="st"> </span><span class="kw">gave_to_area</span>(social_welfare, <span class="dt">from =</span> <span class="dv">20160701</span>)</code></pre></div>
-<p>Now I can create my <code>LYBUNT</code> definition, as I strategized above:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">LYBUNT =<span class="st"> </span>last_year %but_not%<span class="st"> </span>this_year
-<span class="kw">display</span>(LYBUNT)</code></pre></div>
-<pre><code>## # A tibble: 433 × 1
+<p>A client in Student Affairs is considering organizing a weekend event for parents of marching band members who graduated recently. They are tentatively holding the event at the Claremont Resort, but want to be sure that there are enough recent band parents who live close enough to attend.</p>
+<p>So our job is to build a definition of parents of recent band graduates who live near the Claremont Resort. Then we can just use <code>display</code> to view how many people fit the definition.</p>
+<div id="recent-band-members" class="section level2">
+<h2><span class="header-section-number">11.1</span> Recent band members</h2>
+<p>First I need to find out how to identify marching band members. I’ll use the <a href="brainstorm-bot.html#brainstorm-bot">brainstorm bot</a>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">brainstorm_bot</span>(<span class="st">&quot;marching band&quot;</span>)</code></pre></div>
+<pre><code>## participated_in 
+##     MSMB: UC Marching Band Member</code></pre>
+<p>Cool. So definining “recent” as anyone who graduated between 2010 and 2016:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">recent_band_member =<span class="st"> </span><span class="kw">participated_in</span>(MSMB) %and%
+<span class="st">    </span><span class="kw">has_reunion_year</span>(<span class="dv">2010</span>:<span class="dv">2016</span>)</code></pre></div>
+</div>
+<div id="find-their-parents" class="section level2">
+<h2><span class="header-section-number">11.2</span> Find their parents</h2>
+<p>Since I’m already familiar with <a href="higher-order-widgets.html#higher-order-widgets">higher order widgets</a>, I know what to do here:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">band_parent =<span class="st"> </span><span class="kw">parent_of</span>(recent_band_member)</code></pre></div>
+</div>
+<div id="who-live-close-enough" class="section level2">
+<h2><span class="header-section-number">11.3</span> Who live close enough</h2>
+<p>Here I’ll assume that 25 miles is about as far as we can expect one of these band parents to travel in order to attend the event. So my definition should include only those people who live within 25 miles of the Claremont Resort:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">event_prospect =<span class="st"> </span>band_parent %and%<span class="st"> </span>
+<span class="st">    </span><span class="kw">lives_near</span>(<span class="st">&quot;Claremont Resort&quot;</span>, <span class="dt">miles =</span> <span class="dv">25</span>)</code></pre></div>
+<pre><code>## Basing results on: Claremont Resort And Spa, Oakland, CA, USA (37.86, -122.24)
+## (confidence that this is the right location: 0.903)</code></pre>
+</div>
+<div id="how-many" class="section level2">
+<h2><span class="header-section-number">11.4</span> How many?</h2>
+<p>Now I just use <code>display</code> and see the number of parents:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">display</span>(event_prospect)</code></pre></div>
+<pre><code>## # A tibble: 87 × 1
 ##    entity_id
 ##        &lt;dbl&gt;
-## 1        448
-## 2        500
-## 3        548
-## 4       3408
-## 5       8181
-## 6       9357
-## 7       9359
-## 8       9598
-## 9       9684
-## 10     10025
-## # ... with 423 more rows</code></pre>
-<p>Finally, recall that <a href="working-with-widgets.html#use-defaults">every widget has a default</a> set up if you don’t enter any codes. Looking at <code>?gave_to_area</code> I can see that if I don’t use an area of giving codes, I just get any giving anywhere. I can use this knowledge to get campus-wide LYBUNTs:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">last_year =<span class="st"> </span><span class="kw">gave_to_area</span>(<span class="dt">from =</span> <span class="dv">20150701</span>, <span class="dt">to =</span> <span class="dv">20160630</span>)
-this_year =<span class="st"> </span><span class="kw">gave_to_area</span>(<span class="dt">from =</span> <span class="dv">20160701</span>)
-LYBUNT =<span class="st"> </span>last_year %but_not%<span class="st"> </span>this_year
-<span class="kw">display</span>(LYBUNT)</code></pre></div>
-<pre><code>## # A tibble: 63,319 × 1
+## 1      14999
+## 2      15672
+## 3      15687
+## 4      46204
+## 5      50302
+## 6     250310
+## 7     271059
+## 8     276471
+## 9     296428
+## 10    317956
+## # ... with 77 more rows</code></pre>
+<p>Notice the first line, before the IDs start, tells us exactly how many individuals are on the list: 87.</p>
+</div>
+<div id="householding" class="section level2">
+<h2><span class="header-section-number">11.5</span> Householding</h2>
+<p>But hold up! Looking up some of these IDs, I’m noticing that both members of married couples are on the list. How many households are there here? I check the help for the <code>display</code> function by running <code>?display</code>. And I notice that there is an option called <code>household</code>, and by default it is set to <code>FALSE</code>. So:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">display</span>(event_prospect, <span class="dt">household =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<pre><code>## # A tibble: 48 × 1
 ##    entity_id
 ##        &lt;dbl&gt;
-## 1          3
-## 2          4
-## 3          7
-## 4         13
-## 5         16
-## 6         49
-## 7         59
-## 8         72
-## 9         94
-## 10       114
-## # ... with 63,309 more rows</code></pre>
+## 1      14999
+## 2     317956
+## 3     347337
+## 4     874556
+## 5     889893
+## 6     907499
+## 7     988958
+## 8     780532
+## 9     910163
+## 10    910379
+## # ... with 38 more rows</code></pre>
 
 </div>
+</div>
+
+
+
             </section>
 
           </div>
         </div>
       </div>
-<a href="ex-political-economy.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="ex-recent-band-parents.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+<a href="ex-lybunt.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="test-cdw.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
@@ -269,7 +293,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/tarakc02/discodocs/edit/master/80-example-02.Rmd",
+"link": "https://github.com/tarakc02/discodocs/edit/master/80-example-03.Rmd",
 "text": "Edit"
 },
 "download": null,

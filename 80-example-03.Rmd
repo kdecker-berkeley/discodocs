@@ -1,0 +1,64 @@
+# Recent Band Parents {#ex-recent-band-parents}
+
+```{r ex-band-loadlib}
+# always begin by loading the disco engine if it isn't already loaded
+library(discoveryengine)
+```
+
+A client in Student Affairs is considering organizing a weekend event for parents of marching band members who graduated recently. They are tentatively holding the event at the Claremont Resort, but want to be sure that there are enough recent band parents who live close enough to attend. 
+
+So our job is to build a definition of parents of recent band graduates who live near the Claremont Resort. Then we can just use `display` to view how many people fit the definition.
+
+## Recent band members
+
+First I need to find out how to identify marching band members. I'll use the [brainstorm bot](#brainstorm-bot):
+
+```{r ex-band-brainstorm}
+brainstorm_bot("marching band")
+```
+
+Cool. So definining "recent" as anyone who graduated between 2010 and 2016:
+
+```{r ex-band-define-recent-band-mbr}
+recent_band_member = participated_in(MSMB) %and%
+    has_reunion_year(2010:2016)
+```
+
+## Find their parents
+
+Since I'm already familiar with [higher order widgets](#higher-order-widgets), I know what to do here:
+
+```{r ex-band-parent-of}
+band_parent = parent_of(recent_band_member)
+```
+
+## Who live close enough
+
+Here I'll assume that 25 miles is about as far as we can expect one of these band parents to travel in order to attend the event. So my definition should include only those people who live within 25 miles of the Claremont Resort:
+
+```{r ex-band-lives-near, cache = TRUE}
+event_prospect = band_parent %and% 
+    lives_near("Claremont Resort", miles = 25)
+```
+
+## How many?
+
+Now I just use `display` and see the number of parents:
+
+```{r ex-band-display-bg, cache = TRUE, include = FALSE, echo = FALSE}
+ep_ids <- display(event_prospect)
+```
+
+```{r ex-band-display-1, cache = TRUE}
+display(event_prospect)
+```
+
+Notice the first line, before the IDs start, tells us exactly how many individuals are on the list: `r nrow(ep_ids)`.
+
+## Householding
+
+But hold up! Looking up some of these IDs, I'm noticing that both members of married couples are on the list. How many households are there here? I check the help for the `display` function by running `?display`. And I notice that there is an option called `household`, and by default it is set to `FALSE`. So:
+
+```{r ex-band-display-2, cache = TRUE}
+display(event_prospect, household = TRUE)
+```
