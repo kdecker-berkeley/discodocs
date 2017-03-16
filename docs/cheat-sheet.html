@@ -26,7 +26,6 @@
 <meta name="author" content="Tarak Shah">
 
 
-<meta name="date" content="2017-02-23">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -247,7 +246,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>Academic and student experience: <code>has_degree_from</code>, <code>majored_in</code>, <code>participated_in</code>, <code>played_sport</code>, <code>received_award</code></li>
 <li>UCB affiliations: <code>has_affiliation</code>, <code>on_committee</code>, <code>received_award</code></li>
 <li>Interests, etc: <code>has_interest</code>, <code>has_philanthropic_affinity</code></li>
-<li>Employment: <code>works_in_industry</code>, <code>has_occupation</code></li>
+<li>Employment: <code>works_in_industry</code>, <code>has_occupation</code>, <code>has_position</code>, <code>job_title_like</code></li>
 <li>Geography: <code>lives_in_county</code>, <code>lives_in_msa</code>, <code>lives_in_zip</code>, <code>lives_near</code>, <code>works_in_county</code>, <code>works_in_msa</code>, <code>works_in_zip</code>, <code>works_near</code></li>
 </ul>
 </div>
@@ -255,7 +254,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2><span class="header-section-number">B.5</span> Text search</h2>
 <p>Though most widgets rely on codes from CADS as inputs, some are search-based. Just like the <code>brainstorm_bot</code>, which is also based on text search, these widgets require you to use quotation marks around the search term(s). Here are some examples:</p>
 <ul>
-<li><code>contact_text_contains(&quot;neuroscience&quot;)</code></li>
+<li><code>contact_text_contains(&quot;neuro*&quot;, &quot;brain&quot;)</code></li>
 <li><code>fund_text_contains(&quot;diversity&quot;)</code></li>
 <li><code>research_miner(&quot;underrepresented&quot;)</code></li>
 </ul>

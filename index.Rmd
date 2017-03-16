@@ -1,7 +1,6 @@
 --- 
 title: "Documentation for discoveryengine"
 author: "Tarak Shah"
-date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book
@@ -12,7 +11,15 @@ knit: "bookdown::render_book"
 
 # Disco
 
-Welcome to the introduction and extended documentation for the discoveryengine! The discoveryengine, also known as "Disco Engine" or just "Disco," is a tool enabling Prospect Development staff to do custom prospecting, written in the R programming language. Feel free to read this document in order, or to jump around or just bookmark it and refer to it as needed. You may find the search feature helpful, you can access it by clicking on the little magnifying glass at the top of the screen. 
+![[Did I mention that I like to dance?](https://www.youtube.com/watch?v=uxi73RQlLB8)](images/disco.gif)
+
+Welcome to the introduction to and extended documentation for the discoveryengine! The discoveryengine, also known as "Disco Engine" or just "Disco," is a tool enabling Prospect Development staff to do custom prospecting, written in the R programming language. 
+
+If you are looking for the quickest way to get started, check out the [cheat sheet](#cheat-sheet).
+
+Though the Disco Engine is written in R, you don't need to have any experience using R in order to get started. That said, if you're brand new to R and RStudio, check out our brief [introduction to R and RStudio](#r-intro).
+
+Otherwise, feel free to read this document in order, or to jump around or just bookmark it and refer to it as needed. You may find the search feature helpful, you can access it by clicking on the little magnifying glass at the top of the screen. 
 
 ## Contribute to the Disco Engine
 

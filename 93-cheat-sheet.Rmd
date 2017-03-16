@@ -42,14 +42,14 @@ The following may be incomplete and is *not* a substitute for using `show_widget
 * Academic and student experience: `has_degree_from`, `majored_in`, `participated_in`, `played_sport`, `received_award`
 * UCB affiliations: `has_affiliation`, `on_committee`, `received_award`
 * Interests, etc: `has_interest`, `has_philanthropic_affinity`
-* Employment: `works_in_industry`, `has_occupation`
+* Employment: `works_in_industry`, `has_occupation`, `has_position`, `job_title_like`
 * Geography: `lives_in_county`, `lives_in_msa`, `lives_in_zip`, `lives_near`, `works_in_county`, `works_in_msa`, `works_in_zip`, `works_near`
 
 ## Text search
 
 Though most widgets rely on codes from CADS as inputs, some are search-based. Just like the `brainstorm_bot`, which is also based on text search, these widgets require you to use quotation marks around the search term(s). Here are some examples:
 
-* `contact_text_contains("neuroscience")`
+* `contact_text_contains("neuro*", "brain")`
 * `fund_text_contains("diversity")`
 * `research_miner("underrepresented")`
 
