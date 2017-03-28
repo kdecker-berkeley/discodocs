@@ -12,6 +12,18 @@ library(discoveryengine)
 * Still not sure what to do? Try using the [brainstorm bot](#brainstorm-bot). For instance if you are looking for people who played on the basketball team, type `brainstorm_bot("basketball")`
 * Multiple widgets can be combined using the operators `%and%`, `%or%`, or `%but_not%`. For example, `gave_to_area(natural_resources) %but_not% in_unit_portfolio(natural_resources)`
 
+## Knowing about defaults
+Be aware of defaults: If you're ever wondering about any of the default settings for a widget, utilize the built-in documentation to learn more. For example: `?has_affiliation` shows me that the option `include_former` defaults to `TRUE`, meaning that the `has_affiliation` widget will automatically include former (in addition to current) affiliations, unless you add `include_former = FALSE`. 
+
+An incomplete list of widget options and their default settings:
+
+* `has_degree_from` and `majored_in`: By default, these include undergraduate and graduate degreeholders, and exclude attendees.
+* `attended_event`: By default, non-attendees (coded as "invited but did not attend") are excluded, but can be included with `include_non_attendees = TRUE`
+* `has_affiliation`, `has_interest`, and all of the employment-based widgets have an `include_former` option that defaults to `TRUE`
+* `in_unit_portfolio` has an option to `include_inactive` that defaults to `FALSE` (by default, only the active proposal assignments are considered)
+
+The best way to find out options, defaults and other information about widgets is to use the built-in documentation.
+
 ## Output
 
 Use `display` for output. Recall that you can use the equals sign `=` to assign names to your disco engine definitions, to make it easier to refer to them when `display`ing or doing other operations:
