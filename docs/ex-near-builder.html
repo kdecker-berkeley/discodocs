@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="ex-political-economy.html">
-<link rel="next" href="ex-recent-band-parents.html">
+<link rel="prev" href="ex-recent-band-parents.html">
+<link rel="next" href="test-cdw.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -199,62 +199,70 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="ex-lybunt" class="section level1">
-<h1><span class="header-section-number">10</span> LYBUNTs</h1>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># i always begin by loading the disco engine if it isn&#39;t already loaded</span>
+<div id="ex-near-builder" class="section level1">
+<h1><span class="header-section-number">12</span> Nearing Builder of Berkeley Status</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># always begin by loading the disco engine if it isn&#39;t already loaded</span>
 <span class="kw">library</span>(discoveryengine)</code></pre></div>
-<p>Anyone involved in an annual solicitation cycle will have some interest in the population referred to as <em>LYBUNT</em>, which stands for <strong>L</strong>ast <strong>Y</strong>ear <strong>Bu</strong>t <strong>N</strong>ot <strong>T</strong>his Year. That is, someone who gave last year but has not given this year. How can we create such a definition in the Disco Engine?</p>
-<p>To make the example concrete, let’s say we’re identifying LYBUNTs for the school of Social Welfare. What I’d like to get to is:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">LYBUNT =<span class="st"> </span>last_year %but_not%<span class="st"> </span>this_year</code></pre></div>
-<p>So, all I really need to do is define <code>last_year</code> and <code>this_year</code>. I’m writing this example in September, 2016, so I’ll define “last year” as FY2015-16, or in other words, July 1, 2015 - June 30, 2016:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">last_year =<span class="st"> </span><span class="kw">gave_to_area</span>(social_welfare, <span class="dt">from =</span> <span class="dv">20150701</span>, <span class="dt">to =</span> <span class="dv">20160630</span>)</code></pre></div>
-<p>And now for this year. Since the <code>to</code> argument is optional, I can just do:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">this_year =<span class="st"> </span><span class="kw">gave_to_area</span>(social_welfare, <span class="dt">from =</span> <span class="dv">20160701</span>)</code></pre></div>
-<p>Now I can create my <code>LYBUNT</code> definition, as I strategized above:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">LYBUNT =<span class="st"> </span>last_year %but_not%<span class="st"> </span>this_year
-<span class="kw">display</span>(LYBUNT)</code></pre></div>
-<pre><code>## # A tibble: 433 × 1
+<p>A household is designated a “Builder of Berkeley” when they have donated at least $1 Million lifetime to Berkeley. That status comes with recognition and other perks, so it’s valuable to be aware of households who are nearing that level, as we can then craft solicitations that would push the household into Builder status.</p>
+<div id="defining-close" class="section level2">
+<h2><span class="header-section-number">12.1</span> Defining close</h2>
+<p>For this example, I’ll use $850,000 as the definition of “close” to the $1 Million Builder level. So we’re trying to find households who have given at least $850,000, but not over $1 Million.</p>
+<p><a href="working-with-widgets.html#use-defaults">Recall that</a> the giving widgets, when used without any area or department codes, look at giving anywhere on campus (which is what we want).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># B.O.B. is a lifetime recognition. Pull lifetime giving by not using the </span>
+<span class="co"># date range in the gave_to_area widget</span>
+nearly_builder =<span class="st"> </span><span class="kw">gave_to_area</span>(<span class="dt">at_least =</span> <span class="dv">850000</span>)</code></pre></div>
+<p>To exclude those who are already over $1M (who are already Builders), I first need to identify them:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">already_builder =<span class="st"> </span><span class="kw">gave_to_area</span>(<span class="dt">at_least =</span> <span class="dv">1000000</span>)</code></pre></div>
+<p>Now, I want to find everyone who satisfies <code>nearly_builder</code> but are not <code>already_builder</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">prospect_list =<span class="st"> </span>nearly_builder %but_not%<span class="st"> </span>already_builder</code></pre></div>
+<p>Let’s see what we have!</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">display</span>(prospect_list)</code></pre></div>
+<pre><code>## # A tibble: 57 × 1
 ##    entity_id
 ##        &lt;dbl&gt;
-## 1        448
-## 2        500
-## 3        548
-## 4       3408
-## 5       8181
-## 6       9357
-## 7       9359
-## 8       9598
-## 9       9684
-## 10     10025
-## # ... with 423 more rows</code></pre>
-<p>Finally, recall that <a href="working-with-widgets.html#use-defaults">every widget has a default</a> set up if you don’t enter any codes. Looking at <code>?gave_to_area</code> I can see that if I don’t use an area of giving codes, I just get any giving anywhere. I can use this knowledge to get campus-wide LYBUNTs:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">last_year =<span class="st"> </span><span class="kw">gave_to_area</span>(<span class="dt">from =</span> <span class="dv">20150701</span>, <span class="dt">to =</span> <span class="dv">20160630</span>)
-this_year =<span class="st"> </span><span class="kw">gave_to_area</span>(<span class="dt">from =</span> <span class="dv">20160701</span>)
-LYBUNT =<span class="st"> </span>last_year %but_not%<span class="st"> </span>this_year
-<span class="kw">display</span>(LYBUNT)</code></pre></div>
-<pre><code>## # A tibble: 63,319 × 1
+## 1        566
+## 2       1347
+## 3       8481
+## 4       8872
+## 5       9763
+## 6      10342
+## 7      10688
+## 8      12207
+## 9      15771
+## 10     17583
+## # ... with 47 more rows</code></pre>
+</div>
+<div id="householding-1" class="section level2">
+<h2><span class="header-section-number">12.2</span> Householding</h2>
+<p>A lot of individuals in <code>prospect_list</code> are married to each other, but Builder of Berkeley is a household recognition. If I’m going to run the Prospect Pool Spreadsheet, this doesn’t really matter since that report automatically households, but otherwise I’d like to household the results (this will also help in getting an accurate count). By checking <code>?display</code> I see that deceased people are removed by default (which is what I want in this case), but that householding is not done by default. To enable householding:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">display</span>(prospect_list, <span class="dt">household =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<pre><code>## # A tibble: 45 × 1
 ##    entity_id
 ##        &lt;dbl&gt;
-## 1          3
-## 2          4
-## 3          7
-## 4         13
-## 5         16
-## 6         49
-## 7         59
-## 8         72
-## 9         94
-## 10       114
-## # ... with 63,309 more rows</code></pre>
+## 1       9763
+## 2     508590
+## 3       8872
+## 4      15771
+## 5     132374
+## 6     420352
+## 7     653365
+## 8       1346
+## 9      10342
+## 10     17583
+## # ... with 35 more rows</code></pre>
 
 </div>
+</div>
+
+
+
             </section>
 
           </div>
         </div>
       </div>
-<a href="ex-political-economy.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="ex-recent-band-parents.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+<a href="ex-recent-band-parents.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="test-cdw.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
@@ -273,7 +281,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/tarakc02/discodocs/edit/master/80-example-02.Rmd",
+"link": "https://github.com/tarakc02/discodocs/edit/master/80-example-04.Rmd",
 "text": "Edit"
 },
 "download": null,

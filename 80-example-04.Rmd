@@ -1,0 +1,46 @@
+# Nearing Builder of Berkeley Status {#ex-near-builder}
+
+```{r ex-builder-loadlib}
+# always begin by loading the disco engine if it isn't already loaded
+library(discoveryengine)
+```
+
+A household is designated a "Builder of Berkeley" when they have donated at least $1 Million lifetime to Berkeley. That status comes with recognition and other perks, so it's valuable to be aware of households who are nearing that level, as we can then craft solicitations that would push the household into Builder status.
+
+## Defining close
+
+For this example, I'll use $850,000 as the definition of "close" to the $1 Million Builder level. So we're trying to find households who have given at least $850,000, but not over $1 Million.
+
+[Recall that](#use-defaults) the giving widgets, when used without any area or department codes, look at giving anywhere on campus (which is what we want).
+
+```{r ex-builder-850k}
+# B.O.B. is a lifetime recognition. Pull lifetime giving by not using the 
+# date range in the gave_to_area widget
+nearly_builder = gave_to_area(at_least = 850000)
+```
+
+To exclude those who are already over $1M (who are already Builders), I first need to identify them:
+
+```{r ex-builder-1m}
+already_builder = gave_to_area(at_least = 1000000)
+```
+
+Now, I want to find everyone who satisfies `nearly_builder` but are not `already_builder`:
+
+```{r ex-builder-butnot}
+prospect_list = nearly_builder %but_not% already_builder
+```
+
+Let's see what we have!
+
+```{r ex-builder-disp, cache = TRUE}
+display(prospect_list)
+```
+
+## Householding
+
+A lot of individuals in `prospect_list` are married to each other, but Builder of Berkeley is a household recognition. If I'm going to run the Prospect Pool Spreadsheet, this doesn't really matter since that report automatically households, but otherwise I'd like to household the results (this will also help in getting an accurate count). By checking `?display` I see that deceased people are removed by default (which is what I want in this case), but that householding is not done by default. To enable householding:
+
+```{r ex-builder-household}
+display(prospect_list, household = TRUE)
+```
