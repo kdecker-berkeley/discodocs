@@ -70,7 +70,7 @@ display(did_anything)
 
 That seems a bit magical, doesn't it? The reason that works is because every widget has a defined behavior for when no codes/synonyms are entered. These default behaviors aim to be sensible so that you can use them in an intuitive way. You can always find out exactly what is included in the default by using the help. For instance, by typing `?has_capacity` I find out that entering `has_capacity()` without any specific ratings will find anyone with a researched capacity rating between 1 and 14 (so 99's are excluded, and those with no capacity ratings are excluded). 
 
-## Detailed controls
+## Detailed controls {#detailed-controls}
 
 We saw above that `gave_to_area(business)` will find people who have given to the Haas School of Business. By default, this will find anyone who has ever given any amount, at any time. But `gave_to_area`, like many widgets, has a number of optional arguments that allow more fine-grained control. For example: 
 

@@ -1,0 +1,86 @@
+# (PART) Advanced {-}
+
+```{r opt-load, echo = FALSE, message = FALSE, warning = FALSE}
+library(discoveryengine)
+```
+
+# Optional arguments {#optional-arguments}
+
+As we saw in [Working with widgets](#detailed-controls), many widgets have optional arguments that provide fine-grained control. You can always view the full documentation for a widget, including all of its arguments, by using the built-in help (e.g. `?majored_in`). We are able to make these arguments optional because widgets come pre-configured with default settings for these arguments (the default settings are also explained in the help). 
+
+## Event invitees and attendees {#opt-events}
+
+For example, absent any additional instructions, `attended_event` will exclude anyone who was invited but did not attend the specified events. So to create a definition of people who attended CNR's "Re-discover ESPM" event:
+
+```{r opt-event-default}
+attended_event(2770)
+```
+
+Since I did not specify otherwise, that definition will only pull in those who actually attended, not those who were merely invited. If I were interested not only in those who actually attended, but also anyone who was merely invited (this can be useful because it indicates that a person was at least considered an invite-worthy prospect), I would add `include_non_attendees = TRUE` to my specification:
+
+```{r opt-event-include}
+attended_event(2770, include_non_attendees = TRUE)
+```
+
+If you look closely at the printed output from each of those defintions, in the `logic` section, you'll notice slightly different lists of codes included where it says `activity_participation_code IN ...`. In fact, the latter includes the extra codes `ID` (for "Invited but did not attend"), `RG` ("Regrets"), and `NS` ("No Show"). 
+
+## Date ranges
+
+A number of widgets, including all of the giving-related widgets as well as degree/major widgets, have two optional arguments, called `from` and `to`, to specify a date range. Their being optional means that you can specify none, just one, or both of the `from` and `to` arguments, resulting in the following behaviors:
+
+* None: Dates will not be considered at all. So for example,  `gave_to_area(chemistry)` will look at people's entire lifetime of giving for any gifts to the College of Chemistry
+* Only `from`: The date range will be considered open-ended on the right (future) side, but closed on the left (past). So `gave_to_area(chemistry, from = 20010101)` will look for anyone who has given to the College of Chemistry since the beginning of the year 2001, ignoring any giving that happened earlier than that.
+* Only `to`: The date range will be considered open-ended on the left (past), but closed on the right (future). So `gave_to_area(chemistry, to = 20080630)` will consider any giving on or before June 30, 2008, ignoring any giving that happened after that date.
+* Both: Just a daterange. `gave_to_area(chemistry, from = 20010101, to = 20080630)` will look for giving to the College of Chemistry between January 1, 2001 and June 30, 2008.
+
+## Graduate, undergraduate, attendee
+
+For the most part, widgets have just a small number of options, and they are designed to be easy to get your head around. Should we include inactive records, yes or no? That kind of thing. `majored_in` and `has_degree_from` are two widgets that have a somewhat more complex set of possibilites, arising from the fact that we can pull degreeholders or attendees, graduates or undergraduates. We'll look at some examples:
+
+`majored_in(womens_studies)`: By default, we look for both graduate and undergraduate degreeholders. Only those who completed a degree in Women's Studies will be included. 
+
+`majored_in(womens_studies, attendees = TRUE)`: By adding `attendees = TRUE`, we include any attendee, undergraduate or graduate, in addition to the degreeholders.
+
+`majored_in(womens_studies, undergraduates = FALSE, attendees = TRUE)`: Here we're only interested in graduate-level Women's Studies majors. We'll ignore undergraduate degreeholders, and, importantly, we'll also ignore undergraduate attendees. We'll include anyone who studied Women's Studies at the graduate level, whether or not they earned a degree. Though it has the same meaning and will have the same results, in cases like this it's helpful to be explicit so you don't get confused later:
+
+```{r, eval = FALSE}
+majored_in(
+    womens_studies,
+    undergraduates = FALSE,
+    graduates = TRUE, # not necessary (it's TRUE by default), but more clear
+    attendees = TRUE
+) 
+```
+
+To get any type of attendee, but ignore degreeholders:
+
+```{r, eval = FALSE}
+majored_in(
+    womens_studies,
+    undergraduates = FALSE,
+    graduates = FALSE,
+    attendees = TRUE
+)
+```
+
+## Workarounds: inactive only
+
+Sometimes the simplicity of a widget interface can make it seem insufficiently flexible. For example, what if we wanted to look at only people who were once in a library portfolio, but no longer are? By looking at `?in_unit_portfolio`, I can see that the unit portfolio widget has an option `include_inactive` which is `FALSE` by default, but there is no  `include_active` or any such option. I can do `in_unit_portfolio(library, include_inactive = TRUE)`, but that will include people who are still in a Library portfolio. 
+
+In order to get around this limitation, I'll have to get a little creative. I'll pull anyone in the library portfolio, whether active or inactive, but then I'll exclude those who are only in an active portfolio:
+
+```{r}
+# first define what it means to have ever been in a library portfolio
+current_or_former = in_unit_portfolio(library, include_inactive = TRUE)
+
+# now define being in a "current" portfolio
+# note that include_inactive = FALSE is not necessary here, 
+# since that is the default setting for that argument, but 
+# i include it here because it makes my intent more clear
+current = in_unit_portfolio(library, include_inactive = FALSE)
+
+# to find only the former portfolio:
+former = current_or_former %but_not% current
+```
+
+This little trick is similar to the one we use in the [LYBUNT example](#ex-lybunt). 

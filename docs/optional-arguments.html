@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="ex-recent-band-parents.html">
-<link rel="next" href="test-cdw.html">
+<link rel="prev" href="matrix-bot.html">
+<link rel="next" href="higher-order-widgets.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -211,70 +211,83 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="ex-near-builder" class="section level1">
-<h1><span class="header-section-number">14</span> Nearing Builder of Berkeley Status</h1>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># always begin by loading the disco engine if it isn&#39;t already loaded</span>
-<span class="kw">library</span>(discoveryengine)</code></pre></div>
-<p>A household is designated a “Builder of Berkeley” when they have donated at least $1 Million lifetime to Berkeley. That status comes with recognition and other perks, so it’s valuable to be aware of households who are nearing that level, as we can then craft solicitations that would push the household into Builder status.</p>
-<div id="defining-close" class="section level2">
-<h2><span class="header-section-number">14.1</span> Defining close</h2>
-<p>For this example, I’ll use $850,000 as the definition of “close” to the $1 Million Builder level. So we’re trying to find households who have given at least $850,000, but not over $1 Million.</p>
-<p><a href="working-with-widgets.html#use-defaults">Recall that</a> the giving widgets, when used without any area or department codes, look at giving anywhere on campus (which is what we want).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># B.O.B. is a lifetime recognition. Pull lifetime giving by not using the </span>
-<span class="co"># date range in the gave_to_area widget</span>
-nearly_builder =<span class="st"> </span><span class="kw">gave_to_area</span>(<span class="dt">at_least =</span> <span class="dv">850000</span>)</code></pre></div>
-<p>To exclude those who are already over $1M (who are already Builders), I first need to identify them:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">already_builder =<span class="st"> </span><span class="kw">gave_to_area</span>(<span class="dt">at_least =</span> <span class="dv">1000000</span>)</code></pre></div>
-<p>Now, I want to find everyone who satisfies <code>nearly_builder</code> but are not <code>already_builder</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">prospect_list =<span class="st"> </span>nearly_builder %but_not%<span class="st"> </span>already_builder</code></pre></div>
-<p>Let’s see what we have!</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">display</span>(prospect_list)</code></pre></div>
-<pre><code>## # A tibble: 57 × 1
-##    entity_id
-##        &lt;dbl&gt;
-## 1        566
-## 2       1347
-## 3       8481
-## 4       8872
-## 5       9763
-## 6      10342
-## 7      10688
-## 8      12207
-## 9      15771
-## 10     17583
-## # ... with 47 more rows</code></pre>
+<div id="optional-arguments" class="section level1">
+<h1><span class="header-section-number">8</span> Optional arguments</h1>
+<p>As we saw in <a href="working-with-widgets.html#detailed-controls">Working with widgets</a>, many widgets have optional arguments that provide fine-grained control. You can always view the full documentation for a widget, including all of its arguments, by using the built-in help (e.g. <code>?majored_in</code>). We are able to make these arguments optional because widgets come pre-configured with default settings for these arguments (the default settings are also explained in the help).</p>
+<div id="opt-events" class="section level2">
+<h2><span class="header-section-number">8.1</span> Event invitees and attendees</h2>
+<p>For example, absent any additional instructions, <code>attended_event</code> will exclude anyone who was invited but did not attend the specified events. So to create a definition of people who attended CNR’s “Re-discover ESPM” event:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">attended_event</span>(<span class="dv">2770</span>)</code></pre></div>
+<pre><code>## LISTBUILDER DEFINITION (type: entity_id)
+## .   source: d_bio_activity_mv.entity_id (entity_id)
+## .   logic: 
+## .   .   activity_code IN &#39;2770&#39;
+## .   .   activity_participation_code IN (&#39;P&#39;, &#39;ST&#39;, &#39;SP&#39;, &#39;V&#39;, &#39;H&#39;, &#39;S&#39;, &#39;C&#39;, &#39;KN&#39;, &#39;MD&#39;, &#39;E&#39;)</code></pre>
+<p>Since I did not specify otherwise, that definition will only pull in those who actually attended, not those who were merely invited. If I were interested not only in those who actually attended, but also anyone who was merely invited (this can be useful because it indicates that a person was at least considered an invite-worthy prospect), I would add <code>include_non_attendees = TRUE</code> to my specification:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">attended_event</span>(<span class="dv">2770</span>, <span class="dt">include_non_attendees =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<pre><code>## LISTBUILDER DEFINITION (type: entity_id)
+## .   source: d_bio_activity_mv.entity_id (entity_id)
+## .   logic: 
+## .   .   activity_code IN &#39;2770&#39;
+## .   .   activity_participation_code IN (&#39;P&#39;, &#39;ST&#39;, &#39;SP&#39;, &#39;V&#39;, &#39;H&#39;, &#39;S&#39;, &#39;C&#39;, &#39;KN&#39;, &#39;MD&#39;, &#39;E&#39;, &#39;ID&#39;, &#39;RG&#39;, &#39;NS&#39;)</code></pre>
+<p>If you look closely at the printed output from each of those defintions, in the <code>logic</code> section, you’ll notice slightly different lists of codes included where it says <code>activity_participation_code IN ...</code>. In fact, the latter includes the extra codes <code>ID</code> (for “Invited but did not attend”), <code>RG</code> (“Regrets”), and <code>NS</code> (“No Show”).</p>
 </div>
-<div id="householding-1" class="section level2">
-<h2><span class="header-section-number">14.2</span> Householding</h2>
-<p>A lot of individuals in <code>prospect_list</code> are married to each other, but Builder of Berkeley is a household recognition. If I’m going to run the Prospect Pool Spreadsheet, this doesn’t really matter since that report automatically households, but otherwise I’d like to household the results (this will also help in getting an accurate count). By checking <code>?display</code> I see that deceased people are removed by default (which is what I want in this case), but that householding is not done by default. To enable householding:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">display</span>(prospect_list, <span class="dt">household =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<pre><code>## # A tibble: 43 × 1
-##    entity_id
-##        &lt;dbl&gt;
-## 1       9763
-## 2     508590
-## 3       8872
-## 4      15771
-## 5     132374
-## 6     420352
-## 7     653365
-## 8       1346
-## 9      10342
-## 10     22996
-## # ... with 33 more rows</code></pre>
+<div id="date-ranges" class="section level2">
+<h2><span class="header-section-number">8.2</span> Date ranges</h2>
+<p>A number of widgets, including all of the giving-related widgets as well as degree/major widgets, have two optional arguments, called <code>from</code> and <code>to</code>, to specify a date range. Their being optional means that you can specify none, just one, or both of the <code>from</code> and <code>to</code> arguments, resulting in the following behaviors:</p>
+<ul>
+<li>None: Dates will not be considered at all. So for example, <code>gave_to_area(chemistry)</code> will look at people’s entire lifetime of giving for any gifts to the College of Chemistry</li>
+<li>Only <code>from</code>: The date range will be considered open-ended on the right (future) side, but closed on the left (past). So <code>gave_to_area(chemistry, from = 20010101)</code> will look for anyone who has given to the College of Chemistry since the beginning of the year 2001, ignoring any giving that happened earlier than that.</li>
+<li>Only <code>to</code>: The date range will be considered open-ended on the left (past), but closed on the right (future). So <code>gave_to_area(chemistry, to = 20080630)</code> will consider any giving on or before June 30, 2008, ignoring any giving that happened after that date.</li>
+<li>Both: Just a daterange. <code>gave_to_area(chemistry, from = 20010101, to = 20080630)</code> will look for giving to the College of Chemistry between January 1, 2001 and June 30, 2008.</li>
+</ul>
+</div>
+<div id="graduate-undergraduate-attendee" class="section level2">
+<h2><span class="header-section-number">8.3</span> Graduate, undergraduate, attendee</h2>
+<p>For the most part, widgets have just a small number of options, and they are designed to be easy to get your head around. Should we include inactive records, yes or no? That kind of thing. <code>majored_in</code> and <code>has_degree_from</code> are two widgets that have a somewhat more complex set of possibilites, arising from the fact that we can pull degreeholders or attendees, graduates or undergraduates. We’ll look at some examples:</p>
+<p><code>majored_in(womens_studies)</code>: By default, we look for both graduate and undergraduate degreeholders. Only those who completed a degree in Women’s Studies will be included.</p>
+<p><code>majored_in(womens_studies, attendees = TRUE)</code>: By adding <code>attendees = TRUE</code>, we include any attendee, undergraduate or graduate, in addition to the degreeholders.</p>
+<p><code>majored_in(womens_studies, undergraduates = FALSE, attendees = TRUE)</code>: Here we’re only interested in graduate-level Women’s Studies majors. We’ll ignore undergraduate degreeholders, and, importantly, we’ll also ignore undergraduate attendees. We’ll include anyone who studied Women’s Studies at the graduate level, whether or not they earned a degree. Though it has the same meaning and will have the same results, in cases like this it’s helpful to be explicit so you don’t get confused later:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">majored_in</span>(
+    womens_studies,
+    <span class="dt">undergraduates =</span> <span class="ot">FALSE</span>,
+    <span class="dt">graduates =</span> <span class="ot">TRUE</span>, <span class="co"># not necessary (it&#39;s TRUE by default), but more clear</span>
+    <span class="dt">attendees =</span> <span class="ot">TRUE</span>
+) </code></pre></div>
+<p>To get any type of attendee, but ignore degreeholders:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">majored_in</span>(
+    womens_studies,
+    <span class="dt">undergraduates =</span> <span class="ot">FALSE</span>,
+    <span class="dt">graduates =</span> <span class="ot">FALSE</span>,
+    <span class="dt">attendees =</span> <span class="ot">TRUE</span>
+)</code></pre></div>
+</div>
+<div id="workarounds-inactive-only" class="section level2">
+<h2><span class="header-section-number">8.4</span> Workarounds: inactive only</h2>
+<p>Sometimes the simplicity of a widget interface can make it seem insufficiently flexible. For example, what if we wanted to look at only people who were once in a library portfolio, but no longer are? By looking at <code>?in_unit_portfolio</code>, I can see that the unit portfolio widget has an option <code>include_inactive</code> which is <code>FALSE</code> by default, but there is no <code>include_active</code> or any such option. I can do <code>in_unit_portfolio(library, include_inactive = TRUE)</code>, but that will include people who are still in a Library portfolio.</p>
+<p>In order to get around this limitation, I’ll have to get a little creative. I’ll pull anyone in the library portfolio, whether active or inactive, but then I’ll exclude those who are only in an active portfolio:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># first define what it means to have ever been in a library portfolio</span>
+current_or_former =<span class="st"> </span><span class="kw">in_unit_portfolio</span>(library, <span class="dt">include_inactive =</span> <span class="ot">TRUE</span>)
+
+<span class="co"># now define being in a &quot;current&quot; portfolio</span>
+<span class="co"># note that include_inactive = FALSE is not necessary here, </span>
+<span class="co"># since that is the default setting for that argument, but </span>
+<span class="co"># i include it here because it makes my intent more clear</span>
+current =<span class="st"> </span><span class="kw">in_unit_portfolio</span>(library, <span class="dt">include_inactive =</span> <span class="ot">FALSE</span>)
+
+<span class="co"># to find only the former portfolio:</span>
+former =<span class="st"> </span>current_or_former %but_not%<span class="st"> </span>current</code></pre></div>
+<p>This little trick is similar to the one we use in the <a href="ex-lybunt.html#ex-lybunt">LYBUNT example</a>.</p>
 
 </div>
 </div>
-
-
-
             </section>
 
           </div>
         </div>
       </div>
-<a href="ex-recent-band-parents.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="test-cdw.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+<a href="matrix-bot.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="higher-order-widgets.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
@@ -293,7 +306,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/tarakc02/discodocs/edit/master/80-example-04.Rmd",
+"link": "https://github.com/tarakc02/discodocs/edit/master/35-optional-arguments.Rmd",
 "text": "Edit"
 },
 "download": null,

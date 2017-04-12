@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="ex-recent-band-parents.html">
-<link rel="next" href="test-cdw.html">
+<link rel="prev" href="brainstorm-bot.html">
+<link rel="next" href="optional-arguments.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -211,57 +211,59 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="ex-near-builder" class="section level1">
-<h1><span class="header-section-number">14</span> Nearing Builder of Berkeley Status</h1>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># always begin by loading the disco engine if it isn&#39;t already loaded</span>
+<div id="matrix-bot" class="section level1">
+<h1><span class="header-section-number">7</span> The Matrix Bot</h1>
+<div id="introduction" class="section level2">
+<h2><span class="header-section-number">7.1</span> Introduction</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># as always, i have to make sure the disco engine is loaded</span>
 <span class="kw">library</span>(discoveryengine)</code></pre></div>
-<p>A household is designated a “Builder of Berkeley” when they have donated at least $1 Million lifetime to Berkeley. That status comes with recognition and other perks, so it’s valuable to be aware of households who are nearing that level, as we can then craft solicitations that would push the household into Builder status.</p>
-<div id="defining-close" class="section level2">
-<h2><span class="header-section-number">14.1</span> Defining close</h2>
-<p>For this example, I’ll use $850,000 as the definition of “close” to the $1 Million Builder level. So we’re trying to find households who have given at least $850,000, but not over $1 Million.</p>
-<p><a href="working-with-widgets.html#use-defaults">Recall that</a> the giving widgets, when used without any area or department codes, look at giving anywhere on campus (which is what we want).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># B.O.B. is a lifetime recognition. Pull lifetime giving by not using the </span>
-<span class="co"># date range in the gave_to_area widget</span>
-nearly_builder =<span class="st"> </span><span class="kw">gave_to_area</span>(<span class="dt">at_least =</span> <span class="dv">850000</span>)</code></pre></div>
-<p>To exclude those who are already over $1M (who are already Builders), I first need to identify them:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">already_builder =<span class="st"> </span><span class="kw">gave_to_area</span>(<span class="dt">at_least =</span> <span class="dv">1000000</span>)</code></pre></div>
-<p>Now, I want to find everyone who satisfies <code>nearly_builder</code> but are not <code>already_builder</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">prospect_list =<span class="st"> </span>nearly_builder %but_not%<span class="st"> </span>already_builder</code></pre></div>
-<p>Let’s see what we have!</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">display</span>(prospect_list)</code></pre></div>
-<pre><code>## # A tibble: 57 × 1
-##    entity_id
-##        &lt;dbl&gt;
-## 1        566
-## 2       1347
-## 3       8481
-## 4       8872
-## 5       9763
-## 6      10342
-## 7      10688
-## 8      12207
-## 9      15771
-## 10     17583
-## # ... with 47 more rows</code></pre>
+<p>The <a href="brainstorm-bot.html#brainstorm-bot">brainstorm bot</a> is powered by a simple text search of our code tables. It relies on your search term appearing in the description of a particular code. That’s similar to the sort of search you might encounter on a library website that looks for exact text matches to your search term in the title and perhaps keywords associated with a book. But what if there are relevant facts about (for example) a student activity that are not captured in its name? As a concrete example, if your definition includes music majors, it’s possible (depending on your goals) that you’d also want to take a look at people who had participated in the student group <a href="http://cnmat.berkeley.edu/">CNMAT</a>, which stands for “Center for New Music and Audio Technologies.” But how would you find that? The student activity code for CNMAT is <code>LSCN</code>, and the description that appears in the code table is “CNMAT Users Group.”</p>
+<p>We don’t store longer descriptions or other metadata about student groups the way we do with allocations (which allows us to do <a href="non-entity-widgets.html#searching-fund-text">in-depth searches</a> of fund terms and biographies). The word “music” does not appear in the code table entry for CNMAT, and so this code would slip by both the <a href="working-with-widgets.html#synonym-search">synonym search</a> and the <a href="brainstorm-bot.html#brainstorm-bot">Brainstorm Bot</a> search. Just when we’re about to lose hope, enter the <strong>Matrix Bot</strong>.</p>
+<div class="figure">
+<img src="images/neo.gif" alt="Whoa" />
+<p class="caption">Whoa</p>
 </div>
-<div id="householding-1" class="section level2">
-<h2><span class="header-section-number">14.2</span> Householding</h2>
-<p>A lot of individuals in <code>prospect_list</code> are married to each other, but Builder of Berkeley is a household recognition. If I’m going to run the Prospect Pool Spreadsheet, this doesn’t really matter since that report automatically households, but otherwise I’d like to household the results (this will also help in getting an accurate count). By checking <code>?display</code> I see that deceased people are removed by default (which is what I want in this case), but that householding is not done by default. To enable householding:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">display</span>(prospect_list, <span class="dt">household =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<pre><code>## # A tibble: 43 × 1
-##    entity_id
-##        &lt;dbl&gt;
-## 1       9763
-## 2     508590
-## 3       8872
-## 4      15771
-## 5     132374
-## 6     420352
-## 7     653365
-## 8       1346
-## 9      10342
-## 10     22996
-## # ... with 33 more rows</code></pre>
+</div>
+<div id="what-it-is" class="section level2">
+<h2><span class="header-section-number">7.2</span> What it is</h2>
+<p>The Matrix Bot analyzes an existing Disco Definition and looks for additional codes that might be related. It’s a good way to broaden your search when you’re doing open-ended prospecting. Note that you have to provide it with a Disco Engine definition to start (unlike the Brainstorm Bot, which only requires one or more search terms).</p>
+</div>
+<div id="example" class="section level2">
+<h2><span class="header-section-number">7.3</span> Example</h2>
+<p>We’re interested in finding musicians, so we start with music majors:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">is_musician =<span class="st"> </span><span class="kw">majored_in</span>(music)</code></pre></div>
+<p>But, since this is an open-ended prospecting project, we call up the Matrix Bot to widen the net:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">matrix_bot</span>(is_musician)</code></pre></div>
+<pre><code>## gave_to_department 
+##     MUS: Music
+##     JAZZ: Jazz Ensembles
+##     YMP: Young Musicians Program
+##     AH: Arts &amp; Humanities
+##     UCCE: Choral Ensembles
+## has_affiliation 
+##     MLS1: Chamber Chorus
+##     MLS3: Symphony Orchestra
+##     MLS2: University Chorus
+##     RC35: CAA Cal Band Alumni Association
+## has_interest 
+##     MUS: Music
+## majored_in 
+##     579: Music
+## participated_in 
+##     LSCN: CNMAT Users Group
+##     LSNM: Berkeley New Music Project
+##     LSRE: Repercussions Music Journal
+##     UMUC: Music Connection
+##     MSJZ: UC Jazz Ensembles
+##     URRR: Raza Recruitment &amp; Retention Center
+##     MSMB: UC Marching Band Member
+##     MSCH: UC Choral Ensembles</code></pre>
+<p>As you can see, the Matrix Bot discovered a number of additional avenues for prospecting! As with the <a href="brainstorm-bot.html#brainstorm-bot">Brainstorm Bot</a>, the Matrix Bot results are best thought of as suggestions for further research: not all of the suggestions will be helpful for your particular project, and the best way to proceed is to research and learn more about the codes it suggests, to see if they are relevant to your project.</p>
+</div>
+<div id="how-does-it-work" class="section level2">
+<h2><span class="header-section-number">7.4</span> How does it work?</h2>
+<p>The Matrix Bot looks up entities who match your definition, and then looks for other characteristics they have in common. The theory is that if a lot of people who have characteristic A (example: majored in music) also happen to have characteristic B (participated in CNMAT Users Group), then there’s probably an underlying similarity between characteristic A and B. This approach is closely related to one laid out in the paper <a href="http://www.rci.rutgers.edu/~pmclean/mcleanp_01_920_313_breiger_duality.pdf">“The Duality of Persons and Groups”</a> by Ronald Breiger.</p>
+<p>The name “Matrix Bot,” in addition to evoking some <a href="https://en.wikipedia.org/wiki/The_Matrix">Neo-like magic</a>, is also a nod to the basic linear algebra that the bot uses.</p>
 
 </div>
 </div>
@@ -273,8 +275,8 @@ nearly_builder =<span class="st"> </span><span class="kw">gave_to_area</span>(<s
           </div>
         </div>
       </div>
-<a href="ex-recent-band-parents.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="test-cdw.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+<a href="brainstorm-bot.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="optional-arguments.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
@@ -293,7 +295,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/tarakc02/discodocs/edit/master/80-example-04.Rmd",
+"link": "https://github.com/tarakc02/discodocs/edit/master/31-matrix-bot.Rmd",
 "text": "Edit"
 },
 "download": null,

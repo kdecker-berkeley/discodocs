@@ -1,0 +1,40 @@
+# The Matrix Bot {#matrix-bot}
+
+## Introduction
+
+```{r matrix-loadlib, message = FALSE}
+# as always, i have to make sure the disco engine is loaded
+library(discoveryengine)
+```
+
+The [brainstorm bot](#brainstorm-bot) is powered by a simple text search of our code tables. It relies on your search term appearing in the description of a particular code. That's similar to the sort of search you might encounter on a library website that looks for exact text matches to your search term in the title and perhaps keywords associated with a book. But what if there are relevant facts about (for example) a student activity that are not captured in its name? As a concrete example, if your definition includes music majors, it's possible (depending on your goals) that you'd also want to take a look at people who had participated in the student group [CNMAT](http://cnmat.berkeley.edu/), which stands for "Center for New Music and Audio Technologies." But how would you find that? The student activity code for CNMAT is `LSCN`, and the description that appears in the code table is "CNMAT Users Group." 
+
+We don't store longer descriptions or other metadata about student groups the way we do with allocations (which allows us to do [in-depth searches](#searching-fund-text) of fund terms and biographies). The word "music" does not appear in the code table entry for CNMAT, and so this code would slip by both the [synonym search](#synonym-search) and the [Brainstorm Bot](#brainstorm-bot) search. Just when we're about to lose hope, enter the **Matrix Bot**.
+
+![Whoa](images/neo.gif)
+
+## What it is
+
+The Matrix Bot analyzes an existing Disco Definition and looks for additional codes that might be related. It's a good way to broaden your search when you're doing open-ended prospecting. Note that you have to provide it with a Disco Engine definition to start (unlike the Brainstorm Bot, which only requires one or more search terms).
+
+## Example
+
+We're interested in finding musicians, so we start with music majors:
+
+```{r matrix-music-majors}
+is_musician = majored_in(music)
+```
+
+But, since this is an open-ended prospecting project, we call up the Matrix Bot to widen the net:
+
+```{r matrix-music-matrix}
+matrix_bot(is_musician)
+```
+
+As you can see, the Matrix Bot discovered a number of additional avenues for prospecting! As with the [Brainstorm Bot](#brainstorm-bot), the Matrix Bot results are best thought of as suggestions for further research: not all of the suggestions will be helpful for your particular project, and the best way to proceed is to research and learn more about the codes it suggests, to see if they are relevant to your project.
+
+## How does it work?
+
+The Matrix Bot looks up entities who match your definition, and then looks for other characteristics they have in common. The theory is that if a lot of people who have characteristic A (example: majored in music) also happen to have characteristic B (participated in CNMAT Users Group), then there's probably an underlying similarity between characteristic A and B. This approach is closely related to one laid out in the paper ["The Duality of Persons and Groups"](http://www.rci.rutgers.edu/~pmclean/mcleanp_01_920_313_breiger_duality.pdf) by Ronald Breiger. 
+
+The name "Matrix Bot," in addition to evoking some [Neo-like magic](https://en.wikipedia.org/wiki/The_Matrix), is also a nod to the basic linear algebra that the bot uses. 
