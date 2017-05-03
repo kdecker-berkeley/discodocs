@@ -142,7 +142,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="7.1" data-path="matrix-bot.html"><a href="matrix-bot.html#introduction"><i class="fa fa-check"></i><b>7.1</b> Introduction</a></li>
 <li class="chapter" data-level="7.2" data-path="matrix-bot.html"><a href="matrix-bot.html#what-it-is"><i class="fa fa-check"></i><b>7.2</b> What it is</a></li>
 <li class="chapter" data-level="7.3" data-path="matrix-bot.html"><a href="matrix-bot.html#example"><i class="fa fa-check"></i><b>7.3</b> Example</a></li>
-<li class="chapter" data-level="7.4" data-path="matrix-bot.html"><a href="matrix-bot.html#how-does-it-work"><i class="fa fa-check"></i><b>7.4</b> How does it work?</a></li>
+<li class="chapter" data-level="7.4" data-path="matrix-bot.html"><a href="matrix-bot.html#botstrapping"><i class="fa fa-check"></i><b>7.4</b> Botstrapping</a></li>
+<li class="chapter" data-level="7.5" data-path="matrix-bot.html"><a href="matrix-bot.html#how-does-it-work"><i class="fa fa-check"></i><b>7.5</b> How does it work?</a></li>
 </ul></li>
 <li class="part"><span><b>IV Advanced</b></span></li>
 <li class="chapter" data-level="8" data-path="optional-arguments.html"><a href="optional-arguments.html"><i class="fa fa-check"></i><b>8</b> Optional arguments</a><ul>
@@ -175,12 +176,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="14.1" data-path="ex-near-builder.html"><a href="ex-near-builder.html#defining-close"><i class="fa fa-check"></i><b>14.1</b> Defining close</a></li>
 <li class="chapter" data-level="14.2" data-path="ex-near-builder.html"><a href="ex-near-builder.html#householding-1"><i class="fa fa-check"></i><b>14.2</b> Householding</a></li>
 </ul></li>
+<li class="chapter" data-level="15" data-path="ex-sim-donors.html"><a href="ex-sim-donors.html"><i class="fa fa-check"></i><b>15</b> Donors who aren’t degreeholders</a><ul>
+<li class="chapter" data-level="15.1" data-path="ex-sim-donors.html"><a href="ex-sim-donors.html#why-it-works"><i class="fa fa-check"></i><b>15.1</b> Why it works</a></li>
+</ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="test-cdw.html"><a href="test-cdw.html"><i class="fa fa-check"></i><b>A</b> Test your database set up</a><ul>
 <li class="chapter" data-level="A.1" data-path="test-cdw.html"><a href="test-cdw.html#test-your-connection"><i class="fa fa-check"></i><b>A.1</b> Test your connection</a></li>
 <li class="chapter" data-level="A.2" data-path="test-cdw.html"><a href="test-cdw.html#opening-rstudio"><i class="fa fa-check"></i><b>A.2</b> Opening RStudio</a></li>
-<li class="chapter" data-level="A.3" data-path="test-cdw.html"><a href="test-cdw.html#installing-getcdw"><i class="fa fa-check"></i><b>A.3</b> Installing getcdw</a></li>
-<li class="chapter" data-level="A.4" data-path="test-cdw.html"><a href="test-cdw.html#testing-getcdw"><i class="fa fa-check"></i><b>A.4</b> Testing getcdw</a></li>
+<li class="chapter" data-level="A.3" data-path="test-cdw.html"><a href="test-cdw.html#fixing-the-default-package-installation-directory"><i class="fa fa-check"></i><b>A.3</b> Fixing the default package installation directory</a></li>
+<li class="chapter" data-level="A.4" data-path="test-cdw.html"><a href="test-cdw.html#installing-getcdw"><i class="fa fa-check"></i><b>A.4</b> Installing getcdw</a></li>
+<li class="chapter" data-level="A.5" data-path="test-cdw.html"><a href="test-cdw.html#testing-getcdw"><i class="fa fa-check"></i><b>A.5</b> Testing getcdw</a></li>
 </ul></li>
 <li class="chapter" data-level="B" data-path="cheat-sheet.html"><a href="cheat-sheet.html"><i class="fa fa-check"></i><b>B</b> Cheat Sheet</a><ul>
 <li class="chapter" data-level="B.1" data-path="cheat-sheet.html"><a href="cheat-sheet.html#getting-started"><i class="fa fa-check"></i><b>B.1</b> Getting started</a></li>
@@ -226,7 +231,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="what-it-is" class="section level2">
 <h2><span class="header-section-number">7.2</span> What it is</h2>
-<p>The Matrix Bot analyzes an existing Disco Definition and looks for additional codes that might be related. It’s a good way to broaden your search when you’re doing open-ended prospecting. Note that you have to provide it with a Disco Engine definition to start (unlike the Brainstorm Bot, which only requires one or more search terms).</p>
+<p>The Matrix Bot analyzes an existing Disco Definition and looks for additional codes that might be related. It’s a good way to broaden your search when you’re doing open-ended prospecting. If the Brainstorm Bot is like looking up a book in the card catalog, then the Matrix Bot is like walking through the stacks to the shelves where your book is located, and glancing at all of other books that have been shelved in the same general location.</p>
+<p>Note that you have to provide it with a Disco Engine definition to start (unlike the Brainstorm Bot, which only requires one or more search terms).</p>
 </div>
 <div id="example" class="section level2">
 <h2><span class="header-section-number">7.3</span> Example</h2>
@@ -260,8 +266,98 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ##     MSCH: UC Choral Ensembles</code></pre>
 <p>As you can see, the Matrix Bot discovered a number of additional avenues for prospecting! As with the <a href="brainstorm-bot.html#brainstorm-bot">Brainstorm Bot</a>, the Matrix Bot results are best thought of as suggestions for further research: not all of the suggestions will be helpful for your particular project, and the best way to proceed is to research and learn more about the codes it suggests, to see if they are relevant to your project.</p>
 </div>
+<div id="botstrapping" class="section level2">
+<h2><span class="header-section-number">7.4</span> Botstrapping</h2>
+<p>Recall that the brainstorm bot returns a valid Disco Engine definition (more precisely, it returns the result of combining all of its suggestions using <code>%or%</code>). While we don’t often use that fact (it’s much more common to find yourself copying/pasting from the brainstorm bot results to select the widgets you want to use), it does lend to itself to a nice trick. We can use the matrix bot on brainstorm bot results to quickly and effortlessly identify a number of prospecting options. For example, if we’re prospecting for the Chicano Studies department, but don’t have a great idea where to start:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># i use the wildcard * to search for both &quot;chicano&quot; and &quot;chicana&quot;</span>
+<span class="kw">matrix_bot</span>(<span class="kw">brainstorm_bot</span>(<span class="st">&quot;chican*&quot;</span>))</code></pre></div>
+<pre><code>## gave_to_department 
+##     CHICANO: Chicano Studies Program
+##     MSGC: Multiculture, Sex &amp; Gender Ctrs
+##     ETHNIC: Ethnic Studies
+##     TRSP: Transfer/ReEntry/Parent Ctr
+##     SAGE: SAGE Scholars Program
+##     CEEE: Educ Equity &amp; Excellence Centers
+##     VCEIO: Equity &amp; Inclusion: VC&#39;s Office
+##     SLC: Student Learning Center
+##     CLL: Campus Life/Leadership
+##     CEP: Educational Partnerships Center
+##     PDP: Professional Develpmt Pgm
+##     OGB: Order of the Golden Bear
+##     SW: Social Welfare
+## has_affiliation 
+##     RC15: CAA Chicano Latino Alumni Assoc Nor Cal
+##     RC5: *CAA La Raza Alumni Club-Defunct
+##     MA17: TAAP/KASP Scholarship Interviewer
+##     MA5: CAA Student Recruitment/Outreach Pgm
+## has_interest 
+##     MEX: Mexican-American/Chicano Interest
+##     USL: U.S. Latino Interests
+##     LAT: Latin American Interests
+## majored_in 
+##     160: Chicano Studies
+##     919: Spanish Option D: Hispanic
+##     360: Ethnic Studies
+##     907: Spanish Option C2: Latin American
+##     9A1: Gender &amp; Women&#39;s Studies
+##     498: Latin American Studies
+##     882: Spanish
+##     045: American Studies
+## participated_in 
+##     LSCI: Chicano Studies Undergrad Assoc
+##     EDCH: Chicano Latina Arch Stdnt Assn
+##     LSCL: Chicano/Latino Political Sci Assoc
+##     UCHE: Chicano/Latinos In Health Education
+##     UMEC: Movimiento Estud Chicano de Aztlan
+##     GLTA: Lambda Theta Alpha Latin Sorority
+##     UMAL: Mujeres Activas En Letras (MALCS)
+##     UXIN: Xinaxtli
+##     ULPL: Latino Pre-Law Society
+##     ULV: La Voz
+##     UTRE: TRENZA
+##     GLTP: Lambda Theta Phi Latin Fraternity
+##     UHAU: Hermanas Unidas
+##     ULAS: Latin American Student Association
+##     GLTN: Lambda Theta Nu Sorority
+##     UHSF: Hispanic Scholarship Fund Scholars
+##     GGZA: Gamma Zeta Alpha
+##     UGFR: Grupo Folklorico Reflejos De Mexico
+##     GSPA: Sigma Pi Alpha Sorority
+##     UMCH: MEChXA
+##     UHU: Hermanos Unidos
+##     UESIT: Summer Abroad - Italy
+##     UDUL: DULCE-Cmnty Diabetes Educ &amp; Prev
+##     UYQU: Young Queers United 4 Empow (Y Que)
+##     UEGI: Global Internship
+##     ULF: La Familia
+##     URRR: Raza Recruitment &amp; Retention Center
+##     BULS: Latino Business Student Association
+##     URS: RISE-Rising Immigrant Sch Thru Educ
+##     UHES: Hispanic Engineers &amp; Scientists
+##     UIAM: IAM Outreach Program
+##     UESMX: Summer Abroad - Mexico
+##     ULL: La Llorona
+##     UDCP: Destination: College Program
+##     EAMEX: Education Abroad Program - Mexico
+##     EID1: DC Advising Corps
+##     EABRA: Education Abroad Program - Brazil
+##     RHRV: Rochdale Village Co-Op Resident
+##     LWLS: La Raza Law Students Association
+##     UBUI: BUILD Literacy Program
+##     EIP1: PDP Calculus Intensive
+##     EIR6: TRSP Transfer Student Services
+##     LRAC: La Raza Alumni Chapter
+##     USBR: Summer Bridge Program Participant
+##     LTAD: Latino Alumni Directory
+##     EIT: TAP Transfer Alliance Project
+##     EISA: Educational Opportunity Program
+##     UESSP: Summer Abroad - Spain
+##     LWLR: Berkeley La Raza Law Journal
+##     UBON: Bonner Leaders
+##     RHFW: Fenwick Weavers&#39; Village Co-Op</code></pre>
+</div>
 <div id="how-does-it-work" class="section level2">
-<h2><span class="header-section-number">7.4</span> How does it work?</h2>
+<h2><span class="header-section-number">7.5</span> How does it work?</h2>
 <p>The Matrix Bot looks up entities who match your definition, and then looks for other characteristics they have in common. The theory is that if a lot of people who have characteristic A (example: majored in music) also happen to have characteristic B (participated in CNMAT Users Group), then there’s probably an underlying similarity between characteristic A and B. This approach is closely related to one laid out in the paper <a href="http://www.rci.rutgers.edu/~pmclean/mcleanp_01_920_313_breiger_duality.pdf">“The Duality of Persons and Groups”</a> by Ronald Breiger.</p>
 <p>The name “Matrix Bot,” in addition to evoking some <a href="https://en.wikipedia.org/wiki/The_Matrix">Neo-like magic</a>, is also a nod to the basic linear algebra that the bot uses.</p>
 

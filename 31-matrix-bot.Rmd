@@ -15,7 +15,9 @@ We don't store longer descriptions or other metadata about student groups the wa
 
 ## What it is
 
-The Matrix Bot analyzes an existing Disco Definition and looks for additional codes that might be related. It's a good way to broaden your search when you're doing open-ended prospecting. Note that you have to provide it with a Disco Engine definition to start (unlike the Brainstorm Bot, which only requires one or more search terms).
+The Matrix Bot analyzes an existing Disco Definition and looks for additional codes that might be related. It's a good way to broaden your search when you're doing open-ended prospecting. If the Brainstorm Bot is like looking up a book in the card catalog, then the Matrix Bot is like walking through the stacks to the shelves where your book is located, and glancing at all of other books that have been shelved in the same general location. 
+
+Note that you have to provide it with a Disco Engine definition to start (unlike the Brainstorm Bot, which only requires one or more search terms).
 
 ## Example
 
@@ -27,11 +29,20 @@ is_musician = majored_in(music)
 
 But, since this is an open-ended prospecting project, we call up the Matrix Bot to widen the net:
 
-```{r matrix-music-matrix}
+```{r matrix-music-matrix, cache = TRUE}
 matrix_bot(is_musician)
 ```
 
 As you can see, the Matrix Bot discovered a number of additional avenues for prospecting! As with the [Brainstorm Bot](#brainstorm-bot), the Matrix Bot results are best thought of as suggestions for further research: not all of the suggestions will be helpful for your particular project, and the best way to proceed is to research and learn more about the codes it suggests, to see if they are relevant to your project.
+
+## Botstrapping
+
+Recall that the brainstorm bot returns a valid Disco Engine definition (more precisely, it returns the result of combining all of its suggestions using `%or%`). While we don't often use that fact (it's much more common to find yourself copying/pasting from the brainstorm bot results to select the widgets you want to use), it does lend to itself to a nice trick. We can use the matrix bot on brainstorm bot results to quickly and effortlessly identify a number of prospecting options. For example, if we're prospecting for the Chicano Studies department, but don't have a great idea where to start:
+
+```{r matrix-chicanstar-studies, cache = TRUE}
+# i use the wildcard * to search for both "chicano" and "chicana"
+matrix_bot(brainstorm_bot("chican*"))
+```
 
 ## How does it work?
 

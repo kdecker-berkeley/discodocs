@@ -32,7 +32,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="ex-near-builder.html">
+<link rel="prev" href="ex-sim-donors.html">
 <link rel="next" href="cheat-sheet.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
@@ -142,7 +142,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="7.1" data-path="matrix-bot.html"><a href="matrix-bot.html#introduction"><i class="fa fa-check"></i><b>7.1</b> Introduction</a></li>
 <li class="chapter" data-level="7.2" data-path="matrix-bot.html"><a href="matrix-bot.html#what-it-is"><i class="fa fa-check"></i><b>7.2</b> What it is</a></li>
 <li class="chapter" data-level="7.3" data-path="matrix-bot.html"><a href="matrix-bot.html#example"><i class="fa fa-check"></i><b>7.3</b> Example</a></li>
-<li class="chapter" data-level="7.4" data-path="matrix-bot.html"><a href="matrix-bot.html#how-does-it-work"><i class="fa fa-check"></i><b>7.4</b> How does it work?</a></li>
+<li class="chapter" data-level="7.4" data-path="matrix-bot.html"><a href="matrix-bot.html#botstrapping"><i class="fa fa-check"></i><b>7.4</b> Botstrapping</a></li>
+<li class="chapter" data-level="7.5" data-path="matrix-bot.html"><a href="matrix-bot.html#how-does-it-work"><i class="fa fa-check"></i><b>7.5</b> How does it work?</a></li>
 </ul></li>
 <li class="part"><span><b>IV Advanced</b></span></li>
 <li class="chapter" data-level="8" data-path="optional-arguments.html"><a href="optional-arguments.html"><i class="fa fa-check"></i><b>8</b> Optional arguments</a><ul>
@@ -175,12 +176,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="14.1" data-path="ex-near-builder.html"><a href="ex-near-builder.html#defining-close"><i class="fa fa-check"></i><b>14.1</b> Defining close</a></li>
 <li class="chapter" data-level="14.2" data-path="ex-near-builder.html"><a href="ex-near-builder.html#householding-1"><i class="fa fa-check"></i><b>14.2</b> Householding</a></li>
 </ul></li>
+<li class="chapter" data-level="15" data-path="ex-sim-donors.html"><a href="ex-sim-donors.html"><i class="fa fa-check"></i><b>15</b> Donors who aren’t degreeholders</a><ul>
+<li class="chapter" data-level="15.1" data-path="ex-sim-donors.html"><a href="ex-sim-donors.html#why-it-works"><i class="fa fa-check"></i><b>15.1</b> Why it works</a></li>
+</ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="test-cdw.html"><a href="test-cdw.html"><i class="fa fa-check"></i><b>A</b> Test your database set up</a><ul>
 <li class="chapter" data-level="A.1" data-path="test-cdw.html"><a href="test-cdw.html#test-your-connection"><i class="fa fa-check"></i><b>A.1</b> Test your connection</a></li>
 <li class="chapter" data-level="A.2" data-path="test-cdw.html"><a href="test-cdw.html#opening-rstudio"><i class="fa fa-check"></i><b>A.2</b> Opening RStudio</a></li>
-<li class="chapter" data-level="A.3" data-path="test-cdw.html"><a href="test-cdw.html#installing-getcdw"><i class="fa fa-check"></i><b>A.3</b> Installing getcdw</a></li>
-<li class="chapter" data-level="A.4" data-path="test-cdw.html"><a href="test-cdw.html#testing-getcdw"><i class="fa fa-check"></i><b>A.4</b> Testing getcdw</a></li>
+<li class="chapter" data-level="A.3" data-path="test-cdw.html"><a href="test-cdw.html#fixing-the-default-package-installation-directory"><i class="fa fa-check"></i><b>A.3</b> Fixing the default package installation directory</a></li>
+<li class="chapter" data-level="A.4" data-path="test-cdw.html"><a href="test-cdw.html#installing-getcdw"><i class="fa fa-check"></i><b>A.4</b> Installing getcdw</a></li>
+<li class="chapter" data-level="A.5" data-path="test-cdw.html"><a href="test-cdw.html#testing-getcdw"><i class="fa fa-check"></i><b>A.5</b> Testing getcdw</a></li>
 </ul></li>
 <li class="chapter" data-level="B" data-path="cheat-sheet.html"><a href="cheat-sheet.html"><i class="fa fa-check"></i><b>B</b> Cheat Sheet</a><ul>
 <li class="chapter" data-level="B.1" data-path="cheat-sheet.html"><a href="cheat-sheet.html#getting-started"><i class="fa fa-check"></i><b>B.1</b> Getting started</a></li>
@@ -296,20 +301,41 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>Click “Ok” twice. You may be prompted to restart the program. If so, go ahead and do so.</li>
 </ol>
 </div>
+<div id="fixing-the-default-package-installation-directory" class="section level2">
+<h2><span class="header-section-number">A.3</span> Fixing the default package installation directory</h2>
+<p>By default, R will install packages to a local directory. While this doesn’t cause any immediate problems, it does mean that all of your packages will disappear every time IST recomposes our machines. To avoid having to re-install everything every few weeks, we can change the default package installation directory. You can do this by copying and pasting the following commands into your R console:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># the first part sets up the new package directory</span>
+package_dir &lt;-<span class="st"> &quot;P:/R/win-library/packages&quot;</span>
+if (!<span class="kw">dir.exists</span>(package_dir)) <span class="kw">dir.create</span>(package_dir, <span class="dt">recursive =</span> <span class="ot">TRUE</span>)
+
+<span class="co"># then make a configuration file that notifies R of the new package directory</span>
+env_file &lt;-<span class="st"> &quot;P:/.Renviron&quot;</span>
+if (!<span class="kw">file.exists</span>(env_file)) <span class="kw">file.create</span>(env_file)
+
+<span class="co"># and add the new location to the configuration file</span>
+<span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">R_LIBS_USER=&#39;&quot;</span>, package_dir, <span class="st">&quot;&#39;&quot;</span>, 
+    <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>, <span class="dt">file =</span> env_file, <span class="dt">append =</span> <span class="ot">TRUE</span>)
+
+<span class="co"># we also update the current R session about the new set up</span>
+<span class="co"># (this is so we don&#39;t have to restart for the changes to take effect)</span>
+<span class="kw">do.call</span>(Sys.setenv, <span class="kw">list</span>(<span class="dt">R_LIBS_USER =</span> package_dir))
+
+<span class="co"># finally we update where R will look when loading a package</span>
+<span class="kw">.libPaths</span>(package_dir)</code></pre></div>
+</div>
 <div id="installing-getcdw" class="section level2">
-<h2><span class="header-section-number">A.3</span> Installing getcdw</h2>
-<p>Before you can install getcdw, you’ll need to install a few packages. This can be done in a couple of ways, but perhaps the easiest is to enter the following into the console:</p>
+<h2><span class="header-section-number">A.4</span> Installing getcdw</h2>
+<p>Before you can install getcdw, you’ll need to install a few packages. Once again, just copy and paste the following into the console:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)
 <span class="kw">install.packages</span>(<span class="st">&quot;dplyr&quot;</span>, <span class="dt">dependencies =</span> <span class="ot">TRUE</span>)
 <span class="kw">install.packages</span>(<span class="st">&quot;S:/UR_Everyone/Rohit_Saini/ROracle/ROracle_1.2-2.zip&quot;</span>, <span class="dt">repos =</span> <span class="ot">NULL</span>)</code></pre></div>
-<p>You’ll then need to run this script. To do this, simply press enter after each line. There may be a pause for a few seconds during installation of the packages. A little stop sign will appear in the upper right corner of the console while the script is running. Once this stop sign is gone, you should get an output message that tells you that each package has been successfully unpacked and where the downloaded packages are stored. You’re now ready to move on to the next line.</p>
-<p>Tip: Copy and paste each line of the above code directly into your console and press enter after each time. This will avoid typos and will help narrow down what went wrong if something doesn’t work.</p>
-<p>Now go ahead and use devtools to install getcdw. You’ll need to run code that looks like this:</p>
+<p>There may be a pause for a few seconds during installation of the packages. A little stop sign will appear in the upper right corner of the console while the script is running. Once this stop sign is gone, you should get an output message that tells you that each package has been successfully unpacked and where the downloaded packages are stored. You’re now ready to move on to the next line.</p>
+<p>Now go ahead and use devtools to install getcdw. You’ll need to run this line of code:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools::<span class="kw">install_github</span>(<span class="st">&quot;tarakc02/getcdw&quot;</span>)</code></pre></div>
 <p>You should get a message that getcdw has been installed. Again there may be a pause while the package is being installed.</p>
 </div>
 <div id="testing-getcdw" class="section level2">
-<h2><span class="header-section-number">A.4</span> Testing getcdw</h2>
+<h2><span class="header-section-number">A.5</span> Testing getcdw</h2>
 <p>Let’s go ahead and load the library for getcdw:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(getcdw)</code></pre></div>
 <p>Copy the above into your console and press enter. It will appear that nothing happened, but that actually means everything is fine.</p>
@@ -355,7 +381,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
-<a href="ex-near-builder.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="ex-sim-donors.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="cheat-sheet.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

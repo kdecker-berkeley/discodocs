@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="non-entity-widgets.html">
-<link rel="next" href="ex-lybunt.html">
+<link rel="prev" href="ex-near-builder.html">
+<link rel="next" href="test-cdw.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -216,87 +216,43 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="ex-political-economy" class="section level1">
-<h1><span class="header-section-number">11</span> Political economy list</h1>
-<p>Here’s the request:</p>
+<div id="ex-sim-donors" class="section level1">
+<h1><span class="header-section-number">15</span> Donors who aren’t degreeholders</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># i always begin by loading the disco engine if it isn&#39;t already loaded</span>
+<span class="kw">library</span>(discoveryengine)</code></pre></div>
+<p>We have what looks like an easy request:</p>
 <blockquote>
-<p>Can you please generate a prospect list for me that includes econ, political economy, poli sci and business grads. And also include donors to Haas Center, Goldman School and CEGA?</p>
+<p>Find donors to the School of Information who are not SIM degree holders.</p>
 </blockquote>
-<p>I start with the part I already know – business grads.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(discoveryengine)
-is_business_grad =<span class="st"> </span><span class="kw">has_degree_from</span>(business)</code></pre></div>
-<p>I believe Economics, Political Economy, and Political Science are all majors. I don’t know major codes, but most widgets have a built-in lookup feature:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">majored_in</span>(?econ)</code></pre></div>
-<pre><code>##                          synonym   code
-##           pol_econ_of_indust_soc    697
-##        pol_econ_of_nat_resources    698
-##          urban_secondary_english  24903
-##                political_economy    2B2
-##                        economics    246
-##        environmental_econ_policy    779
-##           agricultural_economics    024
-##                  economics_ma_jd 246501
-##    household_arts_home_economics   373X
-##                   law_jd_econ_ma 501246
-##  agricultural_resource_economics    034</code></pre>
-<p>Ok, looks like <code>economics</code> and <code>political_economy</code> should definitely be included. What about political science?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">majored_in</span>(?political)</code></pre></div>
-<pre><code>##            synonym code
-##  political_economy  2B2
-##  political_science  699</code></pre>
-<p>So now I have what I need for the other graduates:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">is_poli_econ_grad =<span class="st"> </span><span class="kw">majored_in</span>(political_science, political_economy, economics)</code></pre></div>
-<p>Now I need to find donors to the Haas Center, Goldman School, and CEGA. Some follow-up clarified that the “Haas Center” here is referring to the <a href="http://haasinstitute.berkeley.edu/">Haas Institute for a fair and inclusive society</a> . I don’t know if that is an area of giving, a department, a fund? So I use the brainstorm bot. From experience, I know that “institute” sometimes appears in CADS as the full word “institute” and is sometimes abbreviated to something like “inst.” I’ll use the wildcard (*) ability in the brainstorm bot to make sure I capture all possibilities:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">brainstorm_bot</span>(<span class="st">&quot;haas inst*&quot;</span>)</code></pre></div>
-<pre><code>## attended_event 
-##     2843: Haas Institutional Analysis Workshop
-##     4340: Haas Institutional Analysis Workshop
-## gave_to_department 
-##     HDRC: Haas Inst/Fair &amp; Inclusive Soc
-## has_affiliation 
-##     BUA18: Haas Inst of Mgmt, Innovation &amp; Org IMI
-##     BUBSI: Haas Institute for Bus &amp; Social Impact
-##     BUIBI: Haas Institute for Business Innovation</code></pre>
-<p>Ah ha! It’s the department.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">is_haas_ctr_donor =<span class="st"> </span><span class="kw">gave_to_department</span>(HDRC)</code></pre></div>
-<p>CEGA is the “effective global action center.” Once again, I’ll ask the brainstorm bot for suggestions:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">brainstorm_bot</span>(<span class="st">&quot;global action&quot;</span>)</code></pre></div>
-<pre><code>## gave_to_department 
-##     CEGA: Effective Global Action Center</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">is_cega_donor =<span class="st"> </span><span class="kw">gave_to_department</span>(CEGA)</code></pre></div>
-<p>I already happen to know that the Goldman School is an area of giving, so:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">is_goldman_donor =<span class="st"> </span><span class="kw">gave_to_area</span>(public_policy)</code></pre></div>
-<p>The request was for people who meet any of the given criteria, so I’ll use <code>%or%</code> to combine them:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">prospect_list =<span class="st"> </span>is_business_grad %or%<span class="st"> </span>
-<span class="st">    </span>is_poli_econ_grad %or%
-<span class="st">    </span>is_haas_ctr_donor %or%
-<span class="st">    </span>is_cega_donor %or%
-<span class="st">    </span>is_goldman_donor
+<p>Having already looked up the codes, you immediately think:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">gave_to_area</span>(SIM) %but_not%<span class="st"> </span><span class="kw">has_degree_from</span>(LI)</code></pre></div>
+<p>Unfortunately, as you begin reviewing the results, you notice that you produced a list that includes spouses of degree holders who received credit for household gifts to SIM.</p>
+<p>What we actually want here is not “donors who are not degreeholders” but rather “donor households that are not degree-holding households.” Here “donor households” has the standard meaning, and “degree-holding household” means a household where at least one of the spouses has a degree.</p>
+<p>So instead:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">non_alum_donors =<span class="st"> </span>
+<span class="st">    </span><span class="kw">household</span>(<span class="kw">gave_to_area</span>(SIM)) %but_not%
+<span class="st">    </span><span class="kw">household</span>(<span class="kw">has_degree_from</span>(LI))</code></pre></div>
+<p>To make it even more clear what it is we’re doing with this definition, it helps to re-write it with more descriptive names:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">is_donor_hh =<span class="st"> </span><span class="kw">household</span>(<span class="kw">gave_to_area</span>(SIM))
+is_degree_hh =<span class="st"> </span><span class="kw">household</span>(<span class="kw">has_degree_from</span>(LI))
 
-<span class="kw">display</span>(prospect_list)</code></pre></div>
-<pre><code>## # A tibble: 83,461 x 1
-##    entity_id
-##        &lt;dbl&gt;
-## 1          2
-## 2          5
-## 3         13
-## 4         16
-## 5         28
-## 6         51
-## 7         78
-## 8         81
-## 9         98
-## 10       109
-## # ... with 83,451 more rows</code></pre>
+non_alum_donor_hh =<span class="st"> </span>is_donor_hh %but_not%<span class="st"> </span>is_degree_hh</code></pre></div>
+<div id="why-it-works" class="section level2">
+<h2><span class="header-section-number">15.1</span> Why it works</h2>
+<p>By householding each component of the definition before combining them with <code>%but_not%</code>, I am making the household the basic unit of analysis, rather than the individual. This often becomes necessary when we’re working with giving or portfolios (which we usually treat as characteristics of a household) and we want to exclude characteristics such as degree or student activity (which are characteristics of an individual).</p>
 
 </div>
+</div>
+
+
+
             </section>
 
           </div>
         </div>
       </div>
-<a href="non-entity-widgets.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="ex-lybunt.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+<a href="ex-near-builder.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="test-cdw.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
@@ -315,7 +271,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/tarakc02/discodocs/edit/master/80-example-01.Rmd",
+"link": "https://github.com/tarakc02/discodocs/edit/master/80-example-05.Rmd",
 "text": "Edit"
 },
 "download": null,
