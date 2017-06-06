@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="test-cdw.html">
-
+<link rel="prev" href="index.html">
+<link rel="next" href="r-intro.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -219,87 +219,68 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="cheat-sheet" class="section level1">
-<h1><span class="header-section-number">B</span> Cheat Sheet</h1>
-<div id="getting-started" class="section level2">
-<h2><span class="header-section-number">B.1</span> Getting started</h2>
+<div id="what-is-disco" class="section level1">
+<h1><span class="header-section-number">2</span> What is the Disco Engine?</h1>
+<p>If you happen to have an APRA account, this <a href="http://connections.aprahome.org/blog/building-the-discovery-engine">article in APRA Connections magazine</a> is a good introduction. If you don’t have an APRA account, then read on . . .</p>
+<p>The Discovery Engine, or Disco Engine, is a prospecting tool that empowers Prospect Development staff to precisely define (and pull together) constitutencies for their fundraising clients. It does so by providing two complementary resources: a <em>vocabulary and grammar</em> for specifying constituencies, and tools to facilitate <em>discovery</em> of constituencies.</p>
+<div id="vocabulary-and-grammar" class="section level2">
+<h2><span class="header-section-number">2.1</span> Vocabulary and Grammar</h2>
+<p>The Disco Engine is based on the idea that a constituency can be defined using one or more <em>predicates</em> (such as “majored in math” or “attended a Discover Cal event”), where multiple predicates are combined using “and”, “or”, or “but not.” To illustrate, here is a sample constituency definition for the department of mathematics:</p>
+<blockquote>
+<p><em>majored in mathematics</em> <strong>or</strong> <em>has given to the math department</em></p>
+</blockquote>
+<p>The constituency is then just any individual who fits the definition.</p>
+<p>The most basic tool that the Disco Engine provides is called a <a href="working-with-widgets.html#working-with-widgets">widget</a>, which is a tool for generating a simple predicate. For instance, the widget <code>majored_in</code> allows us to build the first part of our example definition:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">majored_in</span>(mathematics)</code></pre></div>
+<p>Furthermore, the Disco Engine provides the following connectors to <em>combine</em> predicates in order to create more complex definitions:</p>
 <ul>
-<li>Always start a session with <code>library(discoveryengine)</code></li>
+<li><code>%and%</code></li>
+<li><code>%or%</code></li>
+<li><code>%but_not%</code></li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(discoveryengine)</code></pre></div>
-<ul>
-<li>Not sure where to begin? Use <code>show_widgets()</code> to view a searchable and sortable list of available widgets. For more tips on finding widgets, check out <a href="working-with-widgets.html#working-with-finding-widgets">the section on finding widgets</a>.</li>
-<li>Still not sure what to do? Try using the <a href="brainstorm-bot.html#brainstorm-bot">brainstorm bot</a>. For instance if you are looking for people who played on the basketball team, type <code>brainstorm_bot(&quot;basketball&quot;)</code></li>
-<li>Multiple widgets can be combined using the operators <code>%and%</code>, <code>%or%</code>, or <code>%but_not%</code>. For example, <code>gave_to_area(natural_resources) %but_not% in_unit_portfolio(natural_resources)</code></li>
-</ul>
-</div>
-<div id="knowing-about-defaults" class="section level2">
-<h2><span class="header-section-number">B.2</span> Knowing about defaults</h2>
-<p>Be aware of defaults: If you’re ever wondering about any of the default settings for a widget, utilize the built-in documentation to learn more. For example: <code>?has_affiliation</code> shows me that the option <code>include_former</code> defaults to <code>TRUE</code>, meaning that the <code>has_affiliation</code> widget will automatically include former (in addition to current) affiliations, unless you add <code>include_former = FALSE</code>.</p>
-<p>An incomplete list of widget options and their default settings:</p>
-<ul>
-<li><code>has_degree_from</code> and <code>majored_in</code>: By default, these include undergraduate and graduate degreeholders, and exclude attendees.</li>
-<li><code>attended_event</code>: By default, non-attendees (coded as “invited but did not attend”) are excluded, but can be included with <code>include_non_attendees = TRUE</code></li>
-<li><code>has_affiliation</code>, <code>has_interest</code>, and all of the employment-based widgets have an <code>include_former</code> option that defaults to <code>TRUE</code></li>
-<li><code>in_unit_portfolio</code> has an option to <code>include_inactive</code> that defaults to <code>FALSE</code> (by default, only the active proposal assignments are considered)</li>
-</ul>
-<p>The best way to find out options, defaults and other information about widgets is to use the built-in documentation.</p>
-</div>
-<div id="output" class="section level2">
-<h2><span class="header-section-number">B.3</span> Output</h2>
-<p>Use <code>display</code> for output. Recall that you can use the equals sign <code>=</code> to assign names to your disco engine definitions, to make it easier to refer to them when <code>display</code>ing or doing other operations:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">basketball_player =<span class="st"> </span><span class="kw">played_sport</span>(basketball_men, basketball_women)
-<span class="kw">display</span>(basketball_player)</code></pre></div>
-<pre><code>## # A tibble: 445 x 1
+<p>So in the language of the Disco Engine, our definition would look like:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">majored_in</span>(mathematics) %or%<span class="st"> </span><span class="kw">gave_to_department</span>(mathematics)</code></pre></div>
+<p>There is no limit to the number of predicates that can be strung together to form a definition:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">majored_in</span>(mathematics) %or%
+<span class="st">    </span><span class="kw">gave_to_department</span>(mathematics) %and%
+<span class="st">    </span><span class="kw">lives_in_msa</span>(san_francisco)</code></pre></div>
+<p>These definitions can quickly become very complex. To manage that complexity, the Disco Engine provides the ability to <em>assign</em> names to definitions, that can then be used to construct more complex definitions:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">is_math_constituent =<span class="st"> </span><span class="kw">majored_in</span>(mathematics) %or%<span class="st"> </span>
+<span class="st">    </span><span class="kw">gave_to_department</span>(mathematics)
+
+local_math_constituent =<span class="st"> </span>is_math_constituent %and%
+<span class="st">    </span><span class="kw">lives_in_msa</span>(san_francisco)
+
+parent_of_local_math_constituent =<span class="st"> </span><span class="kw">parent_of</span>(local_math_constituent)</code></pre></div>
+<p>Together, the collection of predicates, the logical operators, and the ability to assign names form an expressive language for describing custom constituencies for a variety of purposes. Best of all, the Disco Engine gives us the ability to pull the IDs of a defined constituency from the database!</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">display</span>(parent_of_local_math_constituent)</code></pre></div>
+<pre><code>## # A tibble: 528 x 1
 ##    entity_id
 ##        &lt;dbl&gt;
-##  1       370
-##  2      1429
-##  3      1495
-##  4      3615
-##  5      4425
-##  6      5946
-##  7      6412
-##  8      6882
-##  9      7539
-## 10      7659
-## # ... with 435 more rows</code></pre>
-<p>If instead of just viewing IDs on the screen, you’d like to export them (perhaps to use in a CADS savedlist), just add a filename: <code>display(basketball_player, file = &quot;basketball-players&quot;)</code> and a file called “basketball-players.csv” will appear in your working directory. <em>Note that the exported file has a header, so when you upload it to an Advance savedlist, make sure to check the “First row is a header” box.</em></p>
+##  1      1168
+##  2      4522
+##  3      6322
+##  4      6326
+##  5      7644
+##  6     11512
+##  7     23989
+##  8     24151
+##  9     24247
+## 10     26492
+## # ... with 518 more rows</code></pre>
 </div>
-<div id="code-lookup" class="section level2">
-<h2><span class="header-section-number">B.4</span> Code lookup</h2>
-<p>Most widgets rely on the coding found in CADS for their input, but you probably haven’t memorized all of the codes! By using a question-mark inside of a widget, you can do look-ups on the fly:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">gave_to_department</span>(?band)</code></pre></div>
-<pre><code>##   synonym    code
-##  cal_band CALBAND</code></pre>
-<p>Codes (such as <code>CALBAND</code>) and synonyms (such as <code>cal_band</code>) can be used interchangeably, so use whichever feels more comfortable.</p>
-</div>
-<div id="the-best-widgets-for-.-.-." class="section level2">
-<h2><span class="header-section-number">B.5</span> The best widgets for . . .</h2>
-<p>The following may be incomplete and is <em>not</em> a substitute for using <code>show_widgets()</code>, but may come in handy in a pinch. Find out more about any one of these by using the built-in help. For example, to learn more about the <code>gave_to_area</code> widget, type <code>?gave_to_area</code></p>
-<ul>
-<li>Giving widgets: <code>gave_to_area</code>, <code>gave_to_department</code>, <code>gave_to_fund</code></li>
-<li>Ratings: <code>has_capacity</code>, <code>has_implied_capacity</code>, <code>has_major_gift_score</code>, <code>has_gift_planning_score</code></li>
-<li>Academic and student experience: <code>has_degree_from</code>, <code>majored_in</code>, <code>participated_in</code>, <code>played_sport</code>, <code>received_award</code></li>
-<li>UCB affiliations: <code>has_affiliation</code>, <code>on_committee</code>, <code>received_award</code></li>
-<li>Interests, etc: <code>has_interest</code>, <code>has_philanthropic_affinity</code></li>
-<li>Employment: <code>works_in_industry</code>, <code>has_occupation</code>, <code>has_position</code>, <code>job_title_like</code></li>
-<li>Geography: <code>lives_in_county</code>, <code>lives_in_msa</code>, <code>lives_in_zip</code>, <code>lives_near</code>, <code>works_in_county</code>, <code>works_in_msa</code>, <code>works_in_zip</code>, <code>works_near</code></li>
-</ul>
-</div>
-<div id="text-search" class="section level2">
-<h2><span class="header-section-number">B.6</span> Text search</h2>
-<p>Though most widgets rely on codes from CADS as inputs, some are search-based. Just like the <code>brainstorm_bot</code>, which is also based on text search, these widgets require you to use quotation marks around the search term(s). Here are some examples:</p>
-<ul>
-<li><code>contact_text_contains(&quot;neuro*&quot;, &quot;brain&quot;)</code></li>
-<li><code>fund_text_contains(&quot;diversity&quot;)</code></li>
-<li><code>research_miner(&quot;underrepresented&quot;)</code></li>
-</ul>
-<p><strong>Note:</strong> The <code>brainstorm_bot</code> will help you find things through the code tables, but it will not do big text searches of things like contact reports, fund biographies/terms, and research profiles. For that kind of specialized search, you should use these text search based widgets.</p>
-</div>
-<div id="other" class="section level2">
-<h2><span class="header-section-number">B.7</span> Other</h2>
-<p>Type <code>show_suspect_pools()</code> to view a list of all Suspect Pools, which is useful in conjunction with the <code>in_suspect_pool</code> widget.</p>
+<div id="facilitating-discovery" class="section level2">
+<h2><span class="header-section-number">2.2</span> Facilitating discovery</h2>
+<p>Having a clear language for prospecting and defining constituencies is nice, but Prospect Development is increasingly being asked to do affinity-based prospecting, which often involves defining new constituencies that don’t have clear-cut coding associated with them yet, or digging into student activity, interest, affiliation, and other codes to figure out which ones might fit the constituency to be defined. That need motivates the Disco Engine’s bots, such as the <a href="brainstorm-bot.html#brainstorm-bot">brainstorm bot</a> and the <a href="matrix-bot.html#matrix-bot">matrix bot</a>. We’ve already seen examples of using predicates to find individuals, but bots allow us to search for predicates.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">brainstorm_bot</span>(<span class="st">&quot;robot*&quot;</span>, <span class="st">&quot;artificial intelligence&quot;</span>, <span class="st">&quot;AI&quot;</span>)</code></pre></div>
+<pre><code>## attended_event 
+##     6724: Haas East Bay Chp Robotic Event 06-18-14
+## has_interest 
+##     AIN: Artificial Intelligence
+##     ROB: Robotics
+## participated_in 
+##     ENRO: Cal Robotics
+##     UROB: Robotmedia Presents</code></pre>
 
 </div>
 </div>
@@ -308,8 +289,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
-<a href="test-cdw.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="r-intro.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -329,7 +310,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/tarakc02/discodocs/edit/master/93-cheat-sheet.Rmd",
+"link": "https://github.com/tarakc02/discodocs/edit/master/005-what-is-disco.Rmd",
 "text": "Edit"
 },
 "download": null,

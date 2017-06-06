@@ -1,0 +1,71 @@
+# (PART) Preliminaries {-}
+
+# What is the Disco Engine? {#what-is-disco}
+
+```{r, echo = FALSE, message = FALSE}
+library(discoveryengine)
+```
+
+If you happen to have an APRA account, this [article in APRA Connections magazine](http://connections.aprahome.org/blog/building-the-discovery-engine) is a good introduction. If you don't have an APRA account, then read on . . .
+
+The Discovery Engine, or Disco Engine, is a prospecting tool that empowers Prospect Development staff to precisely define (and pull together) constitutencies for their fundraising clients. It does so by providing two complementary resources: a *vocabulary and grammar* for specifying constituencies, and tools to facilitate *discovery* of constituencies. 
+
+## Vocabulary and Grammar
+
+The Disco Engine is based on the idea that a constituency can be defined using one or more *predicates* (such as "majored in math" or "attended a Discover Cal event"), where multiple predicates are combined using "and", "or", or "but not." To illustrate, here is a sample constituency definition for the department of mathematics:
+
+> *majored in mathematics* **or** *has given to the math department*
+
+The constituency is then just any individual who fits the definition. 
+
+The most basic tool that the Disco Engine provides is called a [widget](#working-with-widgets), which is a tool for generating a simple predicate. For instance, the widget `majored_in` allows us to build the first part of our example definition:
+
+```{r, eval = FALSE}
+majored_in(mathematics)
+```
+
+Furthermore, the Disco Engine provides the following connectors to *combine* predicates in order to create more complex definitions:
+
+- `%and%`
+- `%or%`
+- `%but_not%`
+
+So in the language of the Disco Engine, our definition would look like:
+
+```{r, eval = FALSE}
+majored_in(mathematics) %or% gave_to_department(mathematics)
+```
+
+There is no limit to the number of predicates that can be strung together to form a definition:
+
+```{r, eval = FALSE}
+majored_in(mathematics) %or%
+    gave_to_department(mathematics) %and%
+    lives_in_msa(san_francisco)
+```
+
+These definitions can quickly become very complex. To manage that complexity, the Disco Engine provides the ability to *assign* names to definitions, that can then be used to construct more complex definitions:
+
+```{r}
+is_math_constituent = majored_in(mathematics) %or% 
+    gave_to_department(mathematics)
+
+local_math_constituent = is_math_constituent %and%
+    lives_in_msa(san_francisco)
+
+parent_of_local_math_constituent = parent_of(local_math_constituent)
+```
+
+Together, the collection of predicates, the logical operators, and the ability to assign names form an expressive language for describing custom constituencies for a variety of purposes. Best of all, the Disco Engine gives us the ability to pull the IDs of a defined constituency from the database!
+
+```{r}
+display(parent_of_local_math_constituent)
+```
+
+## Facilitating discovery
+
+Having a clear language for prospecting and defining constituencies is nice, but Prospect Development is increasingly being asked to do affinity-based prospecting, which often involves defining new constituencies that don't have clear-cut coding associated with them yet, or digging into student activity, interest, affiliation, and other codes to figure out which ones might fit the constituency to be defined. That need motivates the Disco Engine's bots, such as the [brainstorm bot](#brainstorm-bot) and the [matrix bot](#matrix-bot). We've already seen examples of using predicates to find individuals, but bots allow us to search for predicates.
+
+```{r}
+brainstorm_bot("robot*", "artificial intelligence", "AI")
+```
