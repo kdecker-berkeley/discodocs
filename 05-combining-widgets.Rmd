@@ -1,0 +1,31 @@
+# Combining widgets
+
+As flexible as individual widgets are, they won't help you too much by themselves. What makes them really useful is that they can be combined. There are three ways to combine widgets:
+
+- `%and%` will look for entities who satisfy both widgets
+- `%or%` will look for entities who satisfy at least one of two widgets
+- `%but_not%` will look for entities who satisfy a widget but do not satisfy a second widget. 
+
+Some quick examples:
+
+`gave_to_area(art_museum) %and% gave_to_area(cal_performances)` finds anyone who has given to **both** the Art Museum and Cal Performances. 
+
+`gave_to_area(art_museum) %or% gave_to_area(cal_performances)` finds anyone who has ever given to either the Art Museum or to Cal Performances. Note that this would include everyone who was found in the previous (`%and%`) example, as well as those who only gave to one or the other area.
+
+`gave_to_area(art_museum) %but_not% gave_to_area(cal_performances)` finds anyone who has given to the Art Museum but has not given to Cal Performances.
+
+## Example
+
+You're working with a major gift officer in the School of Business who is surprised to find out that alumni have been giving $15,000+ gifts in response to annual appeals, with no follow-up from major gift officers. She calls you up and says:
+
+> I need to a report on everyone who has given $15,000 or more this year who isn't yet in a portfolio, and I need it right away!
+
+You could probably have a savedlist ready before she's even hung up the phone:
+
+```{r bus_15k, cache = TRUE}
+important_prospects = 
+    gave_to_area(business, at_least = 15000, from = 20160101) %but_not% 
+    in_unit_portfolio(business)
+
+display(important_prospects)
+```

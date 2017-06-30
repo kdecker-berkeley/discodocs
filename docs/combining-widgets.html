@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="index.html">
-<link rel="next" href="r-intro.html">
+<link rel="prev" href="working-with-widgets.html">
+<link rel="next" href="brainstorm-bot.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -218,78 +218,57 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="what-is-disco" class="section level1">
-<h1><span class="header-section-number">2</span> What is the Disco Engine?</h1>
-<p>If you happen to have an APRA account, this <a href="http://connections.aprahome.org/blog/building-the-discovery-engine">article in APRA Connections magazine</a> is a good introduction. If you don’t have an APRA account, then read on . . .</p>
-<p>The Discovery Engine, or Disco Engine, is a prospecting tool that empowers Prospect Development staff to precisely define (and pull together) constitutencies for their fundraising clients. It does so by providing two complementary resources: a <em>vocabulary and grammar</em> for specifying constituencies, and tools to facilitate <em>discovery</em> of constituencies.</p>
-<div id="vocabulary-and-grammar" class="section level2">
-<h2><span class="header-section-number">2.1</span> Vocabulary and Grammar</h2>
-<p>The Disco Engine is based on the idea that a constituency can be defined using one or more <em>predicates</em> (such as “majored in math” or “attended a Discover Cal event”), where multiple predicates are combined using “and”, “or”, or “but not.” To illustrate, here is a sample constituency definition for the department of mathematics:</p>
-<blockquote>
-<p><em>majored in mathematics</em> <strong>or</strong> <em>has given to the math department</em></p>
-</blockquote>
-<p>The constituency is then just any individual who fits the definition.</p>
-<p>The most basic tool that the Disco Engine provides is called a <a href="working-with-widgets.html#working-with-widgets">widget</a>, which is a tool for generating a simple predicate. For instance, the widget <code>majored_in</code> allows us to build the first part of our example definition:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">majored_in</span>(mathematics)</code></pre></div>
-<p>Furthermore, the Disco Engine provides the following connectors to <em>combine</em> predicates in order to create more complex definitions:</p>
+<div id="combining-widgets" class="section level1">
+<h1><span class="header-section-number">7</span> Combining widgets</h1>
+<p>As flexible as individual widgets are, they won’t help you too much by themselves. What makes them really useful is that they can be combined. There are three ways to combine widgets:</p>
 <ul>
-<li><code>%and%</code></li>
-<li><code>%or%</code></li>
-<li><code>%but_not%</code></li>
+<li><code>%and%</code> will look for entities who satisfy both widgets</li>
+<li><code>%or%</code> will look for entities who satisfy at least one of two widgets</li>
+<li><code>%but_not%</code> will look for entities who satisfy a widget but do not satisfy a second widget.</li>
 </ul>
-<p>So in the language of the Disco Engine, our definition would look like:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">majored_in</span>(mathematics) %or%<span class="st"> </span><span class="kw">gave_to_department</span>(mathematics)</code></pre></div>
-<p>There is no limit to the number of predicates that can be strung together to form a definition:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">majored_in</span>(mathematics) %or%
-<span class="st">    </span><span class="kw">gave_to_department</span>(mathematics) %and%
-<span class="st">    </span><span class="kw">lives_in_msa</span>(san_francisco)</code></pre></div>
-<p>These definitions can quickly become very complex. To manage that complexity, the Disco Engine provides the ability to <em>assign</em> names to definitions, that can then be used to construct more complex definitions:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">is_math_constituent =<span class="st"> </span><span class="kw">majored_in</span>(mathematics) %or%<span class="st"> </span>
-<span class="st">    </span><span class="kw">gave_to_department</span>(mathematics)
+<p>Some quick examples:</p>
+<p><code>gave_to_area(art_museum) %and% gave_to_area(cal_performances)</code> finds anyone who has given to <strong>both</strong> the Art Museum and Cal Performances.</p>
+<p><code>gave_to_area(art_museum) %or% gave_to_area(cal_performances)</code> finds anyone who has ever given to either the Art Museum or to Cal Performances. Note that this would include everyone who was found in the previous (<code>%and%</code>) example, as well as those who only gave to one or the other area.</p>
+<p><code>gave_to_area(art_museum) %but_not% gave_to_area(cal_performances)</code> finds anyone who has given to the Art Museum but has not given to Cal Performances.</p>
+<div id="example" class="section level2">
+<h2><span class="header-section-number">7.1</span> Example</h2>
+<p>You’re working with a major gift officer in the School of Business who is surprised to find out that alumni have been giving $15,000+ gifts in response to annual appeals, with no follow-up from major gift officers. She calls you up and says:</p>
+<blockquote>
+<p>I need to a report on everyone who has given $15,000 or more this year who isn’t yet in a portfolio, and I need it right away!</p>
+</blockquote>
+<p>You could probably have a savedlist ready before she’s even hung up the phone:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">important_prospects =<span class="st"> </span>
+<span class="st">    </span><span class="kw">gave_to_area</span>(business, <span class="dt">at_least =</span> <span class="dv">15000</span>, <span class="dt">from =</span> <span class="dv">20160101</span>) %but_not%<span class="st"> </span>
+<span class="st">    </span><span class="kw">in_unit_portfolio</span>(business)
 
-local_math_constituent =<span class="st"> </span>is_math_constituent %and%
-<span class="st">    </span><span class="kw">lives_in_msa</span>(san_francisco)
-
-parent_of_local_math_constituent =<span class="st"> </span><span class="kw">parent_of</span>(local_math_constituent)</code></pre></div>
-<p>Together, the collection of predicates, the logical operators, and the ability to assign names form an expressive language for describing custom constituencies for a variety of purposes. Best of all, the Disco Engine gives us the ability to pull the IDs of a defined constituency from the database!</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">display</span>(parent_of_local_math_constituent)</code></pre></div>
-<pre><code>## # A tibble: 528 x 1
+<span class="kw">display</span>(important_prospects)</code></pre></div>
+<pre><code>## # A tibble: 74 x 1
 ##    entity_id
 ##        &lt;dbl&gt;
-##  1      1168
-##  2      4522
-##  3      6322
-##  4      6326
-##  5      7644
-##  6     11512
-##  7     23989
-##  8     24151
-##  9     24247
-## 10     26492
-## # ... with 518 more rows</code></pre>
-</div>
-<div id="facilitating-discovery" class="section level2">
-<h2><span class="header-section-number">2.2</span> Facilitating discovery</h2>
-<p>Having a clear language for prospecting and defining constituencies is nice, but Prospect Development is increasingly being asked to do affinity-based prospecting, which often involves defining new constituencies that don’t have clear-cut coding associated with them yet, or digging into student activity, interest, affiliation, and other codes to figure out which ones might fit the constituency to be defined. That need motivates the Disco Engine’s bots, such as the <a href="brainstorm-bot.html#brainstorm-bot">brainstorm bot</a> and the <a href="matrix-bot.html#matrix-bot">matrix bot</a>. We’ve already seen examples of using predicates to find individuals, but bots allow us to search for predicates.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">brainstorm_bot</span>(<span class="st">&quot;robot*&quot;</span>, <span class="st">&quot;artificial intelligence&quot;</span>, <span class="st">&quot;AI&quot;</span>)</code></pre></div>
-<pre><code>## attended_event 
-##     6724: Haas East Bay Chp Robotic Event 06-18-14
-## has_interest 
-##     AIN: Artificial Intelligence
-##     ROB: Robotics
-## participated_in 
-##     ENRO: Cal Robotics
-##     UROB: Robotmedia Presents</code></pre>
+## 1     878167
+## 2     741407
+## 3     433145
+## 4      23984
+## 5    3106890
+## 6    1008005
+## 7     612156
+## 8    3152758
+## 9    3083791
+## 10     21159
+## # ... with 64 more rows</code></pre>
 
 </div>
 </div>
+
+
+
             </section>
 
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="r-intro.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="working-with-widgets.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="brainstorm-bot.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -309,7 +288,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/tarakc02/discodocs/edit/master/005-what-is-disco.Rmd",
+"link": "https://github.com/tarakc02/discodocs/edit/master/05-combining-widgets.Rmd",
 "text": "Edit"
 },
 "download": null,
