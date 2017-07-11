@@ -1,5 +1,3 @@
-# (PART) Advanced {-}
-
 ```{r opt-load, echo = FALSE, message = FALSE, warning = FALSE}
 library(discoveryengine)
 ```

@@ -1,0 +1,315 @@
+# How does it work? {#how-it-works}
+
+In this section, I'll go over the basic building blocks that make the Disco Engine work. To help organize the lesson, I'll assume we're building a brand new Disco Engine from scratch. Of course, what we build will necessarily be just a simplified version of the Disco Engine, but we'll cover the most important concepts. All of the code behind the real Disco Engine is available for anyone to view [on GitHub](https://github.com/tarakc02/discoveryengine). Where possible, I'll add a link to the appropriate bit of production code and explain what's different from our simplified example.
+
+## A Widget as a SQL template
+
+To get data from the database, the Disco Engine converts definitions into valid SQL. The key insight here is that any first-order predicate ([what's first-order mean?](#higher-order-widgets)) can be represented in terms of a very basic SQL query, which we can turn into this all-purpose template:
+
+```{sql, eval = FALSE}
+select distinct ID_FIELD as ID_TYPE
+from TABLE_NAME
+where FIELD_NAME in (LIST_OF_VALUES)
+```
+
+*Note: The actual implementation allows for a broader range of queries, but this captures the basic idea. To see the actual templates used, check out [the source code in the listbuilder package](https://github.com/tarakc02/listbuilder/blob/master/R/templates.R)*
+
+There are a number of R packages that allow you to be able to construct templates this way and populate them with R objects. `discoveryengine` uses the [whisker package](https://cran.r-project.org/web/packages/whisker/index.html), but for this simplified example, I'll use `getcdw::parameterize_template`:
+
+```{r}
+library(getcdw)
+generate_query <- parameterize_template("
+select distinct ##ID_FIELD## as ##ID_TYPE##
+from ##TABLE_NAME##
+where ##FIELD_NAME## in (##LIST_OF_VALUES##)
+")
+
+# generate_query is now a function with the same arguments as the 
+# names highlighted in the template
+generate_query
+```
+
+Now, we can get a clunky, but functional, `has_affiliation` widget working:
+
+```{r}
+has_affiliation <- function(affiliations) {
+    list(ID_FIELD = "entity_id",
+         ID_TYPE = "entity_id",
+         TABLE_NAME = "cdw.d_bio_affiliation_mv",
+         FIELD_NAME = "affil_code",
+         LIST_OF_VALUES = paste0("'", affiliations, "'",
+                                collapse = ", "))
+}
+```
+
+Wait, what? I wanted to create a constituency definition, but all I got was this lousy list!
+
+## A template as a data structure
+
+Recall that definitions don't turn into IDs until we use the `display` function. The basic job of our `display` function will be to take care of two steps:
+
+1. Convert the definition (currently just a list) to SQL, and
+2. Send the SQL to the database, returning the appropriate data
+
+So it makes sense that `has_affiliation` just makes a list. It has all of the components of our definition, so we can inspect and figure out what it's supposed to return, but it won't actually return data from the data warehouse until we build a `display` function.
+
+Luckily, step 2 of the `display` function is easy, because that's exactly what the function `getcdw::get_cdw` does (if you're building for your own database, you just need a function here that can send SQL to your database and return a `data.frame`).
+
+```{r}
+display <- function(definition) {
+    get_cdw(to_sql(definition))
+}
+```
+
+How can we implement `to_sql`? Well, that's just a matter of combining our template from `generate_query` with the data to fill it in from `has_affiliation`. The R function `do.call` lets us call any R function using a list of arguments. For example:
+
+```{r}
+# here is the usual way we call a function:
+# this takes 2 samples from the integers between 1 and 100
+sample(x = 1:100, size = 2)
+
+# but what if we've collected the arguments from some process?
+args <- list(x = 1:100, size = 2)
+
+# sample(args) won't work. what we want is do.call, which allows us to 
+# "feed" args as arguments to sample()
+do.call("sample", args)
+```
+
+Ok, so it looks like we know how to implement `to_sql`:
+
+```{r}
+to_sql <- function(definition) {
+    do.call("generate_query", definition)
+}
+```
+
+That's basically it! Let's test what we have:
+
+```{r}
+is_prytanean = has_affiliation("OC6")
+display(is_prytanean)
+
+## and we can use multiple affiliations:
+is_constituent = has_affiliation(c("M2", "MA4"))
+display(is_constituent)
+```
+
+Ok! So we've now implemented basic widget functionality. We still have a couple of outstanding issues:
+
+1. The real disco engine allows you to type `has_affiliation(M2, MA4)` which is so much more readable and easy-to-understand than `has_affiliation(c("M2", "MA4"))`.
+2. How can we combine multiple predicates to make complex definitions?
+
+## Non-standard evaluation
+
+The answer to our first outstanding issue is provided by the magic of [non-standard evaluation](http://adv-r.had.co.nz/Computing-on-the-language.html) (that link is to the Non-standard evaluation chapter of the excellent book *Advanced R* by Hadley Wickham, which I highly recommend). For the purposes of this simplified example, I'll use the following:
+
+```{r}
+has_affiliation <- function(...) {
+    affiliations <- eval(substitute(alist(...)))
+    affiliations <- as.character(affiliations)
+    
+    list(ID_FIELD = "entity_id",
+         ID_TYPE = "entity_id",
+         TABLE_NAME = "cdw.d_bio_affiliation_mv",
+         FIELD_NAME = "affil_code",
+         LIST_OF_VALUES = paste0("'", affiliations, "'",
+                                collapse = ", "))    
+}
+```
+
+Here `eval(substitute(alist(...)))` and `as.character(affiliations)` take the symbols entered by the user (I'm noting they are symbols and not characters) and convert them to a character vector. So far, so good:
+
+```{r}
+display(
+    has_affiliation(M2, MA4)
+)
+```
+
+*Note that the actual package is a little bit more careful about how it does things here, by using the [lazyeval package](https://cran.r-project.org/web/packages/lazyeval/index.html). To see the actual code used in the Disco Engine, check out `prep_dots` and `partial_sub` in [this discoveryengine source code file](https://github.com/tarakc02/discoveryengine/blob/master/R/helper-utils.R)*
+
+## Combining simple definitions
+
+Now we want to know, given two existing definitions, how do we combine them into one more complex definition? The answer is surprisingly simple, but may take a minute to wrap your head around if you haven't programmed in this way before. I'll take things step-by-step.
+
+### "Atomic" vs. "Complex" definitions
+
+Our first step is to distinguish between what I'll call "atomic" and "complex" definitions. So far we've been working with atomic definitions -- that is, simple definitions that do not use `%and%`, `%or%`, or `%but_not%`. 
+
+Since we'll want to build more widgets (in order to benefit from being able to combine them!), I'm going to write some scaffolding code that will make it easier to produce widgets:
+
+```{r}
+# widget will be a function to make ATOMIC definitions
+widget <- function(..., ID_FIELD, ID_TYPE = ID_FIELD, TABLE_NAME,
+                   FIELD_NAME) {
+    args <- eval(substitute(alist(...)))
+    args <- as.character(args)
+    
+    res <- list(ID_FIELD = ID_FIELD,
+                ID_TYPE = ID_TYPE,
+                TABLE_NAME = TABLE_NAME,
+                FIELD_NAME = FIELD_NAME,
+                LIST_OF_VALUES = paste0("'", args, "'",
+                                        collapse = ", "))
+    
+    # tagging atomic definitions makes it easier to keep track
+    # here we add an "attribute" specifying that the definition is atomic
+    # if you're unfamiliar with attributes, see ?attributes
+    structure(res, atomic = TRUE)
+}
+```
+
+Now let's re-create `has_affiliation` using our new scaffolding code, and also let's create a widget called `participated_in` for student activities and one called `on_committee` for committee participation:
+
+```{r}
+has_affiliation <- function(...) {
+    # notice I can just pass the ... along to the next function
+    widget(...,
+           ID_FIELD = "entity_id",
+           TABLE_NAME = "cdw.d_bio_affiliation_mv",
+           FIELD_NAME = "affil_code")
+}
+
+participated_in <- function(...) {
+    widget(...,
+           ID_FIELD = "entity_id",
+           TABLE_NAME = "cdw.d_bio_student_activity_mv",
+           FIELD_NAME = "student_activity_code")
+}
+
+on_committee <- function(...) {
+    widget(...,
+           ID_FIELD = "entity_id",
+           TABLE_NAME = "cdw.d_bio_committee_mv",
+           FIELD_NAME = "committee_code")
+}
+```
+
+Just to make sure I haven't broken anything, I quickly inspect the SQL that is being built by these widgets:
+
+```{r}
+# to make it easier to inspect the queries
+show_query <- function(definition) cat(to_sql(definition))
+
+show_query( has_affiliation(MA6, OC3) ) 
+show_query( participated_in(SA1, SA2) )
+show_query( on_committee(AE7, ME3, ME5, AE5) )
+```
+
+### Operations on definitions
+
+We now want to implement `%and%`, `%or%`, and `%but_not%`. Luckily, these are closely related to, in order, the SQL operators `intersect`, `union`, and `minus`.
+
+So here is the surprisingly simple template we need to construct complex queries:
+
+```{r}
+generate_complex_query <- parameterize_template("
+(##LHS##)
+##operator##
+(##RHS##)
+")
+```
+
+Here `LHS` and `RHS` (which stand for "left-hand-side" and "right-hand-side") are the SQL translations of definitions (they can be atomic or complex -- as long as we know they have been converted to SQL properly, the result of this template will also be a valid SQL query). So when we translate a complex definition to SQL, all we have to do is translate the individual components to SQL. Those components (that is, `LHS` and `RHS`) may be either atomic (in which case we already know what to do) or complex (in which case we'll just break it down again using the same logic, until we get down to atomic definitions).
+
+Now to implement our operations, we once again collect the necessary information into a list, this time tagging it as not atomic:
+
+```{r}
+operate <- function(LHS, RHS, operator) {
+    res <- list(
+        operator = operator,
+        LHS = LHS,
+        RHS = RHS
+    )
+    
+    # we need to make sure to tag the result as NOT atomic
+    structure(res, atomic = FALSE)
+}
+
+`%and%` <- function(LHS, RHS) operate(LHS, RHS, "intersect")
+`%or%` <- function(LHS, RHS) operate(LHS, RHS, "union")
+`%but_not%` <- function(LHS, RHS) operate(LHS, RHS, "minus")
+```
+
+## Re-visiting `to_sql`
+
+We now have two different SQL templates -- one for atomic definitions, and one for non-atomic definitions. Accordingly, we'll update `to_sql` so that it uses the correct template. The fact that every definition we create, whether atomic or not, has an attribute called `atomic` that can be either `TRUE` or `FALSE` helps us. We'll start by making a helper function that tells us if a definition is complex or not:
+
+```{r}
+is_atomic <- function(definition) {
+    # recall this attribute is always TRUE or FALSE
+    attr(definition, "atomic")
+}
+```
+
+Now we can update our `to_sql` function to check whether a definition is atomic or not and then populate the appropriate template:
+
+```{r}
+to_sql <- function(definition) {
+    # we already know what to do with atomic definitions
+    if (is_atomic(definition)) do.call("generate_query", definition)
+    
+    # with complex definitions, we translate the LHS and RHS to SQL,
+    # then pass everything back to the complex query template
+    else {
+        translated_pieces <- list(
+            LHS = to_sql(definition$LHS),
+            RHS = to_sql(definition$RHS),
+            operator = definition$operator
+        )
+        do.call("generate_complex_query", translated_pieces)
+    }
+}
+```
+
+If you look closely at the non-atomic part of `to_sql`, you may be surprised to find that it seems to be circularly defined! It helps to describe the process in plain language first:
+
+> To convert a complex (i.e. non-atomic) definition to SQL, we first convert its constituent pieces to SQL, then combine the resulting SQL using the appropriate operator (intersect, union, or minus)
+
+That process is pretty easy to understand if both pieces of a non-atomic definition are atomic, but what if, say, the left-hand-side (LHS) is also non-atomic? Well, we just do the same thing, trying to convert the constituent pieces to SQL, and so forth. This works because *we know that eventually we'll hit an atomic definition*. 
+
+## Seeing it all in action
+
+Let's create some definitions and then see how they are being converted to SQL. 
+
+```{r}
+# a simple definition
+has_engineering_affil = has_affiliation(MA4, SWE, URAE, DEN1)
+
+# a slightly more complex definition
+engineering_constituency_1 = 
+    has_engineering_affil %and%
+    participated_in(UWSE, CHES, ENWE, ENSE)
+
+engineering_constituency_2 = 
+    engineering_constituency_1 %but_not%
+    on_committee(ME3)
+
+```
+
+To reassure myself that the system is working as expected, I `display` the most complicated constituency, and look in CADS to verify that the resulting IDs do in fact match the definition I created:
+
+```{r}
+display(engineering_constituency_2)
+```
+
+Now, let's take a look at the actual SQL that is being generated behind the scenes: 
+
+```{r}
+# we've already seen the atomic definitions turned to SQL:
+show_query(has_engineering_affil)
+
+# this is a complex definition, but both pieces are atomic:
+show_query(engineering_constituency_1)
+
+# as the definitions get more complex, even the LHS and RHS can 
+# be complex, but everything still can be analyzed down to atomic pieces:
+show_query(engineering_constituency_2)
+```
+
+You'll notice that, especially as the definitions grow more complex, the resulting SQL may not look exactly how you'd type it yourself. But it does work, is correct, and thanks to the [Relational Algebra](https://en.wikipedia.org/wiki/Relational_algebra), I know the SQL will be optimized before running against our data. 
+
+## For further study
+
+If you've made it this far, you should have a pretty solid understanding of the basic functioning of the Discovery Engine. We did not cover some core features, in particular [code lookup (aka synonym search)](#synonym-search), [higher order widgets](#higher-order-widgets), and the bots -- 
+the [brainstorm bot](#brainstorm-bot) and the [matrix bot](#matrix-bot). But armed with the knowledge you do have, you can explore [the source code](https://github.com/tarakc02/discoveryengine) and see how everything else works. Feel free to [reach out to Tarak via email](mailto:tarak_shah@berkeley.edu) if you have any questions.
