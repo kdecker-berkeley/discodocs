@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="r-intro.html">
-<link rel="next" href="intro-example.html">
+<link rel="prev" href="optional-arguments.html">
+<link rel="next" href="ex-political-economy.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -234,57 +234,32 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="installation" class="section level1">
-<h1><span class="header-section-number">4</span> Installation</h1>
-<p>In order to use the discoveryengine, you’ll have to install it. And in order to successfully install the discoveryengine, you’ll have to install a few other packages, too. The <a href="r-intro.html#r-intro">introduction to RStudio video</a> showed you how to install new packages both by typing install commands into the console, or by using RStudio’s “Packages” pane. Here, we’ll go through the installation step-by-step by typing out the install commands (copying and pasting is a good way to avoid frustrating typos!).</p>
-<p>Note that installation can sometimes be a pain. But once you’ve gotten through the process successfully, you won’t have to deal with it again!</p>
-<div id="required-packages" class="section level2">
-<h2><span class="header-section-number">4.1</span> Required packages</h2>
-<p>At this point, you should have already:</p>
-<ul>
-<li>tested your CDW connection</li>
-<li>installed <code>getcdw</code></li>
-<li>run a test query</li>
-</ul>
-<p>If you haven’t completed all of those items, head over to <a href="test-cdw.html#test-cdw">the step-by-step guide</a> and complete those steps, and then return here.</p>
-<p>Ok, so if you’ve got <code>getcdw</code> working properly, that means you’ve already installed <code>devtools</code>. All that’s left is to install <code>listbuilder</code> and <code>discoveryengine</code> packages:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;tarakc02/listbuilder&quot;</span>)
-devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;tarakc02/discoveryengine&quot;</span>)</code></pre></div>
-<p>There are a couple more packages that are optional, but will make the discoveryengine even better:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;tarakc02/preprocessr&quot;</span>)
-<span class="kw">install.packages</span>(<span class="st">&quot;DT&quot;</span>)</code></pre></div>
+<div id="add-on-packages" class="section level1">
+<h1><span class="header-section-number">13</span> Add-on packages</h1>
+<p>There are a growing number of packages that provide the Disco Engine user with additional functionality:</p>
+<div id="discoappend" class="section level2">
+<h2><span class="header-section-number">13.1</span> <code>discoappend</code></h2>
+<p><code>discoappend</code> allows you to output additional data (beyond just IDs) based on your disco engine definitions. For an introduction with examples, check <a href="https://github.com/cwolfsonseeley/discoappend#discoappend">the official README</a>.</p>
+<p>To install <code>discoappend</code>, type:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;cwolfsonseeley/discoappend&quot;</span>)</code></pre></div>
 </div>
-<div id="a-disco-test" class="section level2">
-<h2><span class="header-section-number">4.2</span> A disco test</h2>
-<p>In order to make sure everything is working properly, we’ll run a quick disco test:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># you&#39;ll always load the discoveryengine package before doing anythying else</span>
-<span class="kw">library</span>(discoveryengine)
-
-<span class="co"># make sure we can create a disco definition</span>
-high_cap =<span class="st"> </span><span class="kw">has_capacity</span>(<span class="dv">1</span>)
-
-<span class="co"># make sure that things print properly</span>
-high_cap</code></pre></div>
-<pre><code>## LISTBUILDER DEFINITION (type: entity_id)
-## .   source: d_entity_mv.entity_id (entity_id)
-## .   logic: capacity_rating_code IN 1</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># make sure we can send the defintion to the data warehouse</span>
-<span class="kw">display</span>(high_cap)</code></pre></div>
-<pre><code>## # A tibble: 169 x 1
-##    entity_id
-##        &lt;dbl&gt;
-## 1       1969
-## 2       3105
-## 3       3422
-## 4       7644
-## 5      12178
-## 6      17464
-## 7      18139
-## 8      20039
-## 9      20125
-## 10     20227
-## # ... with 159 more rows</code></pre>
-<p>If you got this far without any problems, then congrats! You are a disco dancer!</p>
+<div id="discovcr" class="section level2">
+<h2><span class="header-section-number">13.2</span> <code>discovcr</code></h2>
+<p><code>discovcr</code> allows you to browse data related to your discovery engine definition and select just the IDs you want to keep. This can be particularly useful when using text-search widgets such as <code>fund_text_contains</code>, where you may want to review the individual allocations you captured in your original search and remove any that were false matches (for example, a search for funds related to “diversity” brings in a number of biology research funds related to bio-diversity).</p>
+<p>To install <code>discovcr</code>, type:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw">install_git</span>(<span class="st">&quot;R:/Prospect Development/Prospect Analysis/discovcr&quot;</span>, <span class="dt">build_vignettes =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<p>Once you’ve installed, you can view the “vignette” that includes examples and instructions by typing:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">vignette</span>(<span class="st">&quot;vcr-intro&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;discovcr&quot;</span>)</code></pre></div>
+</div>
+<div id="discoscape" class="section level2">
+<h2><span class="header-section-number">13.3</span> <code>discoscape</code></h2>
+<p>The <code>discoscape</code> package serves as a bridge between the Discovery Engine and DonorScape. The <code>donorscape_report</code> function outputs data in the format required by the DonorScape screening service, so that you can discover and/or define a population using the Discovery Engine, and then immediately run that population through a DonorScape without much hassle in between.</p>
+<p>To install <code>discoscape</code>, type:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;cwolfsonseeley/discoscape&quot;</span>)</code></pre></div>
+<p>As with any package, you can load it up by using the <code>library</code> function:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(discoscape)</code></pre></div>
+<p>The main function is called <code>donorscape_report</code>, and you can learn more about it by typing:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">?donorscape_report</code></pre></div>
 
 </div>
 </div>
@@ -296,8 +271,8 @@ high_cap</code></pre></div>
           </div>
         </div>
       </div>
-<a href="r-intro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="intro-example.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="optional-arguments.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="ex-political-economy.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -317,7 +292,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/tarakc02/discodocs/edit/master/02-installation.Rmd",
+"link": "https://github.com/tarakc02/discodocs/edit/master/70-add-on-packages.Rmd",
 "text": "Edit"
 },
 "download": null,

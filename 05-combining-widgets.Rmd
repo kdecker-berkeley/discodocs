@@ -1,4 +1,4 @@
-# Combining widgets
+# Combining widgets {#combining-widgets}
 
 As flexible as individual widgets are, they won't help you too much by themselves. What makes them really useful is that they can be combined. There are three ways to combine widgets:
 

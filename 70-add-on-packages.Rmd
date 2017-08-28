@@ -1,0 +1,50 @@
+# (PART) Related tools {-}
+
+# Add-on packages {#add-on-packages}
+
+There are a growing number of packages that provide the Disco Engine user with additional functionality:
+
+## `discoappend`
+`discoappend` allows you to output additional data (beyond just IDs) based on your disco engine definitions. For an introduction with examples, check [the official README](https://github.com/cwolfsonseeley/discoappend#discoappend). 
+
+To install `discoappend`, type: 
+
+```{r, eval = FALSE}
+devtools::install_github("cwolfsonseeley/discoappend")
+```
+
+## `discovcr`
+`discovcr` allows you to browse data related to your discovery engine definition and select just the IDs you want to keep. This can be particularly useful when using text-search widgets such as `fund_text_contains`, where you may want to review the individual allocations you captured in your original search and remove any that were false matches (for example, a search for funds related to "diversity" brings in a number of biology research funds related to bio-diversity). 
+
+To install `discovcr`, type:
+
+```{r, eval = FALSE}
+devtools::install_git("R:/Prospect Development/Prospect Analysis/discovcr", build_vignettes = TRUE)
+```
+
+Once you've installed, you can view the "vignette" that includes examples and instructions by typing: 
+
+```{r, eval = FALSE}
+vignette("vcr-intro", package = "discovcr")
+```
+
+## `discoscape`
+The `discoscape` package serves as a bridge between the Discovery Engine and DonorScape. The `donorscape_report` function outputs data in the format required by the DonorScape screening service, so that you can discover and/or define a population using the Discovery Engine, and then immediately run that population through a DonorScape without much hassle in between. 
+
+To install `discoscape`, type:
+
+```{r, eval = FALSE}
+devtools::install_github("cwolfsonseeley/discoscape")
+```
+
+As with any package, you can load it up by using the `library` function:
+
+```{r, eval = FALSE}
+library(discoscape)
+```
+
+The main function is called `donorscape_report`, and you can learn more about it by typing:
+
+```{r, eval = FALSE}
+?donorscape_report
+```
