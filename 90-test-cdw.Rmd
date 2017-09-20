@@ -62,7 +62,7 @@ You also want to make sure you're using the correct version of R. Here are the s
 `r knitr::include_graphics("images/options.png")`
 </p></center>
 
-2) The top box tells you the R version you're using. Click on the "Change.." button and make sure "[32-bit] C:\\Program Files\\R\\R-3.3.1" is selected. It looks like this:
+2) The top box tells you the R version you're using. Click on the "Change.." button. There may be multiple versions of R available, pick the latest one, but pick the "[32-bit]" one. As of this September 2017, the version you should pick is "[32-bit] C:\\Program Files\\R\\R-3.4.1" Depending on when you are reading this, you may have a later version of R available -- use that, just be sure to pick the version that is "[32-bit]" 
 
 <p><center>
 `r knitr::include_graphics("images/version.png")`

@@ -255,7 +255,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Use <code>display</code> for output. Recall that you can use the equals sign <code>=</code> to assign names to your disco engine definitions, to make it easier to refer to them when <code>display</code>ing or doing other operations:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">basketball_player =<span class="st"> </span><span class="kw">played_sport</span>(basketball_men, basketball_women)
 <span class="kw">display</span>(basketball_player)</code></pre></div>
-<pre><code>## # A tibble: 460 x 1
+<pre><code>## # A tibble: 466 x 1
 ##    entity_id
 ##        &lt;dbl&gt;
 ##  1       370
@@ -268,7 +268,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ##  8      6882
 ##  9      7539
 ## 10      7659
-## # ... with 450 more rows</code></pre>
+## # ... with 456 more rows</code></pre>
 <p>If instead of just viewing IDs on the screen, you’d like to export them (perhaps to use in a CADS savedlist), just add a filename: <code>display(basketball_player, file = &quot;basketball-players&quot;)</code> and a file called “basketball-players.csv” will appear in your working directory. <em>Note that the exported file has a header, so when you upload it to an Advance savedlist, make sure to check the “First row is a header” box.</em></p>
 </div>
 <div id="code-lookup" class="section level2">
