@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="r-intro.html">
-<link rel="next" href="intro-example.html">
+<link rel="prev" href="cheat-sheet.html">
+<link rel="next" href="how-it-works.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -240,70 +240,51 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="installation" class="section level1">
-<h1><span class="header-section-number">4</span> Installation</h1>
-<p>In order to use the discoveryengine, you’ll have to install it. And in order to successfully install the discoveryengine, you’ll have to install a few other packages, too. The <a href="r-intro.html#r-intro">introduction to RStudio video</a> showed you how to install new packages both by typing install commands into the console, or by using RStudio’s “Packages” pane. Here, we’ll go through the installation step-by-step by typing out the install commands (copying and pasting is a good way to avoid frustrating typos!).</p>
-<p>Note that installation can sometimes be a pain. But once you’ve gotten through the process successfully, you won’t have to deal with it again!</p>
-<div id="required-packages" class="section level2">
-<h2><span class="header-section-number">4.1</span> Required packages</h2>
-<p>At this point, you should have already:</p>
-<ul>
-<li>tested your CDW connection</li>
-<li>installed <code>getcdw</code></li>
-<li>run a test query</li>
-</ul>
-<p>If you haven’t completed all of those items, head over to <a href="test-cdw.html#test-cdw">the step-by-step guide</a> and complete those steps, and then return here.</p>
-<p>Ok, so if you’ve got <code>getcdw</code> working properly, that means you’ve already installed <code>devtools</code>. All that’s left is to install <code>listbuilder</code> and <code>discoveryengine</code> packages:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;tarakc02/listbuilder&quot;</span>)
-devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;tarakc02/discoveryengine&quot;</span>)</code></pre></div>
-<p>There are a couple more packages that are optional, but will make the discoveryengine even better:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;tarakc02/preprocessr&quot;</span>)
-<span class="kw">install.packages</span>(<span class="st">&quot;DT&quot;</span>)</code></pre></div>
+<div id="updating" class="section level1">
+<h1><span class="header-section-number">C</span> Updating your installation</h1>
+<div id="when-do-i-need-to-update-the-disco-engine" class="section level2">
+<h2><span class="header-section-number">C.1</span> When do I need to update the Disco Engine?</h2>
+<p>We are always working on and improving the Disco Engine, incorporating feedback and adding new features. But you shouldn’t feel pressure to be constantly updating your version of the Disco Engine - most updates incorporate new features without disrupting any existing functionality. So when should you update?</p>
+<ol style="list-style-type: decimal">
+<li>If a significant bug was discovered and fixed. Tarak will send out an email if this happens.</li>
+<li>If a new version includes significantly new functionality, you’ll want to update to take advantage of the new features. Tarak will send out an email if this is the case, and there will also be a demonstration of the new features in a staff meeting.</li>
+<li>If you’re trying to use a widget you heard about, but you get an error, that’s probably because the widget was added since your last update.</li>
+</ol>
+<p>That said, it doesn’t take much time to update the Disco Engine (see below for instructions), and updates will never change existing functionality, so feel free to update more frequently if you wish. In fact, if you try to update but you’re already on the latest version, you’ll get a message informing you of the fact, and no updates will happen. There is no penalty or cost for trying to update the Disco Engine.</p>
 </div>
-<div id="a-disco-test" class="section level2">
-<h2><span class="header-section-number">4.2</span> A disco test</h2>
-<p>In order to make sure everything is working properly, we’ll run a quick disco test:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># you&#39;ll always load the discoveryengine package before doing anythying else</span>
-<span class="kw">library</span>(discoveryengine)
-
-<span class="co"># make sure we can create a disco definition</span>
-high_cap =<span class="st"> </span><span class="kw">has_capacity</span>(<span class="dv">1</span>)
-
-<span class="co"># make sure that things print properly</span>
-high_cap</code></pre></div>
-<pre><code>## LISTBUILDER DEFINITION (type: entity_id)
-## .   source: d_entity_mv.entity_id (entity_id)
-## .   logic: capacity_rating_code IN 1</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># make sure we can send the defintion to the data warehouse</span>
-<span class="kw">display</span>(high_cap)</code></pre></div>
-<pre><code>## # A tibble: 169 x 1
-##    entity_id
-##        &lt;dbl&gt;
-## 1       1969
-## 2       3105
-## 3       3422
-## 4       7644
-## 5      12178
-## 6      17464
-## 7      18139
-## 8      20039
-## 9      20125
-## 10     20227
-## # ... with 159 more rows</code></pre>
-<p>If you got this far without any problems, then congrats! You are a disco dancer!</p>
+<div id="what-version-am-i-using-right-now" class="section level2">
+<h2><span class="header-section-number">C.2</span> What version am I using right now?</h2>
+<p>Whenever you start up the Disco Engine, there is a welcome message that will tell you what version number you currently have installed:</p>
+<div class="figure">
+<img src="images/startup-msg.png" alt="The startup message shows you what version you’re using" />
+<p class="caption">The startup message shows you what version you’re using</p>
+</div>
+</div>
+<div id="whats-the-most-recent-version" class="section level2">
+<h2><span class="header-section-number">C.3</span> What’s the most recent version?</h2>
+<p>The welcome message above includes a link to the Disco Engine <a href="https://github.com/tarakc02/discoveryengine/blob/master/NEWS.md">NEWS page</a>, which not only shows what the most recent version number is, but also goes over all of the changes made in each version.</p>
+</div>
+<div id="how-do-i-update" class="section level2">
+<h2><span class="header-section-number">C.4</span> How do I update?</h2>
+<p>We’ve found that updating goes most smoothly when you start with a fresh R session. So if you already have RStudio open, press Ctrl+Shift+F10 (or use the menu and navigate to Session | Restart R). This will restart R without restarting RStudio. Next, just type:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;tarakc02/discoveryengine&quot;</span>)</code></pre></div>
+<p>That should do it! The <code>devtools</code> package that is used to do the installation is smart enough to make any other necessary updates to other packages that <code>discoveryengine</code> depends on, so typing that one line might result in updates to several packages.</p>
+<p>When you do that, one of these things will happen:</p>
+<ol style="list-style-type: decimal">
+<li>You see a message that starts with “Skipping install of ‘discoveryengine’ from a github remote . . .”: That just means you’re already up-to-date and don’t need to do anything more.</li>
+<li>A bunch of text scrolls up the screen, ending with “* DONE (discoveryengine)”. Congrats! You’ve successfully updated your Disco Engine installation!</li>
+<li>Something else: uh oh - something might have gone wrong. Get in touch with Tarak or Caleb to help troubleshoot.</li>
+</ol>
 
 </div>
 </div>
-
-
-
             </section>
 
           </div>
         </div>
       </div>
-<a href="r-intro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="intro-example.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="cheat-sheet.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="how-it-works.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -323,7 +304,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/tarakc02/discodocs/edit/master/02-installation.Rmd",
+"link": "https://github.com/tarakc02/discodocs/edit/master/95-updating.Rmd",
 "text": "Edit"
 },
 "download": null,

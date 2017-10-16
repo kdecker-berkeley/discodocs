@@ -45,6 +45,11 @@
 
 
 
+<script src="libs/htmlwidgets-0.8/htmlwidgets.js"></script>
+<script src="libs/datatables-binding-0.2/datatables.js"></script>
+<link href="libs/dt-core-1.10.12/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.12/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.12/js/jquery.dataTables.min.js"></script>
 
 
 <style type="text/css">
@@ -101,30 +106,87 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="./">Documentation for the discoveryengine</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Welcome</a></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Welcome</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#contribute-to-the-disco-engine"><i class="fa fa-check"></i><b>1.1</b> Contribute to the Disco Engine</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#contribute-to-this-documentation"><i class="fa fa-check"></i><b>1.2</b> Contribute to this documentation</a></li>
+</ul></li>
 <li class="part"><span><b>I Preliminaries</b></span></li>
-<li class="chapter" data-level="2" data-path="what-is-disco.html"><a href="what-is-disco.html"><i class="fa fa-check"></i><b>2</b> What is the Disco Engine?</a></li>
+<li class="chapter" data-level="2" data-path="what-is-disco.html"><a href="what-is-disco.html"><i class="fa fa-check"></i><b>2</b> What is the Disco Engine?</a><ul>
+<li class="chapter" data-level="2.1" data-path="what-is-disco.html"><a href="what-is-disco.html#vocabulary-and-grammar"><i class="fa fa-check"></i><b>2.1</b> Vocabulary and Grammar</a></li>
+<li class="chapter" data-level="2.2" data-path="what-is-disco.html"><a href="what-is-disco.html#facilitating-discovery"><i class="fa fa-check"></i><b>2.2</b> Facilitating discovery</a></li>
+</ul></li>
 <li class="chapter" data-level="3" data-path="r-intro.html"><a href="r-intro.html"><i class="fa fa-check"></i><b>3</b> Introduction to R and RStudio</a></li>
-<li class="chapter" data-level="4" data-path="installation.html"><a href="installation.html"><i class="fa fa-check"></i><b>4</b> Installation</a></li>
+<li class="chapter" data-level="4" data-path="installation.html"><a href="installation.html"><i class="fa fa-check"></i><b>4</b> Installation</a><ul>
+<li class="chapter" data-level="4.1" data-path="installation.html"><a href="installation.html#required-packages"><i class="fa fa-check"></i><b>4.1</b> Required packages</a></li>
+<li class="chapter" data-level="4.2" data-path="installation.html"><a href="installation.html#a-disco-test"><i class="fa fa-check"></i><b>4.2</b> A disco test</a></li>
+</ul></li>
 <li class="part"><span><b>II Basics</b></span></li>
-<li class="chapter" data-level="5" data-path="intro-example.html"><a href="intro-example.html"><i class="fa fa-check"></i><b>5</b> An introductory example</a></li>
-<li class="chapter" data-level="6" data-path="working-with-widgets.html"><a href="working-with-widgets.html"><i class="fa fa-check"></i><b>6</b> Working with widgets</a></li>
-<li class="chapter" data-level="7" data-path="combining-widgets.html"><a href="combining-widgets.html"><i class="fa fa-check"></i><b>7</b> Combining widgets</a></li>
+<li class="chapter" data-level="5" data-path="intro-example.html"><a href="intro-example.html"><i class="fa fa-check"></i><b>5</b> An introductory example</a><ul>
+<li class="chapter" data-level="5.1" data-path="intro-example.html"><a href="intro-example.html#develop-a-strategy"><i class="fa fa-check"></i><b>5.1</b> Develop a strategy</a></li>
+<li class="chapter" data-level="5.2" data-path="intro-example.html"><a href="intro-example.html#intro-example-create-def"><i class="fa fa-check"></i><b>5.2</b> Create the definition</a></li>
+<li class="chapter" data-level="5.3" data-path="intro-example.html"><a href="intro-example.html#send-the-definition-to-the-cdw"><i class="fa fa-check"></i><b>5.3</b> Send the definition to the CDW</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="working-with-widgets.html"><a href="working-with-widgets.html"><i class="fa fa-check"></i><b>6</b> Working with widgets</a><ul>
+<li class="chapter" data-level="6.1" data-path="working-with-widgets.html"><a href="working-with-widgets.html#working-with-finding-widgets"><i class="fa fa-check"></i><b>6.1</b> Finding widgets</a></li>
+<li class="chapter" data-level="6.2" data-path="working-with-widgets.html"><a href="working-with-widgets.html#codes-and-synonyms"><i class="fa fa-check"></i><b>6.2</b> Codes and synonyms</a></li>
+<li class="chapter" data-level="6.3" data-path="working-with-widgets.html"><a href="working-with-widgets.html#synonym-search"><i class="fa fa-check"></i><b>6.3</b> Synonym search</a></li>
+<li class="chapter" data-level="6.4" data-path="working-with-widgets.html"><a href="working-with-widgets.html#use-defaults"><i class="fa fa-check"></i><b>6.4</b> Use the default cases</a></li>
+<li class="chapter" data-level="6.5" data-path="working-with-widgets.html"><a href="working-with-widgets.html#detailed-controls"><i class="fa fa-check"></i><b>6.5</b> Detailed controls</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="combining-widgets.html"><a href="combining-widgets.html"><i class="fa fa-check"></i><b>7</b> Combining widgets</a><ul>
+<li class="chapter" data-level="7.1" data-path="combining-widgets.html"><a href="combining-widgets.html#example"><i class="fa fa-check"></i><b>7.1</b> Example</a></li>
+</ul></li>
 <li class="part"><span><b>III Bots</b></span></li>
-<li class="chapter" data-level="8" data-path="brainstorm-bot.html"><a href="brainstorm-bot.html"><i class="fa fa-check"></i><b>8</b> The Brainstorm Bot</a></li>
-<li class="chapter" data-level="9" data-path="matrix-bot.html"><a href="matrix-bot.html"><i class="fa fa-check"></i><b>9</b> The Matrix Bot</a></li>
+<li class="chapter" data-level="8" data-path="brainstorm-bot.html"><a href="brainstorm-bot.html"><i class="fa fa-check"></i><b>8</b> The Brainstorm Bot</a><ul>
+<li class="chapter" data-level="8.1" data-path="brainstorm-bot.html"><a href="brainstorm-bot.html#search-features"><i class="fa fa-check"></i><b>8.1</b> Search features</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="matrix-bot.html"><a href="matrix-bot.html"><i class="fa fa-check"></i><b>9</b> The Matrix Bot</a><ul>
+<li class="chapter" data-level="9.1" data-path="matrix-bot.html"><a href="matrix-bot.html#introduction"><i class="fa fa-check"></i><b>9.1</b> Introduction</a></li>
+<li class="chapter" data-level="9.2" data-path="matrix-bot.html"><a href="matrix-bot.html#what-it-is"><i class="fa fa-check"></i><b>9.2</b> What it is</a></li>
+<li class="chapter" data-level="9.3" data-path="matrix-bot.html"><a href="matrix-bot.html#example-1"><i class="fa fa-check"></i><b>9.3</b> Example</a></li>
+<li class="chapter" data-level="9.4" data-path="matrix-bot.html"><a href="matrix-bot.html#botstrapping"><i class="fa fa-check"></i><b>9.4</b> Botstrapping</a></li>
+<li class="chapter" data-level="9.5" data-path="matrix-bot.html"><a href="matrix-bot.html#how-does-it-work"><i class="fa fa-check"></i><b>9.5</b> How does it work?</a></li>
+</ul></li>
 <li class="part"><span><b>IV Advanced</b></span></li>
-<li class="chapter" data-level="10" data-path="higher-order-widgets.html"><a href="higher-order-widgets.html"><i class="fa fa-check"></i><b>10</b> Higher order widgets</a></li>
-<li class="chapter" data-level="11" data-path="non-entity-widgets.html"><a href="non-entity-widgets.html"><i class="fa fa-check"></i><b>11</b> Non-entity widgets</a></li>
-<li class="chapter" data-level="12" data-path="optional-arguments.html"><a href="optional-arguments.html"><i class="fa fa-check"></i><b>12</b> Optional arguments</a></li>
+<li class="chapter" data-level="10" data-path="higher-order-widgets.html"><a href="higher-order-widgets.html"><i class="fa fa-check"></i><b>10</b> Higher order widgets</a><ul>
+<li class="chapter" data-level="10.1" data-path="higher-order-widgets.html"><a href="higher-order-widgets.html#children-of-wealth"><i class="fa fa-check"></i><b>10.1</b> Children of wealth</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="non-entity-widgets.html"><a href="non-entity-widgets.html"><i class="fa fa-check"></i><b>11</b> Non-entity widgets</a><ul>
+<li class="chapter" data-level="11.1" data-path="non-entity-widgets.html"><a href="non-entity-widgets.html#motivation"><i class="fa fa-check"></i><b>11.1</b> Motivation</a></li>
+<li class="chapter" data-level="11.2" data-path="non-entity-widgets.html"><a href="non-entity-widgets.html#non-entity-disco-definition-types"><i class="fa fa-check"></i><b>11.2</b> Disco Definition Types</a></li>
+<li class="chapter" data-level="11.3" data-path="non-entity-widgets.html"><a href="non-entity-widgets.html#searching-fund-text"><i class="fa fa-check"></i><b>11.3</b> Searching fund text</a></li>
+<li class="chapter" data-level="11.4" data-path="non-entity-widgets.html"><a href="non-entity-widgets.html#from-funds-to-entities"><i class="fa fa-check"></i><b>11.4</b> From funds to entities</a></li>
+<li class="chapter" data-level="11.5" data-path="non-entity-widgets.html"><a href="non-entity-widgets.html#non-entity-converters"><i class="fa fa-check"></i><b>11.5</b> “Converters”</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="optional-arguments.html"><a href="optional-arguments.html"><i class="fa fa-check"></i><b>12</b> Optional arguments</a><ul>
+<li class="chapter" data-level="12.1" data-path="optional-arguments.html"><a href="optional-arguments.html#opt-events"><i class="fa fa-check"></i><b>12.1</b> Event invitees and attendees</a></li>
+<li class="chapter" data-level="12.2" data-path="optional-arguments.html"><a href="optional-arguments.html#date-ranges"><i class="fa fa-check"></i><b>12.2</b> Date ranges</a></li>
+<li class="chapter" data-level="12.3" data-path="optional-arguments.html"><a href="optional-arguments.html#graduate-undergraduate-attendee"><i class="fa fa-check"></i><b>12.3</b> Graduate, undergraduate, attendee</a></li>
+<li class="chapter" data-level="12.4" data-path="optional-arguments.html"><a href="optional-arguments.html#workarounds-inactive-only"><i class="fa fa-check"></i><b>12.4</b> Workarounds: inactive only</a></li>
+</ul></li>
 <li class="part"><span><b>V Related tools</b></span></li>
-<li class="chapter" data-level="13" data-path="add-on-packages.html"><a href="add-on-packages.html"><i class="fa fa-check"></i><b>13</b> Add-on packages</a></li>
+<li class="chapter" data-level="13" data-path="add-on-packages.html"><a href="add-on-packages.html"><i class="fa fa-check"></i><b>13</b> Add-on packages</a><ul>
+<li class="chapter" data-level="13.1" data-path="add-on-packages.html"><a href="add-on-packages.html#discoappend"><i class="fa fa-check"></i><b>13.1</b> <code>discoappend</code></a></li>
+<li class="chapter" data-level="13.2" data-path="add-on-packages.html"><a href="add-on-packages.html#discovcr"><i class="fa fa-check"></i><b>13.2</b> <code>discovcr</code></a></li>
+<li class="chapter" data-level="13.3" data-path="add-on-packages.html"><a href="add-on-packages.html#discoscape"><i class="fa fa-check"></i><b>13.3</b> <code>discoscape</code></a></li>
+</ul></li>
 <li class="part"><span><b>VI Examples</b></span></li>
 <li class="chapter" data-level="14" data-path="ex-political-economy.html"><a href="ex-political-economy.html"><i class="fa fa-check"></i><b>14</b> Political economy list</a></li>
 <li class="chapter" data-level="15" data-path="ex-lybunt.html"><a href="ex-lybunt.html"><i class="fa fa-check"></i><b>15</b> LYBUNTs</a></li>
-<li class="chapter" data-level="16" data-path="ex-recent-band-parents.html"><a href="ex-recent-band-parents.html"><i class="fa fa-check"></i><b>16</b> Recent Band Parents</a></li>
-<li class="chapter" data-level="17" data-path="ex-near-builder.html"><a href="ex-near-builder.html"><i class="fa fa-check"></i><b>17</b> Nearing Builder of Berkeley Status</a></li>
-<li class="chapter" data-level="18" data-path="ex-sim-donors.html"><a href="ex-sim-donors.html"><i class="fa fa-check"></i><b>18</b> Donors who aren’t degreeholders</a></li>
+<li class="chapter" data-level="16" data-path="ex-recent-band-parents.html"><a href="ex-recent-band-parents.html"><i class="fa fa-check"></i><b>16</b> Recent Band Parents</a><ul>
+<li class="chapter" data-level="16.1" data-path="ex-recent-band-parents.html"><a href="ex-recent-band-parents.html#recent-band-members"><i class="fa fa-check"></i><b>16.1</b> Recent band members</a></li>
+<li class="chapter" data-level="16.2" data-path="ex-recent-band-parents.html"><a href="ex-recent-band-parents.html#find-their-parents"><i class="fa fa-check"></i><b>16.2</b> Find their parents</a></li>
+<li class="chapter" data-level="16.3" data-path="ex-recent-band-parents.html"><a href="ex-recent-band-parents.html#who-live-close-enough"><i class="fa fa-check"></i><b>16.3</b> Who live close enough</a></li>
+<li class="chapter" data-level="16.4" data-path="ex-recent-band-parents.html"><a href="ex-recent-band-parents.html#how-many"><i class="fa fa-check"></i><b>16.4</b> How many?</a></li>
+<li class="chapter" data-level="16.5" data-path="ex-recent-band-parents.html"><a href="ex-recent-band-parents.html#householding"><i class="fa fa-check"></i><b>16.5</b> Householding</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="ex-near-builder.html"><a href="ex-near-builder.html"><i class="fa fa-check"></i><b>17</b> Nearing Builder of Berkeley Status</a><ul>
+<li class="chapter" data-level="17.1" data-path="ex-near-builder.html"><a href="ex-near-builder.html#defining-close"><i class="fa fa-check"></i><b>17.1</b> Defining close</a></li>
+<li class="chapter" data-level="17.2" data-path="ex-near-builder.html"><a href="ex-near-builder.html#householding-1"><i class="fa fa-check"></i><b>17.2</b> Householding</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="ex-sim-donors.html"><a href="ex-sim-donors.html"><i class="fa fa-check"></i><b>18</b> Donors who aren’t degreeholders</a><ul>
+<li class="chapter" data-level="18.1" data-path="ex-sim-donors.html"><a href="ex-sim-donors.html#why-it-works"><i class="fa fa-check"></i><b>18.1</b> Why it works</a></li>
+</ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="test-cdw.html"><a href="test-cdw.html"><i class="fa fa-check"></i><b>A</b> Test your database set up</a><ul>
 <li class="chapter" data-level="A.1" data-path="test-cdw.html"><a href="test-cdw.html#test-your-connection"><i class="fa fa-check"></i><b>A.1</b> Test your connection</a></li>
@@ -133,8 +195,31 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="A.4" data-path="test-cdw.html"><a href="test-cdw.html#installing-getcdw"><i class="fa fa-check"></i><b>A.4</b> Installing getcdw</a></li>
 <li class="chapter" data-level="A.5" data-path="test-cdw.html"><a href="test-cdw.html#testing-getcdw"><i class="fa fa-check"></i><b>A.5</b> Testing getcdw</a></li>
 </ul></li>
-<li class="chapter" data-level="B" data-path="cheat-sheet.html"><a href="cheat-sheet.html"><i class="fa fa-check"></i><b>B</b> Cheat Sheet</a></li>
-<li class="chapter" data-level="C" data-path="how-it-works.html"><a href="how-it-works.html"><i class="fa fa-check"></i><b>C</b> How does it work?</a></li>
+<li class="chapter" data-level="B" data-path="cheat-sheet.html"><a href="cheat-sheet.html"><i class="fa fa-check"></i><b>B</b> Cheat Sheet</a><ul>
+<li class="chapter" data-level="B.1" data-path="cheat-sheet.html"><a href="cheat-sheet.html#general"><i class="fa fa-check"></i><b>B.1</b> General</a></li>
+<li class="chapter" data-level="B.2" data-path="cheat-sheet.html"><a href="cheat-sheet.html#output"><i class="fa fa-check"></i><b>B.2</b> Output</a></li>
+<li class="chapter" data-level="B.3" data-path="cheat-sheet.html"><a href="cheat-sheet.html#code-lookup"><i class="fa fa-check"></i><b>B.3</b> Code lookup</a></li>
+<li class="chapter" data-level="B.4" data-path="cheat-sheet.html"><a href="cheat-sheet.html#text-search"><i class="fa fa-check"></i><b>B.4</b> Text search</a></li>
+<li class="chapter" data-level="B.5" data-path="cheat-sheet.html"><a href="cheat-sheet.html#other"><i class="fa fa-check"></i><b>B.5</b> Other</a></li>
+</ul></li>
+<li class="chapter" data-level="C" data-path="updating.html"><a href="updating.html"><i class="fa fa-check"></i><b>C</b> Updating your installation</a><ul>
+<li class="chapter" data-level="C.1" data-path="updating.html"><a href="updating.html#when-do-i-need-to-update-the-disco-engine"><i class="fa fa-check"></i><b>C.1</b> When do I need to update the Disco Engine?</a></li>
+<li class="chapter" data-level="C.2" data-path="updating.html"><a href="updating.html#what-version-am-i-using-right-now"><i class="fa fa-check"></i><b>C.2</b> What version am I using right now?</a></li>
+<li class="chapter" data-level="C.3" data-path="updating.html"><a href="updating.html#whats-the-most-recent-version"><i class="fa fa-check"></i><b>C.3</b> What’s the most recent version?</a></li>
+<li class="chapter" data-level="C.4" data-path="updating.html"><a href="updating.html#how-do-i-update"><i class="fa fa-check"></i><b>C.4</b> How do I update?</a></li>
+</ul></li>
+<li class="chapter" data-level="D" data-path="how-it-works.html"><a href="how-it-works.html"><i class="fa fa-check"></i><b>D</b> How does it work?</a><ul>
+<li class="chapter" data-level="D.1" data-path="how-it-works.html"><a href="how-it-works.html#a-widget-as-a-sql-template"><i class="fa fa-check"></i><b>D.1</b> A Widget as a SQL template</a></li>
+<li class="chapter" data-level="D.2" data-path="how-it-works.html"><a href="how-it-works.html#a-template-as-a-data-structure"><i class="fa fa-check"></i><b>D.2</b> A template as a data structure</a></li>
+<li class="chapter" data-level="D.3" data-path="how-it-works.html"><a href="how-it-works.html#non-standard-evaluation"><i class="fa fa-check"></i><b>D.3</b> Non-standard evaluation</a></li>
+<li class="chapter" data-level="D.4" data-path="how-it-works.html"><a href="how-it-works.html#combining-simple-definitions"><i class="fa fa-check"></i><b>D.4</b> Combining simple definitions</a><ul>
+<li class="chapter" data-level="D.4.1" data-path="how-it-works.html"><a href="how-it-works.html#atomic-vs.-complex-definitions"><i class="fa fa-check"></i><b>D.4.1</b> “Atomic” vs. “Complex” definitions</a></li>
+<li class="chapter" data-level="D.4.2" data-path="how-it-works.html"><a href="how-it-works.html#operations-on-definitions"><i class="fa fa-check"></i><b>D.4.2</b> Operations on definitions</a></li>
+</ul></li>
+<li class="chapter" data-level="D.5" data-path="how-it-works.html"><a href="how-it-works.html#re-visiting-to_sql"><i class="fa fa-check"></i><b>D.5</b> Re-visiting <code>to_sql</code></a></li>
+<li class="chapter" data-level="D.6" data-path="how-it-works.html"><a href="how-it-works.html#seeing-it-all-in-action"><i class="fa fa-check"></i><b>D.6</b> Seeing it all in action</a></li>
+<li class="chapter" data-level="D.7" data-path="how-it-works.html"><a href="how-it-works.html#for-further-study"><i class="fa fa-check"></i><b>D.7</b> For further study</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
