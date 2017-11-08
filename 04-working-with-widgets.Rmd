@@ -24,7 +24,7 @@ widget_for("giving")
 
 Once you've found the widget you're looking for, you can get additional information using R's built-in help system. Just type a question mark followed by the name of the widget, e.g. `?gave_to_area`.
 
-## Codes and synonyms
+## Codes and synonyms {#working-with-codes-synonyms}
 
 You may have noticed in previous examples that widgets work with exact codes, such as `in_unit_portfolio(BU)` or with *synonyms*, such as `in_unit_portfolio(business)`. Synonyms will always be in lower-case, and may include any letter of the alphabet or the underscore "_" character, and nothing else. 
 

@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="index.html">
-<link rel="next" href="r-intro.html">
+<link rel="prev" href="ex-sim-donors.html">
+<link rel="next" href="test-cdw.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -246,85 +246,142 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="what-is-disco" class="section level1">
-<h1><span class="header-section-number">2</span> What is the Disco Engine?</h1>
-<p>If you happen to have an APRA account, this <a href="http://connections.aprahome.org/blog/building-the-discovery-engine">article in APRA Connections magazine</a> is a good introduction. If you don’t have an APRA account, then read on . . .</p>
-<p>The Discovery Engine, or Disco Engine, is a prospecting tool that empowers Prospect Development staff to precisely define (and pull together) constitutencies for their fundraising clients. It does so by providing two complementary resources: a <em>vocabulary and grammar</em> for specifying constituencies, and tools to facilitate <em>discovery</em> of constituencies.</p>
-<div id="vocabulary-and-grammar" class="section level2">
-<h2><span class="header-section-number">2.1</span> Vocabulary and Grammar</h2>
-<p>The Disco Engine is based on the idea that a constituency can be defined using one or more <em>predicates</em> (such as “majored in math” or “attended a Discover Cal event”), where multiple predicates are combined using “and”, “or”, or “but not.” To illustrate, here is a sample constituency definition for the department of mathematics:</p>
-<blockquote>
-<p><em>majored in mathematics</em> <strong>or</strong> <em>has given to the math department</em></p>
-</blockquote>
-<p>The constituency is then just any individual who fits the definition.</p>
-<p>The most basic tool that the Disco Engine provides is called a <a href="working-with-widgets.html#working-with-widgets">widget</a>, which is a tool for generating a simple predicate. For instance, the widget <code>majored_in</code> allows us to build the first part of our example definition:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">majored_in</span>(mathematics)</code></pre></div>
-<p>Furthermore, the Disco Engine provides the following connectors to <em>combine</em> predicates in order to create more complex definitions:</p>
+<div id="ex-fec" class="section level1">
+<h1><span class="header-section-number">19</span> Utilizing FEC disclosure data</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># i always begin by loading the disco engine if it isn&#39;t already loaded</span>
+<span class="kw">library</span>(discoveryengine)</code></pre></div>
+<p>Prospect Analysis regularly screens various public data against CADS, including FEC disclosures. This data makes its way into some of our predictive models, but on occasion it is useful to use the data directly.</p>
+<div id="basics" class="section level2">
+<h2><span class="header-section-number">19.1</span> Basics</h2>
+<p>The Disco Engine provides the following FEC widgets:</p>
 <ul>
-<li><code>%and%</code></li>
-<li><code>%or%</code></li>
-<li><code>%but_not%</code></li>
+<li><code>fec_gave_to_committee</code></li>
+<li><code>fec_gave_to_candidate</code></li>
+<li><code>fec_gave_to_category</code></li>
 </ul>
-<p>So in the language of the Disco Engine, our definition would look like:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">majored_in</span>(mathematics) <span class="op">%or%</span><span class="st"> </span><span class="kw">gave_to_department</span>(mathematics)</code></pre></div>
-<p>There is no limit to the number of predicates that can be strung together to form a definition:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">majored_in</span>(mathematics) <span class="op">%or%</span>
-<span class="st">    </span><span class="kw">gave_to_department</span>(mathematics) <span class="op">%and%</span>
-<span class="st">    </span><span class="kw">lives_in_msa</span>(san_francisco)</code></pre></div>
-<p>These definitions can quickly become very complex. To manage that complexity, the Disco Engine provides the ability to <em>assign</em> names to definitions, that can then be used to construct more complex definitions:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">is_math_constituent =<span class="st"> </span><span class="kw">majored_in</span>(mathematics) <span class="op">%or%</span><span class="st"> </span>
-<span class="st">    </span><span class="kw">gave_to_department</span>(mathematics)
+<p>Since the names of all of these related widgets begin with the same prefix, they are easy to find using RStudio’s auto-completion:</p>
+<div class="figure">
+<img src="images/fec-widgets-autocomplete.png" alt="just type fec_" />
+<p class="caption">just type “fec_”</p>
+</div>
+<p>The candidate and committee widgets should be pretty self-explanatory. <code>fec_gave_to_category</code> is based on a categorization of PACs and other committees done by the <a href="https://www.opensecrets.org/">Center for Responsive Politics (opensecrets.org)</a>.</p>
+<p>All of the widgets have the same interface as the giving widgets, meaning you can specify date ranges and minimum amounts when using them.</p>
+<p>For example, to find donors to Kamala Harris’s CA senate campaign who gave at least $500 between January 1, 2016 and November 1, 2016:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fec_gave_to_candidate</span>(harris_kamala_d, <span class="dt">at_least =</span> <span class="dv">500</span>, 
+                      <span class="dt">from =</span> <span class="dv">20160101</span>, <span class="dt">to =</span> <span class="dv">20161101</span>)</code></pre></div>
+<p>As that example shows, the <a href="working-with-widgets.html#working-with-codes-synonyms">system of codes and synonyms</a> works the same way with the FEC widgets as with any other widget. <a href="working-with-widgets.html#synonym-search">Synonym search</a> is particularly useful with these widgets:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fec_gave_to_category</span>(?abortion)</code></pre></div>
+<pre><code>##                              synonym  code
+##  abortion_policy_pro_abortion_rights J7150
+##        abortion_policy_anti_abortion J7120</code></pre>
+</div>
+<div id="example-engineering-prospects" class="section level2">
+<h2><span class="header-section-number">19.2</span> Example: Engineering Prospects</h2>
+<p>A fundraiser might like to know if any of her prospects have recently made sizable political contributions:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># as with other widgets, leaving the committee code blank means i&#39;m looking</span>
+<span class="co"># for giving to any committee</span>
+political_engineering_prospect =<span class="st"> </span>
+<span class="st">    </span><span class="kw">in_unit_portfolio</span>(engineering) <span class="op">%and%</span>
+<span class="st">    </span><span class="kw">fec_gave_to_committee</span>(<span class="dt">at_least =</span> <span class="dv">5000</span>, <span class="dt">from =</span> <span class="dv">20170101</span>, <span class="dt">to =</span> <span class="dv">20171031</span>)
 
-local_math_constituent =<span class="st"> </span>is_math_constituent <span class="op">%and%</span>
-<span class="st">    </span><span class="kw">lives_in_msa</span>(san_francisco)
-
-parent_of_local_math_constituent =<span class="st"> </span><span class="kw">parent_of</span>(local_math_constituent)</code></pre></div>
-<p>Together, the collection of predicates, the logical operators, and the ability to assign names form an expressive language for describing custom constituencies for a variety of purposes. Best of all, the Disco Engine gives us the ability to pull the IDs of a defined constituency from the database!</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">display</span>(parent_of_local_math_constituent)</code></pre></div>
-<pre><code>## # A tibble: 526 x 1
+<span class="kw">display</span>(political_engineering_prospect)</code></pre></div>
+<pre><code>## # A tibble: 32 x 1
 ##    entity_id
 ##        &lt;dbl&gt;
-##  1      1168
-##  2      4522
-##  3      6322
-##  4      6326
-##  5      7644
-##  6     11512
-##  7     23989
-##  8     24151
-##  9     24247
-## 10     26492
-## # ... with 516 more rows</code></pre>
+##  1       616
+##  2      5881
+##  3      9313
+##  4     16641
+##  5     17677
+##  6     18893
+##  7     21091
+##  8     22653
+##  9     23207
+## 10     24247
+## # ... with 22 more rows</code></pre>
 </div>
-<div id="facilitating-discovery" class="section level2">
-<h2><span class="header-section-number">2.2</span> Facilitating discovery</h2>
-<p>Having a clear language for prospecting and defining constituencies is nice, but Prospect Development is increasingly being asked to do affinity-based prospecting, which often involves defining new constituencies that don’t have clear-cut coding associated with them yet, or digging into student activity, interest, affiliation, and other codes to figure out which ones might fit the constituency to be defined. That need motivates the Disco Engine’s bots, such as the <a href="brainstorm-bot.html#brainstorm-bot">brainstorm bot</a> and the <a href="matrix-bot.html#matrix-bot">matrix bot</a>. We’ve already seen examples of using predicates to find individuals, but bots allow us to search for predicates.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">brainstorm_bot</span>(<span class="st">&quot;robot*&quot;</span>, <span class="st">&quot;artificial intelligence&quot;</span>, <span class="st">&quot;AI&quot;</span>)</code></pre></div>
-<pre><code>## Committee categorization comes from the Center for Responsive Politics (www.OpenSecrets.org)</code></pre>
-<pre><code>## attended_event 
-##     6724: Haas East Bay Chp Robotic Event 06-18-14
+<div id="example-environmental-interest" class="section level2">
+<h2><span class="header-section-number">19.3</span> Example: Environmental Interest</h2>
+<p>We can use political giving to identify constituent interest in the environment. First, I’ll use the lookup features to identify the right <code>category</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fec_gave_to_category</span>(?environment)</code></pre></div>
+<pre><code>##                                      synonym  code
+##  environmental_services_equipment_consulting E2000
+##                         environmental_policy JE300
+##     energy_natural_resources_and_environment E0000</code></pre>
+<p>In this case, “environmental policy” is an ideological category, while the other two are industry PACs. Next, I might look for people who have expressed an interest in the environment by making political contributions to environmental policy organizations, but who have not already been coded with the</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">has_uncoded_environment_interest =<span class="st"> </span>
+<span class="st">    </span><span class="kw">fec_gave_to_category</span>(environmental_policy) <span class="op">%but_not%</span>
+<span class="st">    </span><span class="kw">has_interest</span>(environment)
+
+<span class="kw">display</span>(has_uncoded_environment_interest)</code></pre></div>
+<pre><code>## # A tibble: 369 x 1
+##    entity_id
+##        &lt;dbl&gt;
+##  1      1326
+##  2      4048
+##  3      4556
+##  4      7411
+##  5      8725
+##  6     11994
+##  7     12584
+##  8     14922
+##  9     15245
+## 10     15454
+## # ... with 359 more rows</code></pre>
+</div>
+<div id="bots" class="section level2">
+<h2><span class="header-section-number">19.4</span> Bots</h2>
+<p>Just like any other widget, FEC widgets are plugged in to the <a href="brainstorm-bot.html#brainstorm-bot">Brainstorm Bot</a> and <a href="matrix-bot.html#matrix-bot">Matrix Bot</a>. So, for instance:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">brainstorm_bot</span>(<span class="st">&quot;cannabis&quot;</span>)</code></pre></div>
+<pre><code>## fec_gave_to_category 
+##     H4700: Pharmaceutical cannabis
 ## fec_gave_to_committee 
-##     C00521765: LIQUID ROBOTICS INC POLITICAL ACTION COMMITTEE (LIQUID ROBOTICS PAC)
-##     C00582767: CAMPAIGN FOR A FEDERAL ROBOTICS COMMISSION
-##     C00144261: APPRAISAL INSTITUTE PAC (AI PAC)
-##     C00635748: AI PAC
-##     C00596908: ROBOTECHNOLOGY INC C.R.
-## has_interest 
-##     AIN: Artificial Intelligence
-##     ROB: Robotics
+##     C00635896: CANNABIS COLLECTIVE
+##     C00628610: AMERICAN CANNABIS POLITICAL ACTION COMMITTEE
+##     C00569723: AMERICANS FOR CANNABIS LEGALIZATION
+##     C00569723: AMEICANS FOR CANNABIS LEGALIZATION
+##     C00653444: CANNABIS SUPER PAC
+##     C00561159: SMART CANNABIS REFORM
+##     C00572545: MISSISSIPPI ALLIANCE FOR CANNABIS
+##     C00534529: FEDERAL CANNABIS SUPERPAC
+##     C00530683: AMERICANS FOR CANNABIS REFORM
+##     C00647685: THE CANNABIS FUND
+##     C00613356: THE ACCC CANNABIS POLITICAL ACTION COMMITTEE
+##     C00528026: NATIONAL CANNABIS INDUSTRY ASSOCIATION PAC
+##     C00534529: MEDICINAL CANNABIS SUPERPAC
 ## participated_in 
-##     ENRO: Cal Robotics
-##     UROB: Robotmedia Presents</code></pre>
+##     UCBS: Cannabis Action Network</code></pre>
+<p>Or:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">matrix_bot</span>(<span class="kw">fec_gave_to_candidate</span>(sanders_bernard))</code></pre></div>
+<pre><code>## fec_gave_to_candidate 
+##     S4VT00033: SANDERS, BERNARD
+##     P60007168: SANDERS, BERNARD
+##     H6FL23063: CANOVA, TIMOTHY A.
+##     P20003984: STEIN, JILL
+##     H6NV04012: FLORES, LUCY
+##     H6NY19243: TEACHOUT, ZEPHYR
+##     P40002545: KUCINICH, DENNIS J
+##     H6OH23033: KUCINICH, DENNIS J
+## gave_to_department 
+##     PACS: Peace &amp; Conflict Studies
+##     EGP: Emma Goldman Papers Project
+##     HCSJ: Henderson Center
+##     MN: Magnes Collection
+## has_interest 
+##     DEM: Democratic Politics</code></pre>
 
 </div>
 </div>
+
+
+
             </section>
 
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="r-intro.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="ex-sim-donors.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="test-cdw.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -344,7 +401,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/tarakc02/discodocs/edit/master/005-what-is-disco.Rmd",
+"link": "https://github.com/tarakc02/discodocs/edit/master/80-example-06.Rmd",
 "text": "Edit"
 },
 "download": null,

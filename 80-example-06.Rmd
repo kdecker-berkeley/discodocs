@@ -1,0 +1,83 @@
+# Utilizing FEC disclosure data {#ex-fec}
+
+```{r ex-fec-loadlib, message = FALSE}
+# i always begin by loading the disco engine if it isn't already loaded
+library(discoveryengine)
+```
+
+Prospect Analysis regularly screens various public data against CADS, including FEC disclosures. This data makes its way into some of our predictive models, but on occasion it is useful to use the data directly. 
+
+## Basics
+
+The Disco Engine provides the following FEC widgets:
+
+- `fec_gave_to_committee`
+- `fec_gave_to_candidate`
+- `fec_gave_to_category`
+
+Since the names of all of these related widgets begin with the same prefix, they are easy to find using RStudio's auto-completion:
+
+![just type "fec_"](images/fec-widgets-autocomplete.png)
+
+The candidate and committee widgets should be pretty self-explanatory. `fec_gave_to_category` is based on a categorization of PACs and other committees done by the [Center for Responsive Politics (opensecrets.org)](https://www.opensecrets.org/). 
+
+All of the widgets have the same interface as the giving widgets, meaning you can specify date ranges and minimum amounts when using them. 
+
+For example, to find donors to Kamala Harris's CA senate campaign who gave at least $500 between January 1, 2016 and November 1, 2016:
+
+```{r, eval = FALSE}
+fec_gave_to_candidate(harris_kamala_d, at_least = 500, 
+                      from = 20160101, to = 20161101)
+```
+
+As that example shows, the [system of codes and synonyms](#working-with-codes-synonyms) works the same way with the FEC widgets as with any other widget. [Synonym search](#synonym-search) is particularly useful with these widgets:
+
+```{r, message = FALSE}
+fec_gave_to_category(?abortion)
+```
+
+## Example: Engineering Prospects
+
+A fundraiser might like to know if any of her prospects have recently made sizable political contributions:
+
+```{r ex-fec-poli-eng, cache = TRUE}
+# as with other widgets, leaving the committee code blank means i'm looking
+# for giving to any committee
+political_engineering_prospect = 
+    in_unit_portfolio(engineering) %and%
+    fec_gave_to_committee(at_least = 5000, from = 20170101, to = 20171031)
+
+display(political_engineering_prospect)
+```
+
+## Example: Environmental Interest
+
+We can use political giving to identify constituent interest in the environment. First, I'll use the lookup features to identify the right `category`:
+
+```{r ex-fec-find-env, cache = TRUE, message = FALSE}
+fec_gave_to_category(?environment)
+```
+
+In this case, "environmental policy" is an ideological category, while the other two are industry PACs. Next, I might look for people who have expressed an interest in the environment by making political contributions to environmental policy organizations, but who have not already been coded with the 
+
+```{r ex-fec-env-interest, cache = TRUE, message = FALSE}
+has_uncoded_environment_interest = 
+    fec_gave_to_category(environmental_policy) %but_not%
+    has_interest(environment)
+
+display(has_uncoded_environment_interest)
+```
+
+## Bots
+
+Just like any other widget, FEC widgets are plugged in to the [Brainstorm Bot](#brainstorm-bot) and [Matrix Bot](#matrix-bot). So, for instance:
+
+```{r ex-fec-brainstorm, cache = TRUE, message = FALSE}
+brainstorm_bot("cannabis")
+```
+
+Or:
+
+```{r ex-fec-bernie-matrix, cache = TRUE, message = FALSE}
+matrix_bot(fec_gave_to_candidate(sanders_bernard))
+```
