@@ -30,6 +30,12 @@ In order to manage the updating process smoothly, we'll use another package call
 update.packages("devtools")
 ```
 
+If `devtools` is already up-to-date, nothing will happen and you'll be immediately prompted with the `>` prompt. Otherwise, you'll see some messages about the installation process, ending with something like 
+
+```
+package 'devtools' successfully unpacked and MD5 sums checked
+```
+
 Now we're ready to update the Disco Engine. To do that, just type:
 
 ```{r, eval = FALSE}

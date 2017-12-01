@@ -184,6 +184,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>We’ve found that updating goes most smoothly when you start with a fresh R session. So if you already have RStudio open, press Ctrl+Shift+F10 (or use the menu and navigate to Session | Restart R). This will restart R without restarting RStudio.</p>
 <p>In order to manage the updating process smoothly, we’ll use another package called <code>devtools</code>. We use <code>devtools</code> to install the Disco Engine in the first place, so you likely already have it installed. But it doesn’t hurt to check for updates:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">update.packages</span>(<span class="st">&quot;devtools&quot;</span>)</code></pre></div>
+<p>If <code>devtools</code> is already up-to-date, nothing will happen and you’ll be immediately prompted with the <code>&gt;</code> prompt. Otherwise, you’ll see some messages about the installation process, ending with something like</p>
+<pre><code>package &#39;devtools&#39; successfully unpacked and MD5 sums checked</code></pre>
 <p>Now we’re ready to update the Disco Engine. To do that, just type:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;tarakc02/discoveryengine&quot;</span>,
                          <span class="dt">dependencies =</span> <span class="ot">TRUE</span>,
