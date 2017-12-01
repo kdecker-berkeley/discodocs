@@ -25,7 +25,9 @@ The welcome message above includes a link to the Disco Engine [NEWS page](https:
 We've found that updating goes most smoothly when you start with a fresh R session. So if you already have RStudio open, press Ctrl+Shift+F10 (or use the menu and navigate to Session | Restart R). This will restart R without restarting RStudio. Next, just type:
 
 ```{r, eval = FALSE}
-devtools::install_github("tarakc02/discoveryengine")
+devtools::install_github("tarakc02/discoveryengine",
+                         dependencies = TRUE,
+                         upgrade_dependencies = TRUE)
 ```
 
 That should do it! The `devtools` package that is used to do the installation is smart enough to make any other necessary updates to other packages that `discoveryengine` depends on, so typing that one line might result in updates to several packages. 
