@@ -181,11 +181,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="how-do-i-update" class="section level2">
 <h2><span class="header-section-number">B.4</span> How do I update?</h2>
-<p>We’ve found that updating goes most smoothly when you start with a fresh R session. So if you already have RStudio open, press Ctrl+Shift+F10 (or use the menu and navigate to Session | Restart R). This will restart R without restarting RStudio. Next, just type:</p>
+<p>We’ve found that updating goes most smoothly when you start with a fresh R session. So if you already have RStudio open, press Ctrl+Shift+F10 (or use the menu and navigate to Session | Restart R). This will restart R without restarting RStudio.</p>
+<p>In order to manage the updating process smoothly, we’ll use another package called <code>devtools</code>. We use <code>devtools</code> to install the Disco Engine in the first place, so you likely already have it installed. But it doesn’t hurt to check for updates:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">update.packages</span>(<span class="st">&quot;devtools&quot;</span>)</code></pre></div>
+<p>Now we’re ready to update the Disco Engine. To do that, just type:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;tarakc02/discoveryengine&quot;</span>,
                          <span class="dt">dependencies =</span> <span class="ot">TRUE</span>,
                          <span class="dt">upgrade_dependencies =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<p>That should do it! The <code>devtools</code> package that is used to do the installation is smart enough to make any other necessary updates to other packages that <code>discoveryengine</code> depends on, so typing that one line might result in updates to several packages.</p>
+<p>That should do it! The <code>devtools</code> package that’s managing the update is smart enough to make any other necessary updates to other packages that <code>discoveryengine</code> depends on, so typing that one line might result in updates to several packages.</p>
 <p>When you do that, one of these things will happen:</p>
 <ol style="list-style-type: decimal">
 <li>You see a message that starts with “Skipping install of ‘discoveryengine’ from a github remote . . .”: That just means you’re already up-to-date and don’t need to do anything more.</li>
