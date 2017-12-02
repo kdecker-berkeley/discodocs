@@ -313,16 +313,16 @@ args &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt"
 <pre><code>## # A tibble: 3,499 x 1
 ##    entity_id
 ##        &lt;dbl&gt;
-##  1    448201
-##  2    218218
-##  3     85083
-##  4       619
-##  5       691
-##  6    536960
-##  7    304307
-##  8     13842
-##  9     11314
-## 10    281422
+##  1    188919
+##  2    127920
+##  3    138295
+##  4    133931
+##  5     90351
+##  6    177574
+##  7    178163
+##  8    190848
+##  9    191395
+## 10    187864
 ## # ... with 3,489 more rows</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## and we can use multiple affiliations:
 is_constituent =<span class="st"> </span><span class="kw">has_affiliation</span>(<span class="kw">c</span>(<span class="st">&quot;M2&quot;</span>, <span class="st">&quot;MA4&quot;</span>))
@@ -330,16 +330,16 @@ is_constituent =<span class="st"> </span><span class="kw">has_affiliation</span>
 <pre><code>## # A tibble: 2,682 x 1
 ##    entity_id
 ##        &lt;dbl&gt;
-##  1    934020
-##  2    934674
-##  3     26787
-##  4    703367
-##  5    704361
-##  6    679051
-##  7    672896
-##  8    638501
-##  9    702139
-## 10    745898
+##  1    176394
+##  2    138510
+##  3    139176
+##  4    132678
+##  5    469074
+##  6    465508
+##  7    421039
+##  8    396337
+##  9    422257
+## 10    433563
 ## # ... with 2,672 more rows</code></pre>
 <p>Ok! So we’ve now implemented basic widget functionality. We still have a couple of outstanding issues:</p>
 <ol style="list-style-type: decimal">
@@ -368,16 +368,16 @@ is_constituent =<span class="st"> </span><span class="kw">has_affiliation</span>
 <pre><code>## # A tibble: 2,682 x 1
 ##    entity_id
 ##        &lt;dbl&gt;
-##  1    934020
-##  2    934674
-##  3     26787
-##  4    703367
-##  5    704361
-##  6    679051
-##  7    672896
-##  8    638501
-##  9    702139
-## 10    745898
+##  1    176394
+##  2    138510
+##  3    139176
+##  4    132678
+##  5    469074
+##  6    465508
+##  7    421039
+##  8    396337
+##  9    422257
+## 10    433563
 ## # ... with 2,672 more rows</code></pre>
 <p><em>Note that the actual package is a little bit more careful about how it does things here, by using the <a href="https://cran.r-project.org/web/packages/lazyeval/index.html">lazyeval package</a>. To see the actual code used in the Disco Engine, check out <code>prep_dots</code> and <code>partial_sub</code> in <a href="https://github.com/tarakc02/discoveryengine/blob/master/R/helper-utils.R">this discoveryengine source code file</a></em></p>
 </div>
