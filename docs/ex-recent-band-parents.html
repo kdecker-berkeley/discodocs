@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Documentation for the discoveryengine</title>
   <meta name="description" content="Some documentation for the discoveryengine">
-  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.6 and GitBook 2.6.7">
 
   <meta property="og:title" content="Documentation for the discoveryengine" />
   <meta property="og:type" content="book" />
@@ -45,11 +45,14 @@
 
 
 
-<script src="libs/htmlwidgets-0.8/htmlwidgets.js"></script>
-<script src="libs/datatables-binding-0.2/datatables.js"></script>
-<link href="libs/dt-core-1.10.12/css/jquery.dataTables.min.css" rel="stylesheet" />
-<link href="libs/dt-core-1.10.12/css/jquery.dataTables.extra.css" rel="stylesheet" />
-<script src="libs/dt-core-1.10.12/js/jquery.dataTables.min.js"></script>
+<script src="libs/htmlwidgets-1.0/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.3/datatables.js"></script>
+<link href="libs/dt-core-1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.16/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.16/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
 
 
 <style type="text/css">
@@ -184,15 +187,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="17.1" data-path="ex-near-builder.html"><a href="ex-near-builder.html#defining-close"><i class="fa fa-check"></i><b>17.1</b> Defining close</a></li>
 <li class="chapter" data-level="17.2" data-path="ex-near-builder.html"><a href="ex-near-builder.html#householding-1"><i class="fa fa-check"></i><b>17.2</b> Householding</a></li>
 </ul></li>
-<li class="chapter" data-level="18" data-path="ex-sim-donors.html"><a href="ex-sim-donors.html"><i class="fa fa-check"></i><b>18</b> Donors who aren’t degreeholders</a><ul>
-<li class="chapter" data-level="18.1" data-path="ex-sim-donors.html"><a href="ex-sim-donors.html#why-it-works"><i class="fa fa-check"></i><b>18.1</b> Why it works</a></li>
-</ul></li>
+<li class="chapter" data-level="18" data-path="ex-sim-donors.html"><a href="ex-sim-donors.html"><i class="fa fa-check"></i><b>18</b> Donors who aren’t degreeholders</a></li>
 <li class="chapter" data-level="19" data-path="ex-fec.html"><a href="ex-fec.html"><i class="fa fa-check"></i><b>19</b> Utilizing FEC disclosure data</a><ul>
 <li class="chapter" data-level="19.1" data-path="ex-fec.html"><a href="ex-fec.html#basics"><i class="fa fa-check"></i><b>19.1</b> Basics</a></li>
 <li class="chapter" data-level="19.2" data-path="ex-fec.html"><a href="ex-fec.html#example-engineering-prospects"><i class="fa fa-check"></i><b>19.2</b> Example: Engineering Prospects</a></li>
 <li class="chapter" data-level="19.3" data-path="ex-fec.html"><a href="ex-fec.html#example-environmental-interest"><i class="fa fa-check"></i><b>19.3</b> Example: Environmental Interest</a></li>
 <li class="chapter" data-level="19.4" data-path="ex-fec.html"><a href="ex-fec.html#bots"><i class="fa fa-check"></i><b>19.4</b> Bots</a></li>
 </ul></li>
+<li class="chapter" data-level="20" data-path="ex-academic.html"><a href="ex-academic.html"><i class="fa fa-check"></i><b>20</b> Alumni and current students</a></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="test-cdw.html"><a href="test-cdw.html"><i class="fa fa-check"></i><b>A</b> Test your database set up</a><ul>
 <li class="chapter" data-level="A.1" data-path="test-cdw.html"><a href="test-cdw.html#test-your-connection"><i class="fa fa-check"></i><b>A.1</b> Test your connection</a></li>
@@ -256,12 +258,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2><span class="header-section-number">16.1</span> Recent band members</h2>
 <p>First I need to find out how to identify marching band members. I’ll use the <a href="brainstorm-bot.html#brainstorm-bot">brainstorm bot</a>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">brainstorm_bot</span>(<span class="st">&quot;marching band&quot;</span>)</code></pre></div>
-<pre><code>## Committee categorization comes from the Center for Responsive Politics (www.OpenSecrets.org)</code></pre>
 <pre><code>## participated_in 
 ##     MSMB: UC Marching Band Member</code></pre>
 <p>Cool. So definining “recent” as anyone who graduated between 2010 and 2016:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">recent_band_member =<span class="st"> </span><span class="kw">participated_in</span>(MSMB) <span class="op">%and%</span>
-<span class="st">    </span><span class="kw">has_reunion_year</span>(<span class="dv">2010</span><span class="op">:</span><span class="dv">2016</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">recent_band_member =<span class="st"> </span><span class="kw">participated_in</span>(MSMB) %and%
+<span class="st">    </span><span class="kw">has_reunion_year</span>(<span class="dv">2010</span>:<span class="dv">2016</span>)</code></pre></div>
 </div>
 <div id="find-their-parents" class="section level2">
 <h2><span class="header-section-number">16.2</span> Find their parents</h2>
@@ -271,49 +272,48 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="who-live-close-enough" class="section level2">
 <h2><span class="header-section-number">16.3</span> Who live close enough</h2>
 <p>Here I’ll assume that 25 miles is about as far as we can expect one of these band parents to travel in order to attend the event. So my definition should include only those people who live within 25 miles of the Claremont Resort:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">event_prospect =<span class="st"> </span>band_parent <span class="op">%and%</span><span class="st"> </span>
-<span class="st">    </span><span class="kw">lives_near</span>(<span class="st">&quot;Claremont Resort&quot;</span>, <span class="dt">miles =</span> <span class="dv">25</span>)</code></pre></div>
-<pre><code>## Basing results on: Claremont Resort And Spa, Oakland, CA, USA (37.86, -122.24)
-## (confidence that this is the right location: 0.903)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">event_prospect =<span class="st"> </span>band_parent %and%<span class="st"> </span>
+<span class="st">    </span><span class="kw">lives_near</span>(<span class="st">&quot;Claremont Hotel and Spa&quot;</span>, <span class="dt">miles =</span> <span class="dv">25</span>)</code></pre></div>
+<pre><code>## Basing results on: The Claremont Hotel, Evergreen Path, Oakland, Alameda County, California, 94609, United States of America (37.8594, -122.242)</code></pre>
 </div>
 <div id="how-many" class="section level2">
 <h2><span class="header-section-number">16.4</span> How many?</h2>
 <p>Now I just use <code>display</code> and see the number of parents:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">display</span>(event_prospect)</code></pre></div>
-<pre><code>## # A tibble: 87 × 1
+<pre><code>## # A tibble: 99 x 1
 ##    entity_id
 ##        &lt;dbl&gt;
-## 1      14999
-## 2      15672
-## 3      15687
-## 4      46204
-## 5      50302
-## 6     250310
-## 7     271059
-## 8     276471
-## 9     296428
-## 10    317956
-## # ... with 77 more rows</code></pre>
-<p>Notice the first line, before the IDs start, tells us exactly how many individuals are on the list: 87.</p>
+##  1    300284
+##  2    333230
+##  3    455419
+##  4    530859
+##  5    787273
+##  6    787276
+##  7    810367
+##  8    847168
+##  9    847171
+## 10    871195
+## # ... with 89 more rows</code></pre>
+<p>Notice the first line, before the IDs start, tells us exactly how many individuals are on the list: 99.</p>
 </div>
 <div id="householding" class="section level2">
 <h2><span class="header-section-number">16.5</span> Householding</h2>
 <p>But hold up! Looking up some of these IDs, I’m noticing that both members of married couples are on the list. How many households are there here? I check the help for the <code>display</code> function by running <code>?display</code>. And I notice that there is an option called <code>household</code>, and by default it is set to <code>FALSE</code>. So:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">display</span>(event_prospect, <span class="dt">household =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<pre><code>## # A tibble: 48 × 1
+<pre><code>## # A tibble: 58 x 1
 ##    entity_id
 ##        &lt;dbl&gt;
-## 1      14999
-## 2     317956
-## 3     347337
-## 4     874556
-## 5     889893
-## 6     907499
-## 7     988958
-## 8     780532
-## 9     910163
-## 10    910379
-## # ... with 38 more rows</code></pre>
+##  1   1007180
+##  2   1018322
+##  3   3115865
+##  4    983103
+##  5   1001345
+##  6   1006903
+##  7   1016064
+##  8    455419
+##  9    935241
+## 10    810367
+## # ... with 48 more rows</code></pre>
 
 </div>
 </div>
@@ -334,7 +334,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": null,
 "fontsettings": {

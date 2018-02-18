@@ -33,7 +33,7 @@ A number of widgets, including all of the giving-related widgets as well as degr
 
 ## Graduate, undergraduate, attendee
 
-For the most part, widgets have just a small number of options, and they are designed to be easy to get your head around. Should we include inactive records, yes or no? That kind of thing. `majored_in` and `has_degree_from` are two widgets that have a somewhat more complex set of possibilites, arising from the fact that we can pull degreeholders or attendees, graduates or undergraduates. We'll look at some examples:
+For the most part, widgets have just a small number of options, and they are designed to be easy to get your head around. Should we include inactive records, yes or no? That kind of thing. Academic/degree-related widgets, including `majored_in`, `has_degree_from`, `has_degree`, and `minored_in` have a somewhat more complex set of possibilites, arising from the fact that we can pull degreeholders, attendees, or current students, and graduates as well as undergraduates. We'll look at a couple of examples here, for more detailed explanations, [see the academic widgets example](#ex-academic):
 
 `majored_in(womens_studies)`: By default, we look for both graduate and undergraduate degreeholders. Only those who completed a degree in Women's Studies will be included. 
 
@@ -48,17 +48,6 @@ majored_in(
     graduates = TRUE, # not necessary (it's TRUE by default), but more clear
     attendees = TRUE
 ) 
-```
-
-To get any type of attendee, but ignore degreeholders:
-
-```{r, eval = FALSE}
-majored_in(
-    womens_studies,
-    undergraduates = FALSE,
-    graduates = FALSE,
-    attendees = TRUE
-)
 ```
 
 ## Workarounds: inactive only

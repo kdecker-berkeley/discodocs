@@ -1,0 +1,91 @@
+# Alumni and current students {#ex-academic}
+
+Several widgets in the Discovery Engine utilize degree information, including `has_degree_from`, `majored_in`, `minored_in`, and `has_degree`. These widgets are set up to select undergraduate and graduate degreeholders, but have options to include or exclude attendees and current students as well. Because of the number of options available, these widgets may seem complex at first. These examples go over some of the more common cases. 
+
+Every degree/academic-related widget includes the following options for specifying degree status:
+
+- `degreeholders`: whether to include (`TRUE`) or exclude (`FALSE`) degreeholders. By default, `degreeholders = TRUE`
+- `attendees`: include or exclude attendees -- these are people who attended UC Berkeley at some point (possibly just for one or two classes), but did not receive a degree. Defaults to `FALSE`
+- `current_students`: include/exclude current students. Defaults to `FALSE`
+
+They also include these options for specifying the level of attendance:
+
+- `undergraduates`: whether to include (`TRUE`) or exclude (`FALSE`) undergraduate students/alumni. Defaults to `TRUE`
+- `graduates`: include or exclude graduate students/alumni. Defaults to `TRUE`
+
+Finally, there are the options to specify dates, `from` and `to`. Dates are assumed to refer to when someone completed their stay at Berkeley (so the graduation date in the case of degreeholders, and the stop date for attendees). `from` and `to` are ignored when looking at current students.
+
+It can be helpful to think of all the options in terms of a grid:
+
+```{r, echo = FALSE, fig.width = 5, fig.height = 2.5, warning = FALSE, message = FALSE}
+library(tidyverse)
+
+f <- function(
+    undergraduates = TRUE, graduates = TRUE,
+    attendees = FALSE,
+    current_students = FALSE,
+    degreeholders = TRUE) {
+   
+    levels <-  c(undergraduates, graduates)
+    data_frame(
+        level = c("undergraduates", "graduates"),
+        current_students = current_students & levels,
+        attendees = attendees & levels,
+        degreeholders = degreeholders & levels
+    ) %>% gather(status, include, -level) %>%
+        ggplot(aes(x = level, y = status)) +
+        geom_tile(aes(fill = include), colour = "gray 70") +
+        scale_fill_manual(values = c("TRUE" = "gray40", "FALSE" = "gray95"),
+                          guide = "none") +
+        theme_minimal() +
+        theme(line = element_blank(), rect = element_blank(),
+              axis.title = element_blank()) +
+        coord_fixed(.67)
+}
+
+f(degreeholders = FALSE)
+```
+
+By default, all academic widgets include only undergraduate and graduate degreeholders:
+```{r, echo = FALSE, fig.width = 5, fig.height = 2.5}
+f()
+```
+
+Since those are the defaults, the code to get Chemistry degreeholders (undergraduate or graduate) is concise:
+
+```{r, eval = FALSE}
+has_degree_from(CH)
+```
+
+What if I only want undergraduate degreeholders?
+
+```{r, eval = FALSE}
+has_degree_from(CH, graduates = FALSE)
+```
+
+```{r, echo = FALSE, fig.width = 5, fig.height = 2.5}
+f(graduates = FALSE)
+```
+
+*Note: the reason I didn't have to type `undergraduates = TRUE` there is because that is the default. When in doubt, you always have the option of being explicit:*
+
+```{r, eval = FALSE}
+has_degree_from(CH, graduates = FALSE, undergraduates = TRUE)
+```
+
+When doing parents prospecting, it is common to need to look for current students. 
+
+```{r, eval = FALSE}
+has_degree_from(CH, 
+                current_students = TRUE, degreeholders = FALSE, 
+                graduates = FALSE)
+```
+```{r, echo = FALSE, fig.width = 5, fig.height = 2.5}
+f(current_students = TRUE, degreeholders = FALSE, graduates = FALSE)
+```
+
+`has_degree_from` searches based on school (Chemistry, Law, Letters & Science, etc.), but other academic widgets have the same options and allow you to search based on major/minor or even the type of degree itself (e.g. Ph.D., JD, Bachelor's, . . .). Here is how to get current MBA students:
+
+```{r, eval = FALSE}
+has_degree(MBA, current_students = TRUE, degreeholders = FALSE)
+```

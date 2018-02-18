@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Documentation for the discoveryengine</title>
   <meta name="description" content="Some documentation for the discoveryengine">
-  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.6 and GitBook 2.6.7">
 
   <meta property="og:title" content="Documentation for the discoveryengine" />
   <meta property="og:type" content="book" />
@@ -45,11 +45,14 @@
 
 
 
-<script src="libs/htmlwidgets-0.8/htmlwidgets.js"></script>
-<script src="libs/datatables-binding-0.2/datatables.js"></script>
-<link href="libs/dt-core-1.10.12/css/jquery.dataTables.min.css" rel="stylesheet" />
-<link href="libs/dt-core-1.10.12/css/jquery.dataTables.extra.css" rel="stylesheet" />
-<script src="libs/dt-core-1.10.12/js/jquery.dataTables.min.js"></script>
+<script src="libs/htmlwidgets-1.0/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.3/datatables.js"></script>
+<link href="libs/dt-core-1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.16/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.16/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
 
 
 <style type="text/css">
@@ -184,15 +187,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="17.1" data-path="ex-near-builder.html"><a href="ex-near-builder.html#defining-close"><i class="fa fa-check"></i><b>17.1</b> Defining close</a></li>
 <li class="chapter" data-level="17.2" data-path="ex-near-builder.html"><a href="ex-near-builder.html#householding-1"><i class="fa fa-check"></i><b>17.2</b> Householding</a></li>
 </ul></li>
-<li class="chapter" data-level="18" data-path="ex-sim-donors.html"><a href="ex-sim-donors.html"><i class="fa fa-check"></i><b>18</b> Donors who aren’t degreeholders</a><ul>
-<li class="chapter" data-level="18.1" data-path="ex-sim-donors.html"><a href="ex-sim-donors.html#why-it-works"><i class="fa fa-check"></i><b>18.1</b> Why it works</a></li>
-</ul></li>
+<li class="chapter" data-level="18" data-path="ex-sim-donors.html"><a href="ex-sim-donors.html"><i class="fa fa-check"></i><b>18</b> Donors who aren’t degreeholders</a></li>
 <li class="chapter" data-level="19" data-path="ex-fec.html"><a href="ex-fec.html"><i class="fa fa-check"></i><b>19</b> Utilizing FEC disclosure data</a><ul>
 <li class="chapter" data-level="19.1" data-path="ex-fec.html"><a href="ex-fec.html#basics"><i class="fa fa-check"></i><b>19.1</b> Basics</a></li>
 <li class="chapter" data-level="19.2" data-path="ex-fec.html"><a href="ex-fec.html#example-engineering-prospects"><i class="fa fa-check"></i><b>19.2</b> Example: Engineering Prospects</a></li>
 <li class="chapter" data-level="19.3" data-path="ex-fec.html"><a href="ex-fec.html#example-environmental-interest"><i class="fa fa-check"></i><b>19.3</b> Example: Environmental Interest</a></li>
 <li class="chapter" data-level="19.4" data-path="ex-fec.html"><a href="ex-fec.html#bots"><i class="fa fa-check"></i><b>19.4</b> Bots</a></li>
 </ul></li>
+<li class="chapter" data-level="20" data-path="ex-academic.html"><a href="ex-academic.html"><i class="fa fa-check"></i><b>20</b> Alumni and current students</a></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="test-cdw.html"><a href="test-cdw.html"><i class="fa fa-check"></i><b>A</b> Test your database set up</a><ul>
 <li class="chapter" data-level="A.1" data-path="test-cdw.html"><a href="test-cdw.html#test-your-connection"><i class="fa fa-check"></i><b>A.1</b> Test your connection</a></li>
@@ -253,25 +255,29 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>At this point, you’re pretty empowered to search through the database for all sorts of prospects, provided you know something about the codes in the database. Even if you don’t know the exact code for, say, basketball, you can use the <a href="working-with-widgets.html#synonym-search">synonym search feature</a> because you know which widget to use:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">played_sport</span>(?basketball)</code></pre></div>
 <pre><code>##              synonym code
+##  cal_basketball_club RSBK
 ##       basketball_men MABB
-##     basketball_women WABB
-##  cal_basketball_club RSBK</code></pre>
+##     basketball_women WABB</code></pre>
 <p>But now imagine someone has asked you for a list of people interested in robotics. Where would that be coded? Perhaps in multiple places? How can you find out?</p>
 <p>Enter the brainstorm bot. The brainstorm bot is a robot that is knowledgeable about the code tables in CADS. Let’s ask it about robotics:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">brainstorm_bot</span>(<span class="st">&quot;robotics&quot;</span>)</code></pre></div>
-<pre><code>## has_interest 
+<pre><code>## fec_gave_to_committee 
+##     C00521765: LIQUID ROBOTICS INC POLITICAL ACTION COMMITTEE (LIQUID ROBOTICS PAC)
+##     C00582767: CAMPAIGN FOR A FEDERAL ROBOTICS COMMISSION
+## has_interest 
 ##     ROB: Robotics
 ## participated_in 
 ##     ENRO: Cal Robotics</code></pre>
 <p>Hey brainstorm bot, thanks for the ideas! The results show the name of a widget, along with the codes that are of interest, along with their description from the CADS code tables, so you can decide if they are appropriate for your project. You can then copy and paste to build up the right population:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">display</span>(<span class="kw">has_interest</span>(ROB))</code></pre></div>
-<pre><code>## # A tibble: 1 x 1
+<pre><code>## # A tibble: 2 x 1
 ##   entity_id
 ##       &lt;dbl&gt;
-## 1    470691</code></pre>
+## 1    470691
+## 2    824520</code></pre>
 <p>If it turns out you agree with every one of the brainstorm bot’s suggestions, then you don’t even have to copy and paste, because (surprise!) the brainstorm bot is actually giving you a fully filled out widget:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># if i wanted robotics fans in the san francisco MSA</span>
-prospects =<span class="st"> </span><span class="kw">brainstorm_bot</span>(<span class="st">&quot;robotics&quot;</span>) <span class="op">%and%</span>
+prospects =<span class="st"> </span><span class="kw">brainstorm_bot</span>(<span class="st">&quot;robotics&quot;</span>) %and%
 <span class="st">    </span><span class="kw">lives_in_msa</span>(san_francisco)
 <span class="kw">display</span>(prospects)</code></pre></div>
 <pre><code>## # A tibble: 5 x 1
@@ -280,14 +286,18 @@ prospects =<span class="st"> </span><span class="kw">brainstorm_bot</span>(<span
 ## 1    718587
 ## 2    749416
 ## 3    823913
-## 4    875964
-## 5    824900</code></pre>
+## 4    824900
+## 5    875964</code></pre>
 <div id="search-features" class="section level2">
 <h2><span class="header-section-number">8.1</span> Search features</h2>
 <p>The brainstorm bot understands wildcards at the beginning and/or ending of your search term:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">brainstorm_bot</span>(<span class="st">&quot;robot*&quot;</span>)</code></pre></div>
 <pre><code>## attended_event 
 ##     6724: Haas East Bay Chp Robotic Event 06-18-14
+## fec_gave_to_committee 
+##     C00521765: LIQUID ROBOTICS INC POLITICAL ACTION COMMITTEE (LIQUID ROBOTICS PAC)
+##     C00596908: ROBOTECHNOLOGY INC C.R.
+##     C00582767: CAMPAIGN FOR A FEDERAL ROBOTICS COMMISSION
 ## has_interest 
 ##     ROB: Robotics
 ## participated_in 
@@ -297,11 +307,21 @@ prospects =<span class="st"> </span><span class="kw">brainstorm_bot</span>(<span
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">brainstorm_bot</span>(<span class="st">&quot;robot*&quot;</span>, <span class="st">&quot;data science&quot;</span>)</code></pre></div>
 <pre><code>## attended_event 
 ##     6724: Haas East Bay Chp Robotic Event 06-18-14
+##     7565: UR NY LG Data Science Salon 10-27-16
+##     8341: Career Connections: Data Science
+##     7643: Career Conn: Data Science
+## fec_gave_to_committee 
+##     C00521765: LIQUID ROBOTICS INC POLITICAL ACTION COMMITTEE (LIQUID ROBOTICS PAC)
+##     C00596908: ROBOTECHNOLOGY INC C.R.
+##     C00582767: CAMPAIGN FOR A FEDERAL ROBOTICS COMMISSION
 ## gave_to_department 
 ##     DT: Berkeley Institute for Data Science
 ## has_interest 
-##     DAT: Data Science
 ##     ROB: Robotics
+##     DAT: Data Science
+## has_philanthropic_interest 
+##     M1: Data Science Education Program
+##     DT: Berkeley Institute for Data Science
 ## majored_in 
 ##     2E0: Master of Information &amp; Data Science
 ## participated_in 
@@ -327,7 +347,7 @@ prospects =<span class="st"> </span><span class="kw">brainstorm_bot</span>(<span
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": null,
 "fontsettings": {

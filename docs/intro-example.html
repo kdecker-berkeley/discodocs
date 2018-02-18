@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Documentation for the discoveryengine</title>
   <meta name="description" content="Some documentation for the discoveryengine">
-  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.6 and GitBook 2.6.7">
 
   <meta property="og:title" content="Documentation for the discoveryengine" />
   <meta property="og:type" content="book" />
@@ -45,11 +45,14 @@
 
 
 
-<script src="libs/htmlwidgets-0.8/htmlwidgets.js"></script>
-<script src="libs/datatables-binding-0.2/datatables.js"></script>
-<link href="libs/dt-core-1.10.12/css/jquery.dataTables.min.css" rel="stylesheet" />
-<link href="libs/dt-core-1.10.12/css/jquery.dataTables.extra.css" rel="stylesheet" />
-<script src="libs/dt-core-1.10.12/js/jquery.dataTables.min.js"></script>
+<script src="libs/htmlwidgets-1.0/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.3/datatables.js"></script>
+<link href="libs/dt-core-1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.16/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.16/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
 
 
 <style type="text/css">
@@ -184,15 +187,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="17.1" data-path="ex-near-builder.html"><a href="ex-near-builder.html#defining-close"><i class="fa fa-check"></i><b>17.1</b> Defining close</a></li>
 <li class="chapter" data-level="17.2" data-path="ex-near-builder.html"><a href="ex-near-builder.html#householding-1"><i class="fa fa-check"></i><b>17.2</b> Householding</a></li>
 </ul></li>
-<li class="chapter" data-level="18" data-path="ex-sim-donors.html"><a href="ex-sim-donors.html"><i class="fa fa-check"></i><b>18</b> Donors who aren’t degreeholders</a><ul>
-<li class="chapter" data-level="18.1" data-path="ex-sim-donors.html"><a href="ex-sim-donors.html#why-it-works"><i class="fa fa-check"></i><b>18.1</b> Why it works</a></li>
-</ul></li>
+<li class="chapter" data-level="18" data-path="ex-sim-donors.html"><a href="ex-sim-donors.html"><i class="fa fa-check"></i><b>18</b> Donors who aren’t degreeholders</a></li>
 <li class="chapter" data-level="19" data-path="ex-fec.html"><a href="ex-fec.html"><i class="fa fa-check"></i><b>19</b> Utilizing FEC disclosure data</a><ul>
 <li class="chapter" data-level="19.1" data-path="ex-fec.html"><a href="ex-fec.html#basics"><i class="fa fa-check"></i><b>19.1</b> Basics</a></li>
 <li class="chapter" data-level="19.2" data-path="ex-fec.html"><a href="ex-fec.html#example-engineering-prospects"><i class="fa fa-check"></i><b>19.2</b> Example: Engineering Prospects</a></li>
 <li class="chapter" data-level="19.3" data-path="ex-fec.html"><a href="ex-fec.html#example-environmental-interest"><i class="fa fa-check"></i><b>19.3</b> Example: Environmental Interest</a></li>
 <li class="chapter" data-level="19.4" data-path="ex-fec.html"><a href="ex-fec.html#bots"><i class="fa fa-check"></i><b>19.4</b> Bots</a></li>
 </ul></li>
+<li class="chapter" data-level="20" data-path="ex-academic.html"><a href="ex-academic.html"><i class="fa fa-check"></i><b>20</b> Alumni and current students</a></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="test-cdw.html"><a href="test-cdw.html"><i class="fa fa-check"></i><b>A</b> Test your database set up</a><ul>
 <li class="chapter" data-level="A.1" data-path="test-cdw.html"><a href="test-cdw.html#test-your-connection"><i class="fa fa-check"></i><b>A.1</b> Test your connection</a></li>
@@ -264,54 +266,56 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2><span class="header-section-number">5.2</span> Create the definition</h2>
 <p>So now that we have a precise idea of who we want to find, we can create a definition that the computer will understand. This is important, since our computer is the only link we have to the CADS Data Warehouse. We can give it a precise definition in a language that it understands, and it will then relay our request to the CADS Data Warehouse. The CADS data warehouse can then search for people who meet our definition, and send them back to the computer, which will then display the list to us.</p>
 <p>Ideally, our definition would look like this: <code>has_tech_interest %and% is_in_sf</code>. Of course, we haven’t defined those pieces yet, so just typing that in will result in an error</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">has_tech_interest <span class="op">%and%</span><span class="st"> </span>is_in_sf</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">has_tech_interest %and%<span class="st"> </span>is_in_sf</code></pre></div>
 <pre><code>## Error in operate(block1, block2, &quot;intersect&quot;): object &#39;has_tech_interest&#39; not found</code></pre>
 <p>But still we’ve made progress. We broke a big problem (“define a prospect for this SF tech event”) into two smaller problems (“define having a tech interest” and “define being in San Francisco”). Let’s tackle each of these one by one. We start by defining <code>has_tech_interest</code>. Recall that we decided to use interest codes and philanthropic affinities here. I happen to already know that there is an interest code for “technology”, but I’m less familiar with the philanthropic affinities area. So I’ll use the search feature that is built into most widgets, accessed by entering a question mark followed by a search term into the widget:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">has_philanthropic_affinity</span>(?tech)</code></pre></div>
 <pre><code>##             synonym code
 ##  science_technology   ST</code></pre>
 <p>Ah, ok. I can use either the code <code>ST</code> or the synonym <code>science_technology</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">has_tech_interest =<span class="st"> </span><span class="kw">has_interest</span>(technology) <span class="op">%or%</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">has_tech_interest =<span class="st"> </span><span class="kw">has_interest</span>(technology) %or%
 <span class="st">    </span><span class="kw">has_philanthropic_affinity</span>(science_technology)</code></pre></div>
 <p>We use <code>%or%</code> as the connector here because we’re interested in anyone who has either one of these characteristics. We now move to defining <code>is_in_sf</code>. We’d like to look for anyone who lives or works in San Francisco:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">is_in_sf =<span class="st"> </span><span class="kw">lives_in_msa</span>(san_francisco) <span class="op">%or%</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">is_in_sf =<span class="st"> </span><span class="kw">lives_in_msa</span>(san_francisco) %or%
 <span class="st">    </span><span class="kw">works_in_msa</span>(san_francisco)</code></pre></div>
 <p>We are now able to create our full definition by combining the pieces:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">event_prospect =<span class="st"> </span>has_tech_interest <span class="op">%and%</span><span class="st"> </span>is_in_sf</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">event_prospect =<span class="st"> </span>has_tech_interest %and%<span class="st"> </span>is_in_sf</code></pre></div>
 </div>
 <div id="send-the-definition-to-the-cdw" class="section level2">
 <h2><span class="header-section-number">5.3</span> Send the definition to the CDW</h2>
 <p>As we discussed in the previous section, now that we have an official definition we can send it to the data warehouse, and see if the data warehouse finds anyone who fits. You can see the definition for yourself by just typing the name of it, though it is now written in a language for the computer to understand and may look intimidating to us humans:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">event_prospect</code></pre></div>
 <pre><code>## LISTBUILDER DEFINITION (type: entity_id)
-## .   operator (KL87): intersect
-## .   left (KL87): 
-## .   .   operator (EM31): union
-## .   .   left (EM31): 
+## .   operator (EQ58): intersect
+## .   left (EQ58): 
+## .   .   operator (VD94): union
+## .   .   left (VD94): 
 ## .   .   .   source: d_bio_interest_mv.entity_id (entity_id)
 ## .   .   .   logic: interest_code IN (&#39;TEC&#39;)
-## .   .   right (EM31): 
+## .   .   right (VD94): 
 ## .   .   .   source: d_oth_phil_affinity_mv.entity_id (entity_id)
 ## .   .   .   logic: 
 ## .   .   .   .   other_affinity_type IN (&#39;ST&#39;)
 ## .   .   .   .   sum(gift_amt) &gt;= 0.0
-## .   right (KL87): 
-## .   .   operator (CU40): union
-## .   .   left (CU40): 
+## .   right (EQ58): 
+## .   .   operator (DZ03): union
+## .   .   left (DZ03): 
 ## .   .   .   source: d_bio_address_mv.entity_id (entity_id)
 ## .   .   .   logic: 
 ## .   .   .   .   geo_metro_area_code IN (&#39;41860&#39;)
-## .   .   .   .   addr_type_code IN (&#39;H&#39;)
+## .   .   .   .   addr_type_code IN (&#39;H&#39;, &#39;6&#39;)
 ## .   .   .   .   contact_type_desc IN (&#39;ADDRESS&#39;)
-## .   .   right (CU40): 
+## .   .   .   .   addr_status_code IN (&#39;A&#39;, &#39;K&#39;)
+## .   .   right (DZ03): 
 ## .   .   .   source: d_bio_address_mv.entity_id (entity_id)
 ## .   .   .   logic: 
 ## .   .   .   .   geo_metro_area_code IN (&#39;41860&#39;)
-## .   .   .   .   addr_type_code IN (&#39;B&#39;)
-## .   .   .   .   contact_type_desc IN (&#39;ADDRESS&#39;)</code></pre>
+## .   .   .   .   addr_type_code IN (&#39;B&#39;, &#39;I&#39;, &#39;N&#39;)
+## .   .   .   .   contact_type_desc IN (&#39;ADDRESS&#39;)
+## .   .   .   .   addr_status_code IN (&#39;A&#39;, &#39;K&#39;)</code></pre>
 <p>In order to send the definition to the data warehouse, retrieve the results, and show them to us, we use the <code>display</code> function:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">display</span>(event_prospect)</code></pre></div>
-<pre><code>## # A tibble: 742 x 1
+<pre><code>## # A tibble: 777 x 1
 ##    entity_id
 ##        &lt;dbl&gt;
 ##  1       529
@@ -323,8 +327,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ##  7      5833
 ##  8      6622
 ##  9      6886
-## 10      9783
-## # ... with 732 more rows</code></pre>
+## 10      7644
+## # ... with 767 more rows</code></pre>
 <p>Of course, we are probably interested in exporting this savedlist to a file, so that we might load it into CADS and run CADSmart reports on it. Conveniently, we can just do that by adding a filename:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">display</span>(event_prospect, <span class="dt">file =</span> <span class="st">&quot;sf-tech-prospects&quot;</span>)</code></pre></div>
 <p>Now when I look over at my working directory, there’s a new file called <code>sf-tech-prospects.csv</code></p>
@@ -348,7 +352,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": null,
 "fontsettings": {

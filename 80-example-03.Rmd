@@ -36,9 +36,9 @@ band_parent = parent_of(recent_band_member)
 
 Here I'll assume that 25 miles is about as far as we can expect one of these band parents to travel in order to attend the event. So my definition should include only those people who live within 25 miles of the Claremont Resort:
 
-```{r ex-band-lives-near, cache = TRUE}
+```{r ex-band-lives-near, cache = TRUE, message=TRUE}
 event_prospect = band_parent %and% 
-    lives_near("Claremont Resort", miles = 25)
+    lives_near("Claremont Hotel and Spa", miles = 25)
 ```
 
 ## How many?

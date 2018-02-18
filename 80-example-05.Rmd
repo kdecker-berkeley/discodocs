@@ -17,25 +17,11 @@ gave_to_area(SIM) %but_not% has_degree_from(LI)
 
 Unfortunately, as you begin reviewing the results, you notice that you produced a list that includes spouses of degree holders who received credit for household gifts to SIM. 
 
-What we actually want here is not "donors who are not degreeholders" but rather "donor households that are not degree-holding households." Here "donor households" has the standard meaning, and "degree-holding household" means a household where at least one of the spouses has a degree.
-
-So instead:
+To get around the issue, use the `married_to` widget (a [higher-order widget](#higher-order-widgets)). Note the use of parentheses to ensure the correct interpretation:
 
 ```{r}
-non_alum_donors = 
-    household(gave_to_area(SIM)) %but_not%
-    household(has_degree_from(LI))
+alum = has_degree_from(LI)
+non_alum_donor = 
+    gave_to_area(SIM) %but_not%
+    (alum %or% married_to(alum))
 ```
-
-To make it even more clear what it is we're doing with this definition, it helps to re-write it with more descriptive names:
-
-```{r}
-is_donor_hh = household(gave_to_area(SIM))
-is_degree_hh = household(has_degree_from(LI))
-
-non_alum_donor_hh = is_donor_hh %but_not% is_degree_hh
-```
-
-## Why it works
-
-By householding each component of the definition before combining them with `%but_not%`, I am making the household the basic unit of analysis, rather than the individual. This often becomes necessary when we're working with giving or portfolios (which we usually treat as characteristics of a household) and we want to exclude characteristics such as degree or student activity (which are characteristics of an individual). 

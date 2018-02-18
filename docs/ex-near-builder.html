@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Documentation for the discoveryengine</title>
   <meta name="description" content="Some documentation for the discoveryengine">
-  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.6 and GitBook 2.6.7">
 
   <meta property="og:title" content="Documentation for the discoveryengine" />
   <meta property="og:type" content="book" />
@@ -45,11 +45,14 @@
 
 
 
-<script src="libs/htmlwidgets-0.8/htmlwidgets.js"></script>
-<script src="libs/datatables-binding-0.2/datatables.js"></script>
-<link href="libs/dt-core-1.10.12/css/jquery.dataTables.min.css" rel="stylesheet" />
-<link href="libs/dt-core-1.10.12/css/jquery.dataTables.extra.css" rel="stylesheet" />
-<script src="libs/dt-core-1.10.12/js/jquery.dataTables.min.js"></script>
+<script src="libs/htmlwidgets-1.0/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.3/datatables.js"></script>
+<link href="libs/dt-core-1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.16/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.16/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
 
 
 <style type="text/css">
@@ -184,15 +187,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="17.1" data-path="ex-near-builder.html"><a href="ex-near-builder.html#defining-close"><i class="fa fa-check"></i><b>17.1</b> Defining close</a></li>
 <li class="chapter" data-level="17.2" data-path="ex-near-builder.html"><a href="ex-near-builder.html#householding-1"><i class="fa fa-check"></i><b>17.2</b> Householding</a></li>
 </ul></li>
-<li class="chapter" data-level="18" data-path="ex-sim-donors.html"><a href="ex-sim-donors.html"><i class="fa fa-check"></i><b>18</b> Donors who aren’t degreeholders</a><ul>
-<li class="chapter" data-level="18.1" data-path="ex-sim-donors.html"><a href="ex-sim-donors.html#why-it-works"><i class="fa fa-check"></i><b>18.1</b> Why it works</a></li>
-</ul></li>
+<li class="chapter" data-level="18" data-path="ex-sim-donors.html"><a href="ex-sim-donors.html"><i class="fa fa-check"></i><b>18</b> Donors who aren’t degreeholders</a></li>
 <li class="chapter" data-level="19" data-path="ex-fec.html"><a href="ex-fec.html"><i class="fa fa-check"></i><b>19</b> Utilizing FEC disclosure data</a><ul>
 <li class="chapter" data-level="19.1" data-path="ex-fec.html"><a href="ex-fec.html#basics"><i class="fa fa-check"></i><b>19.1</b> Basics</a></li>
 <li class="chapter" data-level="19.2" data-path="ex-fec.html"><a href="ex-fec.html#example-engineering-prospects"><i class="fa fa-check"></i><b>19.2</b> Example: Engineering Prospects</a></li>
 <li class="chapter" data-level="19.3" data-path="ex-fec.html"><a href="ex-fec.html#example-environmental-interest"><i class="fa fa-check"></i><b>19.3</b> Example: Environmental Interest</a></li>
 <li class="chapter" data-level="19.4" data-path="ex-fec.html"><a href="ex-fec.html#bots"><i class="fa fa-check"></i><b>19.4</b> Bots</a></li>
 </ul></li>
+<li class="chapter" data-level="20" data-path="ex-academic.html"><a href="ex-academic.html"><i class="fa fa-check"></i><b>20</b> Alumni and current students</a></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="test-cdw.html"><a href="test-cdw.html"><i class="fa fa-check"></i><b>A</b> Test your database set up</a><ul>
 <li class="chapter" data-level="A.1" data-path="test-cdw.html"><a href="test-cdw.html#test-your-connection"><i class="fa fa-check"></i><b>A.1</b> Test your connection</a></li>
@@ -261,42 +263,42 @@ nearly_builder =<span class="st"> </span><span class="kw">gave_to_area</span>(<s
 <p>To exclude those who are already over $1M (who are already Builders), I first need to identify them:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">already_builder =<span class="st"> </span><span class="kw">gave_to_area</span>(<span class="dt">at_least =</span> <span class="dv">1000000</span>)</code></pre></div>
 <p>Now, I want to find everyone who satisfies <code>nearly_builder</code> but are not <code>already_builder</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">prospect_list =<span class="st"> </span>nearly_builder <span class="op">%but_not%</span><span class="st"> </span>already_builder</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">prospect_list =<span class="st"> </span>nearly_builder %but_not%<span class="st"> </span>already_builder</code></pre></div>
 <p>Let’s see what we have!</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">display</span>(prospect_list)</code></pre></div>
-<pre><code>## # A tibble: 57 × 1
+<pre><code>## # A tibble: 62 x 1
 ##    entity_id
 ##        &lt;dbl&gt;
-## 1        566
-## 2       1347
-## 3       8481
-## 4       8872
-## 5       9763
-## 6      10342
-## 7      10688
-## 8      12207
-## 9      15771
-## 10     17583
-## # ... with 47 more rows</code></pre>
+##  1       566
+##  2       618
+##  3      1346
+##  4      1347
+##  5      5832
+##  6      5833
+##  7      7318
+##  8      8872
+##  9     10342
+## 10     10688
+## # ... with 52 more rows</code></pre>
 </div>
 <div id="householding-1" class="section level2">
 <h2><span class="header-section-number">17.2</span> Householding</h2>
 <p>A lot of individuals in <code>prospect_list</code> are married to each other, but Builder of Berkeley is a household recognition. If I’m going to run the Prospect Pool Spreadsheet, this doesn’t really matter since that report automatically households, but otherwise I’d like to household the results (this will also help in getting an accurate count). By checking <code>?display</code> I see that deceased people are removed by default (which is what I want in this case), but that householding is not done by default. To enable householding:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">display</span>(prospect_list, <span class="dt">household =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<pre><code>## # A tibble: 48 x 1
+<pre><code>## # A tibble: 38 x 1
 ##    entity_id
 ##        &lt;dbl&gt;
-##  1      9763
-##  2   3085586
-##  3      8872
-##  4    599596
-##  5     24360
-##  6     24008
-##  7   3121934
-##  8     22476
-##  9    290519
-## 10    334903
-## # ... with 38 more rows</code></pre>
+##  1     48763
+##  2     22476
+##  3     24008
+##  4   3121934
+##  5      5832
+##  6     22241
+##  7     15333
+##  8     10688
+##  9     18204
+## 10       618
+## # ... with 28 more rows</code></pre>
 
 </div>
 </div>
@@ -317,7 +319,7 @@ nearly_builder =<span class="st"> </span><span class="kw">gave_to_area</span>(<s
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": null,
 "fontsettings": {

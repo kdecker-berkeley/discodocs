@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Documentation for the discoveryengine</title>
   <meta name="description" content="Some documentation for the discoveryengine">
-  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.6 and GitBook 2.6.7">
 
   <meta property="og:title" content="Documentation for the discoveryengine" />
   <meta property="og:type" content="book" />
@@ -45,11 +45,14 @@
 
 
 
-<script src="libs/htmlwidgets-0.8/htmlwidgets.js"></script>
-<script src="libs/datatables-binding-0.2/datatables.js"></script>
-<link href="libs/dt-core-1.10.12/css/jquery.dataTables.min.css" rel="stylesheet" />
-<link href="libs/dt-core-1.10.12/css/jquery.dataTables.extra.css" rel="stylesheet" />
-<script src="libs/dt-core-1.10.12/js/jquery.dataTables.min.js"></script>
+<script src="libs/htmlwidgets-1.0/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.3/datatables.js"></script>
+<link href="libs/dt-core-1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.16/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.16/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
 
 
 <style type="text/css">
@@ -184,15 +187,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="17.1" data-path="ex-near-builder.html"><a href="ex-near-builder.html#defining-close"><i class="fa fa-check"></i><b>17.1</b> Defining close</a></li>
 <li class="chapter" data-level="17.2" data-path="ex-near-builder.html"><a href="ex-near-builder.html#householding-1"><i class="fa fa-check"></i><b>17.2</b> Householding</a></li>
 </ul></li>
-<li class="chapter" data-level="18" data-path="ex-sim-donors.html"><a href="ex-sim-donors.html"><i class="fa fa-check"></i><b>18</b> Donors who aren’t degreeholders</a><ul>
-<li class="chapter" data-level="18.1" data-path="ex-sim-donors.html"><a href="ex-sim-donors.html#why-it-works"><i class="fa fa-check"></i><b>18.1</b> Why it works</a></li>
-</ul></li>
+<li class="chapter" data-level="18" data-path="ex-sim-donors.html"><a href="ex-sim-donors.html"><i class="fa fa-check"></i><b>18</b> Donors who aren’t degreeholders</a></li>
 <li class="chapter" data-level="19" data-path="ex-fec.html"><a href="ex-fec.html"><i class="fa fa-check"></i><b>19</b> Utilizing FEC disclosure data</a><ul>
 <li class="chapter" data-level="19.1" data-path="ex-fec.html"><a href="ex-fec.html#basics"><i class="fa fa-check"></i><b>19.1</b> Basics</a></li>
 <li class="chapter" data-level="19.2" data-path="ex-fec.html"><a href="ex-fec.html#example-engineering-prospects"><i class="fa fa-check"></i><b>19.2</b> Example: Engineering Prospects</a></li>
 <li class="chapter" data-level="19.3" data-path="ex-fec.html"><a href="ex-fec.html#example-environmental-interest"><i class="fa fa-check"></i><b>19.3</b> Example: Environmental Interest</a></li>
 <li class="chapter" data-level="19.4" data-path="ex-fec.html"><a href="ex-fec.html#bots"><i class="fa fa-check"></i><b>19.4</b> Bots</a></li>
 </ul></li>
+<li class="chapter" data-level="20" data-path="ex-academic.html"><a href="ex-academic.html"><i class="fa fa-check"></i><b>20</b> Alumni and current students</a></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="test-cdw.html"><a href="test-cdw.html"><i class="fa fa-check"></i><b>A</b> Test your database set up</a><ul>
 <li class="chapter" data-level="A.1" data-path="test-cdw.html"><a href="test-cdw.html#test-your-connection"><i class="fa fa-check"></i><b>A.1</b> Test your connection</a></li>
@@ -256,59 +258,59 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="kw">library</span>(discoveryengine)
 
 <span class="co"># i&#39;ll define wealthy as a capacity of $1 Million+</span>
-wealthy =<span class="st"> </span><span class="kw">has_capacity</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">7</span>)</code></pre></div>
+wealthy =<span class="st"> </span><span class="kw">has_capacity</span>(<span class="dv">1</span>:<span class="dv">7</span>)</code></pre></div>
 <p>But now I’m stuck. I want to find children of anyone on that list. But so far all of the widgets we’ve seen work with specific codes, not other widgets. Technically, all the widgets we’ve seen are <em>first-order</em> widgets. But we do have some widgets that, instead of working on one or more specific codes, works on an existing, already filled out widget. <code>child_of</code> is one such <em>second-order</em> widget:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">child_of_wealth =<span class="st"> </span><span class="kw">child_of</span>(wealthy)
 <span class="kw">display</span>(child_of_wealth)</code></pre></div>
-<pre><code>## # A tibble: 1,024 x 1
+<pre><code>## # A tibble: 1,136 x 1
 ##    entity_id
 ##        &lt;dbl&gt;
-## 1     501819
-## 2     633358
-## 3    3009776
-## 4     684446
-## 5      30621
-## 6     731797
-## 7     325782
-## 8     734035
-## 9      31566
-## 10     26435
-## # ... with 1,014 more rows</code></pre>
+##  1       155
+##  2      1347
+##  3      1529
+##  4      2497
+##  5      3181
+##  6      3296
+##  7      3308
+##  8      3418
+##  9      3442
+## 10      3897
+## # ... with 1,126 more rows</code></pre>
 <p>Though the syntax looks just like what we’ve been doing all along, note that <code>wealthy</code> in the above is not a code or synonym, but instead is the name that I gave to the definition <code>has_capacity(1:7)</code>. This makes <code>child_of</code> very different from other widgets we’ve seen so far. As we’ll see in the next seciton, the ability to use second-order widgets allows us to do some very powerful things.</p>
 <p>The result of using a second-order widget, though, is just like using any other widget. You can continue to combine it with other widgets:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">display</span>(child_of_wealth <span class="op">%and%</span><span class="st"> </span><span class="kw">lives_in_msa</span>(san_francisco))</code></pre></div>
-<pre><code>## # A tibble: 448 x 1
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">display</span>(child_of_wealth %and%<span class="st"> </span><span class="kw">lives_in_msa</span>(san_francisco))</code></pre></div>
+<pre><code>## # A tibble: 494 x 1
 ##    entity_id
 ##        &lt;dbl&gt;
-## 1     501819
-## 2     731797
-## 3     325782
-## 4     415779
-## 5      30775
-## 6      30776
-## 7     459195
-## 8      28210
-## 9      21477
-## 10    433145
-## # ... with 438 more rows</code></pre>
+##  1       155
+##  2      1529
+##  3      2497
+##  4      3296
+##  5      3418
+##  6      3442
+##  7      3897
+##  8      4539
+##  9      4540
+## 10      5084
+## # ... with 484 more rows</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># or even</span>
 <span class="kw">display</span>(
     <span class="kw">child_of</span>(child_of_wealth)
 )</code></pre></div>
-<pre><code>## # A tibble: 118 x 1
+<pre><code>## # A tibble: 129 x 1
 ##    entity_id
 ##        &lt;dbl&gt;
-## 1     684446
-## 2    1002656
-## 3     499074
-## 4    3211635
-## 5     945146
-## 6     509691
-## 7    3162983
-## 8     734034
-## 9     916909
-## 10    742372
-## # ... with 108 more rows</code></pre>
+##  1     22266
+##  2     22307
+##  3     23574
+##  4     25856
+##  5     26067
+##  6     27804
+##  7     28003
+##  8     28405
+##  9     28586
+## 10     28891
+## # ... with 119 more rows</code></pre>
 
 </div>
 </div>
@@ -329,7 +331,7 @@ wealthy =<span class="st"> </span><span class="kw">has_capacity</span>(<span cla
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": null,
 "fontsettings": {
