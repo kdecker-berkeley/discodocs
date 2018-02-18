@@ -271,25 +271,25 @@ diversity_funds =<span class="st"> </span><span class="kw">fund_text_contains</s
 <p>The definition looks pretty complex, but notice that first line – this time around, instead of entity_id, we have <code>type: allocation_code</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">diversity_funds</code></pre></div>
 <pre><code>## LISTBUILDER DEFINITION (type: allocation_code)
-## .   operator (NL73): union
-## .   left (NL73): 
+## .   operator (HQ62): union
+## .   left (HQ62): 
 ## .   .   source: f_allocation_mv.allocation_code (allocation_code)
 ## .   .   logic: REGEXP_LIKE(long_name, &#39;((^|\\s|\\W)divers)|((^|\\s|\\W)underrepresented($|\\s|\\W))&#39;, &#39;i&#39;)
-## .   right (NL73): 
-## .   .   operator (NU49): union
-## .   .   left (NU49): 
-## .   .   .   operator (FT10): union
-## .   .   .   left (FT10): 
+## .   right (HQ62): 
+## .   .   operator (JK37): union
+## .   .   left (JK37): 
+## .   .   .   operator (GI68): union
+## .   .   .   left (GI68): 
 ## .   .   .   .   source: f_notes_mv.allocation_code (allocation_code)
 ## .   .   .   .   logic: 
 ## .   .   .   .   .   REGEXP_LIKE(description, &#39;((^|\\s|\\W)divers)|((^|\\s|\\W)underrepresented($|\\s|\\W))&#39;, &#39;i&#39;)
 ## .   .   .   .   .   note_type IN (&#39;FT&#39;, &#39;FB&#39;)
-## .   .   .   right (FT10): 
+## .   .   .   right (GI68): 
 ## .   .   .   .   source: f_notes_mv.allocation_code (allocation_code)
 ## .   .   .   .   logic: 
 ## .   .   .   .   .   REGEXP_LIKE(brief_note, &#39;((^|\\s|\\W)divers)|((^|\\s|\\W)underrepresented($|\\s|\\W))&#39;, &#39;i&#39;)
 ## .   .   .   .   .   note_type IN (&#39;FT&#39;, &#39;FB&#39;)
-## .   .   right (NU49): 
+## .   .   right (JK37): 
 ## .   .   .   source: f_notes_mv.allocation_code (allocation_code)
 ## .   .   .   logic: 
 ## .   .   .   .   REGEXP_LIKE(note_text, &#39;((^|\\s|\\W)divers)|((^|\\s|\\W)underrepresented($|\\s|\\W))&#39;, &#39;i&#39;)

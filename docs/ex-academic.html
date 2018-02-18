@@ -264,20 +264,20 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul>
 <p>Finally, there are the options to specify dates, <code>from</code> and <code>to</code>. Dates are assumed to refer to when someone completed their stay at Berkeley (so the graduation date in the case of degreeholders, and the stop date for attendees). <code>from</code> and <code>to</code> are ignored when looking at current students.</p>
 <p>It can be helpful to think of all the options in terms of a grid:</p>
-<p><img src="_main_files/figure-html/unnamed-chunk-30-1.png" width="480" /></p>
-<p>By default, all academic widgets include only undergraduate and graduate degreeholders: <img src="_main_files/figure-html/unnamed-chunk-31-1.png" width="480" /></p>
+<p><img src="images/unnamed-chunk-30-1.png" width="480" /></p>
+<p>By default, all academic widgets include only undergraduate and graduate degreeholders: <img src="images/unnamed-chunk-31-1.png" width="480" /></p>
 <p>Since those are the defaults, the code to get Chemistry degreeholders (undergraduate or graduate) is concise:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">has_degree_from</span>(CH)</code></pre></div>
 <p>What if I only want undergraduate degreeholders?</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">has_degree_from</span>(CH, <span class="dt">graduates =</span> <span class="ot">FALSE</span>)</code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-34-1.png" width="480" /></p>
+<p><img src="images/unnamed-chunk-34-1.png" width="480" /></p>
 <p><em>Note: the reason I didn’t have to type <code>undergraduates = TRUE</code> there is because that is the default. When in doubt, you always have the option of being explicit:</em></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">has_degree_from</span>(CH, <span class="dt">graduates =</span> <span class="ot">FALSE</span>, <span class="dt">undergraduates =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <p>When doing parents prospecting, it is common to need to look for current students.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">has_degree_from</span>(CH, 
                 <span class="dt">current_students =</span> <span class="ot">TRUE</span>, <span class="dt">degreeholders =</span> <span class="ot">FALSE</span>, 
                 <span class="dt">graduates =</span> <span class="ot">FALSE</span>)</code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-37-1.png" width="480" /></p>
+<p><img src="images/unnamed-chunk-37-1.png" width="480" /></p>
 <p><code>has_degree_from</code> searches based on school (Chemistry, Law, Letters &amp; Science, etc.), but other academic widgets have the same options and allow you to search based on major/minor or even the type of degree itself (e.g. Ph.D., JD, Bachelor’s, . . .). Here is how to get current MBA students:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">has_degree</span>(MBA, <span class="dt">current_students =</span> <span class="ot">TRUE</span>, <span class="dt">degreeholders =</span> <span class="ot">FALSE</span>)</code></pre></div>
 

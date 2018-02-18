@@ -280,40 +280,40 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2><span class="header-section-number">16.4</span> How many?</h2>
 <p>Now I just use <code>display</code> and see the number of parents:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">display</span>(event_prospect)</code></pre></div>
-<pre><code>## # A tibble: 99 x 1
+<pre><code>## # A tibble: 166 x 1
 ##    entity_id
 ##        &lt;dbl&gt;
-##  1    300284
-##  2    333230
-##  3    455419
-##  4    530859
-##  5    787273
-##  6    787276
-##  7    810367
-##  8    847168
-##  9    847171
-## 10    871195
-## # ... with 89 more rows</code></pre>
-<p>Notice the first line, before the IDs start, tells us exactly how many individuals are on the list: 99.</p>
+##  1     13799
+##  2     14999
+##  3     15672
+##  4     15687
+##  5     21298
+##  6     29578
+##  7     46204
+##  8     50302
+##  9    229795
+## 10    250310
+## # ... with 156 more rows</code></pre>
+<p>Notice the first line, before the IDs start, tells us exactly how many individuals are on the list: 166.</p>
 </div>
 <div id="householding" class="section level2">
 <h2><span class="header-section-number">16.5</span> Householding</h2>
 <p>But hold up! Looking up some of these IDs, I’m noticing that both members of married couples are on the list. How many households are there here? I check the help for the <code>display</code> function by running <code>?display</code>. And I notice that there is an option called <code>household</code>, and by default it is set to <code>FALSE</code>. So:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">display</span>(event_prospect, <span class="dt">household =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<pre><code>## # A tibble: 58 x 1
+<pre><code>## # A tibble: 97 x 1
 ##    entity_id
 ##        &lt;dbl&gt;
-##  1   1007180
-##  2   1018322
-##  3   3115865
-##  4    983103
-##  5   1001345
-##  6   1006903
-##  7   1016064
-##  8    455419
-##  9    935241
-## 10    810367
-## # ... with 48 more rows</code></pre>
+##  1     13799
+##  2     14999
+##  3    317956
+##  4    347337
+##  5    396274
+##  6    874556
+##  7    907499
+##  8   3015961
+##  9    229795
+## 10    766450
+## # ... with 87 more rows</code></pre>
 
 </div>
 </div>

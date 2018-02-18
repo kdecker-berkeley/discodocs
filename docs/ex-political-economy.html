@@ -281,14 +281,14 @@ is_business_grad =<span class="st"> </span><span class="kw">has_degree_from</spa
 <p>Now I need to find donors to the Haas Center, Goldman School, and CEGA. Some follow-up clarified that the “Haas Center” here is referring to the <a href="http://haasinstitute.berkeley.edu/">Haas Institute for a fair and inclusive society</a> . I don’t know if that is an area of giving, a department, a fund? So I use the brainstorm bot. From experience, I know that “institute” sometimes appears in CADS as the full word “institute” and is sometimes abbreviated to something like “inst.” I’ll use the wildcard (*) ability in the brainstorm bot to make sure I capture all possibilities:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">brainstorm_bot</span>(<span class="st">&quot;haas inst*&quot;</span>)</code></pre></div>
 <pre><code>## attended_event 
-##     4340: Haas Institutional Analysis Workshop
 ##     2843: Haas Institutional Analysis Workshop
+##     4340: Haas Institutional Analysis Workshop
 ## gave_to_department 
 ##     HDRC: Haas Inst/Fair &amp; Inclusive Soc
 ## has_affiliation 
+##     BUIBI: Haas Institute for Business Innovation
 ##     BUBSI: Haas Institute for Bus &amp; Social Impact
 ##     BUA18: *Haas Inst of Mgmt, Innovation &amp; Org
-##     BUIBI: Haas Institute for Business Innovation
 ## on_committee 
 ##     IBIAB: Haas Inst/Business Innovation Adv Board</code></pre>
 <p>Ah ha! It’s the department.</p>

@@ -8,7 +8,7 @@ description: "Some documentation for the discoveryengine"
 knit: "bookdown::render_book"
 ---
 ```{r}
-knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, fig.path = "images/")
 ```
 # Welcome
 
