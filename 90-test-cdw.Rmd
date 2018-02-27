@@ -4,7 +4,7 @@
 
 ## Test your connection
 
-First, let's make sure your connection works. You'll need the user name and password you received from Nancy Fan. Here are the steps to see if that connection works:
+First, let's make sure your connection works. You'll need the user name and password you received when you got access to the data warehouse. Here are the steps to see if that connection works:
 
 1) Navigate to C:\\Windows\\SysWOW64. Double click odbcad32. It's the application highlighted in the following image:
 
@@ -44,7 +44,7 @@ First, let's make sure your connection works. You'll need the user name and pass
 
 ## Opening RStudio
 
-If your connection was successful, let's move on to setting up some packages you'll need.
+If your connection was successful, let's move on to making sure you can connect from within RStudio -- this will ensure that the Discovery Engine is able to query the data warehouse.
 
 First, open RStudio. If you don't have an icon on your desktop, you can find the program by searching for "rstudio" in your Start menu. You'll also find a copy at C:\\Program Files\\RStudio\\bin. If you want a shortcut on your desktop, simply drag and drop the rstudio application.
 
@@ -62,7 +62,7 @@ You also want to make sure you're using the correct version of R. Here are the s
 `r knitr::include_graphics("images/options.png")`
 </p></center>
 
-2) The top box tells you the R version you're using. Click on the "Change.." button. There may be multiple versions of R available, pick the latest one, but pick the "[32-bit]" one. As of this September 2017, the version you should pick is "[32-bit] C:\\Program Files\\R\\R-3.4.1" Depending on when you are reading this, you may have a later version of R available -- use that, just be sure to pick the version that is "[32-bit]" 
+2) The top box tells you the R version you're using. Click on the "Change.." button. Then select the option that says "Use your machine's default version of R (32-bit)." Make sure it is 32-bit!
 
 <p><center>
 `r knitr::include_graphics("images/version.png")`
@@ -70,54 +70,9 @@ You also want to make sure you're using the correct version of R. Here are the s
 
 3) Click "Ok" twice. You may be prompted to restart the program. If so, go ahead and do so.
 
-## Fixing the default package installation directory
-
-By default, R will install packages to a local directory. While this doesn't cause any immediate problems, it does mean that all of your packages will disappear every time IST recomposes our machines. To avoid having to re-install everything every few weeks, we can change the default package installation directory. You can do this by copying and pasting the following commands into your R console:
-
-```{r, eval = FALSE}
-# the first part sets up the new package directory
-package_dir <- "P:/R/win-library/packages"
-if (!dir.exists(package_dir)) dir.create(package_dir, recursive = TRUE)
-
-# then make a configuration file that notifies R of the new package directory
-env_file <- "P:/.Renviron"
-if (!file.exists(env_file)) file.create(env_file)
-
-# and add the new location to the configuration file
-cat("\nR_LIBS_USER='", package_dir, "'", 
-    sep = "", file = env_file, append = TRUE)
-
-# we also update the current R session about the new set up
-# (this is so we don't have to restart for the changes to take effect)
-do.call(Sys.setenv, list(R_LIBS_USER = package_dir))
-
-# finally we update where R will look when loading a package
-.libPaths(package_dir)
-```
-
-## Installing getcdw
-
-Before you can install getcdw, you'll need to install a few packages. Once again, just copy and paste the following into the console:
-
-```{r, eval = FALSE}
-install.packages("devtools")
-install.packages("dplyr", dependencies = TRUE)
-install.packages("S:/UR_Everyone/Rohit_Saini/ROracle/ROracle_1.2-2.zip", repos = NULL)
-```
-
-There may be a pause for a few seconds during installation of the packages. A little stop sign will appear in the upper right corner of the console while the script is running. Once this stop sign is gone, you should get an output message that tells you that each package has been successfully unpacked and where the downloaded packages are stored. You're now ready to move on to the next line.
-
-Now go ahead and use devtools to install getcdw. You'll need to run this line of code:
-
-```{r, eval = FALSE}
-devtools::install_github("tarakc02/getcdw")
-```
-
-You should get a message that getcdw has been installed. Again there may be a pause while the package is being installed.
-
 ## Testing getcdw
 
-Let's go ahead and load the library for getcdw:
+Now we can run a test query from the data warehouse. Start by loading the library called `getcdw`:
 
 ```{r}
 library(getcdw)
@@ -139,7 +94,7 @@ When you do this for the first time, you will be prompted for *three* pieces of 
 `r knitr::include_graphics("images/UID.png")`
 </center></p>
 
-2) Your "PWD": This is the password to log-in to the database. You should have received this from Nancy Fan, and it looks like a long random set of characters, numbers, and other symbols:
+2) Your "PWD": This is the password to log-in to the database. You will have received the password via phone call, and it looks like a long random set of characters, numbers, and other symbols:
 
 <p><center>
 `r knitr::include_graphics("images/PWD.png")`
@@ -159,4 +114,4 @@ If everything is working properly, you should see something like this:
 get_cdw("select * from dual")
 ```
 
-If that's what you see, you are all set! Stay tuned for further instructions as we work to roll out the new suite of tools!
+If that's what you see, you are all set! 

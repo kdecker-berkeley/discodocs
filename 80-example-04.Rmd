@@ -41,6 +41,6 @@ display(prospect_list)
 
 A lot of individuals in `prospect_list` are married to each other, but Builder of Berkeley is a household recognition. If I'm going to run the Prospect Pool Spreadsheet, this doesn't really matter since that report automatically households, but otherwise I'd like to household the results (this will also help in getting an accurate count). By checking `?display` I see that deceased people are removed by default (which is what I want in this case), but that householding is not done by default. To enable householding:
 
-```{r ex-builder-household}
+```{r ex-builder-household, cache = TRUE}
 display(prospect_list, household = TRUE)
 ```

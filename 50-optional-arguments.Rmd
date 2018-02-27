@@ -39,16 +39,18 @@ For the most part, widgets have just a small number of options, and they are des
 
 `majored_in(womens_studies, attendees = TRUE)`: By adding `attendees = TRUE`, we include any attendee, undergraduate or graduate, in addition to the degreeholders.
 
-`majored_in(womens_studies, undergraduates = FALSE, attendees = TRUE)`: Here we're only interested in graduate-level Women's Studies majors. We'll ignore undergraduate degreeholders, and, importantly, we'll also ignore undergraduate attendees. We'll include anyone who studied Women's Studies at the graduate level, whether or not they earned a degree. Though it has the same meaning and will have the same results, in cases like this it's helpful to be explicit so you don't get confused later:
+`majored_in(womens_studies, undergraduates = FALSE, current_students = TRUE)`: Here we're only interested in graduate-level Women's Studies majors, including degreeholders and current students (but not attendees). We'll ignore undergraduate degreeholders as well as current undergraduate students. We'll include anyone who studied or is currently studying Women's Studies at the graduate level. Though it has the same meaning and will have the same results, in cases like this it's helpful to be explicit so you don't get confused later:
 
 ```{r, eval = FALSE}
 majored_in(
     womens_studies,
     undergraduates = FALSE,
     graduates = TRUE, # not necessary (it's TRUE by default), but more clear
-    attendees = TRUE
+    current_students = TRUE
 ) 
 ```
+
+There are more examples using the academic widgets in [the examples gallery](#ex-academic).
 
 ## Workarounds: inactive only
 
