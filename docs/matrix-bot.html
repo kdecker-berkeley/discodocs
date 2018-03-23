@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Documentation for the discoveryengine</title>
   <meta name="description" content="Some documentation for the discoveryengine">
-  <meta name="generator" content="bookdown 0.7.1 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
   <meta property="og:title" content="Documentation for the discoveryengine" />
   <meta property="og:type" content="book" />
@@ -45,14 +45,11 @@
 
 
 
-<script src="libs/htmlwidgets-1.0/htmlwidgets.js"></script>
-<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="libs/datatables-binding-0.3/datatables.js"></script>
-<link href="libs/dt-core-1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
-<link href="libs/dt-core-1.10.16/css/jquery.dataTables.extra.css" rel="stylesheet" />
-<script src="libs/dt-core-1.10.16/js/jquery.dataTables.min.js"></script>
-<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<script src="libs/htmlwidgets-0.8/htmlwidgets.js"></script>
+<script src="libs/datatables-binding-0.2/datatables.js"></script>
+<link href="libs/dt-core-1.10.12/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.12/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.12/js/jquery.dataTables.min.js"></script>
 
 
 <style type="text/css">
@@ -190,7 +187,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="18.3" data-path="ex-fec.html"><a href="ex-fec.html#example-environmental-interest"><i class="fa fa-check"></i><b>18.3</b> Example: Environmental Interest</a></li>
 <li class="chapter" data-level="18.4" data-path="ex-fec.html"><a href="ex-fec.html#bots"><i class="fa fa-check"></i><b>18.4</b> Bots</a></li>
 </ul></li>
-<li class="chapter" data-level="19" data-path="ex-academic.html"><a href="ex-academic.html"><i class="fa fa-check"></i><b>19</b> Alumni and current students</a></li>
+<li class="chapter" data-level="19" data-path="ex-ca-campaign.html"><a href="ex-ca-campaign.html"><i class="fa fa-check"></i><b>19</b> Utilizing CA campaign finance data</a><ul>
+<li class="chapter" data-level="19.1" data-path="ex-ca-campaign.html"><a href="ex-ca-campaign.html#example-state-senate-and-assembly-candidates"><i class="fa fa-check"></i><b>19.1</b> Example: State Senate and Assembly candidates</a></li>
+<li class="chapter" data-level="19.2" data-path="ex-ca-campaign.html"><a href="ex-ca-campaign.html#propositions"><i class="fa fa-check"></i><b>19.2</b> Propositions</a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="ex-academic.html"><a href="ex-academic.html"><i class="fa fa-check"></i><b>20</b> Alumni and current students</a></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="test-cdw.html"><a href="test-cdw.html"><i class="fa fa-check"></i><b>A</b> Test your database set up</a><ul>
 <li class="chapter" data-level="A.1" data-path="test-cdw.html"><a href="test-cdw.html#test-your-connection"><i class="fa fa-check"></i><b>A.1</b> Test your connection</a></li>
@@ -284,8 +285,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ## majored_in 
 ##     579: Music
 ## participated_in 
-##     LSCN: CNMAT Users Group
 ##     LSNM: Berkeley New Music Project
+##     LSCN: CNMAT Users Group
 ##     LSRE: Repercussions Music Journal
 ##     UMUC: Music Connection
 ##     MSJZ: UC Jazz Ensembles
@@ -300,18 +301,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># i use the wildcard * to search for both &quot;chicano&quot; and &quot;chicana&quot;</span>
 <span class="kw">matrix_bot</span>(<span class="kw">brainstorm_bot</span>(<span class="st">&quot;chican*&quot;</span>))</code></pre></div>
 <pre><code>## attended_event 
-##     5348: EI Chicano Latino Graduation 5-15-2011
-##     5888: EI Chicano/Latino Graduation 5-1-08
 ##     5882: EI Chicano/Latino Graduation 5-1-02
+##     5348: EI Chicano Latino Graduation 5-15-2011
 ##     5883: EI Chicano/Latino Graduation 5-1-03
-##     5884: EI Chicano/Latino Graduation 5-1-04
 ##     5885: EI Chicano/Latino Graduation 5-1-05
-##     5886: EI Chicano/Latino Graduation 5-1-06
-##     5887: EI Chicano/Latino Graduation 5-1-07
+##     5888: EI Chicano/Latino Graduation 5-1-08
 ##     5889: EI Chicano/Latino Graduation 5-1-09
 ##     5890: EI Chicano/Latino Graduation 5-1-10
 ##     5891: EI Chicano/Latino Graduation 5-1-12
 ##     8420: Chicano Latino Chapter Noche de Osos
+##     5884: EI Chicano/Latino Graduation 5-1-04
+##     5886: EI Chicano/Latino Graduation 5-1-06
+##     5887: EI Chicano/Latino Graduation 5-1-07
 ##     3231: Sandra Hare Welcome Rec.
 ##     4454: CAA Mento Chic/Lat Ptshp
 ##     4867: L&amp;S 10th Anniversary Ethnic Studies Libr
@@ -322,12 +323,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ## gave_to_department 
 ##     CHICANO: Chicano Studies Program
 ##     MSGC: Multiculture, Sex &amp; Gender Ctrs
-##     TRSP: Transfer/ReEntry/Parent Ctr
 ##     ETHNIC: Ethnic Studies
+##     TRSP: Transfer/ReEntry/Parent Ctr
 ##     SAGE: SAGE Scholars Program
 ##     VCEIO: Equity &amp; Inclusion: VC&#39;s Office
-##     CEEE: Educ Equity &amp; Excellence Centers
 ##     SLC: Student Learning Center
+##     CEEE: Educ Equity &amp; Excellence Centers
 ##     CLL: Campus Life/Leadership
 ##     CEP: Educational Partnerships Center
 ##     PDP: Professional Development Pgm
@@ -348,16 +349,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ##     919: Spanish Option D: Hispanic
 ##     360: Ethnic Studies
 ##     907: Spanish Option C2: Latin American
-##     9A1: Gender &amp; Women&#39;s Studies
 ##     498: Latin American Studies
+##     9A1: Gender &amp; Women&#39;s Studies
 ##     882: Spanish
 ##     045: American Studies
 ## participated_in 
+##     LSCL: Chicano/Latino Political Sci Assoc
+##     UMEC: Movimiento Estud Chicano de Aztlan
 ##     EDCH: Chicano Latina Arch Stdnt Assn
 ##     LSCI: Chicano Studies Undergrad Assoc
-##     LSCL: Chicano/Latino Political Sci Assoc
 ##     UCHE: Chicano/Latinos In Health Education
-##     UMEC: Movimiento Estud Chicano de Aztlan
 ##     GLTA: Lambda Theta Alpha Latin Sorority
 ##     UMAL: Mujeres Activas En Letras (MALCS)
 ##     UXIN: Xinaxtli
@@ -369,8 +370,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ##     ULAS: Latin American Student Association
 ##     GLTN: Lambda Theta Nu Sorority
 ##     UHSF: Hispanic Scholarship Fund Scholars
-##     GGZA: Gamma Zeta Alpha
 ##     UGFR: Grupo Folklorico Reflejos De Mexico
+##     GGZA: Gamma Zeta Alpha
 ##     GSPA: Sigma Pi Alpha Sorority
 ##     UMCH: MEChXA
 ##     UHU: Hermanos Unidos
@@ -379,6 +380,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ##     UYQU: Young Queers United 4 Empow (Y Que)
 ##     UEGI: Global Internship
 ##     ULF: La Familia
+##     EIM: Casa Magdalena Mora
 ##     URRR: Raza Recruitment &amp; Retention Center
 ##     BULS: Latino Business Student Association
 ##     URS: RISE-Rising Immigrant Sch Thru Educ

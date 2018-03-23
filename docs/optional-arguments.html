@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Documentation for the discoveryengine</title>
   <meta name="description" content="Some documentation for the discoveryengine">
-  <meta name="generator" content="bookdown 0.7.1 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
   <meta property="og:title" content="Documentation for the discoveryengine" />
   <meta property="og:type" content="book" />
@@ -45,14 +45,6 @@
 
 
 
-<script src="libs/htmlwidgets-1.0/htmlwidgets.js"></script>
-<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="libs/datatables-binding-0.3/datatables.js"></script>
-<link href="libs/dt-core-1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
-<link href="libs/dt-core-1.10.16/css/jquery.dataTables.extra.css" rel="stylesheet" />
-<script src="libs/dt-core-1.10.16/js/jquery.dataTables.min.js"></script>
-<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
 
 
 <style type="text/css">
@@ -190,7 +182,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="18.3" data-path="ex-fec.html"><a href="ex-fec.html#example-environmental-interest"><i class="fa fa-check"></i><b>18.3</b> Example: Environmental Interest</a></li>
 <li class="chapter" data-level="18.4" data-path="ex-fec.html"><a href="ex-fec.html#bots"><i class="fa fa-check"></i><b>18.4</b> Bots</a></li>
 </ul></li>
-<li class="chapter" data-level="19" data-path="ex-academic.html"><a href="ex-academic.html"><i class="fa fa-check"></i><b>19</b> Alumni and current students</a></li>
+<li class="chapter" data-level="19" data-path="ex-ca-campaign.html"><a href="ex-ca-campaign.html"><i class="fa fa-check"></i><b>19</b> Utilizing CA campaign finance data</a><ul>
+<li class="chapter" data-level="19.1" data-path="ex-ca-campaign.html"><a href="ex-ca-campaign.html#example-state-senate-and-assembly-candidates"><i class="fa fa-check"></i><b>19.1</b> Example: State Senate and Assembly candidates</a></li>
+<li class="chapter" data-level="19.2" data-path="ex-ca-campaign.html"><a href="ex-ca-campaign.html#propositions"><i class="fa fa-check"></i><b>19.2</b> Propositions</a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="ex-academic.html"><a href="ex-academic.html"><i class="fa fa-check"></i><b>20</b> Alumni and current students</a></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="test-cdw.html"><a href="test-cdw.html"><i class="fa fa-check"></i><b>A</b> Test your database set up</a><ul>
 <li class="chapter" data-level="A.1" data-path="test-cdw.html"><a href="test-cdw.html#test-your-connection"><i class="fa fa-check"></i><b>A.1</b> Test your connection</a></li>
@@ -207,14 +203,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="C" data-path="how-it-works.html"><a href="how-it-works.html"><i class="fa fa-check"></i><b>C</b> How does it work?</a><ul>
 <li class="chapter" data-level="C.1" data-path="how-it-works.html"><a href="how-it-works.html#a-widget-as-a-sql-template"><i class="fa fa-check"></i><b>C.1</b> A Widget as a SQL template</a></li>
 <li class="chapter" data-level="C.2" data-path="how-it-works.html"><a href="how-it-works.html#a-template-as-a-data-structure"><i class="fa fa-check"></i><b>C.2</b> A template as a data structure</a></li>
-<li class="chapter" data-level="C.3" data-path="how-it-works.html"><a href="how-it-works.html#non-standard-evaluation"><i class="fa fa-check"></i><b>C.3</b> Non-standard evaluation</a></li>
-<li class="chapter" data-level="C.4" data-path="how-it-works.html"><a href="how-it-works.html#combining-simple-definitions"><i class="fa fa-check"></i><b>C.4</b> Combining simple definitions</a><ul>
-<li class="chapter" data-level="C.4.1" data-path="how-it-works.html"><a href="how-it-works.html#atomic-vs.-complex-definitions"><i class="fa fa-check"></i><b>C.4.1</b> “Atomic” vs. “Complex” definitions</a></li>
-<li class="chapter" data-level="C.4.2" data-path="how-it-works.html"><a href="how-it-works.html#operations-on-definitions"><i class="fa fa-check"></i><b>C.4.2</b> Operations on definitions</a></li>
+<li class="chapter" data-level="C.3" data-path="how-it-works.html"><a href="how-it-works.html#and-we-can-use-multiple-affiliations"><i class="fa fa-check"></i><b>C.3</b> and we can use multiple affiliations:</a></li>
+<li class="chapter" data-level="C.4" data-path="how-it-works.html"><a href="how-it-works.html#non-standard-evaluation"><i class="fa fa-check"></i><b>C.4</b> Non-standard evaluation</a></li>
+<li class="chapter" data-level="C.5" data-path="how-it-works.html"><a href="how-it-works.html#combining-simple-definitions"><i class="fa fa-check"></i><b>C.5</b> Combining simple definitions</a><ul>
+<li class="chapter" data-level="C.5.1" data-path="how-it-works.html"><a href="how-it-works.html#atomic-vs.-complex-definitions"><i class="fa fa-check"></i><b>C.5.1</b> “Atomic” vs. “Complex” definitions</a></li>
+<li class="chapter" data-level="C.5.2" data-path="how-it-works.html"><a href="how-it-works.html#operations-on-definitions"><i class="fa fa-check"></i><b>C.5.2</b> Operations on definitions</a></li>
 </ul></li>
-<li class="chapter" data-level="C.5" data-path="how-it-works.html"><a href="how-it-works.html#re-visiting-to_sql"><i class="fa fa-check"></i><b>C.5</b> Re-visiting <code>to_sql</code></a></li>
-<li class="chapter" data-level="C.6" data-path="how-it-works.html"><a href="how-it-works.html#seeing-it-all-in-action"><i class="fa fa-check"></i><b>C.6</b> Seeing it all in action</a></li>
-<li class="chapter" data-level="C.7" data-path="how-it-works.html"><a href="how-it-works.html#for-further-study"><i class="fa fa-check"></i><b>C.7</b> For further study</a></li>
+<li class="chapter" data-level="C.6" data-path="how-it-works.html"><a href="how-it-works.html#re-visiting-to_sql"><i class="fa fa-check"></i><b>C.6</b> Re-visiting <code>to_sql</code></a></li>
+<li class="chapter" data-level="C.7" data-path="how-it-works.html"><a href="how-it-works.html#seeing-it-all-in-action"><i class="fa fa-check"></i><b>C.7</b> Seeing it all in action</a></li>
+<li class="chapter" data-level="C.8" data-path="how-it-works.html"><a href="how-it-works.html#for-further-study"><i class="fa fa-check"></i><b>C.8</b> For further study</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -247,14 +244,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ## .   source: d_bio_activity_mv.entity_id (entity_id)
 ## .   logic: 
 ## .   .   activity_code IN (&#39;2770&#39;)
-## .   .   activity_participation_code IN (&#39;P&#39;, &#39;ST&#39;, &#39;SP&#39;, &#39;V&#39;, &#39;H&#39;, &#39;S&#39;, &#39;C&#39;, &#39;KN&#39;, &#39;MD&#39;, &#39;E&#39;)</code></pre>
+## .   .   activity_participation_code IN (&#39;P&#39;, &#39;ST&#39;, &#39;SP&#39;, &#39;V&#39;, &#39;H&#39;, &#39;S&#39;, &#39;C&#39;, &#39;KN&#39;, &#39;MD&#39;, &#39;E&#39;, &#39;OL&#39;)</code></pre>
 <p>Since I did not specify otherwise, that definition will only pull in those who actually attended, not those who were merely invited. If I were interested not only in those who actually attended, but also anyone who was merely invited (this can be useful because it indicates that a person was at least considered an invite-worthy prospect), I would add <code>include_non_attendees = TRUE</code> to my specification:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">attended_event</span>(<span class="dv">2770</span>, <span class="dt">include_non_attendees =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>## LISTBUILDER DEFINITION (type: entity_id)
 ## .   source: d_bio_activity_mv.entity_id (entity_id)
 ## .   logic: 
 ## .   .   activity_code IN (&#39;2770&#39;)
-## .   .   activity_participation_code IN (&#39;P&#39;, &#39;ST&#39;, &#39;SP&#39;, &#39;V&#39;, &#39;H&#39;, &#39;S&#39;, &#39;C&#39;, &#39;KN&#39;, &#39;MD&#39;, &#39;E&#39;, &#39;ID&#39;, &#39;RG&#39;, &#39;NS&#39;)</code></pre>
+## .   .   activity_participation_code IN (&#39;P&#39;, &#39;ST&#39;, &#39;SP&#39;, &#39;V&#39;, &#39;H&#39;, &#39;S&#39;, &#39;C&#39;, &#39;KN&#39;, &#39;MD&#39;, &#39;E&#39;, &#39;OL&#39;, &#39;ID&#39;, &#39;RG&#39;, &#39;NS&#39;)</code></pre>
 <p>If you look closely at the printed output from each of those defintions, in the <code>logic</code> section, you’ll notice slightly different lists of codes included where it says <code>activity_participation_code IN ...</code>. In fact, the latter includes the extra codes <code>ID</code> (for “Invited but did not attend”), <code>RG</code> (“Regrets”), and <code>NS</code> (“No Show”).</p>
 </div>
 <div id="date-ranges" class="section level2">
@@ -295,7 +292,7 @@ current_or_former =<span class="st"> </span><span class="kw">in_unit_portfolio</
 current =<span class="st"> </span><span class="kw">in_unit_portfolio</span>(library, <span class="dt">include_inactive =</span> <span class="ot">FALSE</span>)
 
 <span class="co"># to find only the former portfolio:</span>
-former =<span class="st"> </span>current_or_former %but_not%<span class="st"> </span>current</code></pre></div>
+former =<span class="st"> </span>current_or_former <span class="op">%but_not%</span><span class="st"> </span>current</code></pre></div>
 <p>This little trick is similar to the one we use in the <a href="ex-lybunt.html#ex-lybunt">LYBUNT example</a>.</p>
 
 </div>
@@ -303,6 +300,7 @@ former =<span class="st"> </span>current_or_former %but_not%<span class="st"> </
 
 
 
+</div>
             </section>
 
           </div>

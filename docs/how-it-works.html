@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Documentation for the discoveryengine</title>
   <meta name="description" content="Some documentation for the discoveryengine">
-  <meta name="generator" content="bookdown 0.7.1 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
   <meta property="og:title" content="Documentation for the discoveryengine" />
   <meta property="og:type" content="book" />
@@ -45,14 +45,11 @@
 
 
 
-<script src="libs/htmlwidgets-1.0/htmlwidgets.js"></script>
-<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="libs/datatables-binding-0.3/datatables.js"></script>
-<link href="libs/dt-core-1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
-<link href="libs/dt-core-1.10.16/css/jquery.dataTables.extra.css" rel="stylesheet" />
-<script src="libs/dt-core-1.10.16/js/jquery.dataTables.min.js"></script>
-<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<script src="libs/htmlwidgets-0.8/htmlwidgets.js"></script>
+<script src="libs/datatables-binding-0.2/datatables.js"></script>
+<link href="libs/dt-core-1.10.12/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.12/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.12/js/jquery.dataTables.min.js"></script>
 
 
 <style type="text/css">
@@ -190,7 +187,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="18.3" data-path="ex-fec.html"><a href="ex-fec.html#example-environmental-interest"><i class="fa fa-check"></i><b>18.3</b> Example: Environmental Interest</a></li>
 <li class="chapter" data-level="18.4" data-path="ex-fec.html"><a href="ex-fec.html#bots"><i class="fa fa-check"></i><b>18.4</b> Bots</a></li>
 </ul></li>
-<li class="chapter" data-level="19" data-path="ex-academic.html"><a href="ex-academic.html"><i class="fa fa-check"></i><b>19</b> Alumni and current students</a></li>
+<li class="chapter" data-level="19" data-path="ex-ca-campaign.html"><a href="ex-ca-campaign.html"><i class="fa fa-check"></i><b>19</b> Utilizing CA campaign finance data</a><ul>
+<li class="chapter" data-level="19.1" data-path="ex-ca-campaign.html"><a href="ex-ca-campaign.html#example-state-senate-and-assembly-candidates"><i class="fa fa-check"></i><b>19.1</b> Example: State Senate and Assembly candidates</a></li>
+<li class="chapter" data-level="19.2" data-path="ex-ca-campaign.html"><a href="ex-ca-campaign.html#propositions"><i class="fa fa-check"></i><b>19.2</b> Propositions</a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="ex-academic.html"><a href="ex-academic.html"><i class="fa fa-check"></i><b>20</b> Alumni and current students</a></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="test-cdw.html"><a href="test-cdw.html"><i class="fa fa-check"></i><b>A</b> Test your database set up</a><ul>
 <li class="chapter" data-level="A.1" data-path="test-cdw.html"><a href="test-cdw.html#test-your-connection"><i class="fa fa-check"></i><b>A.1</b> Test your connection</a></li>
@@ -259,7 +260,7 @@ generate_query &lt;-<span class="st"> </span><span class="kw">parameterize_templ
 generate_query</code></pre></div>
 <pre><code>## A parameterized template with parameters:  ID_FIELD, ID_TYPE, TABLE_NAME, FIELD_NAME, LIST_OF_VALUES</code></pre>
 <p>Now, we can get a clunky, but functional, <code>has_affiliation</code> widget working:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">has_affiliation &lt;-<span class="st"> </span>function(affiliations) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">has_affiliation &lt;-<span class="st"> </span><span class="cf">function</span>(affiliations) {
     <span class="kw">list</span>(<span class="dt">ID_FIELD =</span> <span class="st">&quot;entity_id&quot;</span>,
          <span class="dt">ID_TYPE =</span> <span class="st">&quot;entity_id&quot;</span>,
          <span class="dt">TABLE_NAME =</span> <span class="st">&quot;cdw.d_bio_affiliation_mv&quot;</span>,
@@ -278,23 +279,23 @@ generate_query</code></pre></div>
 </ol>
 <p>So it makes sense that <code>has_affiliation</code> just makes a list. It has all of the components of our definition, so we can inspect and figure out what it’s supposed to return, but it won’t actually return data from the data warehouse until we build a <code>display</code> function.</p>
 <p>Luckily, step 2 of the <code>display</code> function is easy, because that’s exactly what the function <code>getcdw::get_cdw</code> does (if you’re building for your own database, you just need a function here that can send SQL to your database and return a <code>data.frame</code>).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">display &lt;-<span class="st"> </span>function(definition) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">display &lt;-<span class="st"> </span><span class="cf">function</span>(definition) {
     <span class="kw">get_cdw</span>(<span class="kw">to_sql</span>(definition))
 }</code></pre></div>
 <p>How can we implement <code>to_sql</code>? Well, that’s just a matter of combining our template from <code>generate_query</code> with the data to fill it in from <code>has_affiliation</code>. The R function <code>do.call</code> lets us call any R function using a list of arguments. For example:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># here is the usual way we call a function:</span>
 <span class="co"># this takes 2 samples from the integers between 1 and 100</span>
-<span class="kw">sample</span>(<span class="dt">x =</span> <span class="dv">1</span>:<span class="dv">100</span>, <span class="dt">size =</span> <span class="dv">2</span>)</code></pre></div>
-<pre><code>## [1] 32 92</code></pre>
+<span class="kw">sample</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">100</span>, <span class="dt">size =</span> <span class="dv">2</span>)</code></pre></div>
+<pre><code>## [1] 81 83</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># but what if we&#39;ve collected the arguments from some process?</span>
-args &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">x =</span> <span class="dv">1</span>:<span class="dv">100</span>, <span class="dt">size =</span> <span class="dv">2</span>)
+args &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">100</span>, <span class="dt">size =</span> <span class="dv">2</span>)
 
 <span class="co"># sample(args) won&#39;t work. what we want is do.call, which allows us to </span>
 <span class="co"># &quot;feed&quot; args as arguments to sample()</span>
 <span class="kw">do.call</span>(<span class="st">&quot;sample&quot;</span>, args)</code></pre></div>
-<pre><code>## [1] 12 73</code></pre>
+<pre><code>## [1]  4 17</code></pre>
 <p>Ok, so it looks like we know how to implement <code>to_sql</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">to_sql &lt;-<span class="st"> </span>function(definition) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">to_sql &lt;-<span class="st"> </span><span class="cf">function</span>(definition) {
     <span class="kw">do.call</span>(<span class="st">&quot;generate_query&quot;</span>, definition)
 }</code></pre></div>
 <p>That’s basically it! Let’s test what we have:</p>
@@ -303,16 +304,16 @@ args &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt"
 <pre><code>## # A tibble: 3,499 x 1
 ##    entity_id
 ##        &lt;dbl&gt;
-##  1     12737
-##  2     10310
-##  3    382834
-##  4    468926
-##  5    281132
-##  6    177574
-##  7    174232
-##  8    401838
-##  9    402388
-## 10    404909
+##  1     39734
+##  2     52974
+##  3     82541
+##  4    146791
+##  5    147294
+##  6    101126
+##  7    132739
+##  8    148053
+##  9    518692
+## 10    491592
 ## # ... with 3,489 more rows</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## and we can use multiple affiliations:
 is_constituent =<span class="st"> </span><span class="kw">has_affiliation</span>(<span class="kw">c</span>(<span class="st">&quot;M2&quot;</span>, <span class="st">&quot;MA4&quot;</span>))
@@ -320,16 +321,16 @@ is_constituent =<span class="st"> </span><span class="kw">has_affiliation</span>
 <pre><code>## # A tibble: 2,681 x 1
 ##    entity_id
 ##        &lt;dbl&gt;
-##  1    583425
-##  2    606742
-##  3    607277
-##  4      1893
-##  5    846060
-##  6    849847
-##  7    977556
-##  8    872618
-##  9    871870
-## 10    423826
+##  1    703367
+##  2    704361
+##  3    679051
+##  4    672896
+##  5    724117
+##  6    409363
+##  7    396206
+##  8    380716
+##  9    329934
+## 10    393624
 ## # ... with 2,671 more rows</code></pre>
 <p>Ok! So we’ve now implemented basic widget functionality. We still have a couple of outstanding issues:</p>
 <ol style="list-style-type: decimal">
@@ -340,7 +341,7 @@ is_constituent =<span class="st"> </span><span class="kw">has_affiliation</span>
 <div id="non-standard-evaluation" class="section level2">
 <h2><span class="header-section-number">C.3</span> Non-standard evaluation</h2>
 <p>The answer to our first outstanding issue is provided by the magic of <a href="http://adv-r.had.co.nz/Computing-on-the-language.html">non-standard evaluation</a> (that link is to the Non-standard evaluation chapter of the excellent book <em>Advanced R</em> by Hadley Wickham, which I highly recommend). For the purposes of this simplified example, I’ll use the following:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">has_affiliation &lt;-<span class="st"> </span>function(...) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">has_affiliation &lt;-<span class="st"> </span><span class="cf">function</span>(...) {
     affiliations &lt;-<span class="st"> </span><span class="kw">eval</span>(<span class="kw">substitute</span>(<span class="kw">alist</span>(...)))
     affiliations &lt;-<span class="st"> </span><span class="kw">as.character</span>(affiliations)
     
@@ -358,16 +359,16 @@ is_constituent =<span class="st"> </span><span class="kw">has_affiliation</span>
 <pre><code>## # A tibble: 2,681 x 1
 ##    entity_id
 ##        &lt;dbl&gt;
-##  1    583425
-##  2    606742
-##  3    607277
-##  4      1893
-##  5    846060
-##  6    849847
-##  7    977556
-##  8    872618
-##  9    871870
-## 10    423826
+##  1    703367
+##  2    704361
+##  3    679051
+##  4    672896
+##  5    724117
+##  6    409363
+##  7    396206
+##  8    380716
+##  9    329934
+## 10    393624
 ## # ... with 2,671 more rows</code></pre>
 <p><em>Note that the actual package is a little bit more careful about how it does things here, by using the <a href="https://cran.r-project.org/web/packages/lazyeval/index.html">lazyeval package</a>. To see the actual code used in the Disco Engine, check out <code>prep_dots</code> and <code>partial_sub</code> in <a href="https://github.com/tarakc02/discoveryengine/blob/master/R/helper-utils.R">this discoveryengine source code file</a></em></p>
 </div>
@@ -379,7 +380,7 @@ is_constituent =<span class="st"> </span><span class="kw">has_affiliation</span>
 <p>Our first step is to distinguish between what I’ll call “atomic” and “complex” definitions. So far we’ve been working with atomic definitions – that is, simple definitions that do not use <code>%and%</code>, <code>%or%</code>, or <code>%but_not%</code>.</p>
 <p>Since we’ll want to build more widgets (in order to benefit from being able to combine them!), I’m going to write some scaffolding code that will make it easier to produce widgets:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># widget will be a function to make ATOMIC definitions</span>
-widget &lt;-<span class="st"> </span>function(..., ID_FIELD, <span class="dt">ID_TYPE =</span> ID_FIELD, TABLE_NAME,
+widget &lt;-<span class="st"> </span><span class="cf">function</span>(..., ID_FIELD, <span class="dt">ID_TYPE =</span> ID_FIELD, TABLE_NAME,
                    FIELD_NAME) {
     args &lt;-<span class="st"> </span><span class="kw">eval</span>(<span class="kw">substitute</span>(<span class="kw">alist</span>(...)))
     args &lt;-<span class="st"> </span><span class="kw">as.character</span>(args)
@@ -397,7 +398,7 @@ widget &lt;-<span class="st"> </span>function(..., ID_FIELD, <span class="dt">ID
     <span class="kw">structure</span>(res, <span class="dt">atomic =</span> <span class="ot">TRUE</span>)
 }</code></pre></div>
 <p>Now let’s re-create <code>has_affiliation</code> using our new scaffolding code, and also let’s create a widget called <code>participated_in</code> for student activities and one called <code>on_committee</code> for committee participation:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">has_affiliation &lt;-<span class="st"> </span>function(...) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">has_affiliation &lt;-<span class="st"> </span><span class="cf">function</span>(...) {
     <span class="co"># notice I can just pass the ... along to the next function</span>
     <span class="kw">widget</span>(...,
            <span class="dt">ID_FIELD =</span> <span class="st">&quot;entity_id&quot;</span>,
@@ -405,14 +406,14 @@ widget &lt;-<span class="st"> </span>function(..., ID_FIELD, <span class="dt">ID
            <span class="dt">FIELD_NAME =</span> <span class="st">&quot;affil_code&quot;</span>)
 }
 
-participated_in &lt;-<span class="st"> </span>function(...) {
+participated_in &lt;-<span class="st"> </span><span class="cf">function</span>(...) {
     <span class="kw">widget</span>(...,
            <span class="dt">ID_FIELD =</span> <span class="st">&quot;entity_id&quot;</span>,
            <span class="dt">TABLE_NAME =</span> <span class="st">&quot;cdw.d_bio_student_activity_mv&quot;</span>,
            <span class="dt">FIELD_NAME =</span> <span class="st">&quot;student_activity_code&quot;</span>)
 }
 
-on_committee &lt;-<span class="st"> </span>function(...) {
+on_committee &lt;-<span class="st"> </span><span class="cf">function</span>(...) {
     <span class="kw">widget</span>(...,
            <span class="dt">ID_FIELD =</span> <span class="st">&quot;entity_id&quot;</span>,
            <span class="dt">TABLE_NAME =</span> <span class="st">&quot;cdw.d_bio_committee_mv&quot;</span>,
@@ -420,7 +421,7 @@ on_committee &lt;-<span class="st"> </span>function(...) {
 }</code></pre></div>
 <p>Just to make sure I haven’t broken anything, I quickly inspect the SQL that is being built by these widgets:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># to make it easier to inspect the queries</span>
-show_query &lt;-<span class="st"> </span>function(definition) <span class="kw">cat</span>(<span class="kw">to_sql</span>(definition))
+show_query &lt;-<span class="st"> </span><span class="cf">function</span>(definition) <span class="kw">cat</span>(<span class="kw">to_sql</span>(definition))
 
 <span class="kw">show_query</span>( <span class="kw">has_affiliation</span>(MA6, OC3) ) </code></pre></div>
 <pre><code>## 
@@ -449,7 +450,7 @@ show_query &lt;-<span class="st"> </span>function(definition) <span class="kw">c
 <span class="st">&quot;</span>)</code></pre></div>
 <p>Here <code>LHS</code> and <code>RHS</code> (which stand for “left-hand-side” and “right-hand-side”) are the SQL translations of definitions (they can be atomic or complex – as long as we know they have been converted to SQL properly, the result of this template will also be a valid SQL query). So when we translate a complex definition to SQL, all we have to do is translate the individual components to SQL. Those components (that is, <code>LHS</code> and <code>RHS</code>) may be either atomic (in which case we already know what to do) or complex (in which case we’ll just break it down again using the same logic, until we get down to atomic definitions).</p>
 <p>Now to implement our operations, we once again collect the necessary information into a list, this time tagging it as not atomic:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">operate &lt;-<span class="st"> </span>function(LHS, RHS, operator) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">operate &lt;-<span class="st"> </span><span class="cf">function</span>(LHS, RHS, operator) {
     res &lt;-<span class="st"> </span><span class="kw">list</span>(
         <span class="dt">operator =</span> operator,
         <span class="dt">LHS =</span> LHS,
@@ -460,30 +461,30 @@ show_query &lt;-<span class="st"> </span>function(definition) <span class="kw">c
     <span class="kw">structure</span>(res, <span class="dt">atomic =</span> <span class="ot">FALSE</span>)
 }
 
-<span class="st">`</span><span class="dt">%and%</span><span class="st">`</span> &lt;-<span class="st"> </span>function(LHS, RHS) <span class="kw">operate</span>(LHS, RHS, <span class="st">&quot;intersect&quot;</span>)
-<span class="st">`</span><span class="dt">%or%</span><span class="st">`</span> &lt;-<span class="st"> </span>function(LHS, RHS) <span class="kw">operate</span>(LHS, RHS, <span class="st">&quot;union&quot;</span>)
-<span class="st">`</span><span class="dt">%but_not%</span><span class="st">`</span> &lt;-<span class="st"> </span>function(LHS, RHS) <span class="kw">operate</span>(LHS, RHS, <span class="st">&quot;minus&quot;</span>)</code></pre></div>
+<span class="st">`</span><span class="dt">%and%</span><span class="st">`</span> &lt;-<span class="st"> </span><span class="cf">function</span>(LHS, RHS) <span class="kw">operate</span>(LHS, RHS, <span class="st">&quot;intersect&quot;</span>)
+<span class="st">`</span><span class="dt">%or%</span><span class="st">`</span> &lt;-<span class="st"> </span><span class="cf">function</span>(LHS, RHS) <span class="kw">operate</span>(LHS, RHS, <span class="st">&quot;union&quot;</span>)
+<span class="st">`</span><span class="dt">%but_not%</span><span class="st">`</span> &lt;-<span class="st"> </span><span class="cf">function</span>(LHS, RHS) <span class="kw">operate</span>(LHS, RHS, <span class="st">&quot;minus&quot;</span>)</code></pre></div>
 </div>
 </div>
 <div id="re-visiting-to_sql" class="section level2">
 <h2><span class="header-section-number">C.5</span> Re-visiting <code>to_sql</code></h2>
 <p>We now have two different SQL templates – one for atomic definitions, and one for non-atomic definitions. Accordingly, we’ll update <code>to_sql</code> so that it uses the correct template. The fact that every definition we create, whether atomic or not, has an attribute called <code>atomic</code> that can be either <code>TRUE</code> or <code>FALSE</code> helps us. We’ll start by making a helper function that tells us if a definition is complex or not:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">is_atomic &lt;-<span class="st"> </span>function(definition) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">is_atomic &lt;-<span class="st"> </span><span class="cf">function</span>(definition) {
     <span class="co"># recall this attribute is always TRUE or FALSE</span>
     <span class="kw">attr</span>(definition, <span class="st">&quot;atomic&quot;</span>)
 }</code></pre></div>
 <p>Now we can update our <code>to_sql</code> function to check whether a definition is atomic or not and then populate the appropriate template:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">to_sql &lt;-<span class="st"> </span>function(definition) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">to_sql &lt;-<span class="st"> </span><span class="cf">function</span>(definition) {
     <span class="co"># we already know what to do with atomic definitions</span>
-    if (<span class="kw">is_atomic</span>(definition)) <span class="kw">do.call</span>(<span class="st">&quot;generate_query&quot;</span>, definition)
+    <span class="cf">if</span> (<span class="kw">is_atomic</span>(definition)) <span class="kw">do.call</span>(<span class="st">&quot;generate_query&quot;</span>, definition)
     
     <span class="co"># with complex definitions, we translate the LHS and RHS to SQL,</span>
     <span class="co"># then pass everything back to the complex query template</span>
-    else {
+    <span class="cf">else</span> {
         translated_pieces &lt;-<span class="st"> </span><span class="kw">list</span>(
-            <span class="dt">LHS =</span> <span class="kw">to_sql</span>(definition$LHS),
-            <span class="dt">RHS =</span> <span class="kw">to_sql</span>(definition$RHS),
-            <span class="dt">operator =</span> definition$operator
+            <span class="dt">LHS =</span> <span class="kw">to_sql</span>(definition<span class="op">$</span>LHS),
+            <span class="dt">RHS =</span> <span class="kw">to_sql</span>(definition<span class="op">$</span>RHS),
+            <span class="dt">operator =</span> definition<span class="op">$</span>operator
         )
         <span class="kw">do.call</span>(<span class="st">&quot;generate_complex_query&quot;</span>, translated_pieces)
     }
@@ -501,15 +502,15 @@ show_query &lt;-<span class="st"> </span>function(definition) <span class="kw">c
 has_engineering_affil =<span class="st"> </span><span class="kw">has_affiliation</span>(MA4, SWE, URAE, DEN1)
 
 <span class="co"># a slightly more complex definition</span>
-engineering_constituency_1 =<span class="st"> </span>
-<span class="st">    </span>has_engineering_affil %and%
+engineering_constituency_<span class="dv">1</span> =<span class="st"> </span>
+<span class="st">    </span>has_engineering_affil <span class="op">%and%</span>
 <span class="st">    </span><span class="kw">participated_in</span>(UWSE, CHES, ENWE, ENSE)
 
-engineering_constituency_2 =<span class="st"> </span>
-<span class="st">    </span>engineering_constituency_1 %but_not%
+engineering_constituency_<span class="dv">2</span> =<span class="st"> </span>
+<span class="st">    </span>engineering_constituency_<span class="dv">1</span> <span class="op">%but_not%</span>
 <span class="st">    </span><span class="kw">on_committee</span>(ME3)</code></pre></div>
 <p>To reassure myself that the system is working as expected, I <code>display</code> the most complicated constituency, and look in CADS to verify that the resulting IDs do in fact match the definition I created:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">display</span>(engineering_constituency_2)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">display</span>(engineering_constituency_<span class="dv">2</span>)</code></pre></div>
 <pre><code>## # A tibble: 4 x 1
 ##   entity_id
 ##       &lt;dbl&gt;
@@ -525,7 +526,7 @@ engineering_constituency_2 =<span class="st"> </span>
 ## from cdw.d_bio_affiliation_mv
 ## where affil_code in (&#39;MA4&#39;, &#39;SWE&#39;, &#39;URAE&#39;, &#39;DEN1&#39;)</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># this is a complex definition, but both pieces are atomic:</span>
-<span class="kw">show_query</span>(engineering_constituency_1)</code></pre></div>
+<span class="kw">show_query</span>(engineering_constituency_<span class="dv">1</span>)</code></pre></div>
 <pre><code>## 
 ## (
 ## select distinct entity_id as entity_id
@@ -540,7 +541,7 @@ engineering_constituency_2 =<span class="st"> </span>
 ## )</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># as the definitions get more complex, even the LHS and RHS can </span>
 <span class="co"># be complex, but everything still can be analyzed down to atomic pieces:</span>
-<span class="kw">show_query</span>(engineering_constituency_2)</code></pre></div>
+<span class="kw">show_query</span>(engineering_constituency_<span class="dv">2</span>)</code></pre></div>
 <pre><code>## 
 ## (
 ## (

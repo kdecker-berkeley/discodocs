@@ -1,0 +1,63 @@
+# Utilizing CA campaign finance data {#ex-ca-campaign}
+
+```{r ex-ca-loadlib, message = FALSE}
+# i always begin by loading the disco engine if it isn't already loaded
+library(discoveryengine)
+```
+
+Prospect Analysis screens CADS data against campaign finance disclosures for California elections, as reported to the CA Secretary of State. The widgets to access this data are similar in form and function to the [FEC widgets](#ex-fec). They are:
+
+* `ca_gave_to_candidate`
+* `ca_gave_to_proposition`
+* `ca_gave`
+
+The first two widgets only look at contributions in campaigns for statewide office. However, the Secretary of State's "Cal Access" database includes a number of transactions that don't fit into either of those two categories. For instance, contributions to a campaign for Superior Court Judge (who run locally, not statewide) or contributions to committees that are not directly affiliated with a single candidate/proposition (such as the Democratic State Central Committee of California). In order to be able to find any kind of contribution, use `ca_gave`, which includes giving to statewide candidates and propositions as well as any other disclosed giving.
+
+## Example: State Senate and Assembly candidates
+
+The UC Berkeley Foundation is holding an event which will feature appearances by State assembly member Phil Ting, former state senator and assembly member Holly Mitchell, and state senator (and former state assembly member) Jim Beall. In preparation for the event, they ask you to find out who among our constituents have contributed to these officials' campaigns when they were running for office and do some preliminary research on them. We start by identifying the candidate IDs for those candidates, using the same [synonym search](#synonym-search) tool that works in every widget:
+
+```{r ex-ca-lookup-cands, cache = TRUE}
+ca_gave_to_candidate(?mitchell, ?ting, ?beall)
+```
+
+Once we know the correct candidate codes, we can pull contributors:
+
+```{r ex-ca-display-cands, cache = TRUE}
+donors = ca_gave_to_candidate(CA79738798, CA63467867, CA57102205)
+display(donors)
+```
+
+Just like giving and FEC widgets, the California campaign finance widgets all support the following optional arguments:
+
+* `at_least`: to find donors with total contributions over a specified amount. By default, this is assumed to be 1 cent.
+* `from` and `to`: to constrain the date range when looking for contributions. By default, all matched contributions will be searched regardless of date. Prospect Development's California campaign finance database goes back to 2006.
+
+## Propositions
+
+The process for ballot propositions is pretty similar to the one for candidates, but with the added complication that donors to proposition campaigns can be either supporting or opposed to the proposition in question. An example will help illustrate.
+
+If you're looking for prospects who are interested in public education, you might end up considering donors to propositions 30 (in the 2011-12 cycle) and 55 (in the 2015-15 cycle). Prop 30 raised taxes in order to pay for both public K-12 schools as well as community colleges, and Prop 55 extended those tax increases. Once again, we'll start with a [synonym search](#synonym-search):
+
+```{r ex-ca-lookup-props, cache = TRUE}
+ca_gave_to_proposition(?education)
+```
+
+The `code` field looks at first like it is completely meaningless, but take a closer look at you might notice: the last 4 characters are the proposition number (e.g. `0055`), while the 4 characters before that are the start of the election cycle that the proposition was a part of (so `2015` refers to the 2015-16 election cycle). So for this project, I'd use `BL20150055` and `BL20110030`. By default, `ca_gave_to_proposition` will pull both supporters and oppononents of the propositions. While that may be useful if you're just looking for wealth indicators, you probably want to specify one or the other for any affinity-based work. So:
+
+```{r ex-ca-pull-props, cache = TRUE}
+# to pull supporters of a tax increase to fund education:
+tax_supporter = ca_gave_to_proposition(BL20150055, BL20110030, 
+                                       support = TRUE)
+
+# and opponents:
+tax_opponent = ca_gave_to_proposition(BL20150055, BL20110030, 
+                                      support = FALSE)
+```
+
+A quick glance at the [Matrix Bot](#matrix-bot) results give us a good idea of which side of the political aisle these two groups are coming from:
+
+```{r ex-ca-prop-matrix, cache = TRUE}
+matrix_bot(tax_supporter)
+matrix_bot(tax_opponent)
+```

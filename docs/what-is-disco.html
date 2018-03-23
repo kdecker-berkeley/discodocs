@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Documentation for the discoveryengine</title>
   <meta name="description" content="Some documentation for the discoveryengine">
-  <meta name="generator" content="bookdown 0.7.1 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
   <meta property="og:title" content="Documentation for the discoveryengine" />
   <meta property="og:type" content="book" />
@@ -45,14 +45,11 @@
 
 
 
-<script src="libs/htmlwidgets-1.0/htmlwidgets.js"></script>
-<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="libs/datatables-binding-0.3/datatables.js"></script>
-<link href="libs/dt-core-1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
-<link href="libs/dt-core-1.10.16/css/jquery.dataTables.extra.css" rel="stylesheet" />
-<script src="libs/dt-core-1.10.16/js/jquery.dataTables.min.js"></script>
-<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<script src="libs/htmlwidgets-0.8/htmlwidgets.js"></script>
+<script src="libs/datatables-binding-0.2/datatables.js"></script>
+<link href="libs/dt-core-1.10.12/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.12/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.12/js/jquery.dataTables.min.js"></script>
 
 
 <style type="text/css">
@@ -190,7 +187,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="18.3" data-path="ex-fec.html"><a href="ex-fec.html#example-environmental-interest"><i class="fa fa-check"></i><b>18.3</b> Example: Environmental Interest</a></li>
 <li class="chapter" data-level="18.4" data-path="ex-fec.html"><a href="ex-fec.html#bots"><i class="fa fa-check"></i><b>18.4</b> Bots</a></li>
 </ul></li>
-<li class="chapter" data-level="19" data-path="ex-academic.html"><a href="ex-academic.html"><i class="fa fa-check"></i><b>19</b> Alumni and current students</a></li>
+<li class="chapter" data-level="19" data-path="ex-ca-campaign.html"><a href="ex-ca-campaign.html"><i class="fa fa-check"></i><b>19</b> Utilizing CA campaign finance data</a><ul>
+<li class="chapter" data-level="19.1" data-path="ex-ca-campaign.html"><a href="ex-ca-campaign.html#example-state-senate-and-assembly-candidates"><i class="fa fa-check"></i><b>19.1</b> Example: State Senate and Assembly candidates</a></li>
+<li class="chapter" data-level="19.2" data-path="ex-ca-campaign.html"><a href="ex-ca-campaign.html#propositions"><i class="fa fa-check"></i><b>19.2</b> Propositions</a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="ex-academic.html"><a href="ex-academic.html"><i class="fa fa-check"></i><b>20</b> Alumni and current students</a></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="test-cdw.html"><a href="test-cdw.html"><i class="fa fa-check"></i><b>A</b> Test your database set up</a><ul>
 <li class="chapter" data-level="A.1" data-path="test-cdw.html"><a href="test-cdw.html#test-your-connection"><i class="fa fa-check"></i><b>A.1</b> Test your connection</a></li>
@@ -256,22 +257,22 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><code>%but_not%</code></li>
 </ul>
 <p>So in the language of the Disco Engine, our definition would look like:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">majored_in</span>(mathematics) %or%<span class="st"> </span><span class="kw">gave_to_department</span>(mathematics)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">majored_in</span>(mathematics) <span class="op">%or%</span><span class="st"> </span><span class="kw">gave_to_department</span>(mathematics)</code></pre></div>
 <p>There is no limit to the number of predicates that can be strung together to form a definition:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">majored_in</span>(mathematics) %or%
-<span class="st">    </span><span class="kw">gave_to_department</span>(mathematics) %and%
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">majored_in</span>(mathematics) <span class="op">%or%</span>
+<span class="st">    </span><span class="kw">gave_to_department</span>(mathematics) <span class="op">%and%</span>
 <span class="st">    </span><span class="kw">lives_in_msa</span>(san_francisco)</code></pre></div>
 <p>These definitions can quickly become very complex. To manage that complexity, the Disco Engine provides the ability to <em>assign</em> names to definitions, that can then be used to construct more complex definitions:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">is_math_constituent =<span class="st"> </span><span class="kw">majored_in</span>(mathematics) %or%<span class="st"> </span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">is_math_constituent =<span class="st"> </span><span class="kw">majored_in</span>(mathematics) <span class="op">%or%</span><span class="st"> </span>
 <span class="st">    </span><span class="kw">gave_to_department</span>(mathematics)
 
-local_math_constituent =<span class="st"> </span>is_math_constituent %and%
+local_math_constituent =<span class="st"> </span>is_math_constituent <span class="op">%and%</span>
 <span class="st">    </span><span class="kw">lives_in_msa</span>(san_francisco)
 
 parent_of_local_math_constituent =<span class="st"> </span><span class="kw">parent_of</span>(local_math_constituent)</code></pre></div>
 <p>Together, the collection of predicates, the logical operators, and the ability to assign names form an expressive language for describing custom constituencies for a variety of purposes. Best of all, the Disco Engine gives us the ability to pull the IDs of a defined constituency from the database!</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">display</span>(parent_of_local_math_constituent)</code></pre></div>
-<pre><code>## # A tibble: 562 x 1
+<pre><code>## # A tibble: 563 x 1
 ##    entity_id
 ##        &lt;dbl&gt;
 ##  1      1168
@@ -284,7 +285,7 @@ parent_of_local_math_constituent =<span class="st"> </span><span class="kw">pare
 ##  8     23989
 ##  9     24151
 ## 10     24247
-## # ... with 552 more rows</code></pre>
+## # ... with 553 more rows</code></pre>
 </div>
 <div id="facilitating-discovery" class="section level2">
 <h2><span class="header-section-number">2.2</span> Facilitating discovery</h2>
@@ -293,17 +294,17 @@ parent_of_local_math_constituent =<span class="st"> </span><span class="kw">pare
 <pre><code>## attended_event 
 ##     6724: Haas East Bay Chp Robotic Event 06-18-14
 ## fec_gave_to_committee 
-##     C00635748: AI PAC
-##     C00582767: CAMPAIGN FOR A FEDERAL ROBOTICS COMMISSION
-##     C00144261: APPRAISAL INSTITUTE PAC (AI PAC)
 ##     C00521765: LIQUID ROBOTICS INC POLITICAL ACTION COMMITTEE (LIQUID ROBOTICS PAC)
+##     C00144261: APPRAISAL INSTITUTE PAC (AI PAC)
 ##     C00596908: ROBOTECHNOLOGY INC C.R.
+##     C00582767: CAMPAIGN FOR A FEDERAL ROBOTICS COMMISSION
+##     C00635748: AI PAC
 ## has_interest 
-##     AIN: Artificial Intelligence
 ##     ROB: Robotics
+##     AIN: Artificial Intelligence
 ## participated_in 
-##     UROB: Robotmedia Presents
-##     ENRO: Cal Robotics</code></pre>
+##     ENRO: Cal Robotics
+##     UROB: Robotmedia Presents</code></pre>
 
 </div>
 </div>

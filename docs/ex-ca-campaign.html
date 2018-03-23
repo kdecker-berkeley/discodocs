@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="ex-recent-band-parents.html">
-<link rel="next" href="ex-sim-donors.html">
+<link rel="prev" href="ex-fec.html">
+<link rel="next" href="ex-academic.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -237,57 +237,179 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="ex-near-builder" class="section level1">
-<h1><span class="header-section-number">16</span> Nearing Builder of Berkeley Status</h1>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># always begin by loading the disco engine if it isn&#39;t already loaded</span>
+<div id="ex-ca-campaign" class="section level1">
+<h1><span class="header-section-number">19</span> Utilizing CA campaign finance data</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># i always begin by loading the disco engine if it isn&#39;t already loaded</span>
 <span class="kw">library</span>(discoveryengine)</code></pre></div>
-<p>A household is designated a “Builder of Berkeley” when they have donated at least $1 Million lifetime to Berkeley. That status comes with recognition and other perks, so it’s valuable to be aware of households who are nearing that level, as we can then craft solicitations that would push the household into Builder status.</p>
-<div id="defining-close" class="section level2">
-<h2><span class="header-section-number">16.1</span> Defining close</h2>
-<p>For this example, I’ll use $850,000 as the definition of “close” to the $1 Million Builder level. So we’re trying to find households who have given at least $850,000, but not over $1 Million.</p>
-<p><a href="working-with-widgets.html#use-defaults">Recall that</a> the giving widgets, when used without any area or department codes, look at giving anywhere on campus (which is what we want).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># B.O.B. is a lifetime recognition. Pull lifetime giving by not using the </span>
-<span class="co"># date range in the gave_to_area widget</span>
-nearly_builder =<span class="st"> </span><span class="kw">gave_to_area</span>(<span class="dt">at_least =</span> <span class="dv">850000</span>)</code></pre></div>
-<p>To exclude those who are already over $1M (who are already Builders), I first need to identify them:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">already_builder =<span class="st"> </span><span class="kw">gave_to_area</span>(<span class="dt">at_least =</span> <span class="dv">1000000</span>)</code></pre></div>
-<p>Now, I want to find everyone who satisfies <code>nearly_builder</code> but are not <code>already_builder</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">prospect_list =<span class="st"> </span>nearly_builder <span class="op">%but_not%</span><span class="st"> </span>already_builder</code></pre></div>
-<p>Let’s see what we have!</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">display</span>(prospect_list)</code></pre></div>
-<pre><code>## # A tibble: 63 x 1
+<p>Prospect Analysis screens CADS data against campaign finance disclosures for California elections, as reported to the CA Secretary of State. The widgets to access this data are similar in form and function to the <a href="ex-fec.html#ex-fec">FEC widgets</a>. They are:</p>
+<ul>
+<li><code>ca_gave_to_candidate</code></li>
+<li><code>ca_gave_to_proposition</code></li>
+<li><code>ca_gave</code></li>
+</ul>
+<p>The first two widgets only look at contributions in campaigns for statewide office. However, the Secretary of State’s “Cal Access” database includes a number of transactions that don’t fit into either of those two categories. For instance, contributions to a campaign for Superior Court Judge (who run locally, not statewide) or contributions to committees that are not directly affiliated with a single candidate/proposition (such as the Democratic State Central Committee of California). In order to be able to find any kind of contribution, use <code>ca_gave</code>, which includes giving to statewide candidates and propositions as well as any other disclosed giving.</p>
+<div id="example-state-senate-and-assembly-candidates" class="section level2">
+<h2><span class="header-section-number">19.1</span> Example: State Senate and Assembly candidates</h2>
+<p>The UC Berkeley Foundation is holding an event which will feature appearances by State assembly member Phil Ting, former state senator and assembly member Holly Mitchell, and state senator (and former state assembly member) Jim Beall. In preparation for the event, they ask you to find out who among our constituents have contributed to these officials’ campaigns when they were running for office and do some preliminary research on them. We start by identifying the candidate IDs for those candidates, using the same <a href="working-with-widgets.html#synonym-search">synonym search</a> tool that works in every widget:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ca_gave_to_candidate</span>(?mitchell, ?ting, ?beall)</code></pre></div>
+<pre><code>## Regular codes and synonyms:
+##           synonym       code
+##  mitchell_holly_j CA79738798
+##      ing_mitchell CA65733180
+##    keating_janice CA15407672
+##         ting_phil CA57102205
+##  keating_janice_e CA83880493
+##         beall_jim CA63467867</code></pre>
+<p>Once we know the correct candidate codes, we can pull contributors:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">donors =<span class="st"> </span><span class="kw">ca_gave_to_candidate</span>(CA79738798, CA63467867, CA57102205)
+<span class="kw">display</span>(donors)</code></pre></div>
+<pre><code>## # A tibble: 460 x 1
 ##    entity_id
 ##        &lt;dbl&gt;
-##  1       566
-##  2       618
-##  3      1346
-##  4      1347
-##  5      5832
-##  6      5833
-##  7      7318
-##  8      8872
-##  9     10342
-## 10     10688
-## # ... with 53 more rows</code></pre>
+##  1       331
+##  2       867
+##  3      1303
+##  4      6582
+##  5      8666
+##  6     11015
+##  7     11529
+##  8     12306
+##  9     12453
+## 10     12735
+## # ... with 450 more rows</code></pre>
+<p>Just like giving and FEC widgets, the California campaign finance widgets all support the following optional arguments:</p>
+<ul>
+<li><code>at_least</code>: to find donors with total contributions over a specified amount. By default, this is assumed to be 1 cent.</li>
+<li><code>from</code> and <code>to</code>: to constrain the date range when looking for contributions. By default, all matched contributions will be searched regardless of date. Prospect Development’s California campaign finance database goes back to 2006.</li>
+</ul>
 </div>
-<div id="householding-1" class="section level2">
-<h2><span class="header-section-number">16.2</span> Householding</h2>
-<p>A lot of individuals in <code>prospect_list</code> are married to each other, but Builder of Berkeley is a household recognition. If I’m going to run the Prospect Pool Spreadsheet, this doesn’t really matter since that report automatically households, but otherwise I’d like to household the results (this will also help in getting an accurate count). By checking <code>?display</code> I see that deceased people are removed by default (which is what I want in this case), but that householding is not done by default. To enable householding:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">display</span>(prospect_list, <span class="dt">household =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<pre><code>## # A tibble: 39 x 1
-##    entity_id
-##        &lt;dbl&gt;
-##  1     48763
-##  2    508590
-##  3   3085586
-##  4      8872
-##  5     15771
-##  6    132374
-##  7    420352
-##  8    653365
-##  9      1346
-## 10     10342
-## # ... with 29 more rows</code></pre>
+<div id="propositions" class="section level2">
+<h2><span class="header-section-number">19.2</span> Propositions</h2>
+<p>The process for ballot propositions is pretty similar to the one for candidates, but with the added complication that donors to proposition campaigns can be either supporting or opposed to the proposition in question. An example will help illustrate.</p>
+<p>If you’re looking for prospects who are interested in public education, you might end up considering donors to propositions 30 (in the 2011-12 cycle) and 55 (in the 2015-15 cycle). Prop 30 raised taxes in order to pay for both public K-12 schools as well as community colleges, and Prop 55 extended those tax increases. Once again, we’ll start with a <a href="working-with-widgets.html#synonym-search">synonym search</a>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ca_gave_to_proposition</span>(?education)</code></pre></div>
+<pre><code>## Regular codes and synonyms:
+##                                                                                   synonym
+##                      kindergarten_university_public_education_facilities_bond_act_of_2004
+##      ab_127_chapter_35_2006_nunez_education_facilities_kindergarten_university_public_edu
+##  education_funding_real_property_parcel_tax_initiative_constitutional_amendment_and_statu
+##                      sb_1174_chapter_753_statutes_of_2014_lara_english_language_education
+##                      kindergarten_university_public_education_facilities_bond_act_of_2002
+##                                                            education_funding_payment_plan
+##                   tax_for_early_education_and_early_childhood_programs_initiative_statute
+##      public_preschool_education_tax_increase_on_incomes_over_400000_for_individuals_80000
+##          temporary_taxes_to_fund_education_guaranteed_local_public_safety_funding_initiat
+##         tax_extension_to_fund_education_and_healthcare_initiative_constitutional_amendmen
+##        code
+##  BL20030055
+##  BL2005001D
+##  BL20050088
+##  BL20150058
+##  BL20010047
+##  BL2009001B
+##  BL20110038
+##  BL20050082
+##  BL20110030
+##  BL20150055</code></pre>
+<p>The <code>code</code> field looks at first like it is completely meaningless, but take a closer look at you might notice: the last 4 characters are the proposition number (e.g. <code>0055</code>), while the 4 characters before that are the start of the election cycle that the proposition was a part of (so <code>2015</code> refers to the 2015-16 election cycle). So for this project, I’d use <code>BL20150055</code> and <code>BL20110030</code>. By default, <code>ca_gave_to_proposition</code> will pull both supporters and oppononents of the propositions. While that may be useful if you’re just looking for wealth indicators, you probably want to specify one or the other for any affinity-based work. So:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># to pull supporters of a tax increase to fund education:</span>
+tax_supporter =<span class="st"> </span><span class="kw">ca_gave_to_proposition</span>(BL20150055, BL20110030, 
+                                       <span class="dt">support =</span> <span class="ot">TRUE</span>)
+
+<span class="co"># and opponents:</span>
+tax_opponent =<span class="st"> </span><span class="kw">ca_gave_to_proposition</span>(BL20150055, BL20110030, 
+                                      <span class="dt">support =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<p>A quick glance at the <a href="matrix-bot.html#matrix-bot">Matrix Bot</a> results give us a good idea of which side of the political aisle these two groups are coming from:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">matrix_bot</span>(tax_supporter)</code></pre></div>
+<pre><code>## fec_gave_to_candidate 
+##     H4CA21072: RENTERIA, AMANDA
+##     H0CA33117: BASS, KAREN
+##     S4MA00028: MARKEY, EDWARD JOHN MR
+##     H2CA31125: AGUILAR, PETE
+##     H2CA36439: RUIZ, RAUL DR.
+##     H6AZ08038: GIFFORDS, GABRIELLE
+##     S4MI00355: PETERS, GARY
+##     H4CA10075: EGGMAN, MICHAEL RAY
+##     S6OH00254: STRICKLAND, TED
+##     H8NV03036: TITUS, DINA
+##     H8CO04067: MARKEY, ELIZABETH HELEN
+##     S6MO00362: KANDER, JASON
+##     H2CA43245: TAKANO, MARK
+##     S2IN00091: DONNELLY, JOSEPH S
+##     H2CA52089: PETERS, SCOTT
+##     S8AK00090: BEGICH, MARK
+##     H8CA22089: CAPPS, LOIS G
+##     S8ME00080: ALLEN, THOMAS H
+##     S6PA00100: SPECTER, ARLEN
+##     H2CA26026: BERMAN, HOWARD L
+##     H2CA00120: BROWNLEY, JULIA
+##     S2NM00088: HEINRICH, MARTIN TREVOR
+##     H6CA04123: BROWN, CHARLES
+##     S6VA00093: WARNER, MARK ROBERT
+##     S4GA11277: NUNN, MARY MICHELLE
+##     S8CO00172: UDALL, MARK E
+##     S6NV00028: REID, HARRY
+##     S6LA00227: LANDRIEU, MARY L
+##     S6PA00266: MCGINTY, KATHLEEN ALANA
+##     S6NV00200: MASTO, CATHERINE CORTEZ
+##     S8NY00082: SCHUMER, CHARLES E
+##     S4NJ00185: BOOKER, CORY A
+##     S8NC00239: HAGAN, KAY R
+##     S2VA00142: KAINE, TIMOTHY MICHAEL
+##     S2NV00209: BERKLEY, SHELLEY
+##     H0CA10149: GARAMENDI, JOHN
+##     S8NM00184: UDALL, TOM
+##     S0NH00219: SHAHEEN, JEANNE
+##     S6OH00163: BROWN, SHERROD
+##     S0CO00211: BENNET, MICHAEL F
+##     S6IL00292: DUCKWORTH, L TAMMY
+##     H0CA03078: BERA, AMERISH
+##     H8CA05035: PELOSI, NANCY
+##     S8OR00207: MERKLEY, JEFFREY ALAN
+##     H4CA11081: MCNERNEY, JERRY
+##     S6NH00091: HASSAN, MARGARET WOOD
+##     S0CA00199: FEINSTEIN, DIANNE
+##     S2WA00189: MURRAY, PATTY
+##     S6MT00162: TESTER, JON
+##     S6MO00305: MCCASKILL, CLAIRE
+##     S8WI00026: FEINGOLD, RUSSELL DANA
+##     S6CA00584: HARRIS, KAMALA D
+##     S2WI00219: BALDWIN, TAMMY
+##     S8MN00438: FRANKEN, AL
+##     S0NY00410: GILLIBRAND, KIRSTEN ELIZABETH
+##     S2CA00286: BOXER, BARBARA
+##     S2MA00170: WARREN, ELIZABETH
+## fec_gave_to_category 
+##     J2100: Democratic leadership PAC
+##     J7500: Minority/Ethnic Groups
+##     J1200: Democratic/Liberal
+## gave_to_department 
+##     PP: Public Policy
+##     BAM: Berkeley Art Museum
+## has_interest 
+##     DEM: Democratic Politics</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">matrix_bot</span>(tax_opponent)</code></pre></div>
+<pre><code>## fec_gave_to_candidate 
+##     S4AR00103: COTTON, THOMAS
+##     H0CA10123: HARMER, DAVID
+##     S0OH00133: PORTMAN, ROB
+##     S0NV00138: ANGLE, SHARRON E
+##     S0MA00109: BROWN, SCOTT P
+##     S0FL00338: RUBIO, MARCO
+##     H2CA11135: GILL, RICKY
+##     H6CA22125: MCCARTHY, KEVIN
+##     S0CA00330: FIORINA, CARLY
+##     H0OH08029: BOEHNER, JOHN A
+##     S2CA00351: CAMPBELL, TOM
+##     H8WI01024: RYAN, PAUL D.
+##     P80003353: ROMNEY, MITT / RYAN, PAUL D. 
+##     P80002801: MCCAIN, JOHN S.
+## fec_gave_to_category 
+##     J1100: Republican/Conservative
+##     J2200: Republican leadership PAC
+##     Z4100: Republican Joint Candidate Committee
+##     Z5100: Republican Party Committees
+##     Z1100: Republican Candidate Committees</code></pre>
 
 </div>
 </div>
@@ -296,8 +418,8 @@ nearly_builder =<span class="st"> </span><span class="kw">gave_to_area</span>(<s
           </div>
         </div>
       </div>
-<a href="ex-recent-band-parents.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="ex-sim-donors.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="ex-fec.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="ex-academic.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -317,7 +439,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/tarakc02/discodocs/edit/master/80-example-04.Rmd",
+"link": "https://github.com/tarakc02/discodocs/edit/master/80-example-07-ca-campaign.Rmd",
 "text": "Edit"
 },
 "download": null,

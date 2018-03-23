@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Documentation for the discoveryengine</title>
   <meta name="description" content="Some documentation for the discoveryengine">
-  <meta name="generator" content="bookdown 0.7.1 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
   <meta property="og:title" content="Documentation for the discoveryengine" />
   <meta property="og:type" content="book" />
@@ -45,14 +45,11 @@
 
 
 
-<script src="libs/htmlwidgets-1.0/htmlwidgets.js"></script>
-<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="libs/datatables-binding-0.3/datatables.js"></script>
-<link href="libs/dt-core-1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
-<link href="libs/dt-core-1.10.16/css/jquery.dataTables.extra.css" rel="stylesheet" />
-<script src="libs/dt-core-1.10.16/js/jquery.dataTables.min.js"></script>
-<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<script src="libs/htmlwidgets-0.8/htmlwidgets.js"></script>
+<script src="libs/datatables-binding-0.2/datatables.js"></script>
+<link href="libs/dt-core-1.10.12/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.12/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.12/js/jquery.dataTables.min.js"></script>
 
 
 <style type="text/css">
@@ -190,7 +187,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="18.3" data-path="ex-fec.html"><a href="ex-fec.html#example-environmental-interest"><i class="fa fa-check"></i><b>18.3</b> Example: Environmental Interest</a></li>
 <li class="chapter" data-level="18.4" data-path="ex-fec.html"><a href="ex-fec.html#bots"><i class="fa fa-check"></i><b>18.4</b> Bots</a></li>
 </ul></li>
-<li class="chapter" data-level="19" data-path="ex-academic.html"><a href="ex-academic.html"><i class="fa fa-check"></i><b>19</b> Alumni and current students</a></li>
+<li class="chapter" data-level="19" data-path="ex-ca-campaign.html"><a href="ex-ca-campaign.html"><i class="fa fa-check"></i><b>19</b> Utilizing CA campaign finance data</a><ul>
+<li class="chapter" data-level="19.1" data-path="ex-ca-campaign.html"><a href="ex-ca-campaign.html#example-state-senate-and-assembly-candidates"><i class="fa fa-check"></i><b>19.1</b> Example: State Senate and Assembly candidates</a></li>
+<li class="chapter" data-level="19.2" data-path="ex-ca-campaign.html"><a href="ex-ca-campaign.html#propositions"><i class="fa fa-check"></i><b>19.2</b> Propositions</a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="ex-academic.html"><a href="ex-academic.html"><i class="fa fa-check"></i><b>20</b> Alumni and current students</a></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="test-cdw.html"><a href="test-cdw.html"><i class="fa fa-check"></i><b>A</b> Test your database set up</a><ul>
 <li class="chapter" data-level="A.1" data-path="test-cdw.html"><a href="test-cdw.html#test-your-connection"><i class="fa fa-check"></i><b>A.1</b> Test your connection</a></li>
@@ -245,13 +246,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Find donors to the School of Information who are not SIM degree holders.</p>
 </blockquote>
 <p>Having already looked up the codes, you immediately think:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">gave_to_area</span>(SIM) %but_not%<span class="st"> </span><span class="kw">has_degree_from</span>(LI)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">gave_to_area</span>(SIM) <span class="op">%but_not%</span><span class="st"> </span><span class="kw">has_degree_from</span>(LI)</code></pre></div>
 <p>Unfortunately, as you begin reviewing the results, you notice that you produced a list that includes spouses of degree holders who received credit for household gifts to SIM.</p>
 <p>To get around the issue, use the <code>married_to</code> widget (a <a href="higher-order-widgets.html#higher-order-widgets">higher-order widget</a>). Note the use of parentheses to ensure the correct interpretation:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">alum =<span class="st"> </span><span class="kw">has_degree_from</span>(LI)
 non_alum_donor =<span class="st"> </span>
-<span class="st">    </span><span class="kw">gave_to_area</span>(SIM) %but_not%
-<span class="st">    </span>(alum %or%<span class="st"> </span><span class="kw">married_to</span>(alum))</code></pre></div>
+<span class="st">    </span><span class="kw">gave_to_area</span>(SIM) <span class="op">%but_not%</span>
+<span class="st">    </span>(alum <span class="op">%or%</span><span class="st"> </span><span class="kw">married_to</span>(alum))</code></pre></div>
 
 </div>
             </section>
