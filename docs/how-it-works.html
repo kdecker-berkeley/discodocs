@@ -124,10 +124,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="5" data-path="working-with-widgets.html"><a href="working-with-widgets.html"><i class="fa fa-check"></i><b>5</b> Working with widgets</a><ul>
 <li class="chapter" data-level="5.1" data-path="working-with-widgets.html"><a href="working-with-widgets.html#working-with-finding-widgets"><i class="fa fa-check"></i><b>5.1</b> Finding widgets</a></li>
-<li class="chapter" data-level="5.2" data-path="working-with-widgets.html"><a href="working-with-widgets.html#working-with-codes-synonyms"><i class="fa fa-check"></i><b>5.2</b> Codes and synonyms</a></li>
-<li class="chapter" data-level="5.3" data-path="working-with-widgets.html"><a href="working-with-widgets.html#synonym-search"><i class="fa fa-check"></i><b>5.3</b> Synonym search</a></li>
-<li class="chapter" data-level="5.4" data-path="working-with-widgets.html"><a href="working-with-widgets.html#use-defaults"><i class="fa fa-check"></i><b>5.4</b> Use the default cases</a></li>
-<li class="chapter" data-level="5.5" data-path="working-with-widgets.html"><a href="working-with-widgets.html#detailed-controls"><i class="fa fa-check"></i><b>5.5</b> Detailed controls</a></li>
+<li class="chapter" data-level="5.2" data-path="working-with-widgets.html"><a href="working-with-widgets.html#working-with-autocomplete"><i class="fa fa-check"></i><b>5.2</b> Leveraging autocomplete</a></li>
+<li class="chapter" data-level="5.3" data-path="working-with-widgets.html"><a href="working-with-widgets.html#working-with-codes-synonyms"><i class="fa fa-check"></i><b>5.3</b> Codes and synonyms</a></li>
+<li class="chapter" data-level="5.4" data-path="working-with-widgets.html"><a href="working-with-widgets.html#synonym-search"><i class="fa fa-check"></i><b>5.4</b> Synonym search</a></li>
+<li class="chapter" data-level="5.5" data-path="working-with-widgets.html"><a href="working-with-widgets.html#use-defaults"><i class="fa fa-check"></i><b>5.5</b> Use the default cases</a></li>
+<li class="chapter" data-level="5.6" data-path="working-with-widgets.html"><a href="working-with-widgets.html#detailed-controls"><i class="fa fa-check"></i><b>5.6</b> Detailed controls</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="combining-widgets.html"><a href="combining-widgets.html"><i class="fa fa-check"></i><b>6</b> Combining widgets</a><ul>
 <li class="chapter" data-level="6.1" data-path="combining-widgets.html"><a href="combining-widgets.html#example"><i class="fa fa-check"></i><b>6.1</b> Example</a></li>
@@ -304,16 +305,16 @@ args &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt"
 <pre><code>## # A tibble: 3,499 x 1
 ##    entity_id
 ##        &lt;dbl&gt;
-##  1     39734
-##  2     52974
-##  3     82541
-##  4    146791
-##  5    147294
-##  6    101126
-##  7    132739
-##  8    148053
-##  9    518692
-## 10    491592
+##  1      3550
+##  2    774055
+##  3    777670
+##  4    668457
+##  5    910042
+##  6     15614
+##  7    417662
+##  8    268592
+##  9    261435
+## 10    174865
 ## # ... with 3,489 more rows</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## and we can use multiple affiliations:
 is_constituent =<span class="st"> </span><span class="kw">has_affiliation</span>(<span class="kw">c</span>(<span class="st">&quot;M2&quot;</span>, <span class="st">&quot;MA4&quot;</span>))
@@ -321,16 +322,16 @@ is_constituent =<span class="st"> </span><span class="kw">has_affiliation</span>
 <pre><code>## # A tibble: 2,681 x 1
 ##    entity_id
 ##        &lt;dbl&gt;
-##  1    703367
-##  2    704361
-##  3    679051
-##  4    672896
-##  5    724117
-##  6    409363
-##  7    396206
-##  8    380716
-##  9    329934
-## 10    393624
+##  1    231417
+##  2   3147309
+##  3   3170738
+##  4   3189504
+##  5   3189303
+##  6   3189304
+##  7    402346
+##  8    679051
+##  9    672896
+## 10    704020
 ## # ... with 2,671 more rows</code></pre>
 <p>Ok! So we’ve now implemented basic widget functionality. We still have a couple of outstanding issues:</p>
 <ol style="list-style-type: decimal">
@@ -359,16 +360,16 @@ is_constituent =<span class="st"> </span><span class="kw">has_affiliation</span>
 <pre><code>## # A tibble: 2,681 x 1
 ##    entity_id
 ##        &lt;dbl&gt;
-##  1    703367
-##  2    704361
-##  3    679051
-##  4    672896
-##  5    724117
-##  6    409363
-##  7    396206
-##  8    380716
-##  9    329934
-## 10    393624
+##  1    231417
+##  2   3147309
+##  3   3170738
+##  4   3189504
+##  5   3189303
+##  6   3189304
+##  7    402346
+##  8    679051
+##  9    672896
+## 10    704020
 ## # ... with 2,671 more rows</code></pre>
 <p><em>Note that the actual package is a little bit more careful about how it does things here, by using the <a href="https://cran.r-project.org/web/packages/lazyeval/index.html">lazyeval package</a>. To see the actual code used in the Disco Engine, check out <code>prep_dots</code> and <code>partial_sub</code> in <a href="https://github.com/tarakc02/discoveryengine/blob/master/R/helper-utils.R">this discoveryengine source code file</a></em></p>
 </div>

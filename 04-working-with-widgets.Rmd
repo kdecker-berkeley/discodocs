@@ -24,6 +24,25 @@ widget_for("giving")
 
 Once you've found the widget you're looking for, you can get additional information using R's built-in help system. Just type a question mark followed by the name of the widget, e.g. `?gave_to_area`.
 
+## Leveraging autocomplete {#working-with-autocomplete}
+
+As the previous section illustrates, there are a bewildering number of widgets available in the Discovery Engine. To make them a little easier to navigate, we've attached standard prefixes to the names of groups of widgets with related functionality. Since RStudio's autocomplete pops up suggestions along with documnetation as you type, typing a known prefix is a good way to quickly find and access a widget.
+
+![Autocomplete pop up for giving widgets](images/gave-to-autocomplete.png)
+
+Here are some of the groups of related widgets that use common prefixes in their names:
+
+- Giving-related widgets: To find donors to the College of Natural Resources, you'd use `gave_to_area`. To find donors to scholarships, use `gave_to_purpose`. Type `gave_to` and wait for a second to see the full list of giving widgets.
+- Political contribution widgets (federal): Widgets for [political contributions in federal elections](#ex-fec) all begin with the prefix `fec_`.
+- Political contribution widgets (statewide): Widgets for [political contributions in California elections](#ex-ca-campaign) all begin with the prefix `ca_`.
+
+In addition to entity widgets, [other types of widgets](#non-entity-widgets) are also helpfully grouped together.
+
+- Every widget that pulls allocation codes instead of entity IDs begins with `fund_` (for example, `fund_type` or `fund_department`).
+- Contact report widgets all begin with `contact_` (for example `contact_text_contains` or `contact_date`).
+
+Finally, `bot_brainstorm` and `bot_matrix` are aliases for the [`brainstorm_bot`](#brainstorm-bot) and the [`matrix_bot`](#matrix-bot), and in general, typing `bot_` and waiting for a second will show a full list of the disco engine's bots.
+
 ## Codes and synonyms {#working-with-codes-synonyms}
 
 You may have noticed in previous examples that widgets work with exact codes, such as `in_unit_portfolio(BU)` or with *synonyms*, such as `in_unit_portfolio(business)`. Synonyms will always be in lower-case, and may include any letter of the alphabet or the underscore "_" character, and nothing else. 

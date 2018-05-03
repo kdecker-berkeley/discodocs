@@ -124,10 +124,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="5" data-path="working-with-widgets.html"><a href="working-with-widgets.html"><i class="fa fa-check"></i><b>5</b> Working with widgets</a><ul>
 <li class="chapter" data-level="5.1" data-path="working-with-widgets.html"><a href="working-with-widgets.html#working-with-finding-widgets"><i class="fa fa-check"></i><b>5.1</b> Finding widgets</a></li>
-<li class="chapter" data-level="5.2" data-path="working-with-widgets.html"><a href="working-with-widgets.html#working-with-codes-synonyms"><i class="fa fa-check"></i><b>5.2</b> Codes and synonyms</a></li>
-<li class="chapter" data-level="5.3" data-path="working-with-widgets.html"><a href="working-with-widgets.html#synonym-search"><i class="fa fa-check"></i><b>5.3</b> Synonym search</a></li>
-<li class="chapter" data-level="5.4" data-path="working-with-widgets.html"><a href="working-with-widgets.html#use-defaults"><i class="fa fa-check"></i><b>5.4</b> Use the default cases</a></li>
-<li class="chapter" data-level="5.5" data-path="working-with-widgets.html"><a href="working-with-widgets.html#detailed-controls"><i class="fa fa-check"></i><b>5.5</b> Detailed controls</a></li>
+<li class="chapter" data-level="5.2" data-path="working-with-widgets.html"><a href="working-with-widgets.html#working-with-autocomplete"><i class="fa fa-check"></i><b>5.2</b> Leveraging autocomplete</a></li>
+<li class="chapter" data-level="5.3" data-path="working-with-widgets.html"><a href="working-with-widgets.html#working-with-codes-synonyms"><i class="fa fa-check"></i><b>5.3</b> Codes and synonyms</a></li>
+<li class="chapter" data-level="5.4" data-path="working-with-widgets.html"><a href="working-with-widgets.html#synonym-search"><i class="fa fa-check"></i><b>5.4</b> Synonym search</a></li>
+<li class="chapter" data-level="5.5" data-path="working-with-widgets.html"><a href="working-with-widgets.html#use-defaults"><i class="fa fa-check"></i><b>5.5</b> Use the default cases</a></li>
+<li class="chapter" data-level="5.6" data-path="working-with-widgets.html"><a href="working-with-widgets.html#detailed-controls"><i class="fa fa-check"></i><b>5.6</b> Detailed controls</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="combining-widgets.html"><a href="combining-widgets.html"><i class="fa fa-check"></i><b>6</b> Combining widgets</a><ul>
 <li class="chapter" data-level="6.1" data-path="combining-widgets.html"><a href="combining-widgets.html#example"><i class="fa fa-check"></i><b>6.1</b> Example</a></li>
@@ -259,7 +260,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Use <code>display</code> for output. Recall that you can use the equals sign <code>=</code> to assign names to your disco engine definitions, to make it easier to refer to them when <code>display</code>ing or doing other operations:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">basketball_player =<span class="st"> </span><span class="kw">played_sport</span>(basketball_men, basketball_women)
 <span class="kw">display</span>(basketball_player)</code></pre></div>
-<pre><code>## # A tibble: 467 x 1
+<pre><code>## # A tibble: 466 x 1
 ##    entity_id
 ##        &lt;dbl&gt;
 ##  1       370
@@ -271,8 +272,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ##  7      6412
 ##  8      6882
 ##  9      7539
-## 10      7659
-## # ... with 457 more rows</code></pre>
+## 10      8283
+## # ... with 456 more rows</code></pre>
 <p>If instead of just viewing IDs on the screen, you’d like to export them (perhaps to use in a CADS savedlist), just add a filename: <code>display(basketball_player, file = &quot;basketball-players&quot;)</code> and a file called “basketball-players.csv” will appear in your working directory. <em>Note that the exported file has a header, so when you upload it to an Advance savedlist, make sure to check the “First row is a header” box.</em></p>
 </div>
 <div id="code-lookup" class="section level2">

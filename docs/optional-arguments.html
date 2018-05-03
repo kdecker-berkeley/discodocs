@@ -45,6 +45,11 @@
 
 
 
+<script src="libs/htmlwidgets-0.8/htmlwidgets.js"></script>
+<script src="libs/datatables-binding-0.2/datatables.js"></script>
+<link href="libs/dt-core-1.10.12/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.12/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.12/js/jquery.dataTables.min.js"></script>
 
 
 <style type="text/css">
@@ -119,10 +124,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="5" data-path="working-with-widgets.html"><a href="working-with-widgets.html"><i class="fa fa-check"></i><b>5</b> Working with widgets</a><ul>
 <li class="chapter" data-level="5.1" data-path="working-with-widgets.html"><a href="working-with-widgets.html#working-with-finding-widgets"><i class="fa fa-check"></i><b>5.1</b> Finding widgets</a></li>
-<li class="chapter" data-level="5.2" data-path="working-with-widgets.html"><a href="working-with-widgets.html#working-with-codes-synonyms"><i class="fa fa-check"></i><b>5.2</b> Codes and synonyms</a></li>
-<li class="chapter" data-level="5.3" data-path="working-with-widgets.html"><a href="working-with-widgets.html#synonym-search"><i class="fa fa-check"></i><b>5.3</b> Synonym search</a></li>
-<li class="chapter" data-level="5.4" data-path="working-with-widgets.html"><a href="working-with-widgets.html#use-defaults"><i class="fa fa-check"></i><b>5.4</b> Use the default cases</a></li>
-<li class="chapter" data-level="5.5" data-path="working-with-widgets.html"><a href="working-with-widgets.html#detailed-controls"><i class="fa fa-check"></i><b>5.5</b> Detailed controls</a></li>
+<li class="chapter" data-level="5.2" data-path="working-with-widgets.html"><a href="working-with-widgets.html#working-with-autocomplete"><i class="fa fa-check"></i><b>5.2</b> Leveraging autocomplete</a></li>
+<li class="chapter" data-level="5.3" data-path="working-with-widgets.html"><a href="working-with-widgets.html#working-with-codes-synonyms"><i class="fa fa-check"></i><b>5.3</b> Codes and synonyms</a></li>
+<li class="chapter" data-level="5.4" data-path="working-with-widgets.html"><a href="working-with-widgets.html#synonym-search"><i class="fa fa-check"></i><b>5.4</b> Synonym search</a></li>
+<li class="chapter" data-level="5.5" data-path="working-with-widgets.html"><a href="working-with-widgets.html#use-defaults"><i class="fa fa-check"></i><b>5.5</b> Use the default cases</a></li>
+<li class="chapter" data-level="5.6" data-path="working-with-widgets.html"><a href="working-with-widgets.html#detailed-controls"><i class="fa fa-check"></i><b>5.6</b> Detailed controls</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="combining-widgets.html"><a href="combining-widgets.html"><i class="fa fa-check"></i><b>6</b> Combining widgets</a><ul>
 <li class="chapter" data-level="6.1" data-path="combining-widgets.html"><a href="combining-widgets.html#example"><i class="fa fa-check"></i><b>6.1</b> Example</a></li>
@@ -203,15 +209,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="C" data-path="how-it-works.html"><a href="how-it-works.html"><i class="fa fa-check"></i><b>C</b> How does it work?</a><ul>
 <li class="chapter" data-level="C.1" data-path="how-it-works.html"><a href="how-it-works.html#a-widget-as-a-sql-template"><i class="fa fa-check"></i><b>C.1</b> A Widget as a SQL template</a></li>
 <li class="chapter" data-level="C.2" data-path="how-it-works.html"><a href="how-it-works.html#a-template-as-a-data-structure"><i class="fa fa-check"></i><b>C.2</b> A template as a data structure</a></li>
-<li class="chapter" data-level="C.3" data-path="how-it-works.html"><a href="how-it-works.html#and-we-can-use-multiple-affiliations"><i class="fa fa-check"></i><b>C.3</b> and we can use multiple affiliations:</a></li>
-<li class="chapter" data-level="C.4" data-path="how-it-works.html"><a href="how-it-works.html#non-standard-evaluation"><i class="fa fa-check"></i><b>C.4</b> Non-standard evaluation</a></li>
-<li class="chapter" data-level="C.5" data-path="how-it-works.html"><a href="how-it-works.html#combining-simple-definitions"><i class="fa fa-check"></i><b>C.5</b> Combining simple definitions</a><ul>
-<li class="chapter" data-level="C.5.1" data-path="how-it-works.html"><a href="how-it-works.html#atomic-vs.-complex-definitions"><i class="fa fa-check"></i><b>C.5.1</b> “Atomic” vs. “Complex” definitions</a></li>
-<li class="chapter" data-level="C.5.2" data-path="how-it-works.html"><a href="how-it-works.html#operations-on-definitions"><i class="fa fa-check"></i><b>C.5.2</b> Operations on definitions</a></li>
+<li class="chapter" data-level="C.3" data-path="how-it-works.html"><a href="how-it-works.html#non-standard-evaluation"><i class="fa fa-check"></i><b>C.3</b> Non-standard evaluation</a></li>
+<li class="chapter" data-level="C.4" data-path="how-it-works.html"><a href="how-it-works.html#combining-simple-definitions"><i class="fa fa-check"></i><b>C.4</b> Combining simple definitions</a><ul>
+<li class="chapter" data-level="C.4.1" data-path="how-it-works.html"><a href="how-it-works.html#atomic-vs.-complex-definitions"><i class="fa fa-check"></i><b>C.4.1</b> “Atomic” vs. “Complex” definitions</a></li>
+<li class="chapter" data-level="C.4.2" data-path="how-it-works.html"><a href="how-it-works.html#operations-on-definitions"><i class="fa fa-check"></i><b>C.4.2</b> Operations on definitions</a></li>
 </ul></li>
-<li class="chapter" data-level="C.6" data-path="how-it-works.html"><a href="how-it-works.html#re-visiting-to_sql"><i class="fa fa-check"></i><b>C.6</b> Re-visiting <code>to_sql</code></a></li>
-<li class="chapter" data-level="C.7" data-path="how-it-works.html"><a href="how-it-works.html#seeing-it-all-in-action"><i class="fa fa-check"></i><b>C.7</b> Seeing it all in action</a></li>
-<li class="chapter" data-level="C.8" data-path="how-it-works.html"><a href="how-it-works.html#for-further-study"><i class="fa fa-check"></i><b>C.8</b> For further study</a></li>
+<li class="chapter" data-level="C.5" data-path="how-it-works.html"><a href="how-it-works.html#re-visiting-to_sql"><i class="fa fa-check"></i><b>C.5</b> Re-visiting <code>to_sql</code></a></li>
+<li class="chapter" data-level="C.6" data-path="how-it-works.html"><a href="how-it-works.html#seeing-it-all-in-action"><i class="fa fa-check"></i><b>C.6</b> Seeing it all in action</a></li>
+<li class="chapter" data-level="C.7" data-path="how-it-works.html"><a href="how-it-works.html#for-further-study"><i class="fa fa-check"></i><b>C.7</b> For further study</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -251,7 +256,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ## .   source: d_bio_activity_mv.entity_id (entity_id)
 ## .   logic: 
 ## .   .   activity_code IN (&#39;2770&#39;)
-## .   .   activity_participation_code IN (&#39;P&#39;, &#39;ST&#39;, &#39;SP&#39;, &#39;V&#39;, &#39;H&#39;, &#39;S&#39;, &#39;C&#39;, &#39;KN&#39;, &#39;MD&#39;, &#39;E&#39;, &#39;OL&#39;, &#39;ID&#39;, &#39;RG&#39;, &#39;NS&#39;)</code></pre>
+## .   .   activity_participation_code IN (&#39;P&#39;, &#39;ST&#39;, &#39;SP&#39;, &#39;V&#39;, &#39;H&#39;, &#39;S&#39;, &#39;C&#39;, &#39;KN&#39;, &#39;MD&#39;, &#39;E&#39;, &#39;OL&#39;, &#39;ID&#39;, &#39;RG&#39;, &#39;NS&#39;, &#39;RU&#39;)</code></pre>
 <p>If you look closely at the printed output from each of those defintions, in the <code>logic</code> section, you’ll notice slightly different lists of codes included where it says <code>activity_participation_code IN ...</code>. In fact, the latter includes the extra codes <code>ID</code> (for “Invited but did not attend”), <code>RG</code> (“Regrets”), and <code>NS</code> (“No Show”).</p>
 </div>
 <div id="date-ranges" class="section level2">
@@ -300,7 +305,6 @@ former =<span class="st"> </span>current_or_former <span class="op">%but_not%</s
 
 
 
-</div>
             </section>
 
           </div>
