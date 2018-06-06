@@ -1,0 +1,64 @@
+# Mining SEC filings {#ex-sec}
+
+```{r ex-sec-loadlib, message = FALSE}
+# i always begin by loading the disco engine if it isn't already loaded
+library(discoveryengine)
+```
+
+The [SEC](https://www.sec.gov/) is another one of the external data sources that Prospect Analysis regularly screens. Specifically, we utilize [SEC Form 3/4/5](https://www.sec.gov/fast-answers/answersform345htm.html) filings made by our constituents. These filings are required of "Corporate insiders – meaning a company's officers and directors, and any beneficial owners of more than ten percent of a class of the company's equity securities," and are made whenever an individual first attains that status as a required filer, and then again every time the person buys or sells shares or derivatives in the company. The matched data is used in our predictive models as well as by the Prospect Discovery team, but it can also be valuable to be able to work with the data directly. (Note also that you can use the `screening` chunk in `discoappend` -- not demonstrated here -- in order to see summaries of all matched external data including SEC filings). 
+
+## Basics
+
+There is one SEC widget, called `sec_filed`. This name keeps up the Disco Engine's convention of using a specific prefix to identify widgets that query matched external data (see also: [FEC widgets](#ex-fec) and [California campaign widgets](#ex-ca-campaign)). The most generic way to use the widget is without any arguments:
+
+```{r ex-sec-noarg, cache = TRUE}
+sec_filer = sec_filed()
+display(sec_filer)
+```
+
+The widget also includes the familiar `from` and `to` daterange options, so that you can search for people who made filings during a specific time period. For instance, my clients in Engineering might be interested in knowing who has made a recent filing, since these SEC filings can indicate a sudden influx of cash:
+
+```{r ex-sec-eng-portfolio, cache = TRUE}
+engineering_prospect = in_unit_portfolio(engineering)
+recent_filer = sec_filed(from = 20180101, to = 20180630)
+prospect_who_filed = engineering_prospect %and% recent_filer
+display(prospect_who_filed)
+```
+
+## Looking for companies
+
+We use the [Central Index Key (CIK)](https://en.wikipedia.org/wiki/Central_Index_Key) to uniquely identify SEC filers and the public companies for whom they work. Looking up a CIK in the Discovery Engine uses the familiar [lookup function](#synonym-search) built in to widgets:
+
+```{r ex-sec-lookup, cache = TRUE}
+sec_filed(?google, ?facebook, ?apple)
+```
+
+These IDs can then be used in the `sec_filed` widget:
+
+```{r ex-sec-bigthree, cache = TRUE}
+display(sec_filed(1288776, 1326801, 320193))
+```
+
+## Specific roles
+
+The SEC filings include checkboxes for the filer to indicate which class of required filers (director, officer, ten percent owner, or other) she belongs to, and the `sec_filed` widget has flags so that you can specifically search for people with these roles. For instance, if in my previous example I wanted to look only for Directors at those companies, I can set `director = TRUE`:
+
+```{r ex-sec-bigthree-directors, cache = TRUE}
+big_three_director = sec_filed(1288776, 1326801, 320193, director = TRUE)
+display(big_three_director)
+```
+
+By default, all filings are included regardless of role. 
+
+Filers who check "officer" or "other" among their roles also have a free text entry space to more precisely describe their role with the company, and the `sec_filed` includes an option to search the text of these fields. So, for example, to find people at one of the Big Three companies who've described themselves as "Chairman":
+
+```{r ex-sec-bigthree-chairman, eval = FALSE}
+sec_filed(1288776, 1326801, 320193, title_text = "chairman")
+```
+
+One practical use of the `title_text` argument is to identify filers who were serving on an interim basis at the time of filing:
+
+```{r ex-sec-interim, cache = TRUE}
+display( sec_filed(title_text = "interim") )
+```
+

@@ -193,6 +193,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="19.2" data-path="ex-ca-campaign.html"><a href="ex-ca-campaign.html#propositions"><i class="fa fa-check"></i><b>19.2</b> Propositions</a></li>
 </ul></li>
 <li class="chapter" data-level="20" data-path="ex-academic.html"><a href="ex-academic.html"><i class="fa fa-check"></i><b>20</b> Alumni and current students</a></li>
+<li class="chapter" data-level="21" data-path="ex-sec.html"><a href="ex-sec.html"><i class="fa fa-check"></i><b>21</b> Mining SEC filings</a><ul>
+<li class="chapter" data-level="21.1" data-path="ex-sec.html"><a href="ex-sec.html#basics-1"><i class="fa fa-check"></i><b>21.1</b> Basics</a></li>
+<li class="chapter" data-level="21.2" data-path="ex-sec.html"><a href="ex-sec.html#looking-for-companies"><i class="fa fa-check"></i><b>21.2</b> Looking for companies</a></li>
+<li class="chapter" data-level="21.3" data-path="ex-sec.html"><a href="ex-sec.html#specific-roles"><i class="fa fa-check"></i><b>21.3</b> Specific roles</a></li>
+</ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="test-cdw.html"><a href="test-cdw.html"><i class="fa fa-check"></i><b>A</b> Test your database set up</a><ul>
 <li class="chapter" data-level="A.1" data-path="test-cdw.html"><a href="test-cdw.html#test-your-connection"><i class="fa fa-check"></i><b>A.1</b> Test your connection</a></li>
@@ -305,16 +310,16 @@ args &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt"
 <pre><code>## # A tibble: 3,499 x 1
 ##    entity_id
 ##        &lt;dbl&gt;
-##  1      3550
-##  2    774055
-##  3    777670
-##  4    668457
-##  5    910042
-##  6     15614
-##  7    417662
-##  8    268592
-##  9    261435
-## 10    174865
+##  1    426609
+##  2    470416
+##  3    432087
+##  4    462987
+##  5     10940
+##  6    268592
+##  7    197869
+##  8    304800
+##  9    281132
+## 10    281340
 ## # ... with 3,489 more rows</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## and we can use multiple affiliations:
 is_constituent =<span class="st"> </span><span class="kw">has_affiliation</span>(<span class="kw">c</span>(<span class="st">&quot;M2&quot;</span>, <span class="st">&quot;MA4&quot;</span>))
@@ -322,16 +327,16 @@ is_constituent =<span class="st"> </span><span class="kw">has_affiliation</span>
 <pre><code>## # A tibble: 2,681 x 1
 ##    entity_id
 ##        &lt;dbl&gt;
-##  1    231417
-##  2   3147309
-##  3   3170738
-##  4   3189504
-##  5   3189303
-##  6   3189304
-##  7    402346
-##  8    679051
-##  9    672896
-## 10    704020
+##  1      3347
+##  2      3359
+##  3     23730
+##  4     15673
+##  5     18143
+##  6     27128
+##  7     27291
+##  8     21108
+##  9     20816
+## 10    299736
 ## # ... with 2,671 more rows</code></pre>
 <p>Ok! So we’ve now implemented basic widget functionality. We still have a couple of outstanding issues:</p>
 <ol style="list-style-type: decimal">
@@ -360,16 +365,16 @@ is_constituent =<span class="st"> </span><span class="kw">has_affiliation</span>
 <pre><code>## # A tibble: 2,681 x 1
 ##    entity_id
 ##        &lt;dbl&gt;
-##  1    231417
-##  2   3147309
-##  3   3170738
-##  4   3189504
-##  5   3189303
-##  6   3189304
-##  7    402346
-##  8    679051
-##  9    672896
-## 10    704020
+##  1      3347
+##  2      3359
+##  3     23730
+##  4     15673
+##  5     18143
+##  6     27128
+##  7     27291
+##  8     21108
+##  9     20816
+## 10    299736
 ## # ... with 2,671 more rows</code></pre>
 <p><em>Note that the actual package is a little bit more careful about how it does things here, by using the <a href="https://cran.r-project.org/web/packages/lazyeval/index.html">lazyeval package</a>. To see the actual code used in the Disco Engine, check out <code>prep_dots</code> and <code>partial_sub</code> in <a href="https://github.com/tarakc02/discoveryengine/blob/master/R/helper-utils.R">this discoveryengine source code file</a></em></p>
 </div>

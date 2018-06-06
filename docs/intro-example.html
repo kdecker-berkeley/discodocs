@@ -193,6 +193,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="19.2" data-path="ex-ca-campaign.html"><a href="ex-ca-campaign.html#propositions"><i class="fa fa-check"></i><b>19.2</b> Propositions</a></li>
 </ul></li>
 <li class="chapter" data-level="20" data-path="ex-academic.html"><a href="ex-academic.html"><i class="fa fa-check"></i><b>20</b> Alumni and current students</a></li>
+<li class="chapter" data-level="21" data-path="ex-sec.html"><a href="ex-sec.html"><i class="fa fa-check"></i><b>21</b> Mining SEC filings</a><ul>
+<li class="chapter" data-level="21.1" data-path="ex-sec.html"><a href="ex-sec.html#basics-1"><i class="fa fa-check"></i><b>21.1</b> Basics</a></li>
+<li class="chapter" data-level="21.2" data-path="ex-sec.html"><a href="ex-sec.html#looking-for-companies"><i class="fa fa-check"></i><b>21.2</b> Looking for companies</a></li>
+<li class="chapter" data-level="21.3" data-path="ex-sec.html"><a href="ex-sec.html#specific-roles"><i class="fa fa-check"></i><b>21.3</b> Specific roles</a></li>
+</ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="test-cdw.html"><a href="test-cdw.html"><i class="fa fa-check"></i><b>A</b> Test your database set up</a><ul>
 <li class="chapter" data-level="A.1" data-path="test-cdw.html"><a href="test-cdw.html#test-your-connection"><i class="fa fa-check"></i><b>A.1</b> Test your connection</a></li>
@@ -277,27 +282,27 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>As we discussed in the previous section, now that we have an official definition we can send it to the data warehouse, and see if the data warehouse finds anyone who fits. You can see the definition for yourself by just typing the name of it, though it is now written in a language for the computer to understand and may look intimidating to us humans:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">event_prospect</code></pre></div>
 <pre><code>## LISTBUILDER DEFINITION (type: entity_id)
-## .   operator (KB07): intersect
-## .   left (KB07): 
-## .   .   operator (SY76): union
-## .   .   left (SY76): 
+## .   operator (DF30): intersect
+## .   left (DF30): 
+## .   .   operator (FH39): union
+## .   .   left (FH39): 
 ## .   .   .   source: d_bio_interest_mv.entity_id (entity_id)
 ## .   .   .   logic: interest_code IN (&#39;TEC&#39;)
-## .   .   right (SY76): 
+## .   .   right (FH39): 
 ## .   .   .   source: d_oth_phil_affinity_mv.entity_id (entity_id)
 ## .   .   .   logic: 
 ## .   .   .   .   other_affinity_type IN (&#39;ST&#39;)
 ## .   .   .   .   sum(gift_amt) &gt;= 0.0
-## .   right (KB07): 
-## .   .   operator (YT39): union
-## .   .   left (YT39): 
+## .   right (DF30): 
+## .   .   operator (AV04): union
+## .   .   left (AV04): 
 ## .   .   .   source: d_bio_address_mv.entity_id (entity_id)
 ## .   .   .   logic: 
 ## .   .   .   .   geo_metro_area_code IN (&#39;41860&#39;)
 ## .   .   .   .   addr_type_code IN (&#39;H&#39;, &#39;6&#39;)
 ## .   .   .   .   contact_type_desc IN (&#39;ADDRESS&#39;)
 ## .   .   .   .   addr_status_code IN (&#39;A&#39;, &#39;K&#39;)
-## .   .   right (YT39): 
+## .   .   right (AV04): 
 ## .   .   .   source: d_bio_address_mv.entity_id (entity_id)
 ## .   .   .   logic: 
 ## .   .   .   .   geo_metro_area_code IN (&#39;41860&#39;)

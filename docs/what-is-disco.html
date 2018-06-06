@@ -193,6 +193,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="19.2" data-path="ex-ca-campaign.html"><a href="ex-ca-campaign.html#propositions"><i class="fa fa-check"></i><b>19.2</b> Propositions</a></li>
 </ul></li>
 <li class="chapter" data-level="20" data-path="ex-academic.html"><a href="ex-academic.html"><i class="fa fa-check"></i><b>20</b> Alumni and current students</a></li>
+<li class="chapter" data-level="21" data-path="ex-sec.html"><a href="ex-sec.html"><i class="fa fa-check"></i><b>21</b> Mining SEC filings</a><ul>
+<li class="chapter" data-level="21.1" data-path="ex-sec.html"><a href="ex-sec.html#basics-1"><i class="fa fa-check"></i><b>21.1</b> Basics</a></li>
+<li class="chapter" data-level="21.2" data-path="ex-sec.html"><a href="ex-sec.html#looking-for-companies"><i class="fa fa-check"></i><b>21.2</b> Looking for companies</a></li>
+<li class="chapter" data-level="21.3" data-path="ex-sec.html"><a href="ex-sec.html#specific-roles"><i class="fa fa-check"></i><b>21.3</b> Specific roles</a></li>
+</ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="test-cdw.html"><a href="test-cdw.html"><i class="fa fa-check"></i><b>A</b> Test your database set up</a><ul>
 <li class="chapter" data-level="A.1" data-path="test-cdw.html"><a href="test-cdw.html#test-your-connection"><i class="fa fa-check"></i><b>A.1</b> Test your connection</a></li>
@@ -273,7 +278,7 @@ local_math_constituent =<span class="st"> </span>is_math_constituent <span class
 parent_of_local_math_constituent =<span class="st"> </span><span class="kw">parent_of</span>(local_math_constituent)</code></pre></div>
 <p>Together, the collection of predicates, the logical operators, and the ability to assign names form an expressive language for describing custom constituencies for a variety of purposes. Best of all, the Disco Engine gives us the ability to pull the IDs of a defined constituency from the database!</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">display</span>(parent_of_local_math_constituent)</code></pre></div>
-<pre><code>## # A tibble: 561 x 1
+<pre><code>## # A tibble: 559 x 1
 ##    entity_id
 ##        &lt;dbl&gt;
 ##  1      1168
@@ -286,7 +291,7 @@ parent_of_local_math_constituent =<span class="st"> </span><span class="kw">pare
 ##  8     23989
 ##  9     24151
 ## 10     24247
-## # ... with 551 more rows</code></pre>
+## # ... with 549 more rows</code></pre>
 </div>
 <div id="facilitating-discovery" class="section level2">
 <h2><span class="header-section-number">2.2</span> Facilitating discovery</h2>
@@ -294,18 +299,23 @@ parent_of_local_math_constituent =<span class="st"> </span><span class="kw">pare
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">brainstorm_bot</span>(<span class="st">&quot;robot*&quot;</span>, <span class="st">&quot;artificial intelligence&quot;</span>, <span class="st">&quot;AI&quot;</span>)</code></pre></div>
 <pre><code>## attended_event 
 ##     6724: Haas East Bay Chp Robotic Event 06-18-14
+## attended_hs 
+##     471828: Cb-Ai Operations S&amp;L
 ## fec_gave_to_committee 
-##     C00521765: LIQUID ROBOTICS INC POLITICAL ACTION COMMITTEE (LIQUID ROBOTICS PAC)
-##     C00596908: ROBOTECHNOLOGY INC C.R.
+##     C00582767: CAMPAIGN FOR A FEDERAL ROBOTICS COMMISSION
 ##     C00635748: AI PAC
 ##     C00144261: APPRAISAL INSTITUTE PAC (AI PAC)
-##     C00582767: CAMPAIGN FOR A FEDERAL ROBOTICS COMMISSION
+##     C00596908: ROBOTECHNOLOGY INC C.R.
+##     C00521765: LIQUID ROBOTICS INC POLITICAL ACTION COMMITTEE (LIQUID ROBOTICS PAC)
 ## has_interest 
 ##     ROB: Robotics
 ##     AIN: Artificial Intelligence
 ## participated_in 
+##     UROB: Robotmedia Presents
 ##     ENRO: Cal Robotics
-##     UROB: Robotmedia Presents</code></pre>
+## sec_filed 
+##     1409269: Restoration Robotics Inc
+##     1528557: Corindus Vascular Robotics, Inc.</code></pre>
 
 </div>
 </div>

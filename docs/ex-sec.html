@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="optional-arguments.html">
-<link rel="next" href="ex-political-economy.html">
+<link rel="prev" href="ex-academic.html">
+<link rel="next" href="test-cdw.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -243,26 +243,128 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="add-on-packages" class="section level1">
-<h1><span class="header-section-number">12</span> Add-on packages</h1>
-<p>There are a growing number of packages that provide the Disco Engine user with additional functionality:</p>
-<div id="discoappend" class="section level2">
-<h2><span class="header-section-number">12.1</span> <code>discoappend</code></h2>
-<p><code>discoappend</code> allows you to output additional data (beyond just IDs) based on your disco engine definitions. For an introduction with examples, check <a href="https://github.com/cwolfsonseeley/discoappend#discoappend">the official README</a>.</p>
+<div id="ex-sec" class="section level1">
+<h1><span class="header-section-number">21</span> Mining SEC filings</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># i always begin by loading the disco engine if it isn&#39;t already loaded</span>
+<span class="kw">library</span>(discoveryengine)</code></pre></div>
+<p>The <a href="https://www.sec.gov/">SEC</a> is another one of the external data sources that Prospect Analysis regularly screens. Specifically, we utilize <a href="https://www.sec.gov/fast-answers/answersform345htm.html">SEC Form 3/4/5</a> filings made by our constituents. These filings are required of “Corporate insiders – meaning a company’s officers and directors, and any beneficial owners of more than ten percent of a class of the company’s equity securities,” and are made whenever an individual first attains that status as a required filer, and then again every time the person buys or sells shares or derivatives in the company. The matched data is used in our predictive models as well as by the Prospect Discovery team, but it can also be valuable to be able to work with the data directly. (Note also that you can use the <code>screening</code> chunk in <code>discoappend</code> – not demonstrated here – in order to see summaries of all matched external data including SEC filings).</p>
+<div id="basics-1" class="section level2">
+<h2><span class="header-section-number">21.1</span> Basics</h2>
+<p>There is one SEC widget, called <code>sec_filed</code>. This name keeps up the Disco Engine’s convention of using a specific prefix to identify widgets that query matched external data (see also: <a href="ex-fec.html#ex-fec">FEC widgets</a> and <a href="ex-ca-campaign.html#ex-ca-campaign">California campaign widgets</a>). The most generic way to use the widget is without any arguments:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sec_filer =<span class="st"> </span><span class="kw">sec_filed</span>()
+<span class="kw">display</span>(sec_filer)</code></pre></div>
+<pre><code>## # A tibble: 2,213 x 1
+##    entity_id
+##        &lt;dbl&gt;
+##  1      2723
+##  2      2937
+##  3      3386
+##  4      6194
+##  5      6349
+##  6      7011
+##  7      7251
+##  8      7751
+##  9      8002
+## 10      8693
+## # ... with 2,203 more rows</code></pre>
+<p>The widget also includes the familiar <code>from</code> and <code>to</code> daterange options, so that you can search for people who made filings during a specific time period. For instance, my clients in Engineering might be interested in knowing who has made a recent filing, since these SEC filings can indicate a sudden influx of cash:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">engineering_prospect =<span class="st"> </span><span class="kw">in_unit_portfolio</span>(engineering)
+recent_filer =<span class="st"> </span><span class="kw">sec_filed</span>(<span class="dt">from =</span> <span class="dv">20180101</span>, <span class="dt">to =</span> <span class="dv">20180630</span>)
+prospect_who_filed =<span class="st"> </span>engineering_prospect <span class="op">%and%</span><span class="st"> </span>recent_filer
+<span class="kw">display</span>(prospect_who_filed)</code></pre></div>
+<pre><code>## # A tibble: 31 x 1
+##    entity_id
+##        &lt;dbl&gt;
+##  1     14765
+##  2     16301
+##  3     21428
+##  4     22653
+##  5     25464
+##  6    122677
+##  7    163618
+##  8    227268
+##  9    283796
+## 10    301895
+## # ... with 21 more rows</code></pre>
 </div>
-<div id="discovcr" class="section level2">
-<h2><span class="header-section-number">12.2</span> <code>discovcr</code></h2>
-<p><code>discovcr</code> allows you to browse data related to your discovery engine definition and select just the IDs you want to keep. This can be particularly useful when using text-search widgets such as <code>fund_text_contains</code>, where you may want to review the individual allocations you captured in your original search and remove any that were false matches (for example, a search for funds related to “diversity” brings in a number of biology research funds related to bio-diversity).</p>
-<p>For a detailed introduction to using <code>discovcr</code>, read the “vignette” that includes examples and instructions by typing:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">vignette</span>(<span class="st">&quot;vcr-intro&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;discovcr&quot;</span>)</code></pre></div>
+<div id="looking-for-companies" class="section level2">
+<h2><span class="header-section-number">21.2</span> Looking for companies</h2>
+<p>We use the <a href="https://en.wikipedia.org/wiki/Central_Index_Key">Central Index Key (CIK)</a> to uniquely identify SEC filers and the public companies for whom they work. Looking up a CIK in the Discovery Engine uses the familiar <a href="working-with-widgets.html#synonym-search">lookup function</a> built in to widgets:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sec_filed</span>(?google, ?facebook, ?apple)</code></pre></div>
+<pre><code>## Regular codes and synonyms:
+##       synonym    code
+##    google_inc 1288776
+##  facebook_inc 1326801
+##     apple_inc  320193</code></pre>
+<p>These IDs can then be used in the <code>sec_filed</code> widget:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">display</span>(<span class="kw">sec_filed</span>(<span class="dv">1288776</span>, <span class="dv">1326801</span>, <span class="dv">320193</span>))</code></pre></div>
+<pre><code>## # A tibble: 23 x 1
+##    entity_id
+##        &lt;dbl&gt;
+##  1     22653
+##  2     26031
+##  3     26542
+##  4    423075
+##  5    423745
+##  6    453623
+##  7    611664
+##  8    625613
+##  9    666498
+## 10    769804
+## # ... with 13 more rows</code></pre>
 </div>
-<div id="discoscape" class="section level2">
-<h2><span class="header-section-number">12.3</span> <code>discoscape</code></h2>
-<p>The <code>discoscape</code> package serves as a bridge between the Discovery Engine and DonorScape. The <code>donorscape_report</code> function outputs data in the format required by the DonorScape screening service, so that you can discover and/or define a population using the Discovery Engine, and then immediately run that population through a DonorScape without much hassle in between.</p>
-<p>As with any package, you can load it up by using the <code>library</code> function:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(discoscape)</code></pre></div>
-<p>The main function is called <code>donorscape_report</code>, and you can learn more about it by typing:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">?donorscape_report</code></pre></div>
+<div id="specific-roles" class="section level2">
+<h2><span class="header-section-number">21.3</span> Specific roles</h2>
+<p>The SEC filings include checkboxes for the filer to indicate which class of required filers (director, officer, ten percent owner, or other) she belongs to, and the <code>sec_filed</code> widget has flags so that you can specifically search for people with these roles. For instance, if in my previous example I wanted to look only for Directors at those companies, I can set <code>director = TRUE</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">big_three_director =<span class="st"> </span><span class="kw">sec_filed</span>(<span class="dv">1288776</span>, <span class="dv">1326801</span>, <span class="dv">320193</span>, <span class="dt">director =</span> <span class="ot">TRUE</span>)
+<span class="kw">display</span>(big_three_director)</code></pre></div>
+<pre><code>## # A tibble: 16 x 1
+##    entity_id
+##        &lt;dbl&gt;
+##  1     22653
+##  2     26031
+##  3     26542
+##  4    423075
+##  5    423745
+##  6    611664
+##  7    625613
+##  8    666498
+##  9    769804
+## 10    826016
+## 11    863210
+## 12    902313
+## 13    921697
+## 14    931282
+## 15   3003117
+## 16   3090604</code></pre>
+<p>By default, all filings are included regardless of role.</p>
+<p>Filers who check “officer” or “other” among their roles also have a free text entry space to more precisely describe their role with the company, and the <code>sec_filed</code> includes an option to search the text of these fields. So, for example, to find people at one of the Big Three companies who’ve described themselves as “Chairman”:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sec_filed</span>(<span class="dv">1288776</span>, <span class="dv">1326801</span>, <span class="dv">320193</span>, <span class="dt">title_text =</span> <span class="st">&quot;chairman&quot;</span>)</code></pre></div>
+<p>One practical use of the <code>title_text</code> argument is to identify filers who were serving on an interim basis at the time of filing:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">display</span>( <span class="kw">sec_filed</span>(<span class="dt">title_text =</span> <span class="st">&quot;interim&quot;</span>) )</code></pre></div>
+<pre><code>## # A tibble: 20 x 1
+##    entity_id
+##        &lt;dbl&gt;
+##  1     31278
+##  2    232051
+##  3    258787
+##  4    268785
+##  5    291703
+##  6    330239
+##  7    348585
+##  8    532880
+##  9    550535
+## 10    603062
+## 11    622069
+## 12    632177
+## 13    736646
+## 14    743208
+## 15    827250
+## 16   1002194
+## 17   3235086
+## 18   3251783
+## 19   3314168
+## 20   3419720</code></pre>
 
 </div>
 </div>
@@ -274,8 +376,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
-<a href="optional-arguments.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="ex-political-economy.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="ex-academic.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="test-cdw.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -295,7 +397,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/tarakc02/discodocs/edit/master/70-add-on-packages.Rmd",
+"link": "https://github.com/tarakc02/discodocs/edit/master/80-example-08-sec.Rmd",
 "text": "Edit"
 },
 "download": null,
