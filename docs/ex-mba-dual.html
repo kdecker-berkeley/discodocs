@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="working-with-widgets.html">
-<link rel="next" href="brainstorm-bot.html">
+<link rel="prev" href="ex-sec.html">
+<link rel="next" href="ex-moves-management.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -247,57 +247,51 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="combining-widgets" class="section level1">
-<h1><span class="header-section-number">6</span> Combining widgets</h1>
-<p>As flexible as individual widgets are, they won’t help you too much by themselves. What makes them really useful is that they can be combined. There are three ways to combine widgets:</p>
-<ul>
-<li><code>%and%</code> will look for entities who satisfy both widgets</li>
-<li><code>%or%</code> will look for entities who satisfy at least one of two widgets</li>
-<li><code>%but_not%</code> will look for entities who satisfy a widget but do not satisfy a second widget.</li>
-</ul>
-<p>Some quick examples:</p>
-<p><code>gave_to_area(art_museum) %and% gave_to_area(cal_performances)</code> finds anyone who has given to <strong>both</strong> the Art Museum and Cal Performances.</p>
-<p><code>gave_to_area(art_museum) %or% gave_to_area(cal_performances)</code> finds anyone who has ever given to either the Art Museum or to Cal Performances. Note that this would include everyone who was found in the previous (<code>%and%</code>) example, as well as those who only gave to one or the other area.</p>
-<p><code>gave_to_area(art_museum) %but_not% gave_to_area(cal_performances)</code> finds anyone who has given to the Art Museum but has not given to Cal Performances.</p>
-<div id="example" class="section level2">
-<h2><span class="header-section-number">6.1</span> Example</h2>
-<p>You’re working with a major gift officer in the School of Business who is surprised to find out that alumni have been giving $15,000+ gifts in response to annual appeals, with no follow-up from major gift officers. She calls you up and says:</p>
-<blockquote>
-<p>I need to a report on everyone who has given $15,000 or more this year who isn’t yet in a portfolio, and I need it right away!</p>
-</blockquote>
-<p>You could probably have a savedlist ready before she’s even hung up the phone:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">important_prospects =<span class="st"> </span>
-<span class="st">    </span><span class="kw">gave_to_area</span>(business, <span class="dt">at_least =</span> <span class="dv">15000</span>, <span class="dt">from =</span> <span class="dv">20160101</span>) <span class="op">%but_not%</span><span class="st"> </span>
-<span class="st">    </span><span class="kw">in_unit_portfolio</span>(business)
+<div id="ex-mba-dual" class="section level1">
+<h1><span class="header-section-number">22</span> Finding dual-degree holders</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># i always begin by loading the disco engine if it isn&#39;t already loaded</span>
+<span class="kw">library</span>(discoveryengine)</code></pre></div>
+<p>We recently received a request to take a look at Haas MBAs who have an additional degree from Berkeley, beyond their MBA. This was a tricky one. If we wanted to find people who have a joint MBA/MPH, we could just do:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">has_degree</span>(MBA) <span class="op">%and%</span><span class="st"> </span><span class="kw">has_degree</span>(MPH)</code></pre></div>
+<p>But for this request, we want to find people with an MBA plus <strong>any</strong> other degree. We want to write something like:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">has_degree</span>(MBA) <span class="op">%and%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">has_degree</span>(any_other_degree_besides_mba)</code></pre></div>
+<p>How can we do that? Enter the <a href="working-with-widgets.html#widget-not-operator">not operator</a>. Inside a widget, the <code>not()</code> operator excludes, rather than includes, the codes entered. So:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mba_dual_alum =<span class="st"> </span><span class="kw">has_degree</span>(MBA) <span class="op">%and%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">has_degree</span>(<span class="kw">not</span>(MBA))
 
-<span class="kw">display</span>(important_prospects)</code></pre></div>
-<pre><code>## # A tibble: 298 x 1
+<span class="kw">display</span>(mba_dual_alum)</code></pre></div>
+<pre><code>## # A tibble: 3,715 x 1
 ##    entity_id
 ##        &lt;dbl&gt;
-##  1      2723
-##  2      5671
-##  3      8659
-##  4     12789
-##  5     14415
-##  6     14923
-##  7     15061
-##  8     15371
-##  9     16158
-## 10     17684
-## # ... with 288 more rows</code></pre>
+##  1       137
+##  2       159
+##  3       217
+##  4       235
+##  5       252
+##  6       257
+##  7       311
+##  8       340
+##  9       358
+## 10       513
+## # ... with 3,705 more rows</code></pre>
+<div id="why-not-but_not" class="section level2">
+<h2><span class="header-section-number">22.1</span> Why not <code>%but_not%</code>?</h2>
+<p>You might wonder, why do we need <code>not()</code> when we can combine widgets with <code>%but_not%</code>? Our example will help illustrate the difference. This –</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">has_degree</span>(MBA) <span class="op">%but_not%</span><span class="st"> </span><span class="kw">has_degree</span>(MBA)</code></pre></div>
+<p>– looks for anyone who both has an MBA degree and also does not have an MBA degree. Which is <a href="https://en.wikipedia.org/wiki/Law_of_excluded_middle">impossible</a>. What we did, on the other hand –</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">has_degree</span>(MBA) <span class="op">%and%</span><span class="st"> </span><span class="kw">has_degree</span>(<span class="kw">not</span>(MBA))</code></pre></div>
+<p>– looks for anyone who has an MBA degree as well as a non-MBA degree. And as we saw, there are thousands of such individuals.</p>
 
 </div>
 </div>
-
-
-
             </section>
 
           </div>
         </div>
       </div>
-<a href="working-with-widgets.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="brainstorm-bot.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="ex-sec.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="ex-moves-management.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -317,7 +311,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/tarakc02/discodocs/edit/master/05-combining-widgets.Rmd",
+"link": "https://github.com/tarakc02/discodocs/edit/master/80-example-09-mba-dual.Rmd",
 "text": "Edit"
 },
 "download": null,

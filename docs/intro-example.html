@@ -45,11 +45,6 @@
 
 
 
-<script src="libs/htmlwidgets-0.8/htmlwidgets.js"></script>
-<script src="libs/datatables-binding-0.2/datatables.js"></script>
-<link href="libs/dt-core-1.10.12/css/jquery.dataTables.min.css" rel="stylesheet" />
-<link href="libs/dt-core-1.10.12/css/jquery.dataTables.extra.css" rel="stylesheet" />
-<script src="libs/dt-core-1.10.12/js/jquery.dataTables.min.js"></script>
 
 
 <style type="text/css">
@@ -128,7 +123,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="5.3" data-path="working-with-widgets.html"><a href="working-with-widgets.html#working-with-codes-synonyms"><i class="fa fa-check"></i><b>5.3</b> Codes and synonyms</a></li>
 <li class="chapter" data-level="5.4" data-path="working-with-widgets.html"><a href="working-with-widgets.html#synonym-search"><i class="fa fa-check"></i><b>5.4</b> Synonym search</a></li>
 <li class="chapter" data-level="5.5" data-path="working-with-widgets.html"><a href="working-with-widgets.html#use-defaults"><i class="fa fa-check"></i><b>5.5</b> Use the default cases</a></li>
-<li class="chapter" data-level="5.6" data-path="working-with-widgets.html"><a href="working-with-widgets.html#detailed-controls"><i class="fa fa-check"></i><b>5.6</b> Detailed controls</a></li>
+<li class="chapter" data-level="5.6" data-path="working-with-widgets.html"><a href="working-with-widgets.html#widget-not-operator"><i class="fa fa-check"></i><b>5.6</b> The <code>not()</code> operator</a></li>
+<li class="chapter" data-level="5.7" data-path="working-with-widgets.html"><a href="working-with-widgets.html#detailed-controls"><i class="fa fa-check"></i><b>5.7</b> Detailed controls</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="combining-widgets.html"><a href="combining-widgets.html"><i class="fa fa-check"></i><b>6</b> Combining widgets</a><ul>
 <li class="chapter" data-level="6.1" data-path="combining-widgets.html"><a href="combining-widgets.html#example"><i class="fa fa-check"></i><b>6.1</b> Example</a></li>
@@ -197,6 +193,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="21.1" data-path="ex-sec.html"><a href="ex-sec.html#basics-1"><i class="fa fa-check"></i><b>21.1</b> Basics</a></li>
 <li class="chapter" data-level="21.2" data-path="ex-sec.html"><a href="ex-sec.html#looking-for-companies"><i class="fa fa-check"></i><b>21.2</b> Looking for companies</a></li>
 <li class="chapter" data-level="21.3" data-path="ex-sec.html"><a href="ex-sec.html#specific-roles"><i class="fa fa-check"></i><b>21.3</b> Specific roles</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="ex-mba-dual.html"><a href="ex-mba-dual.html"><i class="fa fa-check"></i><b>22</b> Finding dual-degree holders</a><ul>
+<li class="chapter" data-level="22.1" data-path="ex-mba-dual.html"><a href="ex-mba-dual.html#why-not-but_not"><i class="fa fa-check"></i><b>22.1</b> Why not <code>%but_not%</code>?</a></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="ex-moves-management.html"><a href="ex-moves-management.html"><i class="fa fa-check"></i><b>23</b> Moves Management</a><ul>
+<li class="chapter" data-level="23.1" data-path="ex-moves-management.html"><a href="ex-moves-management.html#basics-2"><i class="fa fa-check"></i><b>23.1</b> Basics</a></li>
+<li class="chapter" data-level="23.2" data-path="ex-moves-management.html"><a href="ex-moves-management.html#example-engineering-qualifications"><i class="fa fa-check"></i><b>23.2</b> Example: Engineering qualifications</a></li>
+<li class="chapter" data-level="23.3" data-path="ex-moves-management.html"><a href="ex-moves-management.html#example-collaborative-asks"><i class="fa fa-check"></i><b>23.3</b> Example: collaborative asks</a></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="test-cdw.html"><a href="test-cdw.html"><i class="fa fa-check"></i><b>A</b> Test your database set up</a><ul>
@@ -282,27 +286,27 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>As we discussed in the previous section, now that we have an official definition we can send it to the data warehouse, and see if the data warehouse finds anyone who fits. You can see the definition for yourself by just typing the name of it, though it is now written in a language for the computer to understand and may look intimidating to us humans:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">event_prospect</code></pre></div>
 <pre><code>## LISTBUILDER DEFINITION (type: entity_id)
-## .   operator (DF30): intersect
-## .   left (DF30): 
-## .   .   operator (FH39): union
-## .   .   left (FH39): 
+## .   operator (EV58): intersect
+## .   left (EV58): 
+## .   .   operator (WB04): union all
+## .   .   left (WB04): 
 ## .   .   .   source: d_bio_interest_mv.entity_id (entity_id)
 ## .   .   .   logic: interest_code IN (&#39;TEC&#39;)
-## .   .   right (FH39): 
+## .   .   right (WB04): 
 ## .   .   .   source: d_oth_phil_affinity_mv.entity_id (entity_id)
 ## .   .   .   logic: 
 ## .   .   .   .   other_affinity_type IN (&#39;ST&#39;)
 ## .   .   .   .   sum(gift_amt) &gt;= 0.0
-## .   right (DF30): 
-## .   .   operator (AV04): union
-## .   .   left (AV04): 
+## .   right (EV58): 
+## .   .   operator (FR52): union all
+## .   .   left (FR52): 
 ## .   .   .   source: d_bio_address_mv.entity_id (entity_id)
 ## .   .   .   logic: 
 ## .   .   .   .   geo_metro_area_code IN (&#39;41860&#39;)
 ## .   .   .   .   addr_type_code IN (&#39;H&#39;, &#39;6&#39;)
 ## .   .   .   .   contact_type_desc IN (&#39;ADDRESS&#39;)
 ## .   .   .   .   addr_status_code IN (&#39;A&#39;, &#39;K&#39;)
-## .   .   right (AV04): 
+## .   .   right (FR52): 
 ## .   .   .   source: d_bio_address_mv.entity_id (entity_id)
 ## .   .   .   logic: 
 ## .   .   .   .   geo_metro_area_code IN (&#39;41860&#39;)

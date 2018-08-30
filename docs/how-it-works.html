@@ -45,11 +45,6 @@
 
 
 
-<script src="libs/htmlwidgets-0.8/htmlwidgets.js"></script>
-<script src="libs/datatables-binding-0.2/datatables.js"></script>
-<link href="libs/dt-core-1.10.12/css/jquery.dataTables.min.css" rel="stylesheet" />
-<link href="libs/dt-core-1.10.12/css/jquery.dataTables.extra.css" rel="stylesheet" />
-<script src="libs/dt-core-1.10.12/js/jquery.dataTables.min.js"></script>
 
 
 <style type="text/css">
@@ -128,7 +123,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="5.3" data-path="working-with-widgets.html"><a href="working-with-widgets.html#working-with-codes-synonyms"><i class="fa fa-check"></i><b>5.3</b> Codes and synonyms</a></li>
 <li class="chapter" data-level="5.4" data-path="working-with-widgets.html"><a href="working-with-widgets.html#synonym-search"><i class="fa fa-check"></i><b>5.4</b> Synonym search</a></li>
 <li class="chapter" data-level="5.5" data-path="working-with-widgets.html"><a href="working-with-widgets.html#use-defaults"><i class="fa fa-check"></i><b>5.5</b> Use the default cases</a></li>
-<li class="chapter" data-level="5.6" data-path="working-with-widgets.html"><a href="working-with-widgets.html#detailed-controls"><i class="fa fa-check"></i><b>5.6</b> Detailed controls</a></li>
+<li class="chapter" data-level="5.6" data-path="working-with-widgets.html"><a href="working-with-widgets.html#widget-not-operator"><i class="fa fa-check"></i><b>5.6</b> The <code>not()</code> operator</a></li>
+<li class="chapter" data-level="5.7" data-path="working-with-widgets.html"><a href="working-with-widgets.html#detailed-controls"><i class="fa fa-check"></i><b>5.7</b> Detailed controls</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="combining-widgets.html"><a href="combining-widgets.html"><i class="fa fa-check"></i><b>6</b> Combining widgets</a><ul>
 <li class="chapter" data-level="6.1" data-path="combining-widgets.html"><a href="combining-widgets.html#example"><i class="fa fa-check"></i><b>6.1</b> Example</a></li>
@@ -197,6 +193,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="21.1" data-path="ex-sec.html"><a href="ex-sec.html#basics-1"><i class="fa fa-check"></i><b>21.1</b> Basics</a></li>
 <li class="chapter" data-level="21.2" data-path="ex-sec.html"><a href="ex-sec.html#looking-for-companies"><i class="fa fa-check"></i><b>21.2</b> Looking for companies</a></li>
 <li class="chapter" data-level="21.3" data-path="ex-sec.html"><a href="ex-sec.html#specific-roles"><i class="fa fa-check"></i><b>21.3</b> Specific roles</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="ex-mba-dual.html"><a href="ex-mba-dual.html"><i class="fa fa-check"></i><b>22</b> Finding dual-degree holders</a><ul>
+<li class="chapter" data-level="22.1" data-path="ex-mba-dual.html"><a href="ex-mba-dual.html#why-not-but_not"><i class="fa fa-check"></i><b>22.1</b> Why not <code>%but_not%</code>?</a></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="ex-moves-management.html"><a href="ex-moves-management.html"><i class="fa fa-check"></i><b>23</b> Moves Management</a><ul>
+<li class="chapter" data-level="23.1" data-path="ex-moves-management.html"><a href="ex-moves-management.html#basics-2"><i class="fa fa-check"></i><b>23.1</b> Basics</a></li>
+<li class="chapter" data-level="23.2" data-path="ex-moves-management.html"><a href="ex-moves-management.html#example-engineering-qualifications"><i class="fa fa-check"></i><b>23.2</b> Example: Engineering qualifications</a></li>
+<li class="chapter" data-level="23.3" data-path="ex-moves-management.html"><a href="ex-moves-management.html#example-collaborative-asks"><i class="fa fa-check"></i><b>23.3</b> Example: collaborative asks</a></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="test-cdw.html"><a href="test-cdw.html"><i class="fa fa-check"></i><b>A</b> Test your database set up</a><ul>
@@ -310,16 +314,16 @@ args &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt"
 <pre><code>## # A tibble: 3,499 x 1
 ##    entity_id
 ##        &lt;dbl&gt;
-##  1    426609
-##  2    470416
-##  3    432087
-##  4    462987
-##  5     10940
-##  6    268592
-##  7    197869
-##  8    304800
-##  9    281132
-## 10    281340
+##  1    131225
+##  2    131801
+##  3    159881
+##  4    219673
+##  5    163109
+##  6    225019
+##  7    225185
+##  8    174218
+##  9    598341
+## 10    693010
 ## # ... with 3,489 more rows</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## and we can use multiple affiliations:
 is_constituent =<span class="st"> </span><span class="kw">has_affiliation</span>(<span class="kw">c</span>(<span class="st">&quot;M2&quot;</span>, <span class="st">&quot;MA4&quot;</span>))
@@ -327,16 +331,16 @@ is_constituent =<span class="st"> </span><span class="kw">has_affiliation</span>
 <pre><code>## # A tibble: 2,681 x 1
 ##    entity_id
 ##        &lt;dbl&gt;
-##  1      3347
-##  2      3359
-##  3     23730
-##  4     15673
-##  5     18143
-##  6     27128
-##  7     27291
-##  8     21108
-##  9     20816
-## 10    299736
+##  1    875220
+##  2    245832
+##  3    802045
+##  4    776766
+##  5    719475
+##  6   3066224
+##  7    684785
+##  8    999089
+##  9    999094
+## 10     40881
 ## # ... with 2,671 more rows</code></pre>
 <p>Ok! So we’ve now implemented basic widget functionality. We still have a couple of outstanding issues:</p>
 <ol style="list-style-type: decimal">
@@ -365,16 +369,16 @@ is_constituent =<span class="st"> </span><span class="kw">has_affiliation</span>
 <pre><code>## # A tibble: 2,681 x 1
 ##    entity_id
 ##        &lt;dbl&gt;
-##  1      3347
-##  2      3359
-##  3     23730
-##  4     15673
-##  5     18143
-##  6     27128
-##  7     27291
-##  8     21108
-##  9     20816
-## 10    299736
+##  1    875220
+##  2    245832
+##  3    802045
+##  4    776766
+##  5    719475
+##  6   3066224
+##  7    684785
+##  8    999089
+##  9    999094
+## 10     40881
 ## # ... with 2,671 more rows</code></pre>
 <p><em>Note that the actual package is a little bit more careful about how it does things here, by using the <a href="https://cran.r-project.org/web/packages/lazyeval/index.html">lazyeval package</a>. To see the actual code used in the Disco Engine, check out <code>prep_dots</code> and <code>partial_sub</code> in <a href="https://github.com/tarakc02/discoveryengine/blob/master/R/helper-utils.R">this discoveryengine source code file</a></em></p>
 </div>

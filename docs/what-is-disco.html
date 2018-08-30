@@ -45,11 +45,6 @@
 
 
 
-<script src="libs/htmlwidgets-0.8/htmlwidgets.js"></script>
-<script src="libs/datatables-binding-0.2/datatables.js"></script>
-<link href="libs/dt-core-1.10.12/css/jquery.dataTables.min.css" rel="stylesheet" />
-<link href="libs/dt-core-1.10.12/css/jquery.dataTables.extra.css" rel="stylesheet" />
-<script src="libs/dt-core-1.10.12/js/jquery.dataTables.min.js"></script>
 
 
 <style type="text/css">
@@ -128,7 +123,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="5.3" data-path="working-with-widgets.html"><a href="working-with-widgets.html#working-with-codes-synonyms"><i class="fa fa-check"></i><b>5.3</b> Codes and synonyms</a></li>
 <li class="chapter" data-level="5.4" data-path="working-with-widgets.html"><a href="working-with-widgets.html#synonym-search"><i class="fa fa-check"></i><b>5.4</b> Synonym search</a></li>
 <li class="chapter" data-level="5.5" data-path="working-with-widgets.html"><a href="working-with-widgets.html#use-defaults"><i class="fa fa-check"></i><b>5.5</b> Use the default cases</a></li>
-<li class="chapter" data-level="5.6" data-path="working-with-widgets.html"><a href="working-with-widgets.html#detailed-controls"><i class="fa fa-check"></i><b>5.6</b> Detailed controls</a></li>
+<li class="chapter" data-level="5.6" data-path="working-with-widgets.html"><a href="working-with-widgets.html#widget-not-operator"><i class="fa fa-check"></i><b>5.6</b> The <code>not()</code> operator</a></li>
+<li class="chapter" data-level="5.7" data-path="working-with-widgets.html"><a href="working-with-widgets.html#detailed-controls"><i class="fa fa-check"></i><b>5.7</b> Detailed controls</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="combining-widgets.html"><a href="combining-widgets.html"><i class="fa fa-check"></i><b>6</b> Combining widgets</a><ul>
 <li class="chapter" data-level="6.1" data-path="combining-widgets.html"><a href="combining-widgets.html#example"><i class="fa fa-check"></i><b>6.1</b> Example</a></li>
@@ -197,6 +193,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="21.1" data-path="ex-sec.html"><a href="ex-sec.html#basics-1"><i class="fa fa-check"></i><b>21.1</b> Basics</a></li>
 <li class="chapter" data-level="21.2" data-path="ex-sec.html"><a href="ex-sec.html#looking-for-companies"><i class="fa fa-check"></i><b>21.2</b> Looking for companies</a></li>
 <li class="chapter" data-level="21.3" data-path="ex-sec.html"><a href="ex-sec.html#specific-roles"><i class="fa fa-check"></i><b>21.3</b> Specific roles</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="ex-mba-dual.html"><a href="ex-mba-dual.html"><i class="fa fa-check"></i><b>22</b> Finding dual-degree holders</a><ul>
+<li class="chapter" data-level="22.1" data-path="ex-mba-dual.html"><a href="ex-mba-dual.html#why-not-but_not"><i class="fa fa-check"></i><b>22.1</b> Why not <code>%but_not%</code>?</a></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="ex-moves-management.html"><a href="ex-moves-management.html"><i class="fa fa-check"></i><b>23</b> Moves Management</a><ul>
+<li class="chapter" data-level="23.1" data-path="ex-moves-management.html"><a href="ex-moves-management.html#basics-2"><i class="fa fa-check"></i><b>23.1</b> Basics</a></li>
+<li class="chapter" data-level="23.2" data-path="ex-moves-management.html"><a href="ex-moves-management.html#example-engineering-qualifications"><i class="fa fa-check"></i><b>23.2</b> Example: Engineering qualifications</a></li>
+<li class="chapter" data-level="23.3" data-path="ex-moves-management.html"><a href="ex-moves-management.html#example-collaborative-asks"><i class="fa fa-check"></i><b>23.3</b> Example: collaborative asks</a></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="test-cdw.html"><a href="test-cdw.html"><i class="fa fa-check"></i><b>A</b> Test your database set up</a><ul>
@@ -278,7 +282,7 @@ local_math_constituent =<span class="st"> </span>is_math_constituent <span class
 parent_of_local_math_constituent =<span class="st"> </span><span class="kw">parent_of</span>(local_math_constituent)</code></pre></div>
 <p>Together, the collection of predicates, the logical operators, and the ability to assign names form an expressive language for describing custom constituencies for a variety of purposes. Best of all, the Disco Engine gives us the ability to pull the IDs of a defined constituency from the database!</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">display</span>(parent_of_local_math_constituent)</code></pre></div>
-<pre><code>## # A tibble: 559 x 1
+<pre><code>## # A tibble: 567 x 1
 ##    entity_id
 ##        &lt;dbl&gt;
 ##  1      1168
@@ -291,31 +295,34 @@ parent_of_local_math_constituent =<span class="st"> </span><span class="kw">pare
 ##  8     23989
 ##  9     24151
 ## 10     24247
-## # ... with 549 more rows</code></pre>
+## # ... with 557 more rows</code></pre>
 </div>
 <div id="facilitating-discovery" class="section level2">
 <h2><span class="header-section-number">2.2</span> Facilitating discovery</h2>
 <p>Having a clear language for prospecting and defining constituencies is nice, but Prospect Development is increasingly being asked to do affinity-based prospecting, which often involves defining new constituencies that don’t have clear-cut coding associated with them yet, or digging into student activity, interest, affiliation, and other codes to figure out which ones might fit the constituency to be defined. That need motivates the Disco Engine’s bots, such as the <a href="brainstorm-bot.html#brainstorm-bot">brainstorm bot</a> and the <a href="matrix-bot.html#matrix-bot">matrix bot</a>. We’ve already seen examples of using predicates to find individuals, but bots allow us to search for predicates.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">brainstorm_bot</span>(<span class="st">&quot;robot*&quot;</span>, <span class="st">&quot;artificial intelligence&quot;</span>, <span class="st">&quot;AI&quot;</span>)</code></pre></div>
 <pre><code>## attended_event 
+##     8759: AI and IoT at Industrial Scale
 ##     6724: Haas East Bay Chp Robotic Event 06-18-14
+##     8761: Silicon Valley Forum: Medical Robotics
 ## attended_hs 
 ##     471828: Cb-Ai Operations S&amp;L
 ## fec_gave_to_committee 
-##     C00582767: CAMPAIGN FOR A FEDERAL ROBOTICS COMMISSION
 ##     C00635748: AI PAC
-##     C00144261: APPRAISAL INSTITUTE PAC (AI PAC)
 ##     C00596908: ROBOTECHNOLOGY INC C.R.
+##     C00582767: CAMPAIGN FOR A FEDERAL ROBOTICS COMMISSION
 ##     C00521765: LIQUID ROBOTICS INC POLITICAL ACTION COMMITTEE (LIQUID ROBOTICS PAC)
+##     C00144261: APPRAISAL INSTITUTE PAC (AI PAC)
 ## has_interest 
-##     ROB: Robotics
 ##     AIN: Artificial Intelligence
+##     ROB: Robotics
 ## participated_in 
 ##     UROB: Robotmedia Presents
 ##     ENRO: Cal Robotics
 ## sec_filed 
 ##     1409269: Restoration Robotics Inc
-##     1528557: Corindus Vascular Robotics, Inc.</code></pre>
+##     1528557: Corindus Vascular Robotics, Inc.
+##     1409269: Restoration Robotics, Inc.</code></pre>
 
 </div>
 </div>

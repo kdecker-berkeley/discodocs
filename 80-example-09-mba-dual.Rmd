@@ -1,0 +1,44 @@
+# Finding dual-degree holders {#ex-mba-dual}
+
+```{r ex-mba-dual-loadlib, message = FALSE}
+# i always begin by loading the disco engine if it isn't already loaded
+library(discoveryengine)
+```
+
+We recently received a request to take a look at Haas MBAs who have an additional degree from Berkeley, beyond their MBA. This was a tricky one. If we wanted to find people who have a joint MBA/MPH, we could just do:
+
+```{r, eval = FALSE}
+has_degree(MBA) %and% has_degree(MPH)
+```
+
+But for this request, we want to find people with an MBA plus **any** other degree. We want to write something like: 
+
+```{r, eval = FALSE}
+has_degree(MBA) %and% 
+    has_degree(any_other_degree_besides_mba)
+```
+
+How can we do that? Enter the [not operator](#widget-not-operator). Inside a widget, the `not()` operator excludes, rather than includes, the codes entered. So:
+
+```{r haas-dual, cache = TRUE}
+mba_dual_alum = has_degree(MBA) %and% 
+    has_degree(not(MBA))
+
+display(mba_dual_alum)
+```
+
+## Why not `%but_not%`?
+
+You might wonder, why do we need `not()` when we can combine widgets with `%but_not%`? Our example will help illustrate the difference. This -- 
+
+```{r, eval = FALSE}
+has_degree(MBA) %but_not% has_degree(MBA)
+```
+
+-- looks for anyone who both has an MBA degree and also does not have an MBA degree. Which is [impossible](https://en.wikipedia.org/wiki/Law_of_excluded_middle). What we did, on the other hand --
+
+```{r, eval = FALSE}
+has_degree(MBA) %and% has_degree(not(MBA))
+```
+
+-- looks for anyone who has an MBA degree as well as a non-MBA degree. And as we saw, there are thousands of such individuals.

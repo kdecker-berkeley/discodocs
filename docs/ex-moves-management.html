@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="working-with-widgets.html">
-<link rel="next" href="brainstorm-bot.html">
+<link rel="prev" href="ex-mba-dual.html">
+<link rel="next" href="test-cdw.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -247,44 +247,74 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="combining-widgets" class="section level1">
-<h1><span class="header-section-number">6</span> Combining widgets</h1>
-<p>As flexible as individual widgets are, they won’t help you too much by themselves. What makes them really useful is that they can be combined. There are three ways to combine widgets:</p>
-<ul>
-<li><code>%and%</code> will look for entities who satisfy both widgets</li>
-<li><code>%or%</code> will look for entities who satisfy at least one of two widgets</li>
-<li><code>%but_not%</code> will look for entities who satisfy a widget but do not satisfy a second widget.</li>
-</ul>
-<p>Some quick examples:</p>
-<p><code>gave_to_area(art_museum) %and% gave_to_area(cal_performances)</code> finds anyone who has given to <strong>both</strong> the Art Museum and Cal Performances.</p>
-<p><code>gave_to_area(art_museum) %or% gave_to_area(cal_performances)</code> finds anyone who has ever given to either the Art Museum or to Cal Performances. Note that this would include everyone who was found in the previous (<code>%and%</code>) example, as well as those who only gave to one or the other area.</p>
-<p><code>gave_to_area(art_museum) %but_not% gave_to_area(cal_performances)</code> finds anyone who has given to the Art Museum but has not given to Cal Performances.</p>
-<div id="example" class="section level2">
-<h2><span class="header-section-number">6.1</span> Example</h2>
-<p>You’re working with a major gift officer in the School of Business who is surprised to find out that alumni have been giving $15,000+ gifts in response to annual appeals, with no follow-up from major gift officers. She calls you up and says:</p>
-<blockquote>
-<p>I need to a report on everyone who has given $15,000 or more this year who isn’t yet in a portfolio, and I need it right away!</p>
-</blockquote>
-<p>You could probably have a savedlist ready before she’s even hung up the phone:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">important_prospects =<span class="st"> </span>
-<span class="st">    </span><span class="kw">gave_to_area</span>(business, <span class="dt">at_least =</span> <span class="dv">15000</span>, <span class="dt">from =</span> <span class="dv">20160101</span>) <span class="op">%but_not%</span><span class="st"> </span>
-<span class="st">    </span><span class="kw">in_unit_portfolio</span>(business)
+<div id="ex-moves-management" class="section level1">
+<h1><span class="header-section-number">23</span> Moves Management</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># i always begin by loading the disco engine if it isn&#39;t already loaded</span>
+<span class="kw">library</span>(discoveryengine)</code></pre></div>
+<p>The Discovery Engine provides a suite of widgets to identify proposals based on specific characteristics or events related to them.</p>
+<div id="basics-2" class="section level2">
+<h2><span class="header-section-number">23.1</span> Basics</h2>
+<p>With <a href="working-with-widgets.html#working-with-autocomplete">autocomplete in mind</a>, proposal widgets are all prefixed with <code>proposal_</code>.</p>
+<div class="figure">
+<img src="images/proposal-autocomplete.png" alt="Common prefix keeps proposal widgets easy to find" />
+<p class="caption">Common prefix keeps proposal widgets easy to find</p>
+</div>
+<p>As with all other widgets, the proposal widgets are designed to be combined like lego blocks using <code>%and%</code>, <code>%or%</code> and <code>%but_not%</code> in order to precisely define solicitations (and planned solicitations) of interest. Once you’ve zeroed in on the proposals you’re interested in, you can get the relevant enitity IDs using <code>proposal_entity</code>, or look at related contact reports using <code>proposal_contact</code>.</p>
+<p>While these widgets can be used to pull the portfolio for a unit or development officer, it is simpler to use <code>in_unit_portfolio</code> and <code>in_development_officer_portfolio</code> for those needs. The proposal widgets shine in situations where you need to focus on specific types of moves and asks, as the examples below illustrate.</p>
+</div>
+<div id="example-engineering-qualifications" class="section level2">
+<h2><span class="header-section-number">23.2</span> Example: Engineering qualifications</h2>
+<p>Let’s look for prospects who were qualified by Engineering during fiscal year 2017-18:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">eng_qualification =<span class="st"> </span><span class="kw">proposal_office</span>(engineering) <span class="op">%and%</span>
+<span class="st">    </span><span class="kw">proposal_qualified</span>(<span class="dt">from =</span> <span class="dv">20170701</span>, <span class="dt">to =</span> <span class="dv">20180630</span>)
 
-<span class="kw">display</span>(important_prospects)</code></pre></div>
-<pre><code>## # A tibble: 298 x 1
+qualified_prospect =<span class="st"> </span><span class="kw">proposal_entity</span>(eng_qualification)
+<span class="kw">display</span>(qualified_prospect)</code></pre></div>
+<pre><code>## # A tibble: 139 x 1
 ##    entity_id
 ##        &lt;dbl&gt;
-##  1      2723
-##  2      5671
-##  3      8659
-##  4     12789
-##  5     14415
-##  6     14923
-##  7     15061
-##  8     15371
-##  9     16158
-## 10     17684
-## # ... with 288 more rows</code></pre>
+##  1      3422
+##  2      6007
+##  3      6945
+##  4     21152
+##  5     21203
+##  6     22029
+##  7     22892
+##  8     26385
+##  9     26911
+## 10     28489
+## # ... with 129 more rows</code></pre>
+<p><code>proposal_qualified</code> looks for proposals that moved from stage <code>QU</code> to one of <code>(CU, SP, PD, GS, DS)</code> during the specified time period (for a more flexible way to isolate specific types of moves, see <code>?proposal_stage_transition</code>). So our definition describes any proposal that successfully progressed from the qualification stage, during the fiscal year, that was assigned to Engineering at the time of the stage change.</p>
+<p><em>Note: yes, the proposal widgets are smart enough to compare the assignment dates to the stage dates to make sure that the qualification really happened while the proposal was assigned to Engineering</em></p>
+</div>
+<div id="example-collaborative-asks" class="section level2">
+<h2><span class="header-section-number">23.3</span> Example: collaborative asks</h2>
+<p>Which prospects were jointly solicited by the Library along with some other unit during fiscal year 2017-18? Let’s focus only on asks of at least $100,000. For this request, we’ll take advantage of the <a href="working-with-widgets.html#widget-not-operator"><code>not()</code> operator</a>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">joint_ask =<span class="st"> </span><span class="kw">proposal_office</span>(library) <span class="op">%and%</span>
+<span class="st">    </span><span class="kw">proposal_office</span>(<span class="kw">not</span>(library)) <span class="op">%and%</span>
+<span class="st">    </span><span class="kw">proposal_actual_ask</span>(<span class="dt">at_least =</span> <span class="dv">100000</span>, 
+                        <span class="dt">from =</span> <span class="dv">20170701</span>, <span class="dt">to =</span> <span class="dv">20180630</span>)
+
+jointly_asked =<span class="st"> </span><span class="kw">proposal_entity</span>(joint_ask)
+<span class="kw">display</span>(jointly_asked)</code></pre></div>
+<pre><code>## # A tibble: 15 x 1
+##    entity_id
+##        &lt;dbl&gt;
+##  1     10864
+##  2     13293
+##  3     15928
+##  4     17429
+##  5     39287
+##  6     39288
+##  7     53042
+##  8    123883
+##  9    179317
+## 10    369619
+## 11    580679
+## 12    599725
+## 13    624983
+## 14    626271
+## 15    971561</code></pre>
 
 </div>
 </div>
@@ -296,8 +326,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
-<a href="working-with-widgets.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="brainstorm-bot.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="ex-mba-dual.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="test-cdw.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -317,7 +347,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/tarakc02/discodocs/edit/master/05-combining-widgets.Rmd",
+"link": "https://github.com/tarakc02/discodocs/edit/master/80-example-10-proposals.Rmd",
 "text": "Edit"
 },
 "download": null,

@@ -10,9 +10,7 @@ library(discoveryengine)
 
 There are two main ways to find widgets. The first is to use the `show_widgets` function. The function takes no arguments. When you run it, an interactive list of widgets, with short descriptions of each, will appear in your viewer window:
 
-```{r working-with-show_widgets, fig.width=9}
-show_widgets()
-```
+![Searching for widgets related to employment data](images/show-widgets-employment.png)
 
 You can browse the entire listing, or use the search bar at the top right to search for specific widgets. 
 
@@ -40,6 +38,7 @@ In addition to entity widgets, [other types of widgets](#non-entity-widgets) are
 
 - Every widget that pulls allocation codes instead of entity IDs begins with `fund_` (for example, `fund_type` or `fund_department`).
 - Contact report widgets all begin with `contact_` (for example `contact_text_contains` or `contact_date`).
+- Proposal-based widgets all begin with `proposal_` (for example, `proposal_actual_ask` or `proposal_qualified`).
 
 Finally, `bot_brainstorm` and `bot_matrix` are aliases for the [`brainstorm_bot`](#brainstorm-bot) and the [`matrix_bot`](#matrix-bot), and in general, typing `bot_` and waiting for a second will show a full list of the disco engine's bots.
 
@@ -88,6 +87,10 @@ display(did_anything)
 ```
 
 That seems a bit magical, doesn't it? The reason that works is because every widget has a defined behavior for when no codes/synonyms are entered. These default behaviors aim to be sensible so that you can use them in an intuitive way. You can always find out exactly what is included in the default by using the help. For instance, by typing `?has_capacity` I find out that entering `has_capacity()` without any specific ratings will find anyone with a researched capacity rating between 1 and 14 (so 99's are excluded, and those with no capacity ratings are excluded). 
+
+## The `not()` operator {#widget-not-operator}
+
+Within a widget, you can use `not` to modify what you're looking for. For example, you can type `gave_to_fund_type(not(endowment))` to find donors who gave to any kind of fund **other than** endowment funds. For an example of when this can be useful, see [the MBA dual-degree holder example](#ex-mba-dual).
 
 ## Detailed controls {#detailed-controls}
 

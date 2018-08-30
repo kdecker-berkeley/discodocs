@@ -45,11 +45,6 @@
 
 
 
-<script src="libs/htmlwidgets-0.8/htmlwidgets.js"></script>
-<script src="libs/datatables-binding-0.2/datatables.js"></script>
-<link href="libs/dt-core-1.10.12/css/jquery.dataTables.min.css" rel="stylesheet" />
-<link href="libs/dt-core-1.10.12/css/jquery.dataTables.extra.css" rel="stylesheet" />
-<script src="libs/dt-core-1.10.12/js/jquery.dataTables.min.js"></script>
 
 
 <style type="text/css">
@@ -128,7 +123,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="5.3" data-path="working-with-widgets.html"><a href="working-with-widgets.html#working-with-codes-synonyms"><i class="fa fa-check"></i><b>5.3</b> Codes and synonyms</a></li>
 <li class="chapter" data-level="5.4" data-path="working-with-widgets.html"><a href="working-with-widgets.html#synonym-search"><i class="fa fa-check"></i><b>5.4</b> Synonym search</a></li>
 <li class="chapter" data-level="5.5" data-path="working-with-widgets.html"><a href="working-with-widgets.html#use-defaults"><i class="fa fa-check"></i><b>5.5</b> Use the default cases</a></li>
-<li class="chapter" data-level="5.6" data-path="working-with-widgets.html"><a href="working-with-widgets.html#detailed-controls"><i class="fa fa-check"></i><b>5.6</b> Detailed controls</a></li>
+<li class="chapter" data-level="5.6" data-path="working-with-widgets.html"><a href="working-with-widgets.html#widget-not-operator"><i class="fa fa-check"></i><b>5.6</b> The <code>not()</code> operator</a></li>
+<li class="chapter" data-level="5.7" data-path="working-with-widgets.html"><a href="working-with-widgets.html#detailed-controls"><i class="fa fa-check"></i><b>5.7</b> Detailed controls</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="combining-widgets.html"><a href="combining-widgets.html"><i class="fa fa-check"></i><b>6</b> Combining widgets</a><ul>
 <li class="chapter" data-level="6.1" data-path="combining-widgets.html"><a href="combining-widgets.html#example"><i class="fa fa-check"></i><b>6.1</b> Example</a></li>
@@ -198,6 +194,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="21.2" data-path="ex-sec.html"><a href="ex-sec.html#looking-for-companies"><i class="fa fa-check"></i><b>21.2</b> Looking for companies</a></li>
 <li class="chapter" data-level="21.3" data-path="ex-sec.html"><a href="ex-sec.html#specific-roles"><i class="fa fa-check"></i><b>21.3</b> Specific roles</a></li>
 </ul></li>
+<li class="chapter" data-level="22" data-path="ex-mba-dual.html"><a href="ex-mba-dual.html"><i class="fa fa-check"></i><b>22</b> Finding dual-degree holders</a><ul>
+<li class="chapter" data-level="22.1" data-path="ex-mba-dual.html"><a href="ex-mba-dual.html#why-not-but_not"><i class="fa fa-check"></i><b>22.1</b> Why not <code>%but_not%</code>?</a></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="ex-moves-management.html"><a href="ex-moves-management.html"><i class="fa fa-check"></i><b>23</b> Moves Management</a><ul>
+<li class="chapter" data-level="23.1" data-path="ex-moves-management.html"><a href="ex-moves-management.html#basics-2"><i class="fa fa-check"></i><b>23.1</b> Basics</a></li>
+<li class="chapter" data-level="23.2" data-path="ex-moves-management.html"><a href="ex-moves-management.html#example-engineering-qualifications"><i class="fa fa-check"></i><b>23.2</b> Example: Engineering qualifications</a></li>
+<li class="chapter" data-level="23.3" data-path="ex-moves-management.html"><a href="ex-moves-management.html#example-collaborative-asks"><i class="fa fa-check"></i><b>23.3</b> Example: collaborative asks</a></li>
+</ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="test-cdw.html"><a href="test-cdw.html"><i class="fa fa-check"></i><b>A</b> Test your database set up</a><ul>
 <li class="chapter" data-level="A.1" data-path="test-cdw.html"><a href="test-cdw.html#test-your-connection"><i class="fa fa-check"></i><b>A.1</b> Test your connection</a></li>
@@ -256,16 +260,16 @@ is_business_grad =<span class="st"> </span><span class="kw">has_degree_from</spa
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">majored_in</span>(?econ)</code></pre></div>
 <pre><code>## Regular codes and synonyms:
 ##                          synonym   code
+##           pol_econ_of_indust_soc    697
 ##           agricultural_economics    024
 ##    household_arts_home_economics   373X
 ##                   law_jd_econ_ma 501246
-##           pol_econ_of_indust_soc    697
 ##        pol_econ_of_nat_resources    698
 ##  agricultural_resource_economics    034
 ##                        economics    246
+##        environmental_econ_policy    779
 ##                  economics_ma_jd 246501
 ##                political_economy    2B2
-##        environmental_econ_policy    779
 ##          urban_secondary_english  24903</code></pre>
 <p>Ok, looks like <code>economics</code> and <code>political_economy</code> should definitely be included. What about political science?</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">majored_in</span>(?political)</code></pre></div>
