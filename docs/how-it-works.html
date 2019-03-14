@@ -14,7 +14,7 @@
   
   
   <meta property="og:description" content="Some documentation for the discoveryengine" />
-  <meta name="github-repo" content="tarakc02/discodocs" />
+  <meta name="github-repo" content="cwolfsonseeley/discodocs" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Documentation for the discoveryengine" />
@@ -249,14 +249,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="how-it-works" class="section level1">
 <h1><span class="header-section-number">C</span> How does it work?</h1>
-<p>In this section, I’ll go over the basic building blocks that make the Disco Engine work. To help organize the lesson, I’ll assume we’re building a brand new Disco Engine from scratch. Of course, what we build will necessarily be just a simplified version of the Disco Engine, but we’ll cover the most important concepts. All of the code behind the real Disco Engine is available for anyone to view <a href="https://github.com/tarakc02/discoveryengine">on GitHub</a>. Where possible, I’ll add a link to the appropriate bit of production code and explain what’s different from our simplified example.</p>
+<p>In this section, I’ll go over the basic building blocks that make the Disco Engine work. To help organize the lesson, I’ll assume we’re building a brand new Disco Engine from scratch. Of course, what we build will necessarily be just a simplified version of the Disco Engine, but we’ll cover the most important concepts. All of the code behind the real Disco Engine is available for anyone to view <a href="https://github.com/cwolfsonseeley/discoveryengine">on GitHub</a>. Where possible, I’ll add a link to the appropriate bit of production code and explain what’s different from our simplified example.</p>
 <div id="a-widget-as-a-sql-template" class="section level2">
 <h2><span class="header-section-number">C.1</span> A Widget as a SQL template</h2>
 <p>To get data from the database, the Disco Engine converts definitions into valid SQL. The key insight here is that any first-order predicate (<a href="higher-order-widgets.html#higher-order-widgets">what’s first-order mean?</a>) can be represented in terms of a very basic SQL query, which we can turn into this all-purpose template:</p>
 <div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">select</span> <span class="kw">distinct</span> ID_FIELD <span class="kw">as</span> ID_TYPE
 <span class="kw">from</span> TABLE_NAME
 <span class="kw">where</span> FIELD_NAME <span class="kw">in</span> (LIST_OF_VALUES)</code></pre></div>
-<p><em>Note: The actual implementation allows for a broader range of queries, but this captures the basic idea. To see the actual templates used, check out <a href="https://github.com/tarakc02/listbuilder/blob/master/R/templates.R">the source code in the listbuilder package</a></em></p>
+<p><em>Note: The actual implementation allows for a broader range of queries, but this captures the basic idea. To see the actual templates used, check out <a href="https://github.com/cwolfsonseeley/listbuilder/blob/master/R/templates.R">the source code in the listbuilder package</a></em></p>
 <p>There are a number of R packages that allow you to be able to construct templates this way and populate them with R objects. <code>discoveryengine</code> uses the <a href="https://cran.r-project.org/web/packages/whisker/index.html">whisker package</a>, but for this simplified example, I’ll use <code>getcdw::parameterize_template</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(getcdw)
 generate_query &lt;-<span class="st"> </span><span class="kw">parameterize_template</span>(<span class="st">&quot;</span>
@@ -380,7 +380,7 @@ is_constituent =<span class="st"> </span><span class="kw">has_affiliation</span>
 ##  9    999094
 ## 10     40881
 ## # ... with 2,671 more rows</code></pre>
-<p><em>Note that the actual package is a little bit more careful about how it does things here, by using the <a href="https://cran.r-project.org/web/packages/lazyeval/index.html">lazyeval package</a>. To see the actual code used in the Disco Engine, check out <code>prep_dots</code> and <code>partial_sub</code> in <a href="https://github.com/tarakc02/discoveryengine/blob/master/R/helper-utils.R">this discoveryengine source code file</a></em></p>
+<p><em>Note that the actual package is a little bit more careful about how it does things here, by using the <a href="https://cran.r-project.org/web/packages/lazyeval/index.html">lazyeval package</a>. To see the actual code used in the Disco Engine, check out <code>prep_dots</code> and <code>partial_sub</code> in <a href="https://github.com/cwolfsonseeley/discoveryengine/blob/master/R/helper-utils.R">this discoveryengine source code file</a></em></p>
 </div>
 <div id="combining-simple-definitions" class="section level2">
 <h2><span class="header-section-number">C.4</span> Combining simple definitions</h2>
@@ -576,7 +576,7 @@ engineering_constituency_<span class="dv">2</span> =<span class="st"> </span>
 </div>
 <div id="for-further-study" class="section level2">
 <h2><span class="header-section-number">C.7</span> For further study</h2>
-<p>If you’ve made it this far, you should have a pretty solid understanding of the basic functioning of the Discovery Engine. We did not cover some core features, in particular <a href="working-with-widgets.html#synonym-search">code lookup (aka synonym search)</a>, <a href="higher-order-widgets.html#higher-order-widgets">higher order widgets</a>, and the bots – the <a href="brainstorm-bot.html#brainstorm-bot">brainstorm bot</a> and the <a href="matrix-bot.html#matrix-bot">matrix bot</a>. But armed with the knowledge you do have, you can explore <a href="https://github.com/tarakc02/discoveryengine">the source code</a> and see how everything else works. Feel free to <a href="mailto:tarak_shah@berkeley.edu">reach out to Tarak via email</a> if you have any questions.</p>
+<p>If you’ve made it this far, you should have a pretty solid understanding of the basic functioning of the Discovery Engine. We did not cover some core features, in particular <a href="working-with-widgets.html#synonym-search">code lookup (aka synonym search)</a>, <a href="higher-order-widgets.html#higher-order-widgets">higher order widgets</a>, and the bots – the <a href="brainstorm-bot.html#brainstorm-bot">brainstorm bot</a> and the <a href="matrix-bot.html#matrix-bot">matrix bot</a>. But armed with the knowledge you do have, you can explore <a href="https://github.com/cwolfsonseeley/discoveryengine">the source code</a> and see how everything else works. Feel free to <a href="mailto:tarak_shah@berkeley.edu">reach out to Tarak via email</a> if you have any questions.</p>
 
 </div>
 </div>
@@ -606,7 +606,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/tarakc02/discodocs/edit/master/99-how-does-it-work.Rmd",
+"link": "https://github.com/cwolfsonseeley/discodocs/edit/master/99-how-does-it-work.Rmd",
 "text": "Edit"
 },
 "download": null,
