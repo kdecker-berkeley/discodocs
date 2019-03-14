@@ -16,8 +16,8 @@ If you haven't completed all of those items, head over to section \@ref(test_cdw
 Ok, so if you've got `getcdw` working properly, that means you've already installed `devtools`. All that's left is to install `listbuilder` and `discoveryengine` packages:
 
 ```{r install_disco, eval = FALSE}
-devtools::install_github("tarakc02/listbuilder")
-devtools::install_github("tarakc02/discoveryengine")
+devtools::install_github("cwolfsonseeley/listbuilder")
+devtools::install_github("cwolfsonseeley/discoveryengine")
 ```
 
 ## A disco test
