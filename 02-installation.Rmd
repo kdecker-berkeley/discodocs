@@ -1,0 +1,38 @@
+# Installation {#installation}
+
+In order to use the discoveryengine, you'll have to install it. And in order to successfully install the discoveryengine, you'll have to install a few other packages, too. The video in section \@ref(r_intro) showed you how to install new packages both by typing install commands into the console, or by using RStudio's "Packages" pane. Here, we'll go through the installation step-by-step by typing out the install commands (copying and pasting is a good way to avoid frustrating typos!).
+
+Note that installation can sometimes be a pain. But once you've gotten through the process successfully, you won't have to deal with it again! 
+
+## Required packages
+
+At this point, you should have already: 
+- tested your CDW connection
+- installed `getcdw`
+- run a test query
+
+If you haven't completed all of those items, head over to section \@ref(test_cdw) and complete those steps, and then return here.
+
+Ok, so if you've got `getcdw` working properly, that means you've already installed `devtools`. All that's left is to install `listbuilder` and `discoveryengine` packages:
+
+```{r install_disco, eval = FALSE}
+devtools::install_github("tarakc02/listbuilder")
+devtools::install_github("tarakc02/discoveryengine")
+```
+
+## A disco test
+
+In order to make sure everything is working properly, we'll run a quick disco test:
+
+```{r disco_test}
+# you'll always load the discoveryengine package before doing anythying else
+library(discoveryengine)
+# make sure we can create a disco definition
+high_cap = has_capacity(1)
+# make sure that things print properly
+high_cap
+# make sure we can send the defintion to the data warehouse
+display(high_cap)
+```
+
+If you got this far without any problems, then congrats! You are a disco dancer!
