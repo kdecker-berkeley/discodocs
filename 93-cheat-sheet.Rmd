@@ -1,6 +1,6 @@
 # Cheat Sheet {#cheat-sheet}
 
-If you're looking for help installing the discovery engine, head over to the [installation guide](#installation). If you've previously installed the discovery engine, but need to update to the latest version, check the [instructions for updating](#updating).
+If you're looking for help installing the discovery engine, head over to the [installation guide](https://cwolfsonseeley.github.io/discodocs/installation.html). If you've previously installed the discovery engine, but need to update to the latest version, check the [instructions for updating](https://cwolfsonseeley.github.io/discodocs/updating.html).
 
 ## General
 
