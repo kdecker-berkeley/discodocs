@@ -12,25 +12,25 @@ First, let's make sure your connection works. You'll need the user name and pass
 `r knitr::include_graphics("images/syswow64.png")`
 </p></center>
 
-2) You'll now have the ODBC Data Source Administrator open. Click the "System DSN" tab and then click the "Add.." button.
+2) You'll now have the ODBC Data Source Administrator open. Click the "User DSN" tab and then click the "Add.." button.
 
 <p><center>
 `r knitr::include_graphics("images/odbc.png")`
 </p></center>
 
-3) Scroll down to close to the bottom of the list of drivers. There you'll find "Oracle in instantclient_11_2". Double click this.
+3) Scroll down to close to the bottom of the list of drivers. There you'll find "Oracle in instantclient_12_2". Double click this.
 
 <p><center>
 `r knitr::include_graphics("images/oracle.png")`
 </p></center>
 
-4) You'll now be in a window that asks you for some information to configure this driver. Fill out the Data Source Name as "URELUAT" and find "URELUAT" in the dropdown menu for TNS Service Name. Enter your user name (the one given to you by Nancy, which is probably the same as your CalNet ID) as the User ID. Click "Test Connection".
+4) You'll now be in a window that asks you for some information to configure this driver. Fill out the Data Source Name as "URELUAT" and find "URELUAT" in the dropdown menu for TNS Service Name. Enter your user name (the one given to you by IST, which is probably the same as your CalNet ID) as the User ID. Click "Test Connection".
 
 <p><center>
 `r knitr::include_graphics("images/configuration.png")`
 </p></center>
 
-5) Enter your password (given to you by Nancy) in the Password field. Click "OK".
+5) Enter your password (given to you by IST) in the Password field. Click "OK".
 
 <p><center>
 `r knitr::include_graphics("images/test.png")`
@@ -88,25 +88,25 @@ get_cdw("select * from dual")
 
 When you do this for the first time, you will be prompted for *three* pieces of information:
 
-1) Your "UID": This is your username to log-in to the database. Unless you were told otherwise, this should be the same as your CalNet ID
+1) Your "UID": This is your username to log-in to the database. Unless you were told otherwise, this should be the same as your CalNet ID.
 
 <p><center>
 `r knitr::include_graphics("images/UID.png")`
 </center></p>
 
-2) Your "PWD": This is the password to log-in to the database. You will have received the password via phone call, and it looks like a long random set of characters, numbers, and other symbols:
+2) Your "PWD": This is the password to log-in to the database. You will have received the password from IST and may be a random string of letters and numbers.
 
 <p><center>
 `r knitr::include_graphics("images/PWD.png")`
 </center></p>
 
-3) Finally, you'll be prompted for a "secret passphrase." The database password is long and confusing and impossible to remember, which encourages most of us to write it down somewhere and keep it near the computer, which is insecure! So instead getcdw allows you to pick your own secret passphrase (this can be anything, from a single word to a memorable sentence, or whatever you think is easy for you to remember but not easy for someone else to guess).
+3) Finally, you'll be prompted for a "secret passphrase." Instead of having you remember the password given to you by IST, getcdw allows you to pick your own secret passphrase (this can be anything, from a single word to a memorable sentence, or whatever you think is easy for you to remember but not easy for someone else to guess).
 
 <p><center>
 `r knitr::include_graphics("images/passphrase.png")`
 </center></p>
 
-After this step, you will only ever be required to enter your secret passphrase -- you will no longer be prompted for your database UID or PWD.
+After this step, you will only ever be required to enter your secret passphrase -- you will no longer be prompted for your database UID or PWD. (But you can always reset them if necessary, using reset_credentials(dsn = "URELUAT").)
 
 If everything is working properly, you should see something like this:
 

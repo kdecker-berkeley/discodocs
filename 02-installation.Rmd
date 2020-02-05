@@ -1,24 +1,58 @@
 # Installation {#installation}
 
-In order to use the discoveryengine, you'll have to install it. And in order to successfully install the discoveryengine, you'll have to install a few other packages, too. The video in section \@ref(r_intro) showed you how to install new packages both by typing install commands into the console, or by using RStudio's "Packages" pane. Here, we'll go through the installation step-by-step by typing out the install commands (copying and pasting is a good way to avoid frustrating typos!).
+Discoveryengine (and all packages we use in Prospect Developmemt) is installed on the R drive. The most important step to make sure you can access these packages is to set up your default library path to the shared packages repository.
 
-Note that installation can sometimes be a pain. But once you've gotten through the process successfully, you won't have to deal with it again! 
+Run a quick test to see your current library path:
 
-## Required packages
+```{r library_path, eval = FALSE}
+.libPaths()
+```
+
+The first result returned shoud be "R:/Prospect Development/Prospect Analysis/pd-shared-r-packages". If it's not, follow the steps below to change your default library path.
+
+Step 1: Open a new RStudio session and run the following script:
+
+```{r set_up_renviron, eval = FALSE}
+# the first part sets up the new package directory
+package_dir <- "R:/Prospect Development/Prospect Analysis/pd-shared-r-packages"
+if (!dir.exists(package_dir)) dir.create(package_dir, recursive = TRUE)
+
+# then make a configuration file that notifies R of the new package directory
+# change [username] to your actual username in your P drive - usually LastNameFirstInitial
+env_file <- "P:/[username]/.Renviron"
+if (!file.exists(env_file)) file.create(env_file)
+
+# and add the new location to the configuration file
+cat("\nR_LIBS_USER='", package_dir, "'", 
+    sep = "", file = env_file, append = TRUE)
+```
+
+Step 2:
+
+Find the newly created .Renviron file. It will be in your P drive. 
+
+Step 3: 
+
+Move the .Renviron file to your Documents folder. This should be located in D:\\Users\\[username]\\Documents. Simply drag and drop.
+
+Step 4:
+
+Quit your current RStudio session and open a new one. Try running the following test again:
+
+```{r library_path, eval = FALSE}
+.libPaths()
+```
+
+If the PD shared packages depository is returned, you are ready to start using Disco Engine. If not, contact the Analytics Team to troubleshoot your situation.
+
+## Before you continue
 
 At this point, you should have already: 
 - tested your CDW connection
 - installed `getcdw`
 - run a test query
 
-If you haven't completed all of those items, head over to section \@ref(test_cdw) and complete those steps, and then return here.
-
-Ok, so if you've got `getcdw` working properly, that means you've already installed `devtools`. All that's left is to install `listbuilder` and `discoveryengine` packages:
-
-```{r install_disco, eval = FALSE}
-devtools::install_github("cwolfsonseeley/listbuilder")
-devtools::install_github("cwolfsonseeley/discoveryengine")
-```
+If you haven't completed all of those items, head over to section [Test CDW](#test-cdw) and complete those steps, and then return here.
 
 ## A disco test
 
