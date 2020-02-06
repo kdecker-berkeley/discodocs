@@ -5,19 +5,19 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Documentation for the discoveryengine</title>
+  <title>B Cheat Sheet | Documentation for the discoveryengine</title>
   <meta name="description" content="Some documentation for the discoveryengine">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Documentation for the discoveryengine" />
+  <meta property="og:title" content="B Cheat Sheet | Documentation for the discoveryengine" />
   <meta property="og:type" content="book" />
   
   
   <meta property="og:description" content="Some documentation for the discoveryengine" />
-  <meta name="github-repo" content="cwolfsonseeley/discodocs" />
+  <meta name="github-repo" content="tarakc02/discodocs" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Documentation for the discoveryengine" />
+  <meta name="twitter:title" content="B Cheat Sheet | Documentation for the discoveryengine" />
   
   <meta name="twitter:description" content="Some documentation for the discoveryengine" />
   
@@ -34,6 +34,7 @@
 <link rel="next" href="how-it-works.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -48,41 +49,67 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -112,7 +139,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="3" data-path="r-intro.html"><a href="r-intro.html"><i class="fa fa-check"></i><b>3</b> Introduction to R and RStudio</a></li>
 <li class="chapter" data-level="4" data-path="installation.html"><a href="installation.html"><i class="fa fa-check"></i><b>4</b> Installation</a><ul>
-<li class="chapter" data-level="4.1" data-path="installation.html"><a href="installation.html#required-packages"><i class="fa fa-check"></i><b>4.1</b> Required packages</a></li>
+<li class="chapter" data-level="4.1" data-path="installation.html"><a href="installation.html#before-you-continue"><i class="fa fa-check"></i><b>4.1</b> Before you continue</a></li>
 <li class="chapter" data-level="4.2" data-path="installation.html"><a href="installation.html#a-disco-test"><i class="fa fa-check"></i><b>4.2</b> A disco test</a></li>
 </ul></li>
 <li class="part"><span><b>II Basics</b></span></li>
@@ -224,7 +251,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="C.2" data-path="how-it-works.html"><a href="how-it-works.html#a-template-as-a-data-structure"><i class="fa fa-check"></i><b>C.2</b> A template as a data structure</a></li>
 <li class="chapter" data-level="C.3" data-path="how-it-works.html"><a href="how-it-works.html#non-standard-evaluation"><i class="fa fa-check"></i><b>C.3</b> Non-standard evaluation</a></li>
 <li class="chapter" data-level="C.4" data-path="how-it-works.html"><a href="how-it-works.html#combining-simple-definitions"><i class="fa fa-check"></i><b>C.4</b> Combining simple definitions</a><ul>
-<li class="chapter" data-level="C.4.1" data-path="how-it-works.html"><a href="how-it-works.html#atomic-vs.-complex-definitions"><i class="fa fa-check"></i><b>C.4.1</b> “Atomic” vs. “Complex” definitions</a></li>
+<li class="chapter" data-level="C.4.1" data-path="how-it-works.html"><a href="how-it-works.html#atomic-vs.-complex-definitions"><i class="fa fa-check"></i><b>C.4.1</b> “Atomic” vs. “Complex” definitions</a></li>
 <li class="chapter" data-level="C.4.2" data-path="how-it-works.html"><a href="how-it-works.html#operations-on-definitions"><i class="fa fa-check"></i><b>C.4.2</b> Operations on definitions</a></li>
 </ul></li>
 <li class="chapter" data-level="C.5" data-path="how-it-works.html"><a href="how-it-works.html#re-visiting-to_sql"><i class="fa fa-check"></i><b>C.5</b> Re-visiting <code>to_sql</code></a></li>
@@ -253,16 +280,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="cheat-sheet" class="section level1">
 <h1><span class="header-section-number">B</span> Cheat Sheet</h1>
-<p>If you’re looking for help installing the discovery engine, head over to the <a href="installation.html">installation guide</a>.</p>
+<p>If you’re looking for help installing the discovery engine, head over to the <a href="https://cwolfsonseeley.github.io/discodocs/installation.html">installation guide</a>. If you’ve previously installed the discovery engine, but need to update to the latest version, check the <a href="https://cwolfsonseeley.github.io/discodocs/updating.html">instructions for updating</a>.</p>
 <div id="general" class="section level2">
 <h2><span class="header-section-number">B.1</span> General</h2>
 <ul>
 <li>Always start a session with <code>library(discoveryengine)</code></li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(discoveryengine)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(discoveryengine)</code></pre>
 <ul>
 <li>Use <code>show_widgets()</code> for help <a href="working-with-widgets.html#working-with-finding-widgets">finding the right widget</a>.</li>
-<li>When in doubt, use the <a href="brainstorm-bot.html#brainstorm-bot">brainstorm bot</a>. For instance if you are looking for people who played on the basketball team, type <code>brainstorm_bot(&quot;basketball&quot;)</code></li>
+<li>When in doubt, use the <a href="brainstorm-bot.html#brainstorm-bot">brainstorm bot</a>. For instance if you are looking for people who played on the basketball team, type <code>brainstorm_bot("basketball")</code></li>
 <li>Multiple widgets <a href="combining-widgets.html#combining-widgets">can be combined</a> using the operators <code>%and%</code>, <code>%or%</code>, or <code>%but_not%</code>.</li>
 <li>Be aware of the <a href="add-on-packages.html#add-on-packages">add-on packages</a> for outputting additional data and improving your disco engine experience.</li>
 <li>Use the documentation. For instance, type <code>?has_affiliation</code> to understand how to use the <code>has_affiliation</code> widget.</li>
@@ -271,28 +298,28 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="output" class="section level2">
 <h2><span class="header-section-number">B.2</span> Output</h2>
 <p>Use <code>display</code> for output. Recall that you can use the equals sign <code>=</code> to assign names to your disco engine definitions, to make it easier to refer to them when <code>display</code>ing or doing other operations:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">basketball_player =<span class="st"> </span><span class="kw">played_sport</span>(basketball_men, basketball_women)
-<span class="kw">display</span>(basketball_player)</code></pre></div>
-<pre><code>## # A tibble: 476 x 1
+<pre class="sourceCode r"><code class="sourceCode r">basketball_player =<span class="st"> </span><span class="kw">played_sport</span>(basketball_men, basketball_women)
+<span class="kw">display</span>(basketball_player)</code></pre>
+<pre><code>## # A tibble: 489 x 1
 ##    entity_id
 ##        &lt;dbl&gt;
 ##  1       370
-##  2      1429
-##  3      1495
-##  4      3615
-##  5      4425
-##  6      5946
-##  7      6412
-##  8      6882
-##  9      7539
-## 10      8283
-## # ... with 466 more rows</code></pre>
-<p>If instead of just viewing IDs on the screen, you’d like to export them (perhaps to use in a CADS savedlist), just add a filename: <code>display(basketball_player, file = &quot;basketball-players&quot;)</code> and a file called “basketball-players.csv” will appear in your working directory. <em>Note that the exported file has a header, so when you upload it to an Advance savedlist, make sure to check the “First row is a header” box.</em></p>
+##  2      1495
+##  3      3615
+##  4      4425
+##  5      5946
+##  6      6412
+##  7      6882
+##  8      7539
+##  9      8283
+## 10      8328
+## # … with 479 more rows</code></pre>
+<p>If instead of just viewing IDs on the screen, you’d like to export them (perhaps to use in a CADS savedlist), just add a filename: <code>display(basketball_player, file = "basketball-players")</code> and a file called “basketball-players.csv” will appear in your working directory. <em>Note that the exported file has a header, so when you upload it to an Advance savedlist, make sure to check the “First row is a header” box.</em></p>
 </div>
 <div id="code-lookup" class="section level2">
 <h2><span class="header-section-number">B.3</span> Code lookup</h2>
 <p>Most widgets rely on the coding found in CADS for their input, but you probably haven’t memorized all of the codes! By using a question-mark inside of a widget, you can do look-ups on the fly:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">gave_to_department</span>(?band)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">gave_to_department</span>(?band)</code></pre>
 <pre><code>## Regular codes and synonyms:
 ##   synonym    code
 ##  cal_band CALBAND
@@ -306,9 +333,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2><span class="header-section-number">B.4</span> Text search</h2>
 <p>Though most widgets rely on codes from CADS as inputs, some utilize text search. Just like the <code>brainstorm_bot</code>, which is also based on text search, these widgets require you to use quotation marks around the search term(s). Here are some examples:</p>
 <ul>
-<li><code>contact_text_contains(&quot;neuro*&quot;, &quot;brain&quot;)</code></li>
-<li><code>fund_text_contains(&quot;diversity&quot;)</code></li>
-<li><code>research_miner(&quot;underrepresented&quot;)</code></li>
+<li><code>contact_text_contains("neuro*", "brain")</code></li>
+<li><code>fund_text_contains("diversity")</code></li>
+<li><code>research_miner("underrepresented")</code></li>
 </ul>
 <p><strong>Note:</strong> The <code>brainstorm_bot</code> will help you find things through the code tables, but it will not do big text searches of things like contact reports, fund biographies/terms, and research profiles. For that kind of specialized search, you should use these text search based widgets.</p>
 </div>
@@ -346,6 +373,10 @@ gitbook.start({
 "edit": {
 "link": "https://github.com/cwolfsonseeley/discodocs/edit/master/93-cheat-sheet.Rmd",
 "text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
 },
 "download": null,
 "toc": {

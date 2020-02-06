@@ -5,19 +5,19 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Documentation for the discoveryengine</title>
+  <title>20 Utilizing CA campaign finance data | Documentation for the discoveryengine</title>
   <meta name="description" content="Some documentation for the discoveryengine">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Documentation for the discoveryengine" />
+  <meta property="og:title" content="20 Utilizing CA campaign finance data | Documentation for the discoveryengine" />
   <meta property="og:type" content="book" />
   
   
   <meta property="og:description" content="Some documentation for the discoveryengine" />
-  <meta name="github-repo" content="cwolfsonseeley/discodocs" />
+  <meta name="github-repo" content="tarakc02/discodocs" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Documentation for the discoveryengine" />
+  <meta name="twitter:title" content="20 Utilizing CA campaign finance data | Documentation for the discoveryengine" />
   
   <meta name="twitter:description" content="Some documentation for the discoveryengine" />
   
@@ -34,6 +34,7 @@
 <link rel="next" href="ex-academic.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -48,41 +49,67 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -111,96 +138,100 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.2" data-path="what-is-disco.html"><a href="what-is-disco.html#facilitating-discovery"><i class="fa fa-check"></i><b>2.2</b> Facilitating discovery</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="r-intro.html"><a href="r-intro.html"><i class="fa fa-check"></i><b>3</b> Introduction to R and RStudio</a></li>
+<li class="chapter" data-level="4" data-path="installation.html"><a href="installation.html"><i class="fa fa-check"></i><b>4</b> Installation</a><ul>
+<li class="chapter" data-level="4.1" data-path="installation.html"><a href="installation.html#before-you-continue"><i class="fa fa-check"></i><b>4.1</b> Before you continue</a></li>
+<li class="chapter" data-level="4.2" data-path="installation.html"><a href="installation.html#a-disco-test"><i class="fa fa-check"></i><b>4.2</b> A disco test</a></li>
+</ul></li>
 <li class="part"><span><b>II Basics</b></span></li>
-<li class="chapter" data-level="4" data-path="intro-example.html"><a href="intro-example.html"><i class="fa fa-check"></i><b>4</b> An introductory example</a><ul>
-<li class="chapter" data-level="4.1" data-path="intro-example.html"><a href="intro-example.html#develop-a-strategy"><i class="fa fa-check"></i><b>4.1</b> Develop a strategy</a></li>
-<li class="chapter" data-level="4.2" data-path="intro-example.html"><a href="intro-example.html#intro-example-create-def"><i class="fa fa-check"></i><b>4.2</b> Create the definition</a></li>
-<li class="chapter" data-level="4.3" data-path="intro-example.html"><a href="intro-example.html#send-the-definition-to-the-cdw"><i class="fa fa-check"></i><b>4.3</b> Send the definition to the CDW</a></li>
+<li class="chapter" data-level="5" data-path="intro-example.html"><a href="intro-example.html"><i class="fa fa-check"></i><b>5</b> An introductory example</a><ul>
+<li class="chapter" data-level="5.1" data-path="intro-example.html"><a href="intro-example.html#develop-a-strategy"><i class="fa fa-check"></i><b>5.1</b> Develop a strategy</a></li>
+<li class="chapter" data-level="5.2" data-path="intro-example.html"><a href="intro-example.html#intro-example-create-def"><i class="fa fa-check"></i><b>5.2</b> Create the definition</a></li>
+<li class="chapter" data-level="5.3" data-path="intro-example.html"><a href="intro-example.html#send-the-definition-to-the-cdw"><i class="fa fa-check"></i><b>5.3</b> Send the definition to the CDW</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="working-with-widgets.html"><a href="working-with-widgets.html"><i class="fa fa-check"></i><b>5</b> Working with widgets</a><ul>
-<li class="chapter" data-level="5.1" data-path="working-with-widgets.html"><a href="working-with-widgets.html#working-with-finding-widgets"><i class="fa fa-check"></i><b>5.1</b> Finding widgets</a></li>
-<li class="chapter" data-level="5.2" data-path="working-with-widgets.html"><a href="working-with-widgets.html#working-with-autocomplete"><i class="fa fa-check"></i><b>5.2</b> Leveraging autocomplete</a></li>
-<li class="chapter" data-level="5.3" data-path="working-with-widgets.html"><a href="working-with-widgets.html#working-with-codes-synonyms"><i class="fa fa-check"></i><b>5.3</b> Codes and synonyms</a></li>
-<li class="chapter" data-level="5.4" data-path="working-with-widgets.html"><a href="working-with-widgets.html#synonym-search"><i class="fa fa-check"></i><b>5.4</b> Synonym search</a></li>
-<li class="chapter" data-level="5.5" data-path="working-with-widgets.html"><a href="working-with-widgets.html#use-defaults"><i class="fa fa-check"></i><b>5.5</b> Use the default cases</a></li>
-<li class="chapter" data-level="5.6" data-path="working-with-widgets.html"><a href="working-with-widgets.html#widget-not-operator"><i class="fa fa-check"></i><b>5.6</b> The <code>not()</code> operator</a></li>
-<li class="chapter" data-level="5.7" data-path="working-with-widgets.html"><a href="working-with-widgets.html#detailed-controls"><i class="fa fa-check"></i><b>5.7</b> Detailed controls</a></li>
+<li class="chapter" data-level="6" data-path="working-with-widgets.html"><a href="working-with-widgets.html"><i class="fa fa-check"></i><b>6</b> Working with widgets</a><ul>
+<li class="chapter" data-level="6.1" data-path="working-with-widgets.html"><a href="working-with-widgets.html#working-with-finding-widgets"><i class="fa fa-check"></i><b>6.1</b> Finding widgets</a></li>
+<li class="chapter" data-level="6.2" data-path="working-with-widgets.html"><a href="working-with-widgets.html#working-with-autocomplete"><i class="fa fa-check"></i><b>6.2</b> Leveraging autocomplete</a></li>
+<li class="chapter" data-level="6.3" data-path="working-with-widgets.html"><a href="working-with-widgets.html#working-with-codes-synonyms"><i class="fa fa-check"></i><b>6.3</b> Codes and synonyms</a></li>
+<li class="chapter" data-level="6.4" data-path="working-with-widgets.html"><a href="working-with-widgets.html#synonym-search"><i class="fa fa-check"></i><b>6.4</b> Synonym search</a></li>
+<li class="chapter" data-level="6.5" data-path="working-with-widgets.html"><a href="working-with-widgets.html#use-defaults"><i class="fa fa-check"></i><b>6.5</b> Use the default cases</a></li>
+<li class="chapter" data-level="6.6" data-path="working-with-widgets.html"><a href="working-with-widgets.html#widget-not-operator"><i class="fa fa-check"></i><b>6.6</b> The <code>not()</code> operator</a></li>
+<li class="chapter" data-level="6.7" data-path="working-with-widgets.html"><a href="working-with-widgets.html#detailed-controls"><i class="fa fa-check"></i><b>6.7</b> Detailed controls</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="combining-widgets.html"><a href="combining-widgets.html"><i class="fa fa-check"></i><b>6</b> Combining widgets</a><ul>
-<li class="chapter" data-level="6.1" data-path="combining-widgets.html"><a href="combining-widgets.html#example"><i class="fa fa-check"></i><b>6.1</b> Example</a></li>
+<li class="chapter" data-level="7" data-path="combining-widgets.html"><a href="combining-widgets.html"><i class="fa fa-check"></i><b>7</b> Combining widgets</a><ul>
+<li class="chapter" data-level="7.1" data-path="combining-widgets.html"><a href="combining-widgets.html#example"><i class="fa fa-check"></i><b>7.1</b> Example</a></li>
 </ul></li>
 <li class="part"><span><b>III Bots</b></span></li>
-<li class="chapter" data-level="7" data-path="brainstorm-bot.html"><a href="brainstorm-bot.html"><i class="fa fa-check"></i><b>7</b> The Brainstorm Bot</a><ul>
-<li class="chapter" data-level="7.1" data-path="brainstorm-bot.html"><a href="brainstorm-bot.html#search-features"><i class="fa fa-check"></i><b>7.1</b> Search features</a></li>
+<li class="chapter" data-level="8" data-path="brainstorm-bot.html"><a href="brainstorm-bot.html"><i class="fa fa-check"></i><b>8</b> The Brainstorm Bot</a><ul>
+<li class="chapter" data-level="8.1" data-path="brainstorm-bot.html"><a href="brainstorm-bot.html#search-features"><i class="fa fa-check"></i><b>8.1</b> Search features</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="matrix-bot.html"><a href="matrix-bot.html"><i class="fa fa-check"></i><b>8</b> The Matrix Bot</a><ul>
-<li class="chapter" data-level="8.1" data-path="matrix-bot.html"><a href="matrix-bot.html#introduction"><i class="fa fa-check"></i><b>8.1</b> Introduction</a></li>
-<li class="chapter" data-level="8.2" data-path="matrix-bot.html"><a href="matrix-bot.html#what-it-is"><i class="fa fa-check"></i><b>8.2</b> What it is</a></li>
-<li class="chapter" data-level="8.3" data-path="matrix-bot.html"><a href="matrix-bot.html#example-1"><i class="fa fa-check"></i><b>8.3</b> Example</a></li>
-<li class="chapter" data-level="8.4" data-path="matrix-bot.html"><a href="matrix-bot.html#botstrapping"><i class="fa fa-check"></i><b>8.4</b> Botstrapping</a></li>
-<li class="chapter" data-level="8.5" data-path="matrix-bot.html"><a href="matrix-bot.html#how-does-it-work"><i class="fa fa-check"></i><b>8.5</b> How does it work?</a></li>
+<li class="chapter" data-level="9" data-path="matrix-bot.html"><a href="matrix-bot.html"><i class="fa fa-check"></i><b>9</b> The Matrix Bot</a><ul>
+<li class="chapter" data-level="9.1" data-path="matrix-bot.html"><a href="matrix-bot.html#introduction"><i class="fa fa-check"></i><b>9.1</b> Introduction</a></li>
+<li class="chapter" data-level="9.2" data-path="matrix-bot.html"><a href="matrix-bot.html#what-it-is"><i class="fa fa-check"></i><b>9.2</b> What it is</a></li>
+<li class="chapter" data-level="9.3" data-path="matrix-bot.html"><a href="matrix-bot.html#example-1"><i class="fa fa-check"></i><b>9.3</b> Example</a></li>
+<li class="chapter" data-level="9.4" data-path="matrix-bot.html"><a href="matrix-bot.html#botstrapping"><i class="fa fa-check"></i><b>9.4</b> Botstrapping</a></li>
+<li class="chapter" data-level="9.5" data-path="matrix-bot.html"><a href="matrix-bot.html#how-does-it-work"><i class="fa fa-check"></i><b>9.5</b> How does it work?</a></li>
 </ul></li>
 <li class="part"><span><b>IV Advanced</b></span></li>
-<li class="chapter" data-level="9" data-path="higher-order-widgets.html"><a href="higher-order-widgets.html"><i class="fa fa-check"></i><b>9</b> Higher order widgets</a><ul>
-<li class="chapter" data-level="9.1" data-path="higher-order-widgets.html"><a href="higher-order-widgets.html#children-of-wealth"><i class="fa fa-check"></i><b>9.1</b> Children of wealth</a></li>
+<li class="chapter" data-level="10" data-path="higher-order-widgets.html"><a href="higher-order-widgets.html"><i class="fa fa-check"></i><b>10</b> Higher order widgets</a><ul>
+<li class="chapter" data-level="10.1" data-path="higher-order-widgets.html"><a href="higher-order-widgets.html#children-of-wealth"><i class="fa fa-check"></i><b>10.1</b> Children of wealth</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="non-entity-widgets.html"><a href="non-entity-widgets.html"><i class="fa fa-check"></i><b>10</b> Non-entity widgets</a><ul>
-<li class="chapter" data-level="10.1" data-path="non-entity-widgets.html"><a href="non-entity-widgets.html#motivation"><i class="fa fa-check"></i><b>10.1</b> Motivation</a></li>
-<li class="chapter" data-level="10.2" data-path="non-entity-widgets.html"><a href="non-entity-widgets.html#non-entity-disco-definition-types"><i class="fa fa-check"></i><b>10.2</b> Disco Definition Types</a></li>
-<li class="chapter" data-level="10.3" data-path="non-entity-widgets.html"><a href="non-entity-widgets.html#searching-fund-text"><i class="fa fa-check"></i><b>10.3</b> Searching fund text</a></li>
-<li class="chapter" data-level="10.4" data-path="non-entity-widgets.html"><a href="non-entity-widgets.html#from-funds-to-entities"><i class="fa fa-check"></i><b>10.4</b> From funds to entities</a></li>
-<li class="chapter" data-level="10.5" data-path="non-entity-widgets.html"><a href="non-entity-widgets.html#non-entity-converters"><i class="fa fa-check"></i><b>10.5</b> “Converters”</a></li>
+<li class="chapter" data-level="11" data-path="non-entity-widgets.html"><a href="non-entity-widgets.html"><i class="fa fa-check"></i><b>11</b> Non-entity widgets</a><ul>
+<li class="chapter" data-level="11.1" data-path="non-entity-widgets.html"><a href="non-entity-widgets.html#motivation"><i class="fa fa-check"></i><b>11.1</b> Motivation</a></li>
+<li class="chapter" data-level="11.2" data-path="non-entity-widgets.html"><a href="non-entity-widgets.html#non-entity-disco-definition-types"><i class="fa fa-check"></i><b>11.2</b> Disco Definition Types</a></li>
+<li class="chapter" data-level="11.3" data-path="non-entity-widgets.html"><a href="non-entity-widgets.html#searching-fund-text"><i class="fa fa-check"></i><b>11.3</b> Searching fund text</a></li>
+<li class="chapter" data-level="11.4" data-path="non-entity-widgets.html"><a href="non-entity-widgets.html#from-funds-to-entities"><i class="fa fa-check"></i><b>11.4</b> From funds to entities</a></li>
+<li class="chapter" data-level="11.5" data-path="non-entity-widgets.html"><a href="non-entity-widgets.html#non-entity-converters"><i class="fa fa-check"></i><b>11.5</b> “Converters”</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="optional-arguments.html"><a href="optional-arguments.html"><i class="fa fa-check"></i><b>11</b> Optional arguments</a><ul>
-<li class="chapter" data-level="11.1" data-path="optional-arguments.html"><a href="optional-arguments.html#opt-events"><i class="fa fa-check"></i><b>11.1</b> Event invitees and attendees</a></li>
-<li class="chapter" data-level="11.2" data-path="optional-arguments.html"><a href="optional-arguments.html#date-ranges"><i class="fa fa-check"></i><b>11.2</b> Date ranges</a></li>
-<li class="chapter" data-level="11.3" data-path="optional-arguments.html"><a href="optional-arguments.html#graduate-undergraduate-attendee"><i class="fa fa-check"></i><b>11.3</b> Graduate, undergraduate, attendee</a></li>
-<li class="chapter" data-level="11.4" data-path="optional-arguments.html"><a href="optional-arguments.html#workarounds-inactive-only"><i class="fa fa-check"></i><b>11.4</b> Workarounds: inactive only</a></li>
+<li class="chapter" data-level="12" data-path="optional-arguments.html"><a href="optional-arguments.html"><i class="fa fa-check"></i><b>12</b> Optional arguments</a><ul>
+<li class="chapter" data-level="12.1" data-path="optional-arguments.html"><a href="optional-arguments.html#opt-events"><i class="fa fa-check"></i><b>12.1</b> Event invitees and attendees</a></li>
+<li class="chapter" data-level="12.2" data-path="optional-arguments.html"><a href="optional-arguments.html#date-ranges"><i class="fa fa-check"></i><b>12.2</b> Date ranges</a></li>
+<li class="chapter" data-level="12.3" data-path="optional-arguments.html"><a href="optional-arguments.html#graduate-undergraduate-attendee"><i class="fa fa-check"></i><b>12.3</b> Graduate, undergraduate, attendee</a></li>
+<li class="chapter" data-level="12.4" data-path="optional-arguments.html"><a href="optional-arguments.html#workarounds-inactive-only"><i class="fa fa-check"></i><b>12.4</b> Workarounds: inactive only</a></li>
 </ul></li>
 <li class="part"><span><b>V Related tools</b></span></li>
-<li class="chapter" data-level="12" data-path="add-on-packages.html"><a href="add-on-packages.html"><i class="fa fa-check"></i><b>12</b> Add-on packages</a><ul>
-<li class="chapter" data-level="12.1" data-path="add-on-packages.html"><a href="add-on-packages.html#discoappend"><i class="fa fa-check"></i><b>12.1</b> <code>discoappend</code></a></li>
-<li class="chapter" data-level="12.2" data-path="add-on-packages.html"><a href="add-on-packages.html#discovcr"><i class="fa fa-check"></i><b>12.2</b> <code>discovcr</code></a></li>
-<li class="chapter" data-level="12.3" data-path="add-on-packages.html"><a href="add-on-packages.html#discoscape"><i class="fa fa-check"></i><b>12.3</b> <code>discoscape</code></a></li>
+<li class="chapter" data-level="13" data-path="add-on-packages.html"><a href="add-on-packages.html"><i class="fa fa-check"></i><b>13</b> Add-on packages</a><ul>
+<li class="chapter" data-level="13.1" data-path="add-on-packages.html"><a href="add-on-packages.html#discoappend"><i class="fa fa-check"></i><b>13.1</b> <code>discoappend</code></a></li>
+<li class="chapter" data-level="13.2" data-path="add-on-packages.html"><a href="add-on-packages.html#discovcr"><i class="fa fa-check"></i><b>13.2</b> <code>discovcr</code></a></li>
+<li class="chapter" data-level="13.3" data-path="add-on-packages.html"><a href="add-on-packages.html#discoscape"><i class="fa fa-check"></i><b>13.3</b> <code>discoscape</code></a></li>
 </ul></li>
 <li class="part"><span><b>VI Examples</b></span></li>
-<li class="chapter" data-level="13" data-path="ex-political-economy.html"><a href="ex-political-economy.html"><i class="fa fa-check"></i><b>13</b> Political economy list</a></li>
-<li class="chapter" data-level="14" data-path="ex-lybunt.html"><a href="ex-lybunt.html"><i class="fa fa-check"></i><b>14</b> LYBUNTs</a></li>
-<li class="chapter" data-level="15" data-path="ex-recent-band-parents.html"><a href="ex-recent-band-parents.html"><i class="fa fa-check"></i><b>15</b> Recent Band Parents</a><ul>
-<li class="chapter" data-level="15.1" data-path="ex-recent-band-parents.html"><a href="ex-recent-band-parents.html#recent-band-members"><i class="fa fa-check"></i><b>15.1</b> Recent band members</a></li>
-<li class="chapter" data-level="15.2" data-path="ex-recent-band-parents.html"><a href="ex-recent-band-parents.html#find-their-parents"><i class="fa fa-check"></i><b>15.2</b> Find their parents</a></li>
-<li class="chapter" data-level="15.3" data-path="ex-recent-band-parents.html"><a href="ex-recent-band-parents.html#who-live-close-enough"><i class="fa fa-check"></i><b>15.3</b> Who live close enough</a></li>
-<li class="chapter" data-level="15.4" data-path="ex-recent-band-parents.html"><a href="ex-recent-band-parents.html#how-many"><i class="fa fa-check"></i><b>15.4</b> How many?</a></li>
-<li class="chapter" data-level="15.5" data-path="ex-recent-band-parents.html"><a href="ex-recent-band-parents.html#householding"><i class="fa fa-check"></i><b>15.5</b> Householding</a></li>
+<li class="chapter" data-level="14" data-path="ex-political-economy.html"><a href="ex-political-economy.html"><i class="fa fa-check"></i><b>14</b> Political economy list</a></li>
+<li class="chapter" data-level="15" data-path="ex-lybunt.html"><a href="ex-lybunt.html"><i class="fa fa-check"></i><b>15</b> LYBUNTs</a></li>
+<li class="chapter" data-level="16" data-path="ex-recent-band-parents.html"><a href="ex-recent-band-parents.html"><i class="fa fa-check"></i><b>16</b> Recent Band Parents</a><ul>
+<li class="chapter" data-level="16.1" data-path="ex-recent-band-parents.html"><a href="ex-recent-band-parents.html#recent-band-members"><i class="fa fa-check"></i><b>16.1</b> Recent band members</a></li>
+<li class="chapter" data-level="16.2" data-path="ex-recent-band-parents.html"><a href="ex-recent-band-parents.html#find-their-parents"><i class="fa fa-check"></i><b>16.2</b> Find their parents</a></li>
+<li class="chapter" data-level="16.3" data-path="ex-recent-band-parents.html"><a href="ex-recent-band-parents.html#who-live-close-enough"><i class="fa fa-check"></i><b>16.3</b> Who live close enough</a></li>
+<li class="chapter" data-level="16.4" data-path="ex-recent-band-parents.html"><a href="ex-recent-band-parents.html#how-many"><i class="fa fa-check"></i><b>16.4</b> How many?</a></li>
+<li class="chapter" data-level="16.5" data-path="ex-recent-band-parents.html"><a href="ex-recent-band-parents.html#householding"><i class="fa fa-check"></i><b>16.5</b> Householding</a></li>
 </ul></li>
-<li class="chapter" data-level="16" data-path="ex-near-builder.html"><a href="ex-near-builder.html"><i class="fa fa-check"></i><b>16</b> Nearing Builder of Berkeley Status</a><ul>
-<li class="chapter" data-level="16.1" data-path="ex-near-builder.html"><a href="ex-near-builder.html#defining-close"><i class="fa fa-check"></i><b>16.1</b> Defining close</a></li>
-<li class="chapter" data-level="16.2" data-path="ex-near-builder.html"><a href="ex-near-builder.html#householding-1"><i class="fa fa-check"></i><b>16.2</b> Householding</a></li>
+<li class="chapter" data-level="17" data-path="ex-near-builder.html"><a href="ex-near-builder.html"><i class="fa fa-check"></i><b>17</b> Nearing Builder of Berkeley Status</a><ul>
+<li class="chapter" data-level="17.1" data-path="ex-near-builder.html"><a href="ex-near-builder.html#defining-close"><i class="fa fa-check"></i><b>17.1</b> Defining close</a></li>
+<li class="chapter" data-level="17.2" data-path="ex-near-builder.html"><a href="ex-near-builder.html#householding-1"><i class="fa fa-check"></i><b>17.2</b> Householding</a></li>
 </ul></li>
-<li class="chapter" data-level="17" data-path="ex-sim-donors.html"><a href="ex-sim-donors.html"><i class="fa fa-check"></i><b>17</b> Donors who aren’t degreeholders</a></li>
-<li class="chapter" data-level="18" data-path="ex-fec.html"><a href="ex-fec.html"><i class="fa fa-check"></i><b>18</b> Utilizing FEC disclosure data</a><ul>
-<li class="chapter" data-level="18.1" data-path="ex-fec.html"><a href="ex-fec.html#basics"><i class="fa fa-check"></i><b>18.1</b> Basics</a></li>
-<li class="chapter" data-level="18.2" data-path="ex-fec.html"><a href="ex-fec.html#example-engineering-prospects"><i class="fa fa-check"></i><b>18.2</b> Example: Engineering Prospects</a></li>
-<li class="chapter" data-level="18.3" data-path="ex-fec.html"><a href="ex-fec.html#example-environmental-interest"><i class="fa fa-check"></i><b>18.3</b> Example: Environmental Interest</a></li>
-<li class="chapter" data-level="18.4" data-path="ex-fec.html"><a href="ex-fec.html#bots"><i class="fa fa-check"></i><b>18.4</b> Bots</a></li>
+<li class="chapter" data-level="18" data-path="ex-sim-donors.html"><a href="ex-sim-donors.html"><i class="fa fa-check"></i><b>18</b> Donors who aren’t degreeholders</a></li>
+<li class="chapter" data-level="19" data-path="ex-fec.html"><a href="ex-fec.html"><i class="fa fa-check"></i><b>19</b> Utilizing FEC disclosure data</a><ul>
+<li class="chapter" data-level="19.1" data-path="ex-fec.html"><a href="ex-fec.html#basics"><i class="fa fa-check"></i><b>19.1</b> Basics</a></li>
+<li class="chapter" data-level="19.2" data-path="ex-fec.html"><a href="ex-fec.html#example-engineering-prospects"><i class="fa fa-check"></i><b>19.2</b> Example: Engineering Prospects</a></li>
+<li class="chapter" data-level="19.3" data-path="ex-fec.html"><a href="ex-fec.html#example-environmental-interest"><i class="fa fa-check"></i><b>19.3</b> Example: Environmental Interest</a></li>
+<li class="chapter" data-level="19.4" data-path="ex-fec.html"><a href="ex-fec.html#bots"><i class="fa fa-check"></i><b>19.4</b> Bots</a></li>
 </ul></li>
-<li class="chapter" data-level="19" data-path="ex-ca-campaign.html"><a href="ex-ca-campaign.html"><i class="fa fa-check"></i><b>19</b> Utilizing CA campaign finance data</a><ul>
-<li class="chapter" data-level="19.1" data-path="ex-ca-campaign.html"><a href="ex-ca-campaign.html#example-state-senate-and-assembly-candidates"><i class="fa fa-check"></i><b>19.1</b> Example: State Senate and Assembly candidates</a></li>
-<li class="chapter" data-level="19.2" data-path="ex-ca-campaign.html"><a href="ex-ca-campaign.html#propositions"><i class="fa fa-check"></i><b>19.2</b> Propositions</a></li>
+<li class="chapter" data-level="20" data-path="ex-ca-campaign.html"><a href="ex-ca-campaign.html"><i class="fa fa-check"></i><b>20</b> Utilizing CA campaign finance data</a><ul>
+<li class="chapter" data-level="20.1" data-path="ex-ca-campaign.html"><a href="ex-ca-campaign.html#example-state-senate-and-assembly-candidates"><i class="fa fa-check"></i><b>20.1</b> Example: State Senate and Assembly candidates</a></li>
+<li class="chapter" data-level="20.2" data-path="ex-ca-campaign.html"><a href="ex-ca-campaign.html#propositions"><i class="fa fa-check"></i><b>20.2</b> Propositions</a></li>
 </ul></li>
-<li class="chapter" data-level="20" data-path="ex-academic.html"><a href="ex-academic.html"><i class="fa fa-check"></i><b>20</b> Alumni and current students</a></li>
-<li class="chapter" data-level="21" data-path="ex-sec.html"><a href="ex-sec.html"><i class="fa fa-check"></i><b>21</b> Mining SEC filings</a><ul>
-<li class="chapter" data-level="21.1" data-path="ex-sec.html"><a href="ex-sec.html#basics-1"><i class="fa fa-check"></i><b>21.1</b> Basics</a></li>
-<li class="chapter" data-level="21.2" data-path="ex-sec.html"><a href="ex-sec.html#looking-for-companies"><i class="fa fa-check"></i><b>21.2</b> Looking for companies</a></li>
-<li class="chapter" data-level="21.3" data-path="ex-sec.html"><a href="ex-sec.html#specific-roles"><i class="fa fa-check"></i><b>21.3</b> Specific roles</a></li>
+<li class="chapter" data-level="21" data-path="ex-academic.html"><a href="ex-academic.html"><i class="fa fa-check"></i><b>21</b> Alumni and current students</a></li>
+<li class="chapter" data-level="22" data-path="ex-sec.html"><a href="ex-sec.html"><i class="fa fa-check"></i><b>22</b> Mining SEC filings</a><ul>
+<li class="chapter" data-level="22.1" data-path="ex-sec.html"><a href="ex-sec.html#basics-1"><i class="fa fa-check"></i><b>22.1</b> Basics</a></li>
+<li class="chapter" data-level="22.2" data-path="ex-sec.html"><a href="ex-sec.html#looking-for-companies"><i class="fa fa-check"></i><b>22.2</b> Looking for companies</a></li>
+<li class="chapter" data-level="22.3" data-path="ex-sec.html"><a href="ex-sec.html#specific-roles"><i class="fa fa-check"></i><b>22.3</b> Specific roles</a></li>
 </ul></li>
-<li class="chapter" data-level="22" data-path="ex-mba-dual.html"><a href="ex-mba-dual.html"><i class="fa fa-check"></i><b>22</b> Finding dual-degree holders</a><ul>
-<li class="chapter" data-level="22.1" data-path="ex-mba-dual.html"><a href="ex-mba-dual.html#why-not-but_not"><i class="fa fa-check"></i><b>22.1</b> Why not <code>%but_not%</code>?</a></li>
+<li class="chapter" data-level="23" data-path="ex-mba-dual.html"><a href="ex-mba-dual.html"><i class="fa fa-check"></i><b>23</b> Finding dual-degree holders</a><ul>
+<li class="chapter" data-level="23.1" data-path="ex-mba-dual.html"><a href="ex-mba-dual.html#why-not-but_not"><i class="fa fa-check"></i><b>23.1</b> Why not <code>%but_not%</code>?</a></li>
 </ul></li>
-<li class="chapter" data-level="23" data-path="ex-moves-management.html"><a href="ex-moves-management.html"><i class="fa fa-check"></i><b>23</b> Moves Management</a><ul>
-<li class="chapter" data-level="23.1" data-path="ex-moves-management.html"><a href="ex-moves-management.html#basics-2"><i class="fa fa-check"></i><b>23.1</b> Basics</a></li>
-<li class="chapter" data-level="23.2" data-path="ex-moves-management.html"><a href="ex-moves-management.html#example-engineering-qualifications"><i class="fa fa-check"></i><b>23.2</b> Example: Engineering qualifications</a></li>
-<li class="chapter" data-level="23.3" data-path="ex-moves-management.html"><a href="ex-moves-management.html#example-collaborative-asks"><i class="fa fa-check"></i><b>23.3</b> Example: collaborative asks</a></li>
+<li class="chapter" data-level="24" data-path="ex-moves-management.html"><a href="ex-moves-management.html"><i class="fa fa-check"></i><b>24</b> Moves Management</a><ul>
+<li class="chapter" data-level="24.1" data-path="ex-moves-management.html"><a href="ex-moves-management.html#basics-2"><i class="fa fa-check"></i><b>24.1</b> Basics</a></li>
+<li class="chapter" data-level="24.2" data-path="ex-moves-management.html"><a href="ex-moves-management.html#example-engineering-qualifications"><i class="fa fa-check"></i><b>24.2</b> Example: Engineering qualifications</a></li>
+<li class="chapter" data-level="24.3" data-path="ex-moves-management.html"><a href="ex-moves-management.html#example-collaborative-asks"><i class="fa fa-check"></i><b>24.3</b> Example: collaborative asks</a></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="test-cdw.html"><a href="test-cdw.html"><i class="fa fa-check"></i><b>A</b> Test your database set up</a><ul>
@@ -220,7 +251,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="C.2" data-path="how-it-works.html"><a href="how-it-works.html#a-template-as-a-data-structure"><i class="fa fa-check"></i><b>C.2</b> A template as a data structure</a></li>
 <li class="chapter" data-level="C.3" data-path="how-it-works.html"><a href="how-it-works.html#non-standard-evaluation"><i class="fa fa-check"></i><b>C.3</b> Non-standard evaluation</a></li>
 <li class="chapter" data-level="C.4" data-path="how-it-works.html"><a href="how-it-works.html#combining-simple-definitions"><i class="fa fa-check"></i><b>C.4</b> Combining simple definitions</a><ul>
-<li class="chapter" data-level="C.4.1" data-path="how-it-works.html"><a href="how-it-works.html#atomic-vs.-complex-definitions"><i class="fa fa-check"></i><b>C.4.1</b> “Atomic” vs. “Complex” definitions</a></li>
+<li class="chapter" data-level="C.4.1" data-path="how-it-works.html"><a href="how-it-works.html#atomic-vs.-complex-definitions"><i class="fa fa-check"></i><b>C.4.1</b> “Atomic” vs. “Complex” definitions</a></li>
 <li class="chapter" data-level="C.4.2" data-path="how-it-works.html"><a href="how-it-works.html#operations-on-definitions"><i class="fa fa-check"></i><b>C.4.2</b> Operations on definitions</a></li>
 </ul></li>
 <li class="chapter" data-level="C.5" data-path="how-it-works.html"><a href="how-it-works.html#re-visiting-to_sql"><i class="fa fa-check"></i><b>C.5</b> Re-visiting <code>to_sql</code></a></li>
@@ -248,9 +279,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
             <section class="normal" id="section-">
 <div id="ex-ca-campaign" class="section level1">
-<h1><span class="header-section-number">19</span> Utilizing CA campaign finance data</h1>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># i always begin by loading the disco engine if it isn&#39;t already loaded</span>
-<span class="kw">library</span>(discoveryengine)</code></pre></div>
+<h1><span class="header-section-number">20</span> Utilizing CA campaign finance data</h1>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># i always begin by loading the disco engine if it isn&#39;t already loaded</span>
+<span class="kw">library</span>(discoveryengine)</code></pre>
 <p>Prospect Analysis screens CADS data against campaign finance disclosures for California elections, as reported to the CA Secretary of State. The widgets to access this data are similar in form and function to the <a href="ex-fec.html#ex-fec">FEC widgets</a>. They are:</p>
 <ul>
 <li><code>ca_gave_to_candidate</code></li>
@@ -259,34 +290,35 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul>
 <p>The first two widgets only look at contributions in campaigns for statewide office. However, the Secretary of State’s “Cal Access” database includes a number of transactions that don’t fit into either of those two categories. For instance, contributions to a campaign for Superior Court Judge (who run locally, not statewide) or contributions to committees that are not directly affiliated with a single candidate/proposition (such as the Democratic State Central Committee of California). In order to be able to find any kind of contribution, use <code>ca_gave</code>, which includes giving to statewide candidates and propositions as well as any other disclosed giving.</p>
 <div id="example-state-senate-and-assembly-candidates" class="section level2">
-<h2><span class="header-section-number">19.1</span> Example: State Senate and Assembly candidates</h2>
+<h2><span class="header-section-number">20.1</span> Example: State Senate and Assembly candidates</h2>
 <p>The UC Berkeley Foundation is holding an event which will feature appearances by State assembly member Phil Ting, former state senator and assembly member Holly Mitchell, and state senator (and former state assembly member) Jim Beall. In preparation for the event, they ask you to find out who among our constituents have contributed to these officials’ campaigns when they were running for office and do some preliminary research on them. We start by identifying the candidate IDs for those candidates, using the same <a href="working-with-widgets.html#synonym-search">synonym search</a> tool that works in every widget:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ca_gave_to_candidate</span>(?mitchell, ?ting, ?beall)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ca_gave_to_candidate</span>(?mitchell, ?ting, ?beall)</code></pre>
 <pre><code>## Regular codes and synonyms:
-##           synonym       code
-##  mitchell_holly_j CA79738798
-##      ing_mitchell CA65733180
-##    keating_janice CA15407672
-##         ting_phil CA57102205
-##  keating_janice_e CA83880493
-##         beall_jim CA63467867</code></pre>
+##           synonym         code
+##    mitchell_holly CA1223588942
+##  mitchell_holly_j CA3479738832
+##      ing_mitchell CA1065733190
+##         ting_phil  CA657102211
+##    keating_janice   CA15407672
+##  keating_janice_e CA2583880518
+##         beall_jim CA3663467903</code></pre>
 <p>Once we know the correct candidate codes, we can pull contributors:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">donors =<span class="st"> </span><span class="kw">ca_gave_to_candidate</span>(CA79738798, CA63467867, CA57102205)
-<span class="kw">display</span>(donors)</code></pre></div>
-<pre><code>## # A tibble: 460 x 1
+<pre class="sourceCode r"><code class="sourceCode r">donors =<span class="st"> </span><span class="kw">ca_gave_to_candidate</span>(CA657102211, CA1223588942, CA3663467903)
+<span class="kw">display</span>(donors)</code></pre>
+<pre><code>## # A tibble: 366 x 1
 ##    entity_id
 ##        &lt;dbl&gt;
 ##  1       331
-##  2       867
-##  3      1303
-##  4      6582
-##  5      8666
-##  6     11015
-##  7     11529
-##  8     12306
-##  9     12453
-## 10     12735
-## # ... with 450 more rows</code></pre>
+##  2      1303
+##  3      8666
+##  4     11015
+##  5     12306
+##  6     12453
+##  7     14259
+##  8     15683
+##  9     16251
+## 10     16374
+## # … with 356 more rows</code></pre>
 <p>Just like giving and FEC widgets, the California campaign finance widgets all support the following optional arguments:</p>
 <ul>
 <li><code>at_least</code>: to find donors with total contributions over a specified amount. By default, this is assumed to be 1 cent.</li>
@@ -294,10 +326,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul>
 </div>
 <div id="propositions" class="section level2">
-<h2><span class="header-section-number">19.2</span> Propositions</h2>
+<h2><span class="header-section-number">20.2</span> Propositions</h2>
 <p>The process for ballot propositions is pretty similar to the one for candidates, but with the added complication that donors to proposition campaigns can be either supporting or opposed to the proposition in question. An example will help illustrate.</p>
 <p>If you’re looking for prospects who are interested in public education, you might end up considering donors to propositions 30 (in the 2011-12 cycle) and 55 (in the 2015-15 cycle). Prop 30 raised taxes in order to pay for both public K-12 schools as well as community colleges, and Prop 55 extended those tax increases. Once again, we’ll start with a <a href="working-with-widgets.html#synonym-search">synonym search</a>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ca_gave_to_proposition</span>(?education)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ca_gave_to_proposition</span>(?education)</code></pre>
 <pre><code>## Regular codes and synonyms:
 ##                                                                                   synonym
 ##                      kindergarten_university_public_education_facilities_bond_act_of_2004
@@ -321,97 +353,130 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ##  BL20050082
 ##  BL20110030
 ##  BL20150055</code></pre>
-<p>The <code>code</code> field looks at first like it is completely meaningless, but take a closer look at you might notice: the last 4 characters are the proposition number (e.g. <code>0055</code>), while the 4 characters before that are the start of the election cycle that the proposition was a part of (so <code>2015</code> refers to the 2015-16 election cycle). So for this project, I’d use <code>BL20150055</code> and <code>BL20110030</code>. By default, <code>ca_gave_to_proposition</code> will pull both supporters and oppononents of the propositions. While that may be useful if you’re just looking for wealth indicators, you probably want to specify one or the other for any affinity-based work. So:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># to pull supporters of a tax increase to fund education:</span>
+<p>The <code>code</code> field looks at first like it is completely meaningless, but take a closer look at you might notice: the last 4 characters are the proposition number (e.g. <code>0055</code>), while the 4 characters before that are the start of the election cycle that the proposition was a part of (so <code>2015</code> refers to the 2015-16 election cycle). So for this project, I’d use <code>BL20150055</code> and <code>BL20110030</code>. By default, <code>ca_gave_to_proposition</code> will pull both supporters and oppononents of the propositions. While that may be useful if you’re just looking for wealth indicators, you probably want to specify one or the other for any affinity-based work. So:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># to pull supporters of a tax increase to fund education:</span>
 tax_supporter =<span class="st"> </span><span class="kw">ca_gave_to_proposition</span>(BL20150055, BL20110030, 
                                        <span class="dt">support =</span> <span class="ot">TRUE</span>)
 
 <span class="co"># and opponents:</span>
 tax_opponent =<span class="st"> </span><span class="kw">ca_gave_to_proposition</span>(BL20150055, BL20110030, 
-                                      <span class="dt">support =</span> <span class="ot">FALSE</span>)</code></pre></div>
+                                      <span class="dt">support =</span> <span class="ot">FALSE</span>)</code></pre>
 <p>A quick glance at the <a href="matrix-bot.html#matrix-bot">Matrix Bot</a> results give us a good idea of which side of the political aisle these two groups are coming from:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">matrix_bot</span>(tax_supporter)</code></pre></div>
-<pre><code>## fec_gave_to_candidate 
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">matrix_bot</span>(tax_supporter)</code></pre>
+<pre><code>## ca_gave_to_candidate 
+##     CA545453741: DE LEON, KEVIN
+##     CA3415765751: OSBORN, TORIE
+##     CA3789174547: YEE, BETTY T.
+##     CA580635557: PAVLEY, FRAN
+##     CA2025703811: STERN, HENRY
+##     CA165165894: TORLAKSON, TOM
+##     CA1322715128: BECERRA, XAVIER
+##     CA1664107145: YEE , BETTY T.
+##     CA941720645: SKINNER, NANCY
+## fec_gave_to_candidate 
 ##     H4CA21072: RENTERIA, AMANDA
 ##     H0CA33117: BASS, KAREN
+##     H8CA10167: COX, TERRANCE JOHN (TJ)
 ##     S4MA00028: MARKEY, EDWARD JOHN MR
 ##     H2CA31125: AGUILAR, PETE
 ##     H2CA36439: RUIZ, RAUL DR.
 ##     H6AZ08038: GIFFORDS, GABRIELLE
-##     S4MI00355: PETERS, GARY
 ##     H4CA10075: EGGMAN, MICHAEL RAY
-##     S6OH00254: STRICKLAND, TED
 ##     H8NV03036: TITUS, DINA
+##     S6OH00254: STRICKLAND, TED
 ##     H8CO04067: MARKEY, ELIZABETH HELEN
-##     S6MO00362: KANDER, JASON
-##     H2CA43245: TAKANO, MARK
 ##     S2IN00091: DONNELLY, JOSEPH S
-##     H2CA52089: PETERS, SCOTT
+##     S6MO00362: KANDER, JASON
+##     S4MI00355: PETERS, GARY
 ##     S8AK00090: BEGICH, MARK
-##     H8CA22089: CAPPS, LOIS G
+##     H2CA43245: TAKANO, MARK
+##     H2CA52089: PETERS, SCOTT
+##     H8CA22089: CAPPS, LOIS
 ##     S8ME00080: ALLEN, THOMAS H
 ##     S6PA00100: SPECTER, ARLEN
-##     H2CA26026: BERMAN, HOWARD L
+##     H2CA26026: BERMAN, HOWARD L.
+##     H2MA04073: KENNEDY, JOSEPH P III
 ##     H2CA00120: BROWNLEY, JULIA
-##     S2NM00088: HEINRICH, MARTIN TREVOR
 ##     H6CA04123: BROWN, CHARLES
-##     S6VA00093: WARNER, MARK ROBERT
 ##     S4GA11277: NUNN, MARY MICHELLE
 ##     S8CO00172: UDALL, MARK E
+##     S2NM00088: HEINRICH, MARTIN TREVOR
 ##     S6NV00028: REID, HARRY
 ##     S6LA00227: LANDRIEU, MARY L
 ##     S6PA00266: MCGINTY, KATHLEEN ALANA
-##     S6NV00200: MASTO, CATHERINE CORTEZ
+##     S2ND00099: HEITKAMP, HEIDI
+##     S6VA00093: WARNER, MARK ROBERT
+##     S8FL00166: NELSON, BILL
 ##     S8NY00082: SCHUMER, CHARLES E
-##     S4NJ00185: BOOKER, CORY A
 ##     S8NC00239: HAGAN, KAY R
+##     S6NV00200: MASTO, CATHERINE CORTEZ
+##     H0CA27085: SCHIFF, ADAM
 ##     S2VA00142: KAINE, TIMOTHY MICHAEL
+##     S4NJ00185: BOOKER, CORY A
 ##     S2NV00209: BERKLEY, SHELLEY
 ##     H0CA10149: GARAMENDI, JOHN
 ##     S8NM00184: UDALL, TOM
-##     S0NH00219: SHAHEEN, JEANNE
-##     S6OH00163: BROWN, SHERROD
-##     S0CO00211: BENNET, MICHAEL F
-##     S6IL00292: DUCKWORTH, L TAMMY
 ##     H0CA03078: BERA, AMERISH
+##     S0NH00219: SHAHEEN, JEANNE
 ##     H8CA05035: PELOSI, NANCY
-##     S8OR00207: MERKLEY, JEFFREY ALAN
-##     H4CA11081: MCNERNEY, JERRY
+##     S0CO00211: BENNET, MICHAEL F
 ##     S6NH00091: HASSAN, MARGARET WOOD
-##     S0CA00199: FEINSTEIN, DIANNE
+##     S6MO00305: MCCASKILL, CLAIRE
+##     S8MI00281: STABENOW, DEBBIE
+##     S6IL00292: DUCKWORTH, L TAMMY
+##     H4CA11081: MCNERNEY, JERRY
 ##     S2WA00189: MURRAY, PATTY
 ##     S6MT00162: TESTER, JON
-##     S6MO00305: MCCASKILL, CLAIRE
+##     S6OH00163: BROWN, SHERROD
+##     S8OR00207: MERKLEY, JEFFREY ALAN
 ##     S8WI00026: FEINGOLD, RUSSELL DANA
+##     S0CA00199: FEINSTEIN, DIANNE
+##     S8WA00194: CANTWELL, MARIA
 ##     S6CA00584: HARRIS, KAMALA D
-##     S2WI00219: BALDWIN, TAMMY
 ##     S8MN00438: FRANKEN, AL
+##     S2WI00219: BALDWIN, TAMMY
 ##     S0NY00410: GILLIBRAND, KIRSTEN ELIZABETH
+##     S0AL00156: JONES, DOUG
 ##     S2CA00286: BOXER, BARBARA
 ##     S2MA00170: WARREN, ELIZABETH
 ## fec_gave_to_category 
 ##     J2100: Democratic leadership PAC
 ##     J7500: Minority/Ethnic Groups
+##     Y0000: Unknown
 ##     J1200: Democratic/Liberal
 ## gave_to_department 
 ##     PP: Public Policy
-##     BAM: Berkeley Art Museum
+##     CEEE: Educ Equity &amp; Excellence Centers
+## has_affiliation 
+##     BLDR: Builders of Berkeley
 ## has_interest 
-##     DEM: Democratic Politics</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">matrix_bot</span>(tax_opponent)</code></pre></div>
-<pre><code>## fec_gave_to_candidate 
+##     HUR: Human Rights
+##     PCY: Public Policy
+##     ENV: Environment
+##     DIV: Diverse Constituencies</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">matrix_bot</span>(tax_opponent)</code></pre>
+<pre><code>## ca_gave_to_candidate 
+##     CA1403064487: STRICKLAND, TONY
+##     CA3516489204: POIZNER, STEVE
+##     CA643204175: WHITMAN, MARGARET C.
+##     CA4012945810: MC CLINTOCK, THOMAS
+##     CA1728102410: BAKER, CATHARINE
+##     CA4083971340: SCHWARZENEGGER, ARNOLD
+## fec_gave_to_candidate 
 ##     S4AR00103: COTTON, THOMAS
 ##     H0CA10123: HARMER, DAVID
 ##     S0OH00133: PORTMAN, ROB
 ##     S0NV00138: ANGLE, SHARRON E
+##     S2OH00170: MANDEL, JOSH
 ##     S0MA00109: BROWN, SCOTT P
+##     S0SC00149: GRAHAM, LINDSEY OLIN
 ##     S0FL00338: RUBIO, MARCO
 ##     H2CA11135: GILL, RICKY
 ##     H6CA22125: MCCARTHY, KEVIN
 ##     S0CA00330: FIORINA, CARLY
-##     H0OH08029: BOEHNER, JOHN A
-##     S2CA00351: CAMPBELL, TOM
+##     H0OH08029: BOEHNER, JOHN A.
 ##     H8WI01024: RYAN, PAUL D.
+##     S2CA00351: CAMPBELL, TOM
 ##     P80003353: ROMNEY, MITT / RYAN, PAUL D. 
 ##     P80002801: MCCAIN, JOHN S.
 ## fec_gave_to_category 
@@ -419,7 +484,11 @@ tax_opponent =<span class="st"> </span><span class="kw">ca_gave_to_proposition</
 ##     J2200: Republican leadership PAC
 ##     Z4100: Republican Joint Candidate Committee
 ##     Z5100: Republican Party Committees
-##     Z1100: Republican Candidate Committees</code></pre>
+##     Z1100: Republican Candidate Committees
+## has_interest 
+##     VEN: Venture Capital
+##     BUS: Business
+##     REP: Republican Politics</code></pre>
 
 </div>
 </div>
@@ -451,6 +520,10 @@ gitbook.start({
 "edit": {
 "link": "https://github.com/cwolfsonseeley/discodocs/edit/master/80-example-07-ca-campaign.Rmd",
 "text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
 },
 "download": null,
 "toc": {

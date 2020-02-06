@@ -24,7 +24,7 @@ ca_gave_to_candidate(?mitchell, ?ting, ?beall)
 Once we know the correct candidate codes, we can pull contributors:
 
 ```{r ex-ca-display-cands, cache = TRUE}
-donors = ca_gave_to_candidate(CA79738798, CA63467867, CA57102205)
+donors = ca_gave_to_candidate(CA657102211, CA1223588942, CA3663467903)
 display(donors)
 ```
 

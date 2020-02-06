@@ -5,19 +5,19 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Documentation for the discoveryengine</title>
+  <title>C How does it work? | Documentation for the discoveryengine</title>
   <meta name="description" content="Some documentation for the discoveryengine">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Documentation for the discoveryengine" />
+  <meta property="og:title" content="C How does it work? | Documentation for the discoveryengine" />
   <meta property="og:type" content="book" />
   
   
   <meta property="og:description" content="Some documentation for the discoveryengine" />
-  <meta name="github-repo" content="cwolfsonseeley/discodocs" />
+  <meta name="github-repo" content="tarakc02/discodocs" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Documentation for the discoveryengine" />
+  <meta name="twitter:title" content="C How does it work? | Documentation for the discoveryengine" />
   
   <meta name="twitter:description" content="Some documentation for the discoveryengine" />
   
@@ -34,6 +34,7 @@
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -48,41 +49,67 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -111,96 +138,100 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.2" data-path="what-is-disco.html"><a href="what-is-disco.html#facilitating-discovery"><i class="fa fa-check"></i><b>2.2</b> Facilitating discovery</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="r-intro.html"><a href="r-intro.html"><i class="fa fa-check"></i><b>3</b> Introduction to R and RStudio</a></li>
+<li class="chapter" data-level="4" data-path="installation.html"><a href="installation.html"><i class="fa fa-check"></i><b>4</b> Installation</a><ul>
+<li class="chapter" data-level="4.1" data-path="installation.html"><a href="installation.html#before-you-continue"><i class="fa fa-check"></i><b>4.1</b> Before you continue</a></li>
+<li class="chapter" data-level="4.2" data-path="installation.html"><a href="installation.html#a-disco-test"><i class="fa fa-check"></i><b>4.2</b> A disco test</a></li>
+</ul></li>
 <li class="part"><span><b>II Basics</b></span></li>
-<li class="chapter" data-level="4" data-path="intro-example.html"><a href="intro-example.html"><i class="fa fa-check"></i><b>4</b> An introductory example</a><ul>
-<li class="chapter" data-level="4.1" data-path="intro-example.html"><a href="intro-example.html#develop-a-strategy"><i class="fa fa-check"></i><b>4.1</b> Develop a strategy</a></li>
-<li class="chapter" data-level="4.2" data-path="intro-example.html"><a href="intro-example.html#intro-example-create-def"><i class="fa fa-check"></i><b>4.2</b> Create the definition</a></li>
-<li class="chapter" data-level="4.3" data-path="intro-example.html"><a href="intro-example.html#send-the-definition-to-the-cdw"><i class="fa fa-check"></i><b>4.3</b> Send the definition to the CDW</a></li>
+<li class="chapter" data-level="5" data-path="intro-example.html"><a href="intro-example.html"><i class="fa fa-check"></i><b>5</b> An introductory example</a><ul>
+<li class="chapter" data-level="5.1" data-path="intro-example.html"><a href="intro-example.html#develop-a-strategy"><i class="fa fa-check"></i><b>5.1</b> Develop a strategy</a></li>
+<li class="chapter" data-level="5.2" data-path="intro-example.html"><a href="intro-example.html#intro-example-create-def"><i class="fa fa-check"></i><b>5.2</b> Create the definition</a></li>
+<li class="chapter" data-level="5.3" data-path="intro-example.html"><a href="intro-example.html#send-the-definition-to-the-cdw"><i class="fa fa-check"></i><b>5.3</b> Send the definition to the CDW</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="working-with-widgets.html"><a href="working-with-widgets.html"><i class="fa fa-check"></i><b>5</b> Working with widgets</a><ul>
-<li class="chapter" data-level="5.1" data-path="working-with-widgets.html"><a href="working-with-widgets.html#working-with-finding-widgets"><i class="fa fa-check"></i><b>5.1</b> Finding widgets</a></li>
-<li class="chapter" data-level="5.2" data-path="working-with-widgets.html"><a href="working-with-widgets.html#working-with-autocomplete"><i class="fa fa-check"></i><b>5.2</b> Leveraging autocomplete</a></li>
-<li class="chapter" data-level="5.3" data-path="working-with-widgets.html"><a href="working-with-widgets.html#working-with-codes-synonyms"><i class="fa fa-check"></i><b>5.3</b> Codes and synonyms</a></li>
-<li class="chapter" data-level="5.4" data-path="working-with-widgets.html"><a href="working-with-widgets.html#synonym-search"><i class="fa fa-check"></i><b>5.4</b> Synonym search</a></li>
-<li class="chapter" data-level="5.5" data-path="working-with-widgets.html"><a href="working-with-widgets.html#use-defaults"><i class="fa fa-check"></i><b>5.5</b> Use the default cases</a></li>
-<li class="chapter" data-level="5.6" data-path="working-with-widgets.html"><a href="working-with-widgets.html#widget-not-operator"><i class="fa fa-check"></i><b>5.6</b> The <code>not()</code> operator</a></li>
-<li class="chapter" data-level="5.7" data-path="working-with-widgets.html"><a href="working-with-widgets.html#detailed-controls"><i class="fa fa-check"></i><b>5.7</b> Detailed controls</a></li>
+<li class="chapter" data-level="6" data-path="working-with-widgets.html"><a href="working-with-widgets.html"><i class="fa fa-check"></i><b>6</b> Working with widgets</a><ul>
+<li class="chapter" data-level="6.1" data-path="working-with-widgets.html"><a href="working-with-widgets.html#working-with-finding-widgets"><i class="fa fa-check"></i><b>6.1</b> Finding widgets</a></li>
+<li class="chapter" data-level="6.2" data-path="working-with-widgets.html"><a href="working-with-widgets.html#working-with-autocomplete"><i class="fa fa-check"></i><b>6.2</b> Leveraging autocomplete</a></li>
+<li class="chapter" data-level="6.3" data-path="working-with-widgets.html"><a href="working-with-widgets.html#working-with-codes-synonyms"><i class="fa fa-check"></i><b>6.3</b> Codes and synonyms</a></li>
+<li class="chapter" data-level="6.4" data-path="working-with-widgets.html"><a href="working-with-widgets.html#synonym-search"><i class="fa fa-check"></i><b>6.4</b> Synonym search</a></li>
+<li class="chapter" data-level="6.5" data-path="working-with-widgets.html"><a href="working-with-widgets.html#use-defaults"><i class="fa fa-check"></i><b>6.5</b> Use the default cases</a></li>
+<li class="chapter" data-level="6.6" data-path="working-with-widgets.html"><a href="working-with-widgets.html#widget-not-operator"><i class="fa fa-check"></i><b>6.6</b> The <code>not()</code> operator</a></li>
+<li class="chapter" data-level="6.7" data-path="working-with-widgets.html"><a href="working-with-widgets.html#detailed-controls"><i class="fa fa-check"></i><b>6.7</b> Detailed controls</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="combining-widgets.html"><a href="combining-widgets.html"><i class="fa fa-check"></i><b>6</b> Combining widgets</a><ul>
-<li class="chapter" data-level="6.1" data-path="combining-widgets.html"><a href="combining-widgets.html#example"><i class="fa fa-check"></i><b>6.1</b> Example</a></li>
+<li class="chapter" data-level="7" data-path="combining-widgets.html"><a href="combining-widgets.html"><i class="fa fa-check"></i><b>7</b> Combining widgets</a><ul>
+<li class="chapter" data-level="7.1" data-path="combining-widgets.html"><a href="combining-widgets.html#example"><i class="fa fa-check"></i><b>7.1</b> Example</a></li>
 </ul></li>
 <li class="part"><span><b>III Bots</b></span></li>
-<li class="chapter" data-level="7" data-path="brainstorm-bot.html"><a href="brainstorm-bot.html"><i class="fa fa-check"></i><b>7</b> The Brainstorm Bot</a><ul>
-<li class="chapter" data-level="7.1" data-path="brainstorm-bot.html"><a href="brainstorm-bot.html#search-features"><i class="fa fa-check"></i><b>7.1</b> Search features</a></li>
+<li class="chapter" data-level="8" data-path="brainstorm-bot.html"><a href="brainstorm-bot.html"><i class="fa fa-check"></i><b>8</b> The Brainstorm Bot</a><ul>
+<li class="chapter" data-level="8.1" data-path="brainstorm-bot.html"><a href="brainstorm-bot.html#search-features"><i class="fa fa-check"></i><b>8.1</b> Search features</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="matrix-bot.html"><a href="matrix-bot.html"><i class="fa fa-check"></i><b>8</b> The Matrix Bot</a><ul>
-<li class="chapter" data-level="8.1" data-path="matrix-bot.html"><a href="matrix-bot.html#introduction"><i class="fa fa-check"></i><b>8.1</b> Introduction</a></li>
-<li class="chapter" data-level="8.2" data-path="matrix-bot.html"><a href="matrix-bot.html#what-it-is"><i class="fa fa-check"></i><b>8.2</b> What it is</a></li>
-<li class="chapter" data-level="8.3" data-path="matrix-bot.html"><a href="matrix-bot.html#example-1"><i class="fa fa-check"></i><b>8.3</b> Example</a></li>
-<li class="chapter" data-level="8.4" data-path="matrix-bot.html"><a href="matrix-bot.html#botstrapping"><i class="fa fa-check"></i><b>8.4</b> Botstrapping</a></li>
-<li class="chapter" data-level="8.5" data-path="matrix-bot.html"><a href="matrix-bot.html#how-does-it-work"><i class="fa fa-check"></i><b>8.5</b> How does it work?</a></li>
+<li class="chapter" data-level="9" data-path="matrix-bot.html"><a href="matrix-bot.html"><i class="fa fa-check"></i><b>9</b> The Matrix Bot</a><ul>
+<li class="chapter" data-level="9.1" data-path="matrix-bot.html"><a href="matrix-bot.html#introduction"><i class="fa fa-check"></i><b>9.1</b> Introduction</a></li>
+<li class="chapter" data-level="9.2" data-path="matrix-bot.html"><a href="matrix-bot.html#what-it-is"><i class="fa fa-check"></i><b>9.2</b> What it is</a></li>
+<li class="chapter" data-level="9.3" data-path="matrix-bot.html"><a href="matrix-bot.html#example-1"><i class="fa fa-check"></i><b>9.3</b> Example</a></li>
+<li class="chapter" data-level="9.4" data-path="matrix-bot.html"><a href="matrix-bot.html#botstrapping"><i class="fa fa-check"></i><b>9.4</b> Botstrapping</a></li>
+<li class="chapter" data-level="9.5" data-path="matrix-bot.html"><a href="matrix-bot.html#how-does-it-work"><i class="fa fa-check"></i><b>9.5</b> How does it work?</a></li>
 </ul></li>
 <li class="part"><span><b>IV Advanced</b></span></li>
-<li class="chapter" data-level="9" data-path="higher-order-widgets.html"><a href="higher-order-widgets.html"><i class="fa fa-check"></i><b>9</b> Higher order widgets</a><ul>
-<li class="chapter" data-level="9.1" data-path="higher-order-widgets.html"><a href="higher-order-widgets.html#children-of-wealth"><i class="fa fa-check"></i><b>9.1</b> Children of wealth</a></li>
+<li class="chapter" data-level="10" data-path="higher-order-widgets.html"><a href="higher-order-widgets.html"><i class="fa fa-check"></i><b>10</b> Higher order widgets</a><ul>
+<li class="chapter" data-level="10.1" data-path="higher-order-widgets.html"><a href="higher-order-widgets.html#children-of-wealth"><i class="fa fa-check"></i><b>10.1</b> Children of wealth</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="non-entity-widgets.html"><a href="non-entity-widgets.html"><i class="fa fa-check"></i><b>10</b> Non-entity widgets</a><ul>
-<li class="chapter" data-level="10.1" data-path="non-entity-widgets.html"><a href="non-entity-widgets.html#motivation"><i class="fa fa-check"></i><b>10.1</b> Motivation</a></li>
-<li class="chapter" data-level="10.2" data-path="non-entity-widgets.html"><a href="non-entity-widgets.html#non-entity-disco-definition-types"><i class="fa fa-check"></i><b>10.2</b> Disco Definition Types</a></li>
-<li class="chapter" data-level="10.3" data-path="non-entity-widgets.html"><a href="non-entity-widgets.html#searching-fund-text"><i class="fa fa-check"></i><b>10.3</b> Searching fund text</a></li>
-<li class="chapter" data-level="10.4" data-path="non-entity-widgets.html"><a href="non-entity-widgets.html#from-funds-to-entities"><i class="fa fa-check"></i><b>10.4</b> From funds to entities</a></li>
-<li class="chapter" data-level="10.5" data-path="non-entity-widgets.html"><a href="non-entity-widgets.html#non-entity-converters"><i class="fa fa-check"></i><b>10.5</b> “Converters”</a></li>
+<li class="chapter" data-level="11" data-path="non-entity-widgets.html"><a href="non-entity-widgets.html"><i class="fa fa-check"></i><b>11</b> Non-entity widgets</a><ul>
+<li class="chapter" data-level="11.1" data-path="non-entity-widgets.html"><a href="non-entity-widgets.html#motivation"><i class="fa fa-check"></i><b>11.1</b> Motivation</a></li>
+<li class="chapter" data-level="11.2" data-path="non-entity-widgets.html"><a href="non-entity-widgets.html#non-entity-disco-definition-types"><i class="fa fa-check"></i><b>11.2</b> Disco Definition Types</a></li>
+<li class="chapter" data-level="11.3" data-path="non-entity-widgets.html"><a href="non-entity-widgets.html#searching-fund-text"><i class="fa fa-check"></i><b>11.3</b> Searching fund text</a></li>
+<li class="chapter" data-level="11.4" data-path="non-entity-widgets.html"><a href="non-entity-widgets.html#from-funds-to-entities"><i class="fa fa-check"></i><b>11.4</b> From funds to entities</a></li>
+<li class="chapter" data-level="11.5" data-path="non-entity-widgets.html"><a href="non-entity-widgets.html#non-entity-converters"><i class="fa fa-check"></i><b>11.5</b> “Converters”</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="optional-arguments.html"><a href="optional-arguments.html"><i class="fa fa-check"></i><b>11</b> Optional arguments</a><ul>
-<li class="chapter" data-level="11.1" data-path="optional-arguments.html"><a href="optional-arguments.html#opt-events"><i class="fa fa-check"></i><b>11.1</b> Event invitees and attendees</a></li>
-<li class="chapter" data-level="11.2" data-path="optional-arguments.html"><a href="optional-arguments.html#date-ranges"><i class="fa fa-check"></i><b>11.2</b> Date ranges</a></li>
-<li class="chapter" data-level="11.3" data-path="optional-arguments.html"><a href="optional-arguments.html#graduate-undergraduate-attendee"><i class="fa fa-check"></i><b>11.3</b> Graduate, undergraduate, attendee</a></li>
-<li class="chapter" data-level="11.4" data-path="optional-arguments.html"><a href="optional-arguments.html#workarounds-inactive-only"><i class="fa fa-check"></i><b>11.4</b> Workarounds: inactive only</a></li>
+<li class="chapter" data-level="12" data-path="optional-arguments.html"><a href="optional-arguments.html"><i class="fa fa-check"></i><b>12</b> Optional arguments</a><ul>
+<li class="chapter" data-level="12.1" data-path="optional-arguments.html"><a href="optional-arguments.html#opt-events"><i class="fa fa-check"></i><b>12.1</b> Event invitees and attendees</a></li>
+<li class="chapter" data-level="12.2" data-path="optional-arguments.html"><a href="optional-arguments.html#date-ranges"><i class="fa fa-check"></i><b>12.2</b> Date ranges</a></li>
+<li class="chapter" data-level="12.3" data-path="optional-arguments.html"><a href="optional-arguments.html#graduate-undergraduate-attendee"><i class="fa fa-check"></i><b>12.3</b> Graduate, undergraduate, attendee</a></li>
+<li class="chapter" data-level="12.4" data-path="optional-arguments.html"><a href="optional-arguments.html#workarounds-inactive-only"><i class="fa fa-check"></i><b>12.4</b> Workarounds: inactive only</a></li>
 </ul></li>
 <li class="part"><span><b>V Related tools</b></span></li>
-<li class="chapter" data-level="12" data-path="add-on-packages.html"><a href="add-on-packages.html"><i class="fa fa-check"></i><b>12</b> Add-on packages</a><ul>
-<li class="chapter" data-level="12.1" data-path="add-on-packages.html"><a href="add-on-packages.html#discoappend"><i class="fa fa-check"></i><b>12.1</b> <code>discoappend</code></a></li>
-<li class="chapter" data-level="12.2" data-path="add-on-packages.html"><a href="add-on-packages.html#discovcr"><i class="fa fa-check"></i><b>12.2</b> <code>discovcr</code></a></li>
-<li class="chapter" data-level="12.3" data-path="add-on-packages.html"><a href="add-on-packages.html#discoscape"><i class="fa fa-check"></i><b>12.3</b> <code>discoscape</code></a></li>
+<li class="chapter" data-level="13" data-path="add-on-packages.html"><a href="add-on-packages.html"><i class="fa fa-check"></i><b>13</b> Add-on packages</a><ul>
+<li class="chapter" data-level="13.1" data-path="add-on-packages.html"><a href="add-on-packages.html#discoappend"><i class="fa fa-check"></i><b>13.1</b> <code>discoappend</code></a></li>
+<li class="chapter" data-level="13.2" data-path="add-on-packages.html"><a href="add-on-packages.html#discovcr"><i class="fa fa-check"></i><b>13.2</b> <code>discovcr</code></a></li>
+<li class="chapter" data-level="13.3" data-path="add-on-packages.html"><a href="add-on-packages.html#discoscape"><i class="fa fa-check"></i><b>13.3</b> <code>discoscape</code></a></li>
 </ul></li>
 <li class="part"><span><b>VI Examples</b></span></li>
-<li class="chapter" data-level="13" data-path="ex-political-economy.html"><a href="ex-political-economy.html"><i class="fa fa-check"></i><b>13</b> Political economy list</a></li>
-<li class="chapter" data-level="14" data-path="ex-lybunt.html"><a href="ex-lybunt.html"><i class="fa fa-check"></i><b>14</b> LYBUNTs</a></li>
-<li class="chapter" data-level="15" data-path="ex-recent-band-parents.html"><a href="ex-recent-band-parents.html"><i class="fa fa-check"></i><b>15</b> Recent Band Parents</a><ul>
-<li class="chapter" data-level="15.1" data-path="ex-recent-band-parents.html"><a href="ex-recent-band-parents.html#recent-band-members"><i class="fa fa-check"></i><b>15.1</b> Recent band members</a></li>
-<li class="chapter" data-level="15.2" data-path="ex-recent-band-parents.html"><a href="ex-recent-band-parents.html#find-their-parents"><i class="fa fa-check"></i><b>15.2</b> Find their parents</a></li>
-<li class="chapter" data-level="15.3" data-path="ex-recent-band-parents.html"><a href="ex-recent-band-parents.html#who-live-close-enough"><i class="fa fa-check"></i><b>15.3</b> Who live close enough</a></li>
-<li class="chapter" data-level="15.4" data-path="ex-recent-band-parents.html"><a href="ex-recent-band-parents.html#how-many"><i class="fa fa-check"></i><b>15.4</b> How many?</a></li>
-<li class="chapter" data-level="15.5" data-path="ex-recent-band-parents.html"><a href="ex-recent-band-parents.html#householding"><i class="fa fa-check"></i><b>15.5</b> Householding</a></li>
+<li class="chapter" data-level="14" data-path="ex-political-economy.html"><a href="ex-political-economy.html"><i class="fa fa-check"></i><b>14</b> Political economy list</a></li>
+<li class="chapter" data-level="15" data-path="ex-lybunt.html"><a href="ex-lybunt.html"><i class="fa fa-check"></i><b>15</b> LYBUNTs</a></li>
+<li class="chapter" data-level="16" data-path="ex-recent-band-parents.html"><a href="ex-recent-band-parents.html"><i class="fa fa-check"></i><b>16</b> Recent Band Parents</a><ul>
+<li class="chapter" data-level="16.1" data-path="ex-recent-band-parents.html"><a href="ex-recent-band-parents.html#recent-band-members"><i class="fa fa-check"></i><b>16.1</b> Recent band members</a></li>
+<li class="chapter" data-level="16.2" data-path="ex-recent-band-parents.html"><a href="ex-recent-band-parents.html#find-their-parents"><i class="fa fa-check"></i><b>16.2</b> Find their parents</a></li>
+<li class="chapter" data-level="16.3" data-path="ex-recent-band-parents.html"><a href="ex-recent-band-parents.html#who-live-close-enough"><i class="fa fa-check"></i><b>16.3</b> Who live close enough</a></li>
+<li class="chapter" data-level="16.4" data-path="ex-recent-band-parents.html"><a href="ex-recent-band-parents.html#how-many"><i class="fa fa-check"></i><b>16.4</b> How many?</a></li>
+<li class="chapter" data-level="16.5" data-path="ex-recent-band-parents.html"><a href="ex-recent-band-parents.html#householding"><i class="fa fa-check"></i><b>16.5</b> Householding</a></li>
 </ul></li>
-<li class="chapter" data-level="16" data-path="ex-near-builder.html"><a href="ex-near-builder.html"><i class="fa fa-check"></i><b>16</b> Nearing Builder of Berkeley Status</a><ul>
-<li class="chapter" data-level="16.1" data-path="ex-near-builder.html"><a href="ex-near-builder.html#defining-close"><i class="fa fa-check"></i><b>16.1</b> Defining close</a></li>
-<li class="chapter" data-level="16.2" data-path="ex-near-builder.html"><a href="ex-near-builder.html#householding-1"><i class="fa fa-check"></i><b>16.2</b> Householding</a></li>
+<li class="chapter" data-level="17" data-path="ex-near-builder.html"><a href="ex-near-builder.html"><i class="fa fa-check"></i><b>17</b> Nearing Builder of Berkeley Status</a><ul>
+<li class="chapter" data-level="17.1" data-path="ex-near-builder.html"><a href="ex-near-builder.html#defining-close"><i class="fa fa-check"></i><b>17.1</b> Defining close</a></li>
+<li class="chapter" data-level="17.2" data-path="ex-near-builder.html"><a href="ex-near-builder.html#householding-1"><i class="fa fa-check"></i><b>17.2</b> Householding</a></li>
 </ul></li>
-<li class="chapter" data-level="17" data-path="ex-sim-donors.html"><a href="ex-sim-donors.html"><i class="fa fa-check"></i><b>17</b> Donors who aren’t degreeholders</a></li>
-<li class="chapter" data-level="18" data-path="ex-fec.html"><a href="ex-fec.html"><i class="fa fa-check"></i><b>18</b> Utilizing FEC disclosure data</a><ul>
-<li class="chapter" data-level="18.1" data-path="ex-fec.html"><a href="ex-fec.html#basics"><i class="fa fa-check"></i><b>18.1</b> Basics</a></li>
-<li class="chapter" data-level="18.2" data-path="ex-fec.html"><a href="ex-fec.html#example-engineering-prospects"><i class="fa fa-check"></i><b>18.2</b> Example: Engineering Prospects</a></li>
-<li class="chapter" data-level="18.3" data-path="ex-fec.html"><a href="ex-fec.html#example-environmental-interest"><i class="fa fa-check"></i><b>18.3</b> Example: Environmental Interest</a></li>
-<li class="chapter" data-level="18.4" data-path="ex-fec.html"><a href="ex-fec.html#bots"><i class="fa fa-check"></i><b>18.4</b> Bots</a></li>
+<li class="chapter" data-level="18" data-path="ex-sim-donors.html"><a href="ex-sim-donors.html"><i class="fa fa-check"></i><b>18</b> Donors who aren’t degreeholders</a></li>
+<li class="chapter" data-level="19" data-path="ex-fec.html"><a href="ex-fec.html"><i class="fa fa-check"></i><b>19</b> Utilizing FEC disclosure data</a><ul>
+<li class="chapter" data-level="19.1" data-path="ex-fec.html"><a href="ex-fec.html#basics"><i class="fa fa-check"></i><b>19.1</b> Basics</a></li>
+<li class="chapter" data-level="19.2" data-path="ex-fec.html"><a href="ex-fec.html#example-engineering-prospects"><i class="fa fa-check"></i><b>19.2</b> Example: Engineering Prospects</a></li>
+<li class="chapter" data-level="19.3" data-path="ex-fec.html"><a href="ex-fec.html#example-environmental-interest"><i class="fa fa-check"></i><b>19.3</b> Example: Environmental Interest</a></li>
+<li class="chapter" data-level="19.4" data-path="ex-fec.html"><a href="ex-fec.html#bots"><i class="fa fa-check"></i><b>19.4</b> Bots</a></li>
 </ul></li>
-<li class="chapter" data-level="19" data-path="ex-ca-campaign.html"><a href="ex-ca-campaign.html"><i class="fa fa-check"></i><b>19</b> Utilizing CA campaign finance data</a><ul>
-<li class="chapter" data-level="19.1" data-path="ex-ca-campaign.html"><a href="ex-ca-campaign.html#example-state-senate-and-assembly-candidates"><i class="fa fa-check"></i><b>19.1</b> Example: State Senate and Assembly candidates</a></li>
-<li class="chapter" data-level="19.2" data-path="ex-ca-campaign.html"><a href="ex-ca-campaign.html#propositions"><i class="fa fa-check"></i><b>19.2</b> Propositions</a></li>
+<li class="chapter" data-level="20" data-path="ex-ca-campaign.html"><a href="ex-ca-campaign.html"><i class="fa fa-check"></i><b>20</b> Utilizing CA campaign finance data</a><ul>
+<li class="chapter" data-level="20.1" data-path="ex-ca-campaign.html"><a href="ex-ca-campaign.html#example-state-senate-and-assembly-candidates"><i class="fa fa-check"></i><b>20.1</b> Example: State Senate and Assembly candidates</a></li>
+<li class="chapter" data-level="20.2" data-path="ex-ca-campaign.html"><a href="ex-ca-campaign.html#propositions"><i class="fa fa-check"></i><b>20.2</b> Propositions</a></li>
 </ul></li>
-<li class="chapter" data-level="20" data-path="ex-academic.html"><a href="ex-academic.html"><i class="fa fa-check"></i><b>20</b> Alumni and current students</a></li>
-<li class="chapter" data-level="21" data-path="ex-sec.html"><a href="ex-sec.html"><i class="fa fa-check"></i><b>21</b> Mining SEC filings</a><ul>
-<li class="chapter" data-level="21.1" data-path="ex-sec.html"><a href="ex-sec.html#basics-1"><i class="fa fa-check"></i><b>21.1</b> Basics</a></li>
-<li class="chapter" data-level="21.2" data-path="ex-sec.html"><a href="ex-sec.html#looking-for-companies"><i class="fa fa-check"></i><b>21.2</b> Looking for companies</a></li>
-<li class="chapter" data-level="21.3" data-path="ex-sec.html"><a href="ex-sec.html#specific-roles"><i class="fa fa-check"></i><b>21.3</b> Specific roles</a></li>
+<li class="chapter" data-level="21" data-path="ex-academic.html"><a href="ex-academic.html"><i class="fa fa-check"></i><b>21</b> Alumni and current students</a></li>
+<li class="chapter" data-level="22" data-path="ex-sec.html"><a href="ex-sec.html"><i class="fa fa-check"></i><b>22</b> Mining SEC filings</a><ul>
+<li class="chapter" data-level="22.1" data-path="ex-sec.html"><a href="ex-sec.html#basics-1"><i class="fa fa-check"></i><b>22.1</b> Basics</a></li>
+<li class="chapter" data-level="22.2" data-path="ex-sec.html"><a href="ex-sec.html#looking-for-companies"><i class="fa fa-check"></i><b>22.2</b> Looking for companies</a></li>
+<li class="chapter" data-level="22.3" data-path="ex-sec.html"><a href="ex-sec.html#specific-roles"><i class="fa fa-check"></i><b>22.3</b> Specific roles</a></li>
 </ul></li>
-<li class="chapter" data-level="22" data-path="ex-mba-dual.html"><a href="ex-mba-dual.html"><i class="fa fa-check"></i><b>22</b> Finding dual-degree holders</a><ul>
-<li class="chapter" data-level="22.1" data-path="ex-mba-dual.html"><a href="ex-mba-dual.html#why-not-but_not"><i class="fa fa-check"></i><b>22.1</b> Why not <code>%but_not%</code>?</a></li>
+<li class="chapter" data-level="23" data-path="ex-mba-dual.html"><a href="ex-mba-dual.html"><i class="fa fa-check"></i><b>23</b> Finding dual-degree holders</a><ul>
+<li class="chapter" data-level="23.1" data-path="ex-mba-dual.html"><a href="ex-mba-dual.html#why-not-but_not"><i class="fa fa-check"></i><b>23.1</b> Why not <code>%but_not%</code>?</a></li>
 </ul></li>
-<li class="chapter" data-level="23" data-path="ex-moves-management.html"><a href="ex-moves-management.html"><i class="fa fa-check"></i><b>23</b> Moves Management</a><ul>
-<li class="chapter" data-level="23.1" data-path="ex-moves-management.html"><a href="ex-moves-management.html#basics-2"><i class="fa fa-check"></i><b>23.1</b> Basics</a></li>
-<li class="chapter" data-level="23.2" data-path="ex-moves-management.html"><a href="ex-moves-management.html#example-engineering-qualifications"><i class="fa fa-check"></i><b>23.2</b> Example: Engineering qualifications</a></li>
-<li class="chapter" data-level="23.3" data-path="ex-moves-management.html"><a href="ex-moves-management.html#example-collaborative-asks"><i class="fa fa-check"></i><b>23.3</b> Example: collaborative asks</a></li>
+<li class="chapter" data-level="24" data-path="ex-moves-management.html"><a href="ex-moves-management.html"><i class="fa fa-check"></i><b>24</b> Moves Management</a><ul>
+<li class="chapter" data-level="24.1" data-path="ex-moves-management.html"><a href="ex-moves-management.html#basics-2"><i class="fa fa-check"></i><b>24.1</b> Basics</a></li>
+<li class="chapter" data-level="24.2" data-path="ex-moves-management.html"><a href="ex-moves-management.html#example-engineering-qualifications"><i class="fa fa-check"></i><b>24.2</b> Example: Engineering qualifications</a></li>
+<li class="chapter" data-level="24.3" data-path="ex-moves-management.html"><a href="ex-moves-management.html#example-collaborative-asks"><i class="fa fa-check"></i><b>24.3</b> Example: collaborative asks</a></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="test-cdw.html"><a href="test-cdw.html"><i class="fa fa-check"></i><b>A</b> Test your database set up</a><ul>
@@ -220,7 +251,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="C.2" data-path="how-it-works.html"><a href="how-it-works.html#a-template-as-a-data-structure"><i class="fa fa-check"></i><b>C.2</b> A template as a data structure</a></li>
 <li class="chapter" data-level="C.3" data-path="how-it-works.html"><a href="how-it-works.html#non-standard-evaluation"><i class="fa fa-check"></i><b>C.3</b> Non-standard evaluation</a></li>
 <li class="chapter" data-level="C.4" data-path="how-it-works.html"><a href="how-it-works.html#combining-simple-definitions"><i class="fa fa-check"></i><b>C.4</b> Combining simple definitions</a><ul>
-<li class="chapter" data-level="C.4.1" data-path="how-it-works.html"><a href="how-it-works.html#atomic-vs.-complex-definitions"><i class="fa fa-check"></i><b>C.4.1</b> “Atomic” vs. “Complex” definitions</a></li>
+<li class="chapter" data-level="C.4.1" data-path="how-it-works.html"><a href="how-it-works.html#atomic-vs.-complex-definitions"><i class="fa fa-check"></i><b>C.4.1</b> “Atomic” vs. “Complex” definitions</a></li>
 <li class="chapter" data-level="C.4.2" data-path="how-it-works.html"><a href="how-it-works.html#operations-on-definitions"><i class="fa fa-check"></i><b>C.4.2</b> Operations on definitions</a></li>
 </ul></li>
 <li class="chapter" data-level="C.5" data-path="how-it-works.html"><a href="how-it-works.html#re-visiting-to_sql"><i class="fa fa-check"></i><b>C.5</b> Re-visiting <code>to_sql</code></a></li>
@@ -253,12 +284,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="a-widget-as-a-sql-template" class="section level2">
 <h2><span class="header-section-number">C.1</span> A Widget as a SQL template</h2>
 <p>To get data from the database, the Disco Engine converts definitions into valid SQL. The key insight here is that any first-order predicate (<a href="higher-order-widgets.html#higher-order-widgets">what’s first-order mean?</a>) can be represented in terms of a very basic SQL query, which we can turn into this all-purpose template:</p>
-<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">select</span> <span class="kw">distinct</span> ID_FIELD <span class="kw">as</span> ID_TYPE
+<pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">select</span> <span class="kw">distinct</span> ID_FIELD <span class="kw">as</span> ID_TYPE
 <span class="kw">from</span> TABLE_NAME
-<span class="kw">where</span> FIELD_NAME <span class="kw">in</span> (LIST_OF_VALUES)</code></pre></div>
+<span class="kw">where</span> FIELD_NAME <span class="kw">in</span> (LIST_OF_VALUES)</code></pre>
 <p><em>Note: The actual implementation allows for a broader range of queries, but this captures the basic idea. To see the actual templates used, check out <a href="https://github.com/cwolfsonseeley/listbuilder/blob/master/R/templates.R">the source code in the listbuilder package</a></em></p>
 <p>There are a number of R packages that allow you to be able to construct templates this way and populate them with R objects. <code>discoveryengine</code> uses the <a href="https://cran.r-project.org/web/packages/whisker/index.html">whisker package</a>, but for this simplified example, I’ll use <code>getcdw::parameterize_template</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(getcdw)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(getcdw)
 generate_query &lt;-<span class="st"> </span><span class="kw">parameterize_template</span>(<span class="st">&quot;</span>
 <span class="st">select distinct ##ID_FIELD## as ##ID_TYPE##</span>
 <span class="st">from ##TABLE_NAME##</span>
@@ -267,17 +298,17 @@ generate_query &lt;-<span class="st"> </span><span class="kw">parameterize_templ
 
 <span class="co"># generate_query is now a function with the same arguments as the </span>
 <span class="co"># names highlighted in the template</span>
-generate_query</code></pre></div>
+generate_query</code></pre>
 <pre><code>## A parameterized template with parameters:  ID_FIELD, ID_TYPE, TABLE_NAME, FIELD_NAME, LIST_OF_VALUES</code></pre>
 <p>Now, we can get a clunky, but functional, <code>has_affiliation</code> widget working:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">has_affiliation &lt;-<span class="st"> </span><span class="cf">function</span>(affiliations) {
+<pre class="sourceCode r"><code class="sourceCode r">has_affiliation &lt;-<span class="st"> </span><span class="cf">function</span>(affiliations) {
     <span class="kw">list</span>(<span class="dt">ID_FIELD =</span> <span class="st">&quot;entity_id&quot;</span>,
          <span class="dt">ID_TYPE =</span> <span class="st">&quot;entity_id&quot;</span>,
          <span class="dt">TABLE_NAME =</span> <span class="st">&quot;cdw.d_bio_affiliation_mv&quot;</span>,
          <span class="dt">FIELD_NAME =</span> <span class="st">&quot;affil_code&quot;</span>,
          <span class="dt">LIST_OF_VALUES =</span> <span class="kw">paste0</span>(<span class="st">&quot;&#39;&quot;</span>, affiliations, <span class="st">&quot;&#39;&quot;</span>,
                                 <span class="dt">collapse =</span> <span class="st">&quot;, &quot;</span>))
-}</code></pre></div>
+}</code></pre>
 <p>Wait, what? I wanted to create a constituency definition, but all I got was this lousy list!</p>
 </div>
 <div id="a-template-as-a-data-structure" class="section level2">
@@ -289,69 +320,69 @@ generate_query</code></pre></div>
 </ol>
 <p>So it makes sense that <code>has_affiliation</code> just makes a list. It has all of the components of our definition, so we can inspect and figure out what it’s supposed to return, but it won’t actually return data from the data warehouse until we build a <code>display</code> function.</p>
 <p>Luckily, step 2 of the <code>display</code> function is easy, because that’s exactly what the function <code>getcdw::get_cdw</code> does (if you’re building for your own database, you just need a function here that can send SQL to your database and return a <code>data.frame</code>).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">display &lt;-<span class="st"> </span><span class="cf">function</span>(definition) {
+<pre class="sourceCode r"><code class="sourceCode r">display &lt;-<span class="st"> </span><span class="cf">function</span>(definition) {
     <span class="kw">get_cdw</span>(<span class="kw">to_sql</span>(definition))
-}</code></pre></div>
+}</code></pre>
 <p>How can we implement <code>to_sql</code>? Well, that’s just a matter of combining our template from <code>generate_query</code> with the data to fill it in from <code>has_affiliation</code>. The R function <code>do.call</code> lets us call any R function using a list of arguments. For example:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># here is the usual way we call a function:</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># here is the usual way we call a function:</span>
 <span class="co"># this takes 2 samples from the integers between 1 and 100</span>
-<span class="kw">sample</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">100</span>, <span class="dt">size =</span> <span class="dv">2</span>)</code></pre></div>
-<pre><code>## [1] 81 83</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># but what if we&#39;ve collected the arguments from some process?</span>
+<span class="kw">sample</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">100</span>, <span class="dt">size =</span> <span class="dv">2</span>)</code></pre>
+<pre><code>## [1] 45 86</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># but what if we&#39;ve collected the arguments from some process?</span>
 args &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">100</span>, <span class="dt">size =</span> <span class="dv">2</span>)
 
 <span class="co"># sample(args) won&#39;t work. what we want is do.call, which allows us to </span>
 <span class="co"># &quot;feed&quot; args as arguments to sample()</span>
-<span class="kw">do.call</span>(<span class="st">&quot;sample&quot;</span>, args)</code></pre></div>
-<pre><code>## [1]  4 17</code></pre>
+<span class="kw">do.call</span>(<span class="st">&quot;sample&quot;</span>, args)</code></pre>
+<pre><code>## [1] 41 82</code></pre>
 <p>Ok, so it looks like we know how to implement <code>to_sql</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">to_sql &lt;-<span class="st"> </span><span class="cf">function</span>(definition) {
+<pre class="sourceCode r"><code class="sourceCode r">to_sql &lt;-<span class="st"> </span><span class="cf">function</span>(definition) {
     <span class="kw">do.call</span>(<span class="st">&quot;generate_query&quot;</span>, definition)
-}</code></pre></div>
+}</code></pre>
 <p>That’s basically it! Let’s test what we have:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">is_prytanean =<span class="st"> </span><span class="kw">has_affiliation</span>(<span class="st">&quot;OC6&quot;</span>)
-<span class="kw">display</span>(is_prytanean)</code></pre></div>
-<pre><code>## # A tibble: 3,499 x 1
+<pre class="sourceCode r"><code class="sourceCode r">is_prytanean =<span class="st"> </span><span class="kw">has_affiliation</span>(<span class="st">&quot;OC6&quot;</span>)
+<span class="kw">display</span>(is_prytanean)</code></pre>
+<pre><code>## # A tibble: 3,505 x 1
 ##    entity_id
 ##        &lt;dbl&gt;
-##  1    131225
-##  2    131801
-##  3    159881
-##  4    219673
-##  5    163109
-##  6    225019
-##  7    225185
-##  8    174218
-##  9    598341
-## 10    693010
-## # ... with 3,489 more rows</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## and we can use multiple affiliations:
+##  1    191395
+##  2     90351
+##  3     76997
+##  4     77877
+##  5     95676
+##  6     79147
+##  7     65981
+##  8     74960
+##  9     39317
+## 10     66507
+## # … with 3,495 more rows</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">## and we can use multiple affiliations:</span>
 is_constituent =<span class="st"> </span><span class="kw">has_affiliation</span>(<span class="kw">c</span>(<span class="st">&quot;M2&quot;</span>, <span class="st">&quot;MA4&quot;</span>))
-<span class="kw">display</span>(is_constituent)</code></pre></div>
-<pre><code>## # A tibble: 2,681 x 1
+<span class="kw">display</span>(is_constituent)</code></pre>
+<pre><code>## # A tibble: 2,684 x 1
 ##    entity_id
 ##        &lt;dbl&gt;
-##  1    875220
-##  2    245832
-##  3    802045
-##  4    776766
-##  5    719475
-##  6   3066224
-##  7    684785
-##  8    999089
-##  9    999094
-## 10     40881
-## # ... with 2,671 more rows</code></pre>
+##  1    810146
+##  2     80977
+##  3     66904
+##  4    129337
+##  5    259998
+##  6    261033
+##  7    265894
+##  8    234274
+##  9    215118
+## 10    236516
+## # … with 2,674 more rows</code></pre>
 <p>Ok! So we’ve now implemented basic widget functionality. We still have a couple of outstanding issues:</p>
 <ol style="list-style-type: decimal">
-<li>The real disco engine allows you to type <code>has_affiliation(M2, MA4)</code> which is so much more readable and easy-to-understand than <code>has_affiliation(c(&quot;M2&quot;, &quot;MA4&quot;))</code>.</li>
+<li>The real disco engine allows you to type <code>has_affiliation(M2, MA4)</code> which is so much more readable and easy-to-understand than <code>has_affiliation(c("M2", "MA4"))</code>.</li>
 <li>How can we combine multiple predicates to make complex definitions?</li>
 </ol>
 </div>
 <div id="non-standard-evaluation" class="section level2">
 <h2><span class="header-section-number">C.3</span> Non-standard evaluation</h2>
 <p>The answer to our first outstanding issue is provided by the magic of <a href="http://adv-r.had.co.nz/Computing-on-the-language.html">non-standard evaluation</a> (that link is to the Non-standard evaluation chapter of the excellent book <em>Advanced R</em> by Hadley Wickham, which I highly recommend). For the purposes of this simplified example, I’ll use the following:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">has_affiliation &lt;-<span class="st"> </span><span class="cf">function</span>(...) {
+<pre class="sourceCode r"><code class="sourceCode r">has_affiliation &lt;-<span class="st"> </span><span class="cf">function</span>(...) {
     affiliations &lt;-<span class="st"> </span><span class="kw">eval</span>(<span class="kw">substitute</span>(<span class="kw">alist</span>(...)))
     affiliations &lt;-<span class="st"> </span><span class="kw">as.character</span>(affiliations)
     
@@ -361,35 +392,35 @@ is_constituent =<span class="st"> </span><span class="kw">has_affiliation</span>
          <span class="dt">FIELD_NAME =</span> <span class="st">&quot;affil_code&quot;</span>,
          <span class="dt">LIST_OF_VALUES =</span> <span class="kw">paste0</span>(<span class="st">&quot;&#39;&quot;</span>, affiliations, <span class="st">&quot;&#39;&quot;</span>,
                                 <span class="dt">collapse =</span> <span class="st">&quot;, &quot;</span>))    
-}</code></pre></div>
+}</code></pre>
 <p>Here <code>eval(substitute(alist(...)))</code> and <code>as.character(affiliations)</code> take the symbols entered by the user (I’m noting they are symbols and not characters) and convert them to a character vector. So far, so good:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">display</span>(
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">display</span>(
     <span class="kw">has_affiliation</span>(M2, MA4)
-)</code></pre></div>
-<pre><code>## # A tibble: 2,681 x 1
+)</code></pre>
+<pre><code>## # A tibble: 2,684 x 1
 ##    entity_id
 ##        &lt;dbl&gt;
-##  1    875220
-##  2    245832
-##  3    802045
-##  4    776766
-##  5    719475
-##  6   3066224
-##  7    684785
-##  8    999089
-##  9    999094
-## 10     40881
-## # ... with 2,671 more rows</code></pre>
+##  1    810146
+##  2     80977
+##  3     66904
+##  4    129337
+##  5    259998
+##  6    261033
+##  7    265894
+##  8    234274
+##  9    215118
+## 10    236516
+## # … with 2,674 more rows</code></pre>
 <p><em>Note that the actual package is a little bit more careful about how it does things here, by using the <a href="https://cran.r-project.org/web/packages/lazyeval/index.html">lazyeval package</a>. To see the actual code used in the Disco Engine, check out <code>prep_dots</code> and <code>partial_sub</code> in <a href="https://github.com/cwolfsonseeley/discoveryengine/blob/master/R/helper-utils.R">this discoveryengine source code file</a></em></p>
 </div>
 <div id="combining-simple-definitions" class="section level2">
 <h2><span class="header-section-number">C.4</span> Combining simple definitions</h2>
 <p>Now we want to know, given two existing definitions, how do we combine them into one more complex definition? The answer is surprisingly simple, but may take a minute to wrap your head around if you haven’t programmed in this way before. I’ll take things step-by-step.</p>
 <div id="atomic-vs.-complex-definitions" class="section level3">
-<h3><span class="header-section-number">C.4.1</span> “Atomic” vs. “Complex” definitions</h3>
+<h3><span class="header-section-number">C.4.1</span> “Atomic” vs. “Complex” definitions</h3>
 <p>Our first step is to distinguish between what I’ll call “atomic” and “complex” definitions. So far we’ve been working with atomic definitions – that is, simple definitions that do not use <code>%and%</code>, <code>%or%</code>, or <code>%but_not%</code>.</p>
 <p>Since we’ll want to build more widgets (in order to benefit from being able to combine them!), I’m going to write some scaffolding code that will make it easier to produce widgets:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># widget will be a function to make ATOMIC definitions</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># widget will be a function to make ATOMIC definitions</span>
 widget &lt;-<span class="st"> </span><span class="cf">function</span>(..., ID_FIELD, <span class="dt">ID_TYPE =</span> ID_FIELD, TABLE_NAME,
                    FIELD_NAME) {
     args &lt;-<span class="st"> </span><span class="kw">eval</span>(<span class="kw">substitute</span>(<span class="kw">alist</span>(...)))
@@ -406,9 +437,9 @@ widget &lt;-<span class="st"> </span><span class="cf">function</span>(..., ID_FI
     <span class="co"># here we add an &quot;attribute&quot; specifying that the definition is atomic</span>
     <span class="co"># if you&#39;re unfamiliar with attributes, see ?attributes</span>
     <span class="kw">structure</span>(res, <span class="dt">atomic =</span> <span class="ot">TRUE</span>)
-}</code></pre></div>
+}</code></pre>
 <p>Now let’s re-create <code>has_affiliation</code> using our new scaffolding code, and also let’s create a widget called <code>participated_in</code> for student activities and one called <code>on_committee</code> for committee participation:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">has_affiliation &lt;-<span class="st"> </span><span class="cf">function</span>(...) {
+<pre class="sourceCode r"><code class="sourceCode r">has_affiliation &lt;-<span class="st"> </span><span class="cf">function</span>(...) {
     <span class="co"># notice I can just pass the ... along to the next function</span>
     <span class="kw">widget</span>(...,
            <span class="dt">ID_FIELD =</span> <span class="st">&quot;entity_id&quot;</span>,
@@ -428,22 +459,22 @@ on_committee &lt;-<span class="st"> </span><span class="cf">function</span>(...)
            <span class="dt">ID_FIELD =</span> <span class="st">&quot;entity_id&quot;</span>,
            <span class="dt">TABLE_NAME =</span> <span class="st">&quot;cdw.d_bio_committee_mv&quot;</span>,
            <span class="dt">FIELD_NAME =</span> <span class="st">&quot;committee_code&quot;</span>)
-}</code></pre></div>
+}</code></pre>
 <p>Just to make sure I haven’t broken anything, I quickly inspect the SQL that is being built by these widgets:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># to make it easier to inspect the queries</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># to make it easier to inspect the queries</span>
 show_query &lt;-<span class="st"> </span><span class="cf">function</span>(definition) <span class="kw">cat</span>(<span class="kw">to_sql</span>(definition))
 
-<span class="kw">show_query</span>( <span class="kw">has_affiliation</span>(MA6, OC3) ) </code></pre></div>
+<span class="kw">show_query</span>( <span class="kw">has_affiliation</span>(MA6, OC3) ) </code></pre>
 <pre><code>## 
 ## select distinct entity_id as entity_id
 ## from cdw.d_bio_affiliation_mv
 ## where affil_code in (&#39;MA6&#39;, &#39;OC3&#39;)</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">show_query</span>( <span class="kw">participated_in</span>(SA1, SA2) )</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">show_query</span>( <span class="kw">participated_in</span>(SA1, SA2) )</code></pre>
 <pre><code>## 
 ## select distinct entity_id as entity_id
 ## from cdw.d_bio_student_activity_mv
 ## where student_activity_code in (&#39;SA1&#39;, &#39;SA2&#39;)</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">show_query</span>( <span class="kw">on_committee</span>(AE7, ME3, ME5, AE5) )</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">show_query</span>( <span class="kw">on_committee</span>(AE7, ME3, ME5, AE5) )</code></pre>
 <pre><code>## 
 ## select distinct entity_id as entity_id
 ## from cdw.d_bio_committee_mv
@@ -453,14 +484,14 @@ show_query &lt;-<span class="st"> </span><span class="cf">function</span>(defini
 <h3><span class="header-section-number">C.4.2</span> Operations on definitions</h3>
 <p>We now want to implement <code>%and%</code>, <code>%or%</code>, and <code>%but_not%</code>. Luckily, these are closely related to, in order, the SQL operators <code>intersect</code>, <code>union</code>, and <code>minus</code>.</p>
 <p>So here is the surprisingly simple template we need to construct complex queries:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">generate_complex_query &lt;-<span class="st"> </span><span class="kw">parameterize_template</span>(<span class="st">&quot;</span>
+<pre class="sourceCode r"><code class="sourceCode r">generate_complex_query &lt;-<span class="st"> </span><span class="kw">parameterize_template</span>(<span class="st">&quot;</span>
 <span class="st">(##LHS##)</span>
 <span class="st">##operator##</span>
 <span class="st">(##RHS##)</span>
-<span class="st">&quot;</span>)</code></pre></div>
+<span class="st">&quot;</span>)</code></pre>
 <p>Here <code>LHS</code> and <code>RHS</code> (which stand for “left-hand-side” and “right-hand-side”) are the SQL translations of definitions (they can be atomic or complex – as long as we know they have been converted to SQL properly, the result of this template will also be a valid SQL query). So when we translate a complex definition to SQL, all we have to do is translate the individual components to SQL. Those components (that is, <code>LHS</code> and <code>RHS</code>) may be either atomic (in which case we already know what to do) or complex (in which case we’ll just break it down again using the same logic, until we get down to atomic definitions).</p>
 <p>Now to implement our operations, we once again collect the necessary information into a list, this time tagging it as not atomic:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">operate &lt;-<span class="st"> </span><span class="cf">function</span>(LHS, RHS, operator) {
+<pre class="sourceCode r"><code class="sourceCode r">operate &lt;-<span class="st"> </span><span class="cf">function</span>(LHS, RHS, operator) {
     res &lt;-<span class="st"> </span><span class="kw">list</span>(
         <span class="dt">operator =</span> operator,
         <span class="dt">LHS =</span> LHS,
@@ -473,18 +504,18 @@ show_query &lt;-<span class="st"> </span><span class="cf">function</span>(defini
 
 <span class="st">`</span><span class="dt">%and%</span><span class="st">`</span> &lt;-<span class="st"> </span><span class="cf">function</span>(LHS, RHS) <span class="kw">operate</span>(LHS, RHS, <span class="st">&quot;intersect&quot;</span>)
 <span class="st">`</span><span class="dt">%or%</span><span class="st">`</span> &lt;-<span class="st"> </span><span class="cf">function</span>(LHS, RHS) <span class="kw">operate</span>(LHS, RHS, <span class="st">&quot;union&quot;</span>)
-<span class="st">`</span><span class="dt">%but_not%</span><span class="st">`</span> &lt;-<span class="st"> </span><span class="cf">function</span>(LHS, RHS) <span class="kw">operate</span>(LHS, RHS, <span class="st">&quot;minus&quot;</span>)</code></pre></div>
+<span class="st">`</span><span class="dt">%but_not%</span><span class="st">`</span> &lt;-<span class="st"> </span><span class="cf">function</span>(LHS, RHS) <span class="kw">operate</span>(LHS, RHS, <span class="st">&quot;minus&quot;</span>)</code></pre>
 </div>
 </div>
 <div id="re-visiting-to_sql" class="section level2">
 <h2><span class="header-section-number">C.5</span> Re-visiting <code>to_sql</code></h2>
 <p>We now have two different SQL templates – one for atomic definitions, and one for non-atomic definitions. Accordingly, we’ll update <code>to_sql</code> so that it uses the correct template. The fact that every definition we create, whether atomic or not, has an attribute called <code>atomic</code> that can be either <code>TRUE</code> or <code>FALSE</code> helps us. We’ll start by making a helper function that tells us if a definition is complex or not:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">is_atomic &lt;-<span class="st"> </span><span class="cf">function</span>(definition) {
+<pre class="sourceCode r"><code class="sourceCode r">is_atomic &lt;-<span class="st"> </span><span class="cf">function</span>(definition) {
     <span class="co"># recall this attribute is always TRUE or FALSE</span>
     <span class="kw">attr</span>(definition, <span class="st">&quot;atomic&quot;</span>)
-}</code></pre></div>
+}</code></pre>
 <p>Now we can update our <code>to_sql</code> function to check whether a definition is atomic or not and then populate the appropriate template:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">to_sql &lt;-<span class="st"> </span><span class="cf">function</span>(definition) {
+<pre class="sourceCode r"><code class="sourceCode r">to_sql &lt;-<span class="st"> </span><span class="cf">function</span>(definition) {
     <span class="co"># we already know what to do with atomic definitions</span>
     <span class="cf">if</span> (<span class="kw">is_atomic</span>(definition)) <span class="kw">do.call</span>(<span class="st">&quot;generate_query&quot;</span>, definition)
     
@@ -498,7 +529,7 @@ show_query &lt;-<span class="st"> </span><span class="cf">function</span>(defini
         )
         <span class="kw">do.call</span>(<span class="st">&quot;generate_complex_query&quot;</span>, translated_pieces)
     }
-}</code></pre></div>
+}</code></pre>
 <p>If you look closely at the non-atomic part of <code>to_sql</code>, you may be surprised to find that it seems to be circularly defined! It helps to describe the process in plain language first:</p>
 <blockquote>
 <p>To convert a complex (i.e. non-atomic) definition to SQL, we first convert its constituent pieces to SQL, then combine the resulting SQL using the appropriate operator (intersect, union, or minus)</p>
@@ -508,7 +539,7 @@ show_query &lt;-<span class="st"> </span><span class="cf">function</span>(defini
 <div id="seeing-it-all-in-action" class="section level2">
 <h2><span class="header-section-number">C.6</span> Seeing it all in action</h2>
 <p>Let’s create some definitions and then see how they are being converted to SQL.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># a simple definition</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># a simple definition</span>
 has_engineering_affil =<span class="st"> </span><span class="kw">has_affiliation</span>(MA4, SWE, URAE, DEN1)
 
 <span class="co"># a slightly more complex definition</span>
@@ -518,25 +549,30 @@ engineering_constituency_<span class="dv">1</span> =<span class="st"> </span>
 
 engineering_constituency_<span class="dv">2</span> =<span class="st"> </span>
 <span class="st">    </span>engineering_constituency_<span class="dv">1</span> <span class="op">%but_not%</span>
-<span class="st">    </span><span class="kw">on_committee</span>(ME3)</code></pre></div>
+<span class="st">    </span><span class="kw">on_committee</span>(ME3)</code></pre>
 <p>To reassure myself that the system is working as expected, I <code>display</code> the most complicated constituency, and look in CADS to verify that the resulting IDs do in fact match the definition I created:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">display</span>(engineering_constituency_<span class="dv">2</span>)</code></pre></div>
-<pre><code>## # A tibble: 4 x 1
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">display</span>(engineering_constituency_<span class="dv">2</span>)</code></pre>
+<pre><code>## # A tibble: 9 x 1
 ##   entity_id
 ##       &lt;dbl&gt;
 ## 1    593821
 ## 2    664489
 ## 3    819567
-## 4    838088</code></pre>
+## 4    838088
+## 5   3363382
+## 6   3365316
+## 7   3365456
+## 8   3368294
+## 9   3368344</code></pre>
 <p>Now, let’s take a look at the actual SQL that is being generated behind the scenes:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># we&#39;ve already seen the atomic definitions turned to SQL:</span>
-<span class="kw">show_query</span>(has_engineering_affil)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># we&#39;ve already seen the atomic definitions turned to SQL:</span>
+<span class="kw">show_query</span>(has_engineering_affil)</code></pre>
 <pre><code>## 
 ## select distinct entity_id as entity_id
 ## from cdw.d_bio_affiliation_mv
 ## where affil_code in (&#39;MA4&#39;, &#39;SWE&#39;, &#39;URAE&#39;, &#39;DEN1&#39;)</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># this is a complex definition, but both pieces are atomic:</span>
-<span class="kw">show_query</span>(engineering_constituency_<span class="dv">1</span>)</code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># this is a complex definition, but both pieces are atomic:</span>
+<span class="kw">show_query</span>(engineering_constituency_<span class="dv">1</span>)</code></pre>
 <pre><code>## 
 ## (
 ## select distinct entity_id as entity_id
@@ -549,9 +585,9 @@ engineering_constituency_<span class="dv">2</span> =<span class="st"> </span>
 ## from cdw.d_bio_student_activity_mv
 ## where student_activity_code in (&#39;UWSE&#39;, &#39;CHES&#39;, &#39;ENWE&#39;, &#39;ENSE&#39;)
 ## )</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># as the definitions get more complex, even the LHS and RHS can </span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># as the definitions get more complex, even the LHS and RHS can </span>
 <span class="co"># be complex, but everything still can be analyzed down to atomic pieces:</span>
-<span class="kw">show_query</span>(engineering_constituency_<span class="dv">2</span>)</code></pre></div>
+<span class="kw">show_query</span>(engineering_constituency_<span class="dv">2</span>)</code></pre>
 <pre><code>## 
 ## (
 ## (
@@ -576,7 +612,8 @@ engineering_constituency_<span class="dv">2</span> =<span class="st"> </span>
 </div>
 <div id="for-further-study" class="section level2">
 <h2><span class="header-section-number">C.7</span> For further study</h2>
-<p>If you’ve made it this far, you should have a pretty solid understanding of the basic functioning of the Discovery Engine. We did not cover some core features, in particular <a href="working-with-widgets.html#synonym-search">code lookup (aka synonym search)</a>, <a href="higher-order-widgets.html#higher-order-widgets">higher order widgets</a>, and the bots – the <a href="brainstorm-bot.html#brainstorm-bot">brainstorm bot</a> and the <a href="matrix-bot.html#matrix-bot">matrix bot</a>. But armed with the knowledge you do have, you can explore <a href="https://github.com/cwolfsonseeley/discoveryengine">the source code</a> and see how everything else works. Feel free to <a href="mailto:tarak_shah@berkeley.edu">reach out to Tarak via email</a> if you have any questions.</p>
+<p>If you’ve made it this far, you should have a pretty solid understanding of the basic functioning of the Discovery Engine. We did not cover some core features, in particular <a href="working-with-widgets.html#synonym-search">code lookup (aka synonym search)</a>, <a href="higher-order-widgets.html#higher-order-widgets">higher order widgets</a>, and the bots –
+the <a href="brainstorm-bot.html#brainstorm-bot">brainstorm bot</a> and the <a href="matrix-bot.html#matrix-bot">matrix bot</a>. But armed with the knowledge you do have, you can explore <a href="https://github.com/cwolfsonseeley/discoveryengine">the source code</a> and see how everything else works. Feel free to <a href="mailto:cwolfsonseeley@berkeley.edu">reach out to Caleb via email</a> if you have any questions.</p>
 
 </div>
 </div>
@@ -608,6 +645,10 @@ gitbook.start({
 "edit": {
 "link": "https://github.com/cwolfsonseeley/discodocs/edit/master/99-how-does-it-work.Rmd",
 "text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
 },
 "download": null,
 "toc": {

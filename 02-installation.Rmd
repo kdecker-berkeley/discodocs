@@ -39,7 +39,7 @@ Step 4:
 
 Quit your current RStudio session and open a new one. Try running the following test again:
 
-```{r library_path, eval = FALSE}
+```{r library_path2, eval = FALSE}
 .libPaths()
 ```
 

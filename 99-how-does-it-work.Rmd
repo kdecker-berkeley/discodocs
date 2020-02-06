@@ -1,6 +1,6 @@
 # How does it work? {#how-it-works}
 
-In this section, I'll go over the basic building blocks that make the Disco Engine work. To help organize the lesson, I'll assume we're building a brand new Disco Engine from scratch. Of course, what we build will necessarily be just a simplified version of the Disco Engine, but we'll cover the most important concepts. All of the code behind the real Disco Engine is available for anyone to view [on GitHub](https://github.com/tarakc02/discoveryengine). Where possible, I'll add a link to the appropriate bit of production code and explain what's different from our simplified example.
+In this section, I'll go over the basic building blocks that make the Disco Engine work. To help organize the lesson, I'll assume we're building a brand new Disco Engine from scratch. Of course, what we build will necessarily be just a simplified version of the Disco Engine, but we'll cover the most important concepts. All of the code behind the real Disco Engine is available for anyone to view [on GitHub](https://github.com/cwolfsonseeley/discoveryengine). Where possible, I'll add a link to the appropriate bit of production code and explain what's different from our simplified example.
 
 ## A Widget as a SQL template
 
@@ -12,7 +12,7 @@ from TABLE_NAME
 where FIELD_NAME in (LIST_OF_VALUES)
 ```
 
-*Note: The actual implementation allows for a broader range of queries, but this captures the basic idea. To see the actual templates used, check out [the source code in the listbuilder package](https://github.com/tarakc02/listbuilder/blob/master/R/templates.R)*
+*Note: The actual implementation allows for a broader range of queries, but this captures the basic idea. To see the actual templates used, check out [the source code in the listbuilder package](https://github.com/cwolfsonseeley/listbuilder/blob/master/R/templates.R)*
 
 There are a number of R packages that allow you to be able to construct templates this way and populate them with R objects. `discoveryengine` uses the [whisker package](https://cran.r-project.org/web/packages/whisker/index.html), but for this simplified example, I'll use `getcdw::parameterize_template`:
 
@@ -126,7 +126,7 @@ display(
 )
 ```
 
-*Note that the actual package is a little bit more careful about how it does things here, by using the [lazyeval package](https://cran.r-project.org/web/packages/lazyeval/index.html). To see the actual code used in the Disco Engine, check out `prep_dots` and `partial_sub` in [this discoveryengine source code file](https://github.com/tarakc02/discoveryengine/blob/master/R/helper-utils.R)*
+*Note that the actual package is a little bit more careful about how it does things here, by using the [lazyeval package](https://cran.r-project.org/web/packages/lazyeval/index.html). To see the actual code used in the Disco Engine, check out `prep_dots` and `partial_sub` in [this discoveryengine source code file](https://github.com/cwolfsonseeley/discoveryengine/blob/master/R/helper-utils.R)*
 
 ## Combining simple definitions
 
@@ -312,4 +312,4 @@ You'll notice that, especially as the definitions grow more complex, the resulti
 ## For further study
 
 If you've made it this far, you should have a pretty solid understanding of the basic functioning of the Discovery Engine. We did not cover some core features, in particular [code lookup (aka synonym search)](#synonym-search), [higher order widgets](#higher-order-widgets), and the bots -- 
-the [brainstorm bot](#brainstorm-bot) and the [matrix bot](#matrix-bot). But armed with the knowledge you do have, you can explore [the source code](https://github.com/tarakc02/discoveryengine) and see how everything else works. Feel free to [reach out to Tarak via email](mailto:tarak_shah@berkeley.edu) if you have any questions.
+the [brainstorm bot](#brainstorm-bot) and the [matrix bot](#matrix-bot). But armed with the knowledge you do have, you can explore [the source code](https://github.com/cwolfsonseeley/discoveryengine) and see how everything else works. Feel free to [reach out to Caleb via email](mailto:cwolfsonseeley@berkeley.edu) if you have any questions.
