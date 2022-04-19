@@ -3,7 +3,7 @@ title: "Documentation for the discoveryengine"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book
-github-repo: tarakc02/discodocs
+github-repo: cwolfsonseeley/discodocs
 description: "Some documentation for the discoveryengine"
 knit: "bookdown::render_book"
 ---
@@ -24,11 +24,11 @@ Otherwise, feel free to read this document in order, or to jump around or just b
 
 ## Contribute to the Disco Engine
 
-The Disco Engine is a tool made by and for Prospect Development. If you see something that doesn't work correctly, or documentation that could be made clearer, or a widget that would be useful that isn't implemented, or anything at all that could be improved in the Disco Engine, please submit an issue by clicking on the green "New Issue" button on the [Disco engine issues page](https://github.com/tarakc02/discoveryengine/issues).
+The Disco Engine is a tool made by and for Prospect Development. If you see something that doesn't work correctly, or documentation that could be made clearer, or a widget that would be useful that isn't implemented, or anything at all that could be improved in the Disco Engine, please submit an issue by clicking on the green "New Issue" button on the [Disco engine issues page](https://github.com/cwolfsonseeley/discoveryengine/issues).
 
 ## Contribute to this documentation
 
-This site is a work in progress. One way you can help is to report any mistakes you find (typos, spelling mistakes, grammatical errors) or any areas that could be explained better (if something was not clear to you, there's a good chance it won't be clear to others either). This documentation site has its own [Disco-docs issues page](https://github.com/tarakc02/discodocs/issues) -- click on the green "New Issue" button and enter a short message explaining what's wrong. If you'd like to suggest edits directly, you can do so by clicking on the pen-and-paper icon at the top of any page on this site (guide coming soon). Thank you!
+This site is a work in progress. One way you can help is to report any mistakes you find (typos, spelling mistakes, grammatical errors) or any areas that could be explained better (if something was not clear to you, there's a good chance it won't be clear to others either). This documentation site has its own [Disco-docs issues page](https://github.com/cwolfsonseeley/discodocs/issues) -- click on the green "New Issue" button and enter a short message explaining what's wrong. If you'd like to suggest edits directly, you can do so by clicking on the pen-and-paper icon at the top of any page on this site (guide coming soon). Thank you!
 
 <!--chapter:end:index.Rmd-->
 
@@ -110,13 +110,13 @@ brainstorm_bot("robot*", "artificial intelligence", "AI")
 
 The discoveryengine works best when used with RStudio. Watch this video for a quick tour around RStudio:
 
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/O-CSMq2jBAM?rel=0" frameborder="0" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/watch?v=FIrsOBy5k58" frameborder="0" allowfullscreen></iframe>
 
 <!--chapter:end:01-intro-r.Rmd-->
 
 # Installation {#installation}
 
-Discoveryengine (and all packages we use in Prospect Developmemt) is installed on the R drive. The most important step to make sure you can access these packages is to set up your default library path to the shared packages repository.
+Discoveryengine (and all packages we use in Prospect Development) is installed on the R drive. The most important step to make sure you can access these packages is to set up your default library path to the shared packages repository.
 
 Run a quick test to see your current library path:
 
@@ -124,34 +124,26 @@ Run a quick test to see your current library path:
 .libPaths()
 ```
 
-The first result returned shoud be "R:/Prospect Development/Prospect Analysis/pd-shared-r-packages". If it's not, follow the steps below to change your default library path.
+The first result returned should be "\\\\ur2.urel.berkeley.edu/ur_unitshares/Prospect Development/Prospect Analysis/pd-shared-r-packages". If it's not, follow the steps below to change your default library path.
 
 Step 1: Open a new RStudio session and run the following script:
 
 ```{r set_up_renviron, eval = FALSE}
 # the first part sets up the new package directory
-package_dir <- "R:/Prospect Development/Prospect Analysis/pd-shared-r-packages"
+package_dir <- "\\\\ur2.urel.berkeley.edu/ur_unitshares/Prospect Development/Prospect Analysis/pd-shared-r-packages"
 if (!dir.exists(package_dir)) dir.create(package_dir, recursive = TRUE)
 
 # then make a configuration file that notifies R of the new package directory
-# change [username] to your actual username in your P drive - usually LastNameFirstInitial
-env_file <- "P:/[username]/.Renviron"
-if (!file.exists(env_file)) file.create(env_file)
+# change [username] to your actual username in your P drive - usually your last name followed by your first initial
+if (!dir.exists(package_dir)) dir.create(package_dir, recursive = TRUE)
+env_file <- "\\ur2.urel.berkeley.edu\UR_USERS\[usernmae]"
 
 # and add the new location to the configuration file
-cat("\nR_LIBS_USER='", package_dir, "'", 
+cat("\nR_LIBS_USER='", package_dir, "'",
     sep = "", file = env_file, append = TRUE)
 ```
 
 Step 2:
-
-Find the newly created .Renviron file. It will be in your P drive. 
-
-Step 3: 
-
-Move the .Renviron file to your Documents folder. This should be located in D:\\Users\\[username]\\Documents. Simply drag and drop.
-
-Step 4:
 
 Quit your current RStudio session and open a new one. Try running the following test again:
 
@@ -165,7 +157,6 @@ If the PD shared packages depository is returned, you are ready to start using D
 
 At this point, you should have already: 
 - tested your CDW connection
-- installed `getcdw`
 - run a test query
 
 If you haven't completed all of those items, head over to section [Test CDW](#test-cdw) and complete those steps, and then return here.

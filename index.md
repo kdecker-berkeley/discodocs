@@ -1,0 +1,32 @@
+--- 
+title: "Documentation for the discoveryengine"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+github-repo: cwolfsonseeley/discodocs
+description: "Some documentation for the discoveryengine"
+knit: "bookdown::render_book"
+---
+
+```r
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, fig.path = "images/")
+```
+# Welcome
+
+![[Did I mention that I like to dance?](https://www.youtube.com/watch?v=uxi73RQlLB8)](images/disco.gif)
+
+Welcome to the introduction to and extended documentation for the discoveryengine! The discoveryengine, also known as "Disco Engine" or just "Disco," is a tool enabling Prospect Development staff to do custom prospecting, written in the R programming language. For more information, see [What is the Disco Engine?](#what-is-disco)
+
+If you are already familiar with the Disco Engine, and looking for some quick tips to refresh your memory, check out the [cheat sheet](#cheat-sheet).
+
+Though the Disco Engine is written in R, you don't need to have any experience using R in order to get started. That said, if you're brand new to R and RStudio, check out our brief [introduction to R and RStudio](#r-intro).
+
+Otherwise, feel free to read this document in order, or to jump around or just bookmark it and refer to it as needed. You may find the search feature helpful, you can access it by clicking on the little magnifying glass at the top of the screen. 
+
+## Contribute to the Disco Engine
+
+The Disco Engine is a tool made by and for Prospect Development. If you see something that doesn't work correctly, or documentation that could be made clearer, or a widget that would be useful that isn't implemented, or anything at all that could be improved in the Disco Engine, please submit an issue by clicking on the green "New Issue" button on the [Disco engine issues page](https://github.com/cwolfsonseeley/discoveryengine/issues).
+
+## Contribute to this documentation
+
+This site is a work in progress. One way you can help is to report any mistakes you find (typos, spelling mistakes, grammatical errors) or any areas that could be explained better (if something was not clear to you, there's a good chance it won't be clear to others either). This documentation site has its own [Disco-docs issues page](https://github.com/cwolfsonseeley/discodocs/issues) -- click on the green "New Issue" button and enter a short message explaining what's wrong. If you'd like to suggest edits directly, you can do so by clicking on the pen-and-paper icon at the top of any page on this site (guide coming soon). Thank you!
