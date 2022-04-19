@@ -62,7 +62,7 @@ You also want to make sure you're using the correct version of R. Here are the s
 `r knitr::include_graphics("images/options.png")`
 </p></center>
 
-2) The top box tells you the R version you're using. Click on the "Change.." button. Then select the option that says "Choose a specific version of R" and highlight "[64-bit] C:\\Program Files\\R\\R-4.1.2"
+2) The top box tells you the R version you're using. Click on the "Change" button. Then select the option that says "Choose a specific version of R" and highlight "[64-bit] C:\\Program Files\\R\\R-4.1.2"
 
 <p><center>
 `r knitr::include_graphics("images/version.png")`

@@ -3237,7 +3237,7 @@ First, let's make sure your connection works. You'll need the user name and pass
 \def\labelenumi{\arabic{enumi})}
 \tightlist
 \item
-  Navigate to C:\textbackslash Windows\textbackslash SysWOW64. Double click odbcad32. It's the application highlighted in the following image:
+  Navigate to C:\textbackslash ProgramData\textbackslash Microsoft\textbackslash Windows\textbackslash Start Menu\textbackslash Programs\textbackslash Administrative Tools. Double click odbcad64. It's the application highlighted in the following image:
 \end{enumerate}
 
 \includegraphics[width=15.67in]{images/syswow64}
@@ -3247,7 +3247,7 @@ First, let's make sure your connection works. You'll need the user name and pass
 \setcounter{enumi}{1}
 \tightlist
 \item
-  You'll now have the ODBC Data Source Administrator open. Click the ``User DSN'' tab and then click the ``Add..'' button.
+  You'll now have the ODBC Data Source Administrator open. Click the ``User DSN'' tab and then click the ``Add'' button.
 \end{enumerate}
 
 \includegraphics[width=8.26in]{images/odbc}
@@ -3257,7 +3257,7 @@ First, let's make sure your connection works. You'll need the user name and pass
 \setcounter{enumi}{2}
 \tightlist
 \item
-  Scroll down to close to the bottom of the list of drivers. There you'll find ``Oracle in instantclient\_12\_2''. Double click this.
+  Scroll down to close to the bottom of the list of drivers. There you'll find ``Oracle in instantclient_21_3''. Double click this.
 \end{enumerate}
 
 \includegraphics[width=6.5in]{images/oracle}
@@ -3319,7 +3319,7 @@ You also want to make sure you're using the correct version of R. Here are the s
 \setcounter{enumi}{1}
 \tightlist
 \item
-  The top box tells you the R version you're using. Click on the ``Change..'' button. Then select the option that says ``Use your machine's default version of R (32-bit).'' Make sure it is 32-bit!
+  The top box tells you the R version you're using. Click on the ``Change'' button. Then select the option that says ``Choose a specific version of R'' and highlight ``[64-bit] C:\textbackslash Program Files\textbackslash R\textbackslash R-4.1.2''.
 \end{enumerate}
 
 \includegraphics[width=5.53in]{images/version}
@@ -3349,7 +3349,7 @@ Now all we need to do is run a simple query to test the connection. We'll do thi
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{get_cdw}\NormalTok{(}\StringTok{"select * from dual"}\NormalTok{)}
+\KeywordTok{get_cdw}\NormalTok{(}\StringTok{"select entity_id from cdw.d_entity_mv where entity id = 1234"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3389,10 +3389,9 @@ After this step, you will only ever be required to enter your secret passphrase 
 If everything is working properly, you should see something like this:
 
 \begin{verbatim}
-## # A tibble: 1 x 1
-##   dummy
-##   <chr>
-## 1 X
+##    entity_id
+##        <dbl>
+##  1       1234
 \end{verbatim}
 
 If that's what you see, you are all set!
