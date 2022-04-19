@@ -1,6 +1,6 @@
 # Installation {#installation}
 
-Discoveryengine (and all packages we use in Prospect Developmemt) is installed on the R drive. The most important step to make sure you can access these packages is to set up your default library path to the shared packages repository.
+Discoveryengine (and all packages we use in Prospect Development) is installed on the R drive. The most important step to make sure you can access these packages is to set up your default library path to the shared packages repository.
 
 Run a quick test to see your current library path:
 
