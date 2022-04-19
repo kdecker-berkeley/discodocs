@@ -20,7 +20,7 @@ if (!dir.exists(package_dir)) dir.create(package_dir, recursive = TRUE)
 # then make a configuration file that notifies R of the new package directory
 # change [username] to your actual username in your P drive - usually your last name followed by your first initial
 if (!dir.exists(package_dir)) dir.create(package_dir, recursive = TRUE)
-env_file <- "\\ur2.urel.berkeley.edu\UR_USERS\[usernmae]"
+env_file <- "\\ur2.urel.berkeley.edu\UR_USERS\[username]"
 
 # and add the new location to the configuration file
 cat("\nR_LIBS_USER='", package_dir, "'",
@@ -50,13 +50,13 @@ If you haven't completed all of those items, head over to section [Test CDW](#te
 In order to make sure everything is working properly, we'll run a quick disco test:
 
 ```{r disco_test}
-# you'll always load the discoveryengine package before doing anythying else
+# you'll always load the discoveryengine package before doing anything else
 library(discoveryengine)
 # make sure we can create a disco definition
 high_cap = has_capacity(1)
 # make sure that things print properly
 high_cap
-# make sure we can send the defintion to the data warehouse
+# make sure we can send the definition to the data warehouse
 display(high_cap)
 ```
 

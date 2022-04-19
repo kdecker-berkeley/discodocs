@@ -334,20 +334,20 @@ Run a quick test to see your current library path:
 \end{Highlighting}
 \end{Shaded}
 
-The first result returned shoud be ``R:/Prospect Development/Prospect Analysis/pd-shared-r-packages''. If it's not, follow the steps below to change your default library path.
+The first result returned should be "\\\\ur2.urel.berkeley.edu/ur_unitshares/Prospect Development/Prospect Analysis/pd-shared-r-packages". If it's not, follow the steps below to change your default library path.
 
 Step 1: Open a new RStudio session and run the following script:
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# the first part sets up the new package directory}
-\NormalTok{package_dir <-}\StringTok{ "R:/Prospect Development/Prospect Analysis/pd-shared-r-packages"}
+\NormalTok{package_dir <-}\StringTok{ "\\\\ur2.urel.berkeley.edu/ur_unitshares/Prospect Development/Prospect Analysis/pd-shared-r-packages"}
 \ControlFlowTok{if}\NormalTok{ (}\OperatorTok{!}\KeywordTok{dir.exists}\NormalTok{(package_dir)) }\KeywordTok{dir.create}\NormalTok{(package_dir, }\DataTypeTok{recursive =} \OtherTok{TRUE}\NormalTok{)}
 
 \CommentTok{# then make a configuration file that notifies R of the new package directory}
-\CommentTok{# change [username] to your actual username in your P drive - usually LastNameFirstInitial}
-\NormalTok{env_file <-}\StringTok{ "P:/[username]/.Renviron"}
+\CommentTok{# change [username] to your actual username in your P drive - usually your last name followed by your first initial}
 \ControlFlowTok{if}\NormalTok{ (}\OperatorTok{!}\KeywordTok{file.exists}\NormalTok{(env_file)) }\KeywordTok{file.create}\NormalTok{(env_file)}
+\NormalTok{env_file <-}\StringTok{ "\\ur2.urel.berkeley.edu\UR_USERS\[username]"}
 
 \CommentTok{# and add the new location to the configuration file}
 \KeywordTok{cat}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{R_LIBS_USER='"}\NormalTok{, package_dir, }\StringTok{"'"}\NormalTok{, }
@@ -356,14 +356,6 @@ Step 1: Open a new RStudio session and run the following script:
 \end{Shaded}
 
 Step 2:
-
-Find the newly created .Renviron file. It will be in your P drive.
-
-Step 3:
-
-Move the .Renviron file to your Documents folder. This should be located in D:\textbackslash Users\textbackslash{[}username{]}\textbackslash Documents. Simply drag and drop.
-
-Step 4:
 
 Quit your current RStudio session and open a new one. Try running the following test again:
 
@@ -380,7 +372,6 @@ If the PD shared packages depository is returned, you are ready to start using D
 
 At this point, you should have already:
 - tested your CDW connection
-- installed \texttt{getcdw}
 - run a test query
 
 If you haven't completed all of those items, head over to section \protect\hyperlink{test-cdw}{Test CDW} and complete those steps, and then return here.
@@ -392,7 +383,7 @@ In order to make sure everything is working properly, we'll run a quick disco te
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# you'll always load the discoveryengine package before doing anythying else}
+\CommentTok{# you'll always load the discoveryengine package before doing anything else}
 \KeywordTok{library}\NormalTok{(discoveryengine)}
 \CommentTok{# make sure we can create a disco definition}
 \NormalTok{high_cap =}\StringTok{ }\KeywordTok{has_capacity}\NormalTok{(}\DecValTok{1}\NormalTok{)}
@@ -409,7 +400,7 @@ In order to make sure everything is working properly, we'll run a quick disco te
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# make sure we can send the defintion to the data warehouse}
+\CommentTok{# make sure we can send the definition to the data warehouse}
 \KeywordTok{display}\NormalTok{(high_cap)}
 \end{Highlighting}
 \end{Shaded}

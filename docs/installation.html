@@ -283,25 +283,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Discoveryengine (and all packages we use in Prospect Developmemt) is installed on the R drive. The most important step to make sure you can access these packages is to set up your default library path to the shared packages repository.</p>
 <p>Run a quick test to see your current library path:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">.libPaths</span>()</code></pre>
-<p>The first result returned shoud be “R:/Prospect Development/Prospect Analysis/pd-shared-r-packages”. If it’s not, follow the steps below to change your default library path.</p>
+<p>The first result returned shoud be “\\\\ur2.urel.berkeley.edu/ur_unitshares/Prospect Development/Prospect Analysis/pd-shared-r-packages”. If it’s not, follow the steps below to change your default library path.</p>
 <p>Step 1: Open a new RStudio session and run the following script:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># the first part sets up the new package directory</span>
-package_dir &lt;-<span class="st"> &quot;R:/Prospect Development/Prospect Analysis/pd-shared-r-packages&quot;</span>
+package_dir &lt;-<span class="st"> &quot;\\\\ur2.urel.berkeley.edu/ur_unitshares/Prospect Development/Prospect Analysis/pd-shared-r-packages&quot;</span>
 <span class="cf">if</span> (<span class="op">!</span><span class="kw">dir.exists</span>(package_dir)) <span class="kw">dir.create</span>(package_dir, <span class="dt">recursive =</span> <span class="ot">TRUE</span>)
 
 <span class="co"># then make a configuration file that notifies R of the new package directory</span>
-<span class="co"># change [username] to your actual username in your P drive - usually LastNameFirstInitial</span>
-env_file &lt;-<span class="st"> &quot;P:/[username]/.Renviron&quot;</span>
+<span class="co"># change [username] to your actual username in your P drive - usually your last name followed by your first initial</span>
 <span class="cf">if</span> (<span class="op">!</span><span class="kw">file.exists</span>(env_file)) <span class="kw">file.create</span>(env_file)
+env_file &lt;-<span class="st"> &quot;\\ur2.urel.berkeley.edu\UR_USERS\[username]&quot;</span>
 
 <span class="co"># and add the new location to the configuration file</span>
 <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">R_LIBS_USER=&#39;&quot;</span>, package_dir, <span class="st">&quot;&#39;&quot;</span>, 
     <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>, <span class="dt">file =</span> env_file, <span class="dt">append =</span> <span class="ot">TRUE</span>)</code></pre>
 <p>Step 2:</p>
-<p>Find the newly created .Renviron file. It will be in your P drive.</p>
-<p>Step 3:</p>
-<p>Move the .Renviron file to your Documents folder. This should be located in D:\Users\[username]\Documents. Simply drag and drop.</p>
-<p>Step 4:</p>
 <p>Quit your current RStudio session and open a new one. Try running the following test again:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">.libPaths</span>()</code></pre>
 <p>If the PD shared packages depository is returned, you are ready to start using Disco Engine. If not, contact the Analytics Team to troubleshoot your situation.</p>
